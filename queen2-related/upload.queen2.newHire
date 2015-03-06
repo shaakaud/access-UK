@@ -1,0 +1,95 @@
+#!/bin/sh
+
+
+echo "Enter username"
+read UNAME
+echo "Enter password"
+read -s PASSWORD
+
+# Configurable Params
+basedir="/home/$UNAME/"
+
+if [ $# = 1 ]
+then 
+    basedir=${basedir}${1}"/"
+fi
+
+#bin/linux/decore
+
+if [ -f make/ftpxfer.sh ]
+then 
+    # Vars 
+    platforms="7xxx 7750"
+    images="iom.tim cpm.tim both.tim boot.tim vxworks.tim bringup.tim diags.tim isa-aa.tim support.tim"
+    hardware="i386 hops chile"
+    configs="setup_cli.cfg teardown_cli.cfg"
+    binary="decore"
+    cntr=0
+
+    echo "Uploading images..............."
+
+    for p in ${platforms}
+    do
+        if [ ${p} = "7750" -o ${p} = "7xxx" ]
+        then
+            destdir=${basedir}
+        else 
+            destdir=${basedir}${p}"/"
+        fi
+
+        make/ftpxfer.sh queen2.mv.usa.alcatel.com $UNAME $PASSWORD mkdir ${destdir} >/tmp/ftpxfer.txt 2>&1
+
+        for h in ${hardware}
+        do
+            if [ ${h} = "hops" ]
+            then
+                prefix=""
+            else 
+                if [ ${h} = "chile" ]
+                then
+                    prefix=""
+                else
+                    prefix=${h}"-"
+                fi    
+            fi
+
+            for i in ${images}
+            do
+                if [ -f bin/${p}-${h}/${i} ]
+                then
+                    cntr=`expr ${cntr} + 1` 
+                    echo "bin/${p}-${h}/${i} --> ${destdir}${prefix}${i}"
+                    make/ftpxfer.sh queen2.mv.usa.alcatel.com $UNAME $PASSWORD put bin/${p}-${h}/${i} ${destdir}${prefix}${i}
+                fi
+            done
+        done
+    done
+        
+    for i in $binary
+    do
+        if [ -f bin/linux/${i} ]
+        then
+            cntr=`expr ${cntr} + 1` 
+            echo "bin/linux/${i} --> ${basedir}${i}"
+            make/ftpxfer.sh queen2.mv.usa.alcatel.com $UNAME $PASSWORD put bin/linux/${i} ${basedir}${i}
+        fi
+    done
+
+    for i in $configs
+    do
+        if [ -f test/${i} ]
+        then
+            cntr=`expr ${cntr} + 1` 
+            echo "test/${i} --> ${basedir}${i}"
+            make/ftpxfer.sh queen2.mv.usa.alcatel.com $UNAME $PASSWORD put test/${i} ${basedir}${i}
+        fi
+    done
+
+    echo
+    echo "(${cntr}) files uploaded."
+    exit 0;
+fi
+
+echo "Error : The script should be executed from the panos"
+echo "        directory as it uses the ftp scripts"
+exit 1;

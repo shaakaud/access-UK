@@ -1,0 +1,110 @@
+machine 135.254.170.22 login uthimmaja password c4ewel
+machine sparta login uthimmaja password c4ewel
+macdef init
+bin
+prompt
+cd image
+
+
+macdef do
+mput both.tim
+mput boot.tim
+bye
+
+macdef dos
+cd sultan
+mput both.tim
+mput boot.tim
+bye
+
+macdef dox
+cd hops
+mput both.tim
+mput boot.tim
+bye
+
+macdef main
+cd /import/panos_builds/nightly/0.0
+
+macdef ones
+cd /import/panos_builds/nightly/1.1
+
+macdef twos
+cd /import/panos_builds/nightly/2.0
+
+macdef beta
+cd /import/panos_builds/1.1
+
+macdef pvt
+cd /home/uthimmaja/image/sultan
+
+macdef image
+mget both.tim
+mget boot.tim
+
+macdef gi
+$main
+cd $1/MTU-sultan
+lcd bin/MTU-sultan
+mget both.tim
+mget boot.tim
+cd ../MTU-i386
+lcd ../MTU-i386
+mget both.tim
+mget boot.tim
+cd ../STU-i386
+lcd ../STU-i386
+mget both.tim
+mget boot.tim
+cd ../STU-sultan
+lcd ../STU-sultan
+mget both.tim
+mget boot.tim
+lcd ../SASX-hops
+mget both.tim
+mget boot.tim
+lcd ../SASX-i386
+mget both.tim
+mget boot.tim
+bye
+
+macdef gi1s
+$ones
+cd $1/MTU-sultan
+lcd bin/MTU-sultan
+mget both.tim
+mget boot.tim
+cd ../MTU-i386
+lcd ../MTU-i386
+mget both.tim
+mget boot.tim
+cd ../STU-i386
+lcd ../STU-i386
+mget both.tim
+mget boot.tim
+cd ../STU-sultan
+lcd ../STU-sultan
+mget both.tim
+mget boot.tim
+bye
+
+macdef gi2s
+$twos
+cd $1/MTU-sultan
+lcd bin/MTU-sultan
+mget both.tim
+mget boot.tim
+cd ../MTU-i386
+lcd ../MTU-i386
+mget both.tim
+mget boot.tim
+cd ../STU-i386
+lcd ../STU-i386
+mget both.tim
+mget boot.tim
+cd ../STU-sultan
+lcd ../STU-sultan
+mget both.tim
+mget boot.tim
+bye
+

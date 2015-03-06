@@ -1,0 +1,16 @@
+# .inputrc
+#
+# $Id: .inputrc,v 1.2 2001/02/14 23:52:12 mbs Exp $
+#
+#
+
+set bell-style none
+
+#  Uncomment this if you want vi-style command line editing
+#set editing-mode vi
+
+set show-all-if-ambiguous
+
+set expand-tilde
+
+set possible-completions C-d

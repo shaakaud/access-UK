@@ -1,0 +1,66 @@
+#caption always '%{= kB}%-Lw%?%{r}[%{G}%n*%f %t%?%{r}]%{= kB}%+Lw'
+#termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+#escape ``
+hardstatus string ' %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<'
+
+bind o focus
+defscrollback 5000
+
+#hardstatus string '%{= kG}[%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}]'
+#
+# Bind F11 and F12 (NOT F1 and F2) to previous and next screen window
+bindkey -k F1 prev
+bindkey -k F2 next
+#
+# for shift right and left arrows
+bindkey ^[[1;2D prev
+bindkey ^[[1;2C next
+#
+startup_message off
+#
+# Window list at the bottom.
+hardstatus alwayslastline
+hardstatus string "%-w%{= BW}%50>%n %t%{-}%+w%<"
+#
+# From Stephen Shirley
+# Don't block command output if the terminal stops responding
+# (like if the ssh connection times out for example).
+nonblock on
+#
+## Allow editors etc. to restore display on exit
+## rather than leaving existing text in place
+altscreen on
+#
+# Enable 256-color mode when screen is started with TERM=xterm-256color
+# Taken from: http://frexx.de/xterm-256-notes/
+#
+# Note that TERM != "xterm-256color" within a screen window. Rather it is
+# "screen" or "screen-bce"
+# 
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# tell screen how to set colors. AB = background, AF=foreground
+#termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#
+# Don't display the copyright page
+startup_message off
+#
+# tab-completion flash in heading bar
+vbell off
+#
+# These will let you use 
+bind -c selectHighs 0 select 10 #these three commands are 
+bind -c selectHighs 1 select 11 #added to the command-class
+bind -c selectHighs 2 select 12 #selectHighs
+bind -c selectHighs 3 select 13
+bind -c selectHighs 4 select 14
+bind -c selectHighs 5 select 15
+#
+bind - command -c selectHighs   #bind the hyphen to 
+#                                #command-class selectHighs
+
+#UDAY - To display the screen name in the bottom
+screen 
+screen $SHELL -c 'screen -X caption always "$STY"'

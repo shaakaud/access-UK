@@ -1,0 +1,4 @@
+DIST := 0
+DIST_GET_FILES=bin,*.st gen,*
+PTR_CHCK_MODE := enabled
+PTR_CHCK_MOD_WHITE_LIST :=

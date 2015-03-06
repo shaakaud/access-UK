@@ -1,0 +1,112 @@
+"My preferences
+set hlsearch
+set number
+set autoindent
+set smartindent
+set cindent
+set nocompatible
+set tabstop=4
+set shiftwidth=4
+set backspace=2
+set ruler
+set incsearch
+set ttyfast
+set expandtab
+set laststatus=2
+"set columns=80
+colorscheme darkblue
+filetype plugin on
+
+set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+set complete-=k complete+=k
+syntax on
+
+"Key Mappings for cscope
+source  ~/.vim/plugin/cscope_maps.vim
+
+"Key Mappings for quickfix
+set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
+:map <C-Up> :cope 15<CR>
+:map <C-Down> :ccl<CR>
+:map <C-Right> :cn<CR>
+:map <C-Left> :cp<CR>
+
+"Tells where to search for tags
+set tags=./tags,tags;/home/udayakut
+
+"Taglist settings
+:map <C-L> :Tlist<CR>
+""let Tlist_Ctags_Cmd="/home/udayakut/bin/ctags"
+if has("win32unix")
+    let Tlist_Ctags_Cmd="/usr/local/timostools/ctags"
+else
+    let Tlist_Ctags_Cmd="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+endif
+let Tlist_Show_One_File=1
+let Tlist_Exist_OnlyWindow=1
+let Tlist_Use_Horiz_Window=3
+let Tlist_Display_Prototype=1
+let Tlist_Compart_Format=1
+let Tlist_Show_Menu=1
+let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_Display_Tag_Scope=1
+let Tlist_Close_On_Select=0
+let Tlist_Enable_Fold_Column=1
+let Tlist_WinHeight=15
+
+
+"Key Mappings for BufExplorer
+let bufExplorerOpenMode=1
+let bufExplorerSplitBelow=1
+let bufExplorerSplitHorzSize=10
+:map <S-Right> :bnext<CR>
+:map <S-Left>  :bprev<CR>
+:map <S-Up>  \bs
+
+
+"Key mappings for NerdCommenter
+"\cb        "good looking comment
+"\cs        "sexy comment
+"\c<space>  "toggle commenting
+
+
+"Word completion
+":autocmd BufEnter * call DoWordComplete()
+
+"vimdiff color settings
+highlight DiffAdd term=reverse ctermbg=brown ctermfg=black
+highlight DiffChange term=reverse ctermbg=black ctermfg=white
+highlight DiffText term=reverse ctermbg=gray ctermfg=black
+highlight DiffDelete term=reverse ctermbg=black ctermfg=black
+
+"work related
+":cs add $SB_SRC
+":map <C-K> :!svndiff %<CR>
+":map <C-F12> :set nocindent & nosmartindent & noautoindent<CR>
+"autocmd BufEnter *.dd set filetype=c
+
+"SHIFT-Insert are Paste                                         
+nmap <S-Insert>        "+gP
+imap <S-Insert>        <ESC><S-Insert>i
+
+
+"Added by Lakshman Kumar
+if has("win32unix")
+    let g:showfuncctagsbin="/usr/local/timostools/ctags"
+else
+    let g:showfuncctagsbin="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+endif
+let g:ctags_statusline=1
+let g:ctags_title=0
+let generate_tags=1
+
+set bg=dark
+if has("win32unix")
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
+endif
+
+"if has("gui_running") 
+  "let &runtimepath.=',C:\home\udayakut\.vim'
+  ""let g:showfuncctagsbin='C:\\usr\\local\\timostools\\ctags.exe'
+  "let g:showfuncctagsbin='~/ctags/ctags.exe'
+"endif

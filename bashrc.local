@@ -1,0 +1,137 @@
+# personal configurations
+export LOC=0.0MG
+export USERINITIALS=mv
+export EMAIL_ADDR=Udayakumar.Thimma_Janarthanan@Alcatel-Lucent.com
+export CVSUSERNAME=udayakut
+
+# .bashrc overrides
+export CVSROOT=":pserver:$CVSUSERNAME@cvspc.mv.usa.alcatel.com:/swdev/cvsrep"
+export EMACS_BASE=/usr/local/emacs
+export TEMP=/temp
+export TGT_PF=7750
+
+#UDAY
+export WIN="/drive_c/"
+export WINH="/drive_c/home/udayakut/"
+
+####
+#GIT related
+###
+#Show git Branch in the prompt
+source ~/.git-prompt.sh
+#export PS1="\h \w=>$ "
+export PS1="\w\$(__git_ps1)=>$ "
+#GIT autocompletion
+if [ -f /etc/bash_completion.d/git ]; then
+    . /etc/bash_completion.d/git
+fi
+
+# History Size
+HISTSIZE=100
+
+# PROMPT
+COMMENT=
+PROMPT_COMMAND='echo -ne "\033]0;PANOS: ${PANOS} ${COMMENT}\007"'
+
+# Use Colors
+LS_OPTIONS='--color=auto'
+
+# Setup Context Related Variables
+export PAN_DIR=`pwd`
+export PANOS=`pwd`
+
+#
+# ALIASES : START 
+#
+
+# Remove all unnecassary files 
+alias f='rm -f *~; rm -f *#'
+
+# Modified Files 
+alias m='cvs -n up -P -d 2>/dev/null | grep -v "^[/?U]" 2>/dev/null'
+
+# Workspace related 
+alias panos='cd $PAN_DIR'
+
+alias  setcomment='COMMENT=`cat comment 2>1`'
+alias setspace='PAN_DIR=/$USERNAME/$LOC/panos/;  panos; PANOS=$PAN_DIR; setcomment; clear'
+
+alias  00m='LOC=0.0MG;    setspace;'
+alias 002m='LOC=0.0-2MG;  setspace;'
+alias 30sm='LOC=3.0S.MG;  setspace;'
+alias 30bm='LOC=3.0B.MG;  setspace;'
+alias 31sm='LOC=3.1S.MG;  setspace;'
+alias 31bm='LOC=3.1B.MG;  setspace;'
+
+PATH=$PATH:~/bin:/usr/local/timostools;
+alias mks='mk --summary'
+alias mkioms='mks iom'
+alias mksims='mks sim'
+alias mkhops='mks hops'
+alias mkcpms='mks cpms'
+
+#GTP Related
+alias cpm="cd lte_gtp"
+alias gtp="cd lte_gtp"
+alias mscp="cd lte_mscp"
+
+express () { regress -testbed $1 -runLevel express -nobuild; }
+regular () { regress -testbed $1 -runLevel regular -nobuild -runSuite $2; }
+i386 () { cd bin/7xxx-i386/
+          cp iom.tim i386-iom.tim
+          cp cpm.tim i386-cpm.tim
+          cp boot.tim i386-boot.tim
+          cp both.tim i386-both.tim
+          cp isa-aa.tim i386-isa-aa.tim
+          scp i3*.tim $1@$1.mv.usa.alcatel.com:/home/$1/images
+          cd ../.. ;}
+i386n () { cd bin/7xxx-i386/
+          cp iom.tim i386-iom.tim
+          cp cpm.tim i386-cpm.tim
+          cp boot.tim i386-boot.tim
+          cp both.tim i386-both.tim
+          cp isa-aa.tim i386-isa-aa.tim
+          scp i3*.tim $1@$1.us.alcatel-lucent.com:/home/$1/images
+          cd ../.. ;}		  
+i386np () { cd bin/7xxx-i386/
+          cp iom.tim i386-iom.tim
+          cp cpm.tim i386-cpm.tim
+          cp boot.tim i386-boot.tim
+          cp both.tim i386-both.tim
+          cp isa-aa.tim i386-isa-aa.tim
+          scp i3*.tim $1@$1.ih.lucent.com:/home/$1/images
+          cd ../.. ;}		  
+hops () { cd bin/7xxx-hops/
+          scp *.tim $1@$1.mv.usa.alcatel.com:/home/$1/images
+          cd ../7xxx-chile/
+          scp isa-aa.tim $1@$1.mv.usa.alcatel.com:/home/$1/images
+          cd ../.. ;}
+hopsn () { cd bin/7xxx-hops/
+          scp *.tim $1@$1.us.alcatel-lucent.com:/home/$1/images
+          cd ../7xxx-chile/
+          scp isa-aa.tim $1@$1.us.alcatel-lucent.com:/home/$1/images
+          cd ../.. ;}
+
+
+hopsnp () { cd bin/7xxx-hops/
+          scp *.tim $1@$1.ih.lucent.com:/home/$1/images
+          cd ../7xxx-chile/
+          scp isa-aa.tim $1@$1.ih.lucent.com:/home/$1/images
+          cd ../.. ;}
+
+queen () { cd bin/7xxx-i386/
+           cp iom.tim i386-iom.tim
+           cp cpm.tim i386-cpm.tim
+           cp boot.tim i386-boot.tim
+           cp both.tim i386-both.tim
+           cp isa-aa.tim i386-isa-aa.tim
+           scp i3*.tim
+           udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
+           cd ../.. ;}
+
+queenhops () { cd bin/7xxx-hops/
+          scp *.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
+          cd ../7xxx-chile/
+          scp isa-aa.tim
+          udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
+          cd ../.. ;}		   
