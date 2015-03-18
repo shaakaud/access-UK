@@ -1,0 +1,100 @@
+#!perl
+
+use strict;
+
+# Customizations 
+my $dflt_backup_loc = "/cygdrive/o/backups/CODE/";
+
+# Vars
+my $backup_loc;
+my $loc;
+my $files;
+my $dir;
+my $base_dir;
+my $override = 0;
+
+# User specified location override
+if ($#ARGV == 0) 
+{
+    $backup_loc = shift;
+    $backup_loc .= "/" if ($backup_loc !~ /\/$/);
+    $override = 1;
+}
+else 
+{
+    $backup_loc = $dflt_backup_loc;
+}
+
+print "SUDEEP : $backup_loc\n";
+
+# Check Args provided, if not fine then print help
+if (($#ARGV > 0) || ($backup_loc eq "-h/") || ($backup_loc eq "--help/"))
+{
+    print <<USAGE_STRING;
+
+Usage: $0 [<backup-location>]
+
+    1. Performs a cvs compare to check which files have
+       been modified. If new files are added, they will
+       not be detected unless a \"cvs add\" has  been done
+    
+    2. Builds a location directory, specific to the date
+       and time (granularity in seconds).
+    
+    3. Copies the mods to the backup location
+
+USAGE_STRING
+    exit (1);
+}
+
+# Setup the destination location
+
+# 1. From current directory remove the preceding /, correct the path
+$base_dir = `pwd`;
+$base_dir =~ s/(\s+|\:|\\|\/)/\//g;
+$base_dir =~ s/^\///;
+
+if ($override == 0)
+{
+    $loc = `date`;
+    if ($loc =~ m/([A-Za-z]+)\s+([A-Za-z]+)\s+([0-9]+)\s+([\:0-9]+)\s+([A-Za-z]+)\s+([0-9]+)\s+/)
+    {
+        $loc = $3.$2.$6."-".$4."/";
+    }
+    $loc =~ s/\s+//g;
+    $loc =~ s/\:/./g;
+    $loc =~ s/(^\_|\_$)//g;
+    $loc = $backup_loc.$base_dir.$loc;
+}
+else
+{
+    $loc = $backup_loc;
+}
+           
+print "Saving changes to : $loc\n";
+
+# Just ensure the location exists
+$dir = `mkdir -p $loc`;
+if ($dir ne "")
+{
+    print "Destination ($loc) not accessible\n";
+    exit (1);
+}
+
+# Retrieve modified files
+$files = `bash -c "cvs -n up -P -d 2>/dev/null | grep -v \"^[/?U]\""`;
+if ($files eq "")
+{
+    print "No modified files in the present directory\n";
+    exit (0);
+}
+
+# Save each file
+my @fnames = split(/\s+/, $files);
+foreach(@fnames) 
+{
+    if ($_ ne "M" && $_ ne "A" && $_ ne "R") {
+        print "Copying $_ to $loc\n";
+        `cp --parents -f $_ $loc`;
+    }
+}

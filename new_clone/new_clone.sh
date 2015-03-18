@@ -173,7 +173,6 @@ if [ $git_patches -eq 1 ] ; then
     git supercommitpatch $gittish_dir/patch_$number "$patch_comments"
     if [ $? -ne 0 ] ; then
       echo "Trouble in applying git patch patch_$number"
-      inform "Trouble in git patching patch_$number at $(pwd) with comments $comments. Attend!"
       exit 1
     fi
   done
@@ -181,7 +180,6 @@ if [ $git_patches -eq 1 ] ; then
     patch -p2 -i $gittish_dir/patch_00
     if [ $? -ne 0 ] ; then
       echo "Trouble in applying git patch patch_00"
-      inform "Trouble in git patching patch_00 at $(pwd) with comments $comments. Attend!"
       exit 1
     fi
     chmod +w $(git lsm)
@@ -193,7 +191,6 @@ elif [ $patches -eq 1 ] ; then
   patch -p$patch_p_arg -i $patch_file
   if [ $? -ne 0 ] ; then
     echo "Some Trouble patching"
-    inform "Trouble in patching $patch_file at $(pwd) with comments $comments. Attend!"
     exit 1
   fi
   chmod +w $(git ls-files --modified)
@@ -210,5 +207,3 @@ else
   echo "Building"
   mk all
 fi
-
-inform "New clone in $(pwd) with comments $comments is ready"
