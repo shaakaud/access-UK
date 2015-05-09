@@ -6,7 +6,7 @@
     cset = diff-tree --no-commit-id --name-only -r
     lsm = ls-files --modified
     export = "!f() { git show --pretty=format: $1 | tail -n +2 ; } ; f "
-    logol = log --pretty=oneline
+    logol = log --pretty=oneline --graph --decorate
     supercommitpatch = "!f() { patch -p1 -i $1 ; if [ $? -ne 0 ] ; then echo \"patching failed\" ; return 1 ; fi ; chmod +w $(git ls-files --modified) ; git add $(git ls-files --modified) ; git commit -m \"$2\" ; } ; f "
     statusporcut = !git status --porcelain | cut -c4-
     dpeek = !git diff --color=always | less -r

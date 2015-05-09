@@ -75,7 +75,7 @@ alias fs='ftp sparta'
 
 #FILE PATHS
 
-WORK=$HOME/ws/*icc_rx*/panos
+WORK=$HOME/ws/icc_rx_mar18/panos
 #WORK=$HOME/ws/mg70s/panos
 PANOS=$HOME/ws/mg00/panos
 PANOS6=$HOME/ws/mg60s/panos
@@ -140,6 +140,7 @@ alias tailxh='tail -f buildlogs/mkboth.SASX.hops.txt'
 #ALU-2
 alias up0='upload.queen2.newHire images/mg00'
 alias up6='upload.queen2.newHire images/mg60'
+alias upi='upload.queen2.newHire images/iccrx'
 
 #ftp mput
 alias tm='binm; echo "\$ do" | ftp sparta; cd -'
