@@ -44,6 +44,9 @@ LS_OPTIONS='--color=auto'
 export PAN_DIR=`pwd`
 export PANOS=`pwd`
 
+#PATH
+export PATH=${PATH}:~/access-UK/alu
+
 #
 # ALIASES : START 
 #
