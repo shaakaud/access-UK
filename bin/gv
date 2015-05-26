@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Script that demos, command line args
+#
+file=$1;
+gvim $1 &

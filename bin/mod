@@ -1,0 +1,5 @@
+cvs status | grep -i "Modified" > modified.txt
+cvs status | grep -i "Needs Merge" >> modified.txt
+cvs status | grep -i "conflict" >> modified.txt
+echo MODIFIED FILES ARE
+cat modified.txt

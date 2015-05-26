@@ -1,0 +1,280 @@
+#!/bin/sh
+
+PATH="/bin:/usr/bin"; export PATH
+
+uname=""
+if [ -x /bin/uname ]; then
+    uname=`/bin/uname`;
+else
+    uname=`/usr/bin/uname`;
+fi
+
+case "x$uname" in
+    xSunOS )
+    echo "sun"
+        #eval 'exec /import/tools/bin/perl -x $0 ${1+"$@"}'
+        eval 'exec /bin/perl -x $0 ${1+"$@"}'
+    ;;
+    xLinux )
+    echo "lin"
+        eval 'exec /usr/bin/perl -x $0 ${1+"$@"}'
+    ;;
+    xNetBSD )
+    echo "net"
+        eval 'exec /usr/pkg/bin/perl -x $0 ${1+"$@"}'
+    ;;
+esac
+
+echo "Error: Please contact cmteam@riverstonenet.com"
+echo "Error: Cannot determine your operating system in script $0, line 40"
+exit 20
+
+#! perl
+use strict;
+
+
+my $n = 1;
+
+if($ARGV[0] =~ m/^\d+$/){
+    $n = shift @ARGV;;
+}
+
+if((scalar @ARGV) == 0){
+    my $hostname = `/bin/hostname`; chomp $hostname;
+    push @ARGV, $hostname;
+}
+
+my @good_colors = ();
+
+my $machine;
+for $machine (@ARGV){
+    my $i;
+    for($i=0; $i<$n; $i++){
+        my ($fg, $bg) = getcolor();
+        my $xt = `echo $0|/import/atria/cmtools/bin/abspath`; chomp $xt;
+        my $rsh_cmd = "sh -c \"TERM=xterm-256color DISPLAY=$ENV{DISPLAY} sm_fg=$fg sm_bg=$bg sm_xt=$xt xterm -vb -fg $fg -bg $bg -ah -T $machine -n $machine -sb -sl 10000 &\"&";
+        my $cmd = "rsh $machine '$rsh_cmd'&";
+        print "--doing: $cmd\n";
+        system "$cmd > /dev/null 2>&1";
+    }
+}
+
+sub getcolor {
+    my $x = 3;
+    if((scalar @good_colors) == 0){
+        my $status = open O, "<$0";
+        if(!defined($status)){
+            return("aliceblue", "chocolate4");
+        }
+
+        my @lines = <O>;
+        close O;
+        my $line;
+        for $line (@lines){
+            if($line =~ m{^\s*#\s*-fg\s+([^\s]+)\s+-bg\s+([^\s]+)}){
+                push @good_colors, [$1, $2];
+            }
+        }
+    }
+    my $n = rand(scalar @good_colors);
+    $n =~ s{\..*}{};
+    $n = ($n eq "") ? 0 : $n;
+    return(${$good_colors[$n]}[0], ${$good_colors[$n]}[1]);
+}
+__END__
+# -fg aliceblue -bg chocolate4
+# -fg aliceblue -bg gray11
+# -fg antiquewhite -bg deeppink4
+# -fg azure -bg slateblue4
+# -fg bisque -bg darkslategray
+# -fg bisque1 -bg violetred4
+# -fg black -bg antiquewhite1
+# -fg black -bg honeydew
+# -fg black -bg lightcyan1
+# -fg black -bg lightgoldenrod3
+# -fg black -bg navajowhite1
+# -fg black -bg paleturquoise
+# -fg black -bg plum1
+# -fg black -bg rosybrown2
+# -fg blue3 -bg azure1
+# -fg blue3 -bg gray90
+# -fg blue3 -bg gray98
+# -fg blue3 -bg plum1
+# -fg blue3 -bg wheat
+# -fg blue4 -bg antiquewhite2
+# -fg blue4 -bg bisque
+# -fg blue4 -bg cornsilk2
+# -fg blue4 -bg gray98
+# -fg blue4 -bg wheat1
+# -fg brown4 -bg turquoise
+# -fg cornsilk1 -bg magenta4
+# -fg cornsilk1 -bg navy
+# -fg deeppink4 -bg beige
+# -fg deeppink4 -bg gray85
+# -fg deeppink4 -bg peachpuff2
+# -fg deeppink4 -bg thistle1
+# -fg firebrick3 -bg mintcream
+# -fg firebrick4 -bg gray92
+# -fg firebrick4 -bg gray95
+# -fg floralwhite -bg orangered4
+# -fg ghostwhite -bg coral4
+# -fg gray1 -bg burlywood1
+# -fg gray1 -bg coral
+# -fg gray1 -bg gray81
+# -fg gray1 -bg gray91
+# -fg gray1 -bg gray97
+# -fg gray1 -bg honeydew3
+# -fg gray1 -bg khaki2
+# -fg gray11 -bg ghostwhite
+# -fg gray11 -bg gray93
+# -fg gray11 -bg gray95
+# -fg gray11 -bg lightyellow3
+# -fg gray11 -bg mistyrose3
+# -fg gray11 -bg thistle1
+# -fg gray12 -bg cornsilk
+# -fg gray12 -bg gray78
+# -fg gray12 -bg orange
+# -fg gray12 -bg peachpuff1
+# -fg gray12 -bg peachpuff2
+# -fg gray13 -bg lavenderblush
+# -fg gray13 -bg navajowhite
+# -fg gray13 -bg white
+# -fg gray14 -bg antiquewhite
+# -fg gray14 -bg ivory1
+# -fg gray14 -bg khaki1
+# -fg gray14 -bg khaki2
+# -fg gray14 -bg peachpuff
+# -fg gray15 -bg antiquewhite3
+# -fg gray15 -bg cornsilk
+# -fg gray15 -bg khaki1
+# -fg gray15 -bg seashell1
+# -fg gray17 -bg ivory1
+# -fg gray17 -bg snow1
+# -fg gray18 -bg lavenderblush1
+# -fg gray19 -bg lightyellow
+# -fg gray2 -bg coral
+# -fg gray2 -bg navajowhite1
+# -fg gray2 -bg skyblue
+# -fg gray3 -bg blanchedalmond
+# -fg gray3 -bg gainsboro
+# -fg gray3 -bg gray79
+# -fg gray3 -bg gray94
+# -fg gray3 -bg oldlace
+# -fg gray3 -bg paleturquoise2
+# -fg gray3 -bg pink2
+# -fg gray3 -bg sandybrown
+# -fg gray4 -bg antiquewhite3
+# -fg gray4 -bg beige
+# -fg gray4 -bg burlywood
+# -fg gray4 -bg gray97
+# -fg gray4 -bg lightyellow
+# -fg gray4 -bg skyblue
+# -fg gray5 -bg antiquewhite1
+# -fg gray5 -bg gray80
+# -fg gray5 -bg gray83
+# -fg gray5 -bg lemonchiffon1
+# -fg gray6 -bg beige
+# -fg gray6 -bg gray83
+# -fg gray6 -bg gray98
+# -fg gray6 -bg ivory1
+# -fg gray6 -bg lemonchiffon1
+# -fg gray6 -bg orange
+# -fg gray6 -bg peachpuff
+# -fg gray6 -bg wheat3
+# -fg gray7 -bg aliceblue
+# -fg gray7 -bg gray78
+# -fg gray7 -bg lightsteelblue2
+# -fg gray7 -bg pink2
+# -fg gray7 -bg plum2
+# -fg gray8 -bg burlywood2
+# -fg gray8 -bg gray95
+# -fg gray8 -bg gray96
+# -fg gray8 -bg lavender
+# -fg gray8 -bg lightyellow3
+# -fg gray8 -bg plum
+# -fg gray9 -bg khaki2
+# -fg gray9 -bg navajowhite3
+# -fg gray9 -bg snow2
+# -fg gray9 -bg wheat2
+# -fg gray92 -bg midnightblue
+# -fg gray94 -bg brown
+# -fg gray94 -bg maroon4
+# -fg gray96 -bg violetred4
+# -fg gray97 -bg tan4
+# -fg gray99 -bg dodgerblue4
+# -fg gray99 -bg red4
+# -fg honeydew1 -bg darkgreen
+# -fg honeydew1 -bg purple4
+# -fg ivory -bg indianred4
+# -fg ivory2 -bg brown4
+# -fg lavenderblush -bg violetred4
+# -fg lemonchiffon -bg midnightblue
+# -fg lightcyan1 -bg midnightblue
+# -fg lightgoldenrod1 -bg purple4
+# -fg lightskyblue1 -bg midnightblue
+# -fg lightskyblue2 -bg gray3
+# -fg lightyellow -bg purple4
+# -fg lightyellow1 -bg blue4
+# -fg lightyellow2 -bg firebrick4
+# -fg magenta4 -bg beige
+# -fg magenta4 -bg cornsilk2
+# -fg magenta4 -bg gray86
+# -fg magenta4 -bg gray97
+# -fg magenta4 -bg lightcyan2
+# -fg magenta4 -bg wheat2
+# -fg maroon4 -bg lightcyan1
+# -fg maroon4 -bg lightgrey
+# -fg mediumturquoise -bg gray13
+# -fg mediumturquoise -bg gray3
+# -fg midnightblue -bg ivory1
+# -fg midnightblue -bg lavenderblush1
+# -fg midnightblue -bg navajowhite2
+# -fg midnightblue -bg white
+# -fg mintcream -bg firebrick4
+# -fg mintcream -bg purple4
+# -fg mistyrose1 -bg firebrick4
+# -fg navajowhite1 -bg brown4
+# -fg navy -bg honeydew1
+# -fg oldlace -bg darkgreen
+# -fg oldlace -bg sienna4
+# -fg paleturquoise1 -bg maroon4
+# -fg paleturquoise2 -bg black
+# -fg peachpuff -bg gray18
+# -fg peachpuff1 -bg purple4
+# -fg red4 -bg azure1
+# -fg red4 -bg bisque1
+# -fg red4 -bg cornsilk3
+# -fg red4 -bg gray92
+# -fg red4 -bg honeydew
+# -fg red4 -bg linen
+# -fg red4 -bg navajowhite1
+# -fg seashell -bg deeppink4
+# -fg seashell1 -bg brown4
+# -fg skyblue -bg gray19
+# -fg slategray1 -bg midnightblue
+# -fg snow -bg darkgreen
+# -fg snow -bg darkorange4
+# -fg snow -bg orangered4
+# -fg thistle1 -bg midnightblue
+# -fg white -bg darkgreen
+# -fg white -bg hotpink4
+# -fg whitesmoke -bg coral4
+# -fg yellow -bg darkorchid4
+# -fg yellow -bg gray3
+# -fg yellow -bg midnightblue
+# -fg red3 -bg thistle2
+# -fg gray7 -bg lightblue
+# -fg aliceblue -bg deeppink4
+# -fg blue4 -bg ivory1
+# -fg gray9 -bg lemonchiffon1
+# -fg gray5 -bg lightcyan1
+# -fg black -bg lightsalmon
+# -fg khaki -bg magenta4
+# -fg slategray1 -bg gray18
+# -fg wheat1 -bg gray18
+# -fg gray11 -bg wheat
+# -fg paleturquoise1 -bg violetred4
+# -fg gray8 -bg lightblue2
+# -fg mintcream -bg gray15
+# -fg blue3 -bg mistyrose1
+# -fg gray3 -bg blanchedalmond

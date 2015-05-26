@@ -1,0 +1,3 @@
+find . -name "*.[ch]" > /home/udayakut/ws/mg00/panos/cscope.files
+find . -name *.inc >> /home/udayakut/ws/mg00/panos/cscope.files
+cscope  -b /home/udayakut/ws/mg00/panos/cscope.files
