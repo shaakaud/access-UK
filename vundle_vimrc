@@ -1,0 +1,157 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+
+Plugin 'vim-scripts/ctags.vim'
+Plugin 'vim-scripts/MultipleSearch'
+Plugin 'vim-scripts/DirDiff.vim'
+Plugin 'antiAgainst/cscope-macros.vim'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'justinmk/vim-sneak'
+Plugin 'edsono/vim-matchit'
+Plugin 'sjl/gundo.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'vim-scripts/python_match.vim'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'jeetsukumaran/vim-buffersaurus'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+
+"============================================================================================
+
+"UDAY My preferences
+set hlsearch
+set number
+set autoindent
+set smartindent
+set cindent
+set nocompatible
+set tabstop=4
+set shiftwidth=4
+set backspace=2
+set ruler
+set incsearch
+set ttyfast
+set expandtab
+set laststatus=2
+"set columns=80
+colorscheme darkblue
+filetype plugin on
+
+set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+set complete-=k complete+=k
+syntax on
+
+"Key Mappings for cscope
+"source  ~/.vim/plugin/cscope_maps.vim
+
+"Key Mappings for quickfix
+set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
+:map <C-Up> :cope 15<CR>
+:map <C-Down> :ccl<CR>
+:map <C-Right> :cn<CR>
+:map <C-Left> :cp<CR>
+
+"Tells where to search for tags
+set tags=./tags,tags;/home/udayakut
+
+"Taglist settings
+:map <C-L> :Tlist<CR>
+""let Tlist_Ctags_Cmd="/home/udayakut/bin/ctags"
+if has("win32unix")
+    let Tlist_Ctags_Cmd="/usr/local/timostools/ctags"
+else
+    let Tlist_Ctags_Cmd="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+endif
+let Tlist_Show_One_File=1
+let Tlist_Exist_OnlyWindow=1
+let Tlist_Use_Horiz_Window=3
+let Tlist_Display_Prototype=1
+let Tlist_Compart_Format=1
+let Tlist_Show_Menu=1
+let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_Display_Tag_Scope=1
+let Tlist_Close_On_Select=0
+let Tlist_Enable_Fold_Column=1
+let Tlist_WinHeight=15
+
+
+"Key Mappings for BufExplorer
+let bufExplorerOpenMode=1
+let bufExplorerSplitBelow=1
+let bufExplorerSplitHorzSize=10
+:map <S-Right> :bnext<CR>
+:map <S-Left>  :bprev<CR>
+:map <S-Up>  \bs
+
+
+"vimdiff color settings
+highlight DiffAdd term=reverse ctermbg=brown ctermfg=black
+highlight DiffChange term=reverse ctermbg=black ctermfg=white
+highlight DiffText term=reverse ctermbg=gray ctermfg=black
+highlight DiffDelete term=reverse ctermbg=black ctermfg=black
+
+"SHIFT-Insert are Paste
+nmap <S-Insert>        "+gP
+imap <S-Insert>        <ESC><S-Insert>i
+
+"Added by Lakshman Kumar
+if has("win32unix")
+    let g:showfuncctagsbin="/usr/local/timostools/ctags"
+else
+    let g:showfuncctagsbin="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+endif
+let g:ctags_statusline=1
+let g:ctags_title=0
+let generate_tags=1
+
+set bg=dark
+if has("win32unix")
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
+endif
+
+"if has("gui_running") 
+  "let &runtimepath.=',C:\home\udayakut\.vim'
+  ""let g:showfuncctagsbin='C:\\usr\\local\\timostools\\ctags.exe'
+  "let g:showfuncctagsbin='~/ctags/ctags.exe'
+"endif

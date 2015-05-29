@@ -320,3 +320,9 @@ else
     export CSCOPE_EDITOR=/usr/bin/vim
     alias ctags='/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
 fi
+
+#######################################################################
+#AUTOJUMP
+#######################################################################
+[[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
+

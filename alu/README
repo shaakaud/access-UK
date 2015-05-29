@@ -1,0 +1,7 @@
+1. inform.sh "message" - When this command is issued from centos vm terminal, "message" gets displayed on the Windows system tray as Centos Notification. python/win-popup.py needs to be executed from windows machine to receive the messages sent from Centos VM. Create a shortcut and add to the windows startup folder ie C:\Users\udayakut.ENG\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup.
+
+2. txw - when this command is issued from panos directory, it transfers binaries to queen2:/home/udayakut/images/iccrx/ directory
+
+3. tx - when this command is issued from panos directory, it transfers binaries to queen2:/home/udayakut/images/mg00/ directory
+
+4. queen2-related folder has scripts to upload binaries to queen2 server. ftpxfer.sh should be copied to panos/make directory. upload.queen2.newHire script is used to upload images from panos/bin** directories to a given folder of queen2. alias up0 is defined as "'upload.queen2.newHire images/mg00'". This alias uploads images to /home/udayakut/images/mg00 path of queen2 server.

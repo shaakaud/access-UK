@@ -1,0 +1,18 @@
+1. sudo yum install zsh
+2. cd ~/software
+
+   #google for "oh my zsh", click the first link and follow the steps - https://github.com/robbyrussell/oh-my-zsh
+3. curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+4. vi ~/.zshrc and add below line
+   emulate bash -c 'source ~/bashrc_for_zsh'
+
+   #cd ~/access-UK/git/
+5. curl https://github.com/git/git/raw/master/contrib/completion/git-completion.zsh -OL
+   ln -s ~/access-UK/git/git-completion.zsh git-completion.zsh
+
+6. vi ~/.zshrc and add the below line
+   source ~/git-completion.zsh
+
+7. Install autojump following instructions in the below webpage
+   https://github.com/joelthelion/autojump

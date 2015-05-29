@@ -1,0 +1,27 @@
+echo "bin/7xxx-i386/iom.tim --> /home/udayakut/images/mg00/i386-iom.tim"
+scp bin/7xxx-i386/iom.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-iom.tim
+echo "bin/7xxx-i386/iom.tim --> /home/udayakut/images/mg00/i386-iom.tim"
+scp bin/7xxx-i386/cpm.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-cpm.tim
+echo "bin/7xxx-i386/both.tim --> /home/udayakut/images/mg00/i386-both.tim"
+scp bin/7xxx-i386/both.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-both.tim
+echo "bin/7xxx-i386/boot.tim --> /home/udayakut/images/mg00/i386-boot.tim"
+scp bin/7xxx-i386/boot.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-boot.tim
+echo "bin/7xxx-i386/isa-aa.tim --> /home/udayakut/images/mg00/i386-isa-aa.tim"
+scp bin/7xxx-i386/isa-aa.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-isa-aa.tim
+echo "bin/7xxx-hops/iom.tim --> /home/udayakut/images/mg00/iom.tim"
+scp bin/7xxx-hops/iom.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/iom.tim
+echo "bin/7xxx-hops/cpm.tim --> /home/udayakut/images/mg00/cpm.tim"
+scp bin/7xxx-hops/cpm.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/cpm.tim
+echo "bin/7xxx-hops/both.tim --> /home/udayakut/images/mg00/both.tim"
+scp bin/7xxx-hops/both.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/both.tim
+echo "bin/7xxx-hops/boot.tim --> /home/udayakut/images/mg00/boot.tim"
+scp bin/7xxx-hops/boot.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/boot.tim
+echo "bin/7xxx-hops/support.tim --> /home/udayakut/images/mg00/support.tim"
+scp bin/7xxx-hops/support.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/support.tim
+echo "bin/7xxx-chile/isa-aa.tim --> /home/udayakut/images/mg00/isa-aa.tim"
+scp bin/7xxx-chile/isa-aa.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/isa-aa.tim
+echo "test/setup_cli.cfg --> /home/udayakut/images/mg00/setup_cli.cfg"
+scp test/setup_cli.cfg udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/setup_cli.cfg
+echo "test/teardown_cli.cfg --> /home/udayakut/images/mg00/teardown_cli.cfg"
+scp test/teardown_cli.cfg udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/teardown_cli.cfg
+
