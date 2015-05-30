@@ -22,13 +22,9 @@ export TERM=xterm
 ###
 #Show git Branch in the prompt
 source ~/.git-prompt.sh
-export PS1="\w=>$ "
+#export PS1="\w=>$ "
 #export PS1="\h \w=>$ "
 #export PS1="\$(__git_ps1)\w=>$ "
-#GIT autocompletion
-if [ -f /etc/bash_completion.d/git ]; then
-    . /etc/bash_completion.d/git
-fi
 
 # History Size
 HISTSIZE=100
@@ -48,16 +44,16 @@ export PANOS=`pwd`
 export PATH=${PATH}:~/access-UK/alu
 
 #
-# ALIASES : START 
+# ALIASES : START
 #
 
-# Remove all unnecassary files 
+# Remove all unnecassary files
 alias f='rm -f *~; rm -f *#'
 
-# Modified Files 
+# Modified Files
 alias m='cvs -n up -P -d 2>/dev/null | grep -v "^[/?U]" 2>/dev/null'
 
-# Workspace related 
+# Workspace related
 alias panos='cd $PAN_DIR'
 
 alias  setcomment='COMMENT=`cat comment 2>1`'

@@ -61,6 +61,8 @@ bind -c selectHighs 5 select 15
 bind - command -c selectHighs   #bind the hyphen to 
 #                                #command-class selectHighs
 
+shell "/bin/zsh"
+
 #UDAY - To display the screen name in the bottom
 screen 
 screen $SHELL -c 'screen -X caption always "$STY"'

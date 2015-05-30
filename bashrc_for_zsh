@@ -299,9 +299,9 @@ fi
 #
 # Finally, if a ~/.bashrc.local exists, source it
 #
-if [ -e ~/.bashrc.local ]
+if [ -e ~/access-UK/bashrc.local_for_zsh ]
 then
-    source ~/.bashrc.local
+    source ~/access-UK/bashrc.local_for_zsh
 fi
 #########################################################################
 #ALIAS - UDAY
@@ -320,8 +320,3 @@ else
     export CSCOPE_EDITOR=/usr/bin/vim
     alias ctags='/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
 fi
-
-#######################################################################
-#AUTOJUMP
-#######################################################################
-[[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
