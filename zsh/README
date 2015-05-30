@@ -4,15 +4,18 @@
    #google for "oh my zsh", click the first link and follow the steps - https://github.com/robbyrussell/oh-my-zsh
 3. curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-4. vi ~/.zshrc and add below line
-   emulate bash -c 'source ~/bashrc_for_zsh'
+4. link ~/.zshrc to ~/access-UK/zshrc
 
-   #cd ~/access-UK/git/
-5. curl https://github.com/git/git/raw/master/contrib/completion/git-completion.zsh -OL
+5. cd ~/access-UK/git/
+   curl https://github.com/git/git/raw/master/contrib/completion/git-completion.zsh -OL
+   cd ~/
    ln -s ~/access-UK/git/git-completion.zsh git-completion.zsh
 
-6. vi ~/.zshrc and add the below line
-   source ~/git-completion.zsh
+6. Create the below soft links (vim to use bundle)
+    $ls -lart .vimrc
+    lrwxrwxrwx 1 udayakut udayakut 37 May 29 17:21 .vimrc -> /home/udayakut/access-UK/vundle_vimrc*
+    $ ls -lart .vim
+    lrwxrwxrwx 1 udayakut udayakut 35 May 29 17:22 .vim -> /home/udayakut/access-UK/vimbundle/
 
 7. Install autojump following instructions in the below webpage
    https://github.com/joelthelion/autojump
