@@ -55,7 +55,7 @@ let Tlist_Enable_Fold_Column=1
 let Tlist_WinHeight=15
 
 
-"Key Mappings for BufExplorer
+"Key Mappings for BufExplorer - To work on multiple buffers in the same VIM window
 let bufExplorerOpenMode=1
 let bufExplorerSplitBelow=1
 let bufExplorerSplitHorzSize=10
@@ -85,7 +85,7 @@ highlight DiffDelete term=reverse ctermbg=black ctermfg=black
 ":map <C-F12> :set nocindent & nosmartindent & noautoindent<CR>
 "autocmd BufEnter *.dd set filetype=c
 
-"SHIFT-Insert are Paste                                         
+"SHIFT-Insert are Paste
 nmap <S-Insert>        "+gP
 imap <S-Insert>        <ESC><S-Insert>i
 
@@ -105,7 +105,7 @@ if has("win32unix")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
 endif
 
-"if has("gui_running") 
+"if has("gui_running")
   "let &runtimepath.=',C:\home\udayakut\.vim'
   ""let g:showfuncctagsbin='C:\\usr\\local\\timostools\\ctags.exe'
   "let g:showfuncctagsbin='~/ctags/ctags.exe'

@@ -83,5 +83,5 @@ setopt extendedglob
 emulate bash -c 'source ~/access-UK/bashrc_for_zsh'
 export DISABLE_AUTO_TITLE=true
 
-[[ -s /home/lnara002/.autojump/etc/profile.d/autojump.sh ]] && source /home/lnara002/.autojump/etc/profile.d/autojump.sh
+[[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u

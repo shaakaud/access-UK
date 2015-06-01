@@ -40,6 +40,8 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
+Plugin 'shaakaud/vimfiles'
+Plugin 'vim-scripts/vimtabs.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -92,13 +94,13 @@ set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
 :map <C-Right> :cn<CR>
 :map <C-Left> :cp<CR>
 
-"Key Mappings for BufExplorer
+"Key Mappings for BufExplorer - To work on multiple buffers in the same VIM window
 let bufExplorerOpenMode=1
 let bufExplorerSplitBelow=1
 let bufExplorerSplitHorzSize=10
 :map <S-Right> :bnext<CR>
 :map <S-Left>  :bprev<CR>
-:map <S-Up>  \bs
+:map <S-Up>  \be
 
 
 "vimdiff color settings
