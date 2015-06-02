@@ -1,0 +1,10 @@
+1. ln -s ~/access-UK/vim/vimfiles/vundle_vimrc .vimrc; mkdir ~/vimbundle; ln -s /home/udayakut/vimbundle .vim; Then open vim and give ::PluginInstall
+
+2. ln -s ~/access-UK/bash/bashrc .bashrc; ln -s ~/access-UK/bash/bashrc.local .bashrc.local; ln -s ~/access-UK/bash/bash_profile .bash_profile; ln -s ~/access-UK/bash/aliases_bash .aliases_bash;
+
+3. ln -s /home/udayakut/access-UK/zsh/zshrc .zshrc
+
+4. ln -s ~/access-UK/others/netrc .netrc; ln -s ~/access-UK/others/screenrc .screenrc; ln -s ~/access-UK/others/inputrc .inputrc; ln -s ~/access-UK/gdb/gdbinit .gdbinit; 
+
+5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s /home/udayakut/access-UK/git/git-prompt.sh* .git-prompt.sh
+

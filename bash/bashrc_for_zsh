@@ -299,9 +299,9 @@ fi
 #
 # Finally, if a ~/.bashrc.local exists, source it
 #
-if [ -e ~/access-UK/bashrc.local_for_zsh ]
+if [ -e ~/access-UK/bash/bashrc.local_for_zsh ]
 then
-    source ~/access-UK/bashrc.local_for_zsh
+    source ~/access-UK/bash/bashrc.local_for_zsh
 fi
 #########################################################################
 #ALIAS - UDAY

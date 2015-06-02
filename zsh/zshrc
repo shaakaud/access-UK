@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 setopt extendedglob
-emulate bash -c 'source ~/access-UK/bashrc_for_zsh'
+emulate bash -c 'source ~/access-UK/bash/bashrc_for_zsh'
 export DISABLE_AUTO_TITLE=true
 
 [[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh

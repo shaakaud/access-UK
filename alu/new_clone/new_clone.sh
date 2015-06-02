@@ -1,8 +1,8 @@
 
-PREF_MK_LOCATION=~/access-UK/new_clone/prefs.mk
+PREF_MK_LOCATION=~/access-UK/alu/new_clone/prefs.mk
 CSCOPE_INDEXER=/usr/local/timostools/cscope-indexer.sh
 GIT=/usr/bin/git
-GIT_IGNORE=~/access-UK/new_clone/git_ignore_for_panos
+GIT_IGNORE=~/access-UK/alu/new_clone/git_ignore_for_panos
 CVS_CO_OP_FILE=cvs_co_op_file
 
 debug_dirs="iom iom_api"
