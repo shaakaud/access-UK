@@ -40,7 +40,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
-Plugin 'shaakaud/access-UK/vimfiles'
+Plugin 'shaakaud/vimfiles'
 Plugin 'vim-scripts/vimtabs.vim'
 
 " All of your Plugins must be added before the following line
