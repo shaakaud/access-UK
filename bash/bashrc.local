@@ -3,6 +3,7 @@ export LOC=0.0MG
 export USERINITIALS=mv
 export EMAIL_ADDR=Udayakumar.Thimma_Janarthanan@Alcatel-Lucent.com
 export CVSUSERNAME=udayakut
+export EDITOR=vim
 
 # .bashrc overrides
 export CVSROOT=":pserver:$CVSUSERNAME@cvspc.mv.usa.alcatel.com:/swdev/cvsrep"
