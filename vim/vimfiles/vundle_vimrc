@@ -113,6 +113,9 @@ highlight DiffDelete term=reverse ctermbg=black ctermfg=black
 nmap <S-Insert>        "+gP
 imap <S-Insert>        <ESC><S-Insert>i
 
+"vim-fugitive plugin command - To see git diff of a file type :<F9> in vim
+:cmap <F9> :tabnew %\|Gdiff<CR>
+
 "Added by Lakshman Kumar
 if has("win32unix")
     let g:showfuncctagsbin="/usr/local/timostools/ctags"
