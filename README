@@ -6,5 +6,5 @@
 
 4. ln -s ~/access-UK/others/netrc .netrc; ln -s ~/access-UK/others/screenrc .screenrc; ln -s ~/access-UK/others/inputrc .inputrc; ln -s ~/access-UK/gdb/gdbinit .gdbinit; 
 
-5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s /home/udayakut/access-UK/git/git-prompt.sh* .git-prompt.sh
+5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s /home/udayakut/access-UK/git/git-prompt.sh .git-prompt.sh
 
