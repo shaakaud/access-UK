@@ -29,3 +29,4 @@ cvs_co_op_file
 panos/rapidlogic/rcit/timos.ccp
 blddb.sh*
 panos/make/ftpxfer.sh*
+.#db_dist.lck
