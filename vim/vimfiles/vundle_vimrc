@@ -100,7 +100,7 @@ let bufExplorerSplitBelow=1
 let bufExplorerSplitHorzSize=10
 :map <S-Right> :bnext<CR>
 :map <S-Left>  :bprev<CR>
-:map <S-Up>  \be
+:map <S-Up>  \bs
 
 
 "vimdiff color settings

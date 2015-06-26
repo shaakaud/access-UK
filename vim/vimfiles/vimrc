@@ -22,7 +22,8 @@ set complete-=k complete+=k
 syntax on
 
 "Key Mappings for cscope
-source  ~/.vim/plugin/cscope_maps.vim
+"source  ~/.vim/plugin/cscope_maps.vim
+source  ~/access-UK/vim/dotvim-old/plugin/cscope_maps.vim
 
 "Key Mappings for quickfix
 set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
