@@ -42,6 +42,7 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'shaakaud/vimfiles' "My own plugins - took from LK
 Plugin 'vim-scripts/vimtabs.vim'
+Plugin 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -77,7 +78,13 @@ set ttyfast
 set expandtab
 set laststatus=2
 "set columns=80
-colorscheme darkblue
+"colorscheme darkblue
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+colorscheme solarized
 filetype plugin on
 
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
@@ -126,7 +133,6 @@ let g:ctags_statusline=1
 let g:ctags_title=0
 let generate_tags=1
 
-set bg=dark
 if has("win32unix")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
 endif
