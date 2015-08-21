@@ -9,6 +9,7 @@ script uses that to update its host's ip.
 
 Setting it up
 -------------
+Loginto www.noip.com, enter into Hosts/Redirect tab and add a new host first
 
 Edit the script
 ~~~~~~~~~~~~~~~
