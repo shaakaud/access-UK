@@ -1,0 +1,8 @@
+asciidoc
+ctags
+percol
+tmux-1.9a.tar.gz
+libevent-2.0.21-stable.tar.gz
+autojump
+parcellite-1.1.9
+xsel

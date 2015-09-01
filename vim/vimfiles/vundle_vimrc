@@ -133,6 +133,15 @@ let g:ctags_statusline=1
 let g:ctags_title=0
 let generate_tags=1
 
+"To copy vbox centos vm to windows clipboard
+function! DumpToClipBoard()
+    "call writefile(split(@","\n"), '/dev/clipboard')
+    call system("xsel -i -b", getreg("\""))
+endfunction
+
+map <Leader>clip :call DumpToClipBoard()<CR>
+vmap <C-c> y:call DumpToClipBoard()<CR>
+
 if has("win32unix")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
 endif
