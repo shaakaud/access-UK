@@ -101,6 +101,8 @@ alias up0='upload.queen2.newHire images/mg00'
 alias up6='upload.queen2.newHire images/mg60'
 alias upi='upload.queen2.newHire images/iccrx'
 alias pid='cd /drive_c/Users/udayakut.ENG/AppData/Roaming/.purple/logs/sipe/udayakumar.thimma_janarthanan@alcatel-lucent.com%2cudayakumar.thimma_janarthanan@alcatel-lucent.com'
+alias doc='cd ~/Docs-UK'
+alias acc='cd ~/access-UK'
 
 #CVS related
 alias cvsup='cvs update -d'
