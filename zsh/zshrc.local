@@ -1,0 +1,28 @@
+function exists { which $1 &> /dev/null }
+
+export PATH="/usr/local/timostools:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:/home/udayakut/bin:.:/home/udayakut/access-UK/alu:/home/udayakut/bin:/usr/local/timostools"
+
+if exists percol; then
+    function percol_select_history() {
+        local tac
+        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+        CURSOR=$#BUFFER         # move cursor
+        zle -R -c               # refresh
+    }
+
+    zle -N percol_select_history
+    bindkey '^R' percol_select_history
+fi
+
+setopt extendedglob
+emulate bash -c 'source ~/access-UK/bash/bashrc_for_zsh'
+export DISABLE_AUTO_TITLE=true
+
+__git_files () {
+      _wanted files expl 'local files' _files
+}
+
+#autojump
+[[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u

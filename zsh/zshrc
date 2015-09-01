@@ -49,7 +49,6 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/usr/local/timostools:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:/home/udayakut/bin:.:/home/udayakut/access-UK/alu:/home/udayakut/bin:/usr/local/timostools"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -79,9 +78,3 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-setopt extendedglob
-emulate bash -c 'source ~/access-UK/bash/bashrc_for_zsh'
-export DISABLE_AUTO_TITLE=true
-
-[[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
