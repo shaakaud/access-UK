@@ -79,6 +79,8 @@ set expandtab
 set laststatus=2
 "set columns=80
 "colorscheme darkblue
+set nowrap
+set tw=0
 if has('gui_running')
     set background=light
 else

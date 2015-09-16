@@ -6,7 +6,7 @@ import requests
 import os
 
 #Suppress urllib3 warnings
-requests.packages.urllib3.disable_warnings()
+#requests.packages.urllib3.disable_warnings()
 
 # Edit these with your values
 username='udaykumartj'
