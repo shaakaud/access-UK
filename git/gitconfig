@@ -1,6 +1,6 @@
 [user]
-	email = udayakumar.thimma_janarthanan@alcatel-lucent.com
-	name = Udayakumar Thimma Janarthanan
+	email = "udayakumar.thimma_janarthanan@alcatel-lucent.com "
+	name = udayakut
 [alias] 
     dt = difftool --dir-diff
     cset = diff-tree --no-commit-id --name-only -r
@@ -11,6 +11,19 @@
     statusporcut = !git status --porcelain | cut -c4-
     statusnewporcut = !git status --porcelain | grep '^??' | cut -c4-
     dpeek = !git diff --color=always | less -r
+	ci = !cd ${GIT_PREFIX:-.} && /usr/local/timostools/git.d/git-helper.sh ci
+	up = !/usr/local/timostools/git.d/git-helper.sh up
+	co = !/usr/local/timostools/git.d/git-helper.sh co
+	set-hooks = !/usr/local/timostools/git.d/git-helper.sh set-hooks
+	logg = log --graph --pretty=format:'%Cred%h%Creset %w(100)%s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(yellow)%d%Creset' --abbrev-commit --date=relative --decorate
+	update-helper = "!cd /usr/local/timostools/git.d; git pull; /usr/local/timostools/git.d/git-helper.sh install /usr/local/timostools/git.d"
+	edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
+	add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
+	login = !/usr/local/timostools/git.d/git-helper.sh login
 [diff]  
     tool = meld
 
+[push]
+	default = simple
+[difftool]
+	prompt = false

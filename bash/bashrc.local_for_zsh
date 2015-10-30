@@ -11,6 +11,38 @@ export EMACS_BASE=/usr/local/emacs
 export TEMP=/temp
 export TGT_PF=7750
 
+# VI-clone
+if $(uname -a | grep -qi cygwin)
+then
+    if [ -d /Program\ Files\ \(x86\)/Vim/vim74 ]
+    then
+        export PATH=${PATH}:/Program\ Files\ \(x86\)/Vim/vim74
+    fi
+else
+    if [ -f /usr/bin/vim ]
+    then
+        export PATH=${PATH}:/usr/bin/vim
+    fi
+fi
+
+#########################################################################
+#ALIAS - UDAY
+#########################################################################
+if [ -e ~/.aliases_bash ]
+then
+    source ~/.aliases_bash
+fi
+#########################################################################
+#UDAY
+#########################################################################
+if $(uname -a | grep -qi cygwin)
+then
+    export CSCOPE_EDITOR=/Program\ Files\ \(x86\)/Vim/vim74
+else
+    export CSCOPE_EDITOR=/usr/bin/vim
+    alias ctags='/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
+fi
+
 #UDAY
 export WIN="/drive_c/"
 export WINH="/drive_c/home/udayakut/"
@@ -44,17 +76,20 @@ export PANOS=`pwd`
 #PATH
 export PATH=${PATH}:~/access-UK/alu
 
+#Avoid screen feeze when Ctrl-S is pressed on VIM screen
+stty -ixon
+
 #
-# ALIASES : START
+# ALIASES : START 
 #
 
-# Remove all unnecassary files
+# Remove all unnecassary files 
 alias f='rm -f *~; rm -f *#'
 
-# Modified Files
+# Modified Files 
 alias m='cvs -n up -P -d 2>/dev/null | grep -v "^[/?U]" 2>/dev/null'
 
-# Workspace related
+# Workspace related 
 alias panos='cd $PAN_DIR'
 
 alias  setcomment='COMMENT=`cat comment 2>1`'

@@ -17,7 +17,7 @@
 #
 #                 Source Control System Information
 #
-#   $Id: .bashrc,v 1.3 2010/06/08 14:31:53 smorton Exp $
+#   $Id: .bashrc,v 1.11 2015/07/30 17:45:15 jswart Exp $
 #
 ###########################################################################
 #
@@ -25,7 +25,9 @@
 #
 ###########################################################################
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.:
+java=`which java`   # Must be before we overwrite the Windows path
+
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin
 
 if $(uname -a | grep -qi cygwin)
 then
@@ -53,12 +55,7 @@ fi
 # automatically. But, it is here just to catch incorrecty installed software
 # installations to make it easier for me to debug an installation somebody
 # has screwed up.
-if $(uname -a | grep -qi cygwin)
-then
-    export WIND_BASE=/usr/local/tornado-2.0
-fi
-export MAKE_MODE=UNIX
-
+export WIND_BASE=/usr/local/tornado-2.0
 export EMACS_BASE=/usr/local/emacs-20.6
 
 export TMP=/tmp
@@ -72,6 +69,10 @@ export GASHROOT=":pserver:$USER@gashpc.mv.usa.alcatel.com:/swdev/cvsrep"
 export ADMINROOT=":pserver:$USER@cvspc.mv.usa.alcatel.com:/swdev/adminrep"
 export CVSREAD=TRUE
 
+#
+# Things for building PANOS
+#
+export MAKE_MODE=UNIX
 # The default TiMOS build targets.
 export TGT_HW=i386
 export TGT_SYS=both
@@ -79,10 +80,6 @@ export TGT_SYS=both
 #
 # Set up the path. It's done in stages...
 #
-
-# Set the DISPLAY - UDAY
-#export DISPLAY=10.135.20.161:1.0
-#export DISPLAY=135.254.172.188:0.0
 
 if [ $cygwin -eq 1 -a -d /etc/alternatives ]
 then
@@ -92,9 +89,9 @@ fi
 #
 # Wind River Tornado
 # 
-if [ -d $WIND_BASE/host/${WIND_HOST_TYPE}/bin ]
+if [ -d ${WIND_BASE}/host/${WIND_HOST_TYPE}/bin ]
 then
-    export PATH=${PATH}:$WIND_BASE/host/${WIND_HOST_TYPE}/bin
+    export PATH=${PATH}:${WIND_BASE}/host/${WIND_HOST_TYPE}/bin
 fi
 
 #
@@ -102,23 +99,15 @@ fi
 #
 
 # Emacs
-if [ -d $EMACS_BASE/bin ]
+if [ -d ${EMACS_BASE}/bin ]
 then
-    export PATH=${PATH}:$EMACS_BASE/bin
+    export PATH=${PATH}:${EMACS_BASE}/bin
 fi
 
 # VI-clone
-if $(uname -a | grep -qi cygwin)
+if [ -d /usr/local/vim56 ]
 then
-    if [ -d /Program\ Files\ \(x86\)/Vim/vim74 ]
-    then
-        export PATH=${PATH}:/Program\ Files\ \(x86\)/Vim/vim74
-    fi
-else
-    if [ -f /usr/bin/vim ]
-    then
-        export PATH=${PATH}:/usr/bin/vim
-    fi
+    export PATH=${PATH}:/usr/local/vim56
 fi
 
 # TCL
@@ -145,15 +134,25 @@ fi
 # once per month is sort of a problem... Try and "guess" at the most recent
 # one. Surely the most recent is the "best", right?
 #
-jdk=$(/bin/ls -d -t /j2sdk* 2>/dev/null | head -1)
-if [ "${jdk}" != "" ]
-then
-    export PATH="${PATH}:${jdk}/bin"
+
+if [ -n "$java" ]; then
+    PATH=${PATH}:$(dirname $java)
 else
-    jdk=$(/bin/ls -d -t /jdk* 2>/dev/null | head -1)
-    if [ "${jdk}" != "" ]
-    then
-        export PATH="${PATH}:${jdk}/bin"
+    jdk='/ProgramData/Oracle/Java/javapath'
+    if [ -d $jdk ]; then
+        export PATH="${PATH}:$jdk"   #no /bin here
+    else
+        jdk=$(/bin/ls -d -t /j2sdk* 2>/dev/null | head -1)
+        if [ "${jdk}" != "" ]
+        then
+            export PATH="${PATH}:${jdk}/bin"
+        else
+            jdk=$(/bin/ls -d -t /jdk* 2>/dev/null | head -1)
+            if [ "${jdk}" != "" ]
+            then
+                export PATH="${PATH}:${jdk}/bin"
+            fi
+        fi
     fi
 fi
 
@@ -162,7 +161,24 @@ fi
 #
 if [ -d /usr/local/timostools ]
 then
-        export PATH="/usr/local/timostools:${PATH}"
+    export PATH="/usr/local/timostools:${PATH}"
+
+    # Enable git tab-complete and fancy git prompting for linux users
+#    if [ $cygwin -eq 0 ]; then
+#        source /usr/local/timostools/git.d/git-completion.bash
+#        source /usr/local/timostools/git.d/git-prompt.sh
+
+        # git prompt configuration
+#        GIT_PS1_SHOWUPSTREAM=auto
+#        GIT_PS1_SHOWCOLORHINTS=1
+#        GIT_PS1_SHOWDIRTYSTATE=1
+#        GIT_PS1_SHOWUNTRACKEDFILES=1
+#        GIT_PS1_STATESEPARATOR=' '
+#        export PROMPT_COMMAND='__git_ps1 "\w" " > "'
+#    fi
+
+else
+    echo "You do not appear to have the SW development tools."
 fi
 
 #
@@ -179,9 +195,9 @@ fi
 #
 # If you have a bin in your home directory, we'll use it
 #
-if [ -d $HOME/bin ]
+if [ -d ${HOME}/bin ]
 then
-    export PATH="${PATH}:$HOME/bin"
+    export PATH="${PATH}:${HOME}/bin"
 fi
 
 #
@@ -205,20 +221,10 @@ then
     mkdir -p /cygdrive/d/tmp
 fi
 
-
 #
-# Do some poking around to see if the environment is OK
+# Set prompt to <working directory>, space, ">", space
 #
-if $(uname -a | grep -qi cygwin)
-then
-    if [ ! -d $WIND_BASE ]
-    then
-        echo "You do not appear to have Tornado installed in $WIND_BASE"
-    elif [ ! -d $WIND_BASE/host/${WIND_HOST_TYPE}/bin ]
-    then
-        echo "You do not appear to have the right cross compiler tools"
-    fi
-fi
+#export PS1="\w > "
 
 # Set size of history
 export HISTSIZE=500
@@ -235,7 +241,7 @@ export IGNOREEOF
 
 # Executed just before printing every prompt. You probably don't
 # want to do anything with this.
-#export PROMPT_COMMAND=foo
+#export PROMPT_COMMAND="printf '\e]0;$HOSTNAME\7'"
 
 # Don't allow redirection to overwrite existing file
 export noclobber
@@ -275,10 +281,10 @@ alias panos='cd $HOME/ws/panos'
 alias cvsnup='cvs -n -q up -P -d 2>/dev/null | grep -v "^\?"'
 alias cvsup='cvs -z9 -q up -P -d 2>/dev/null | grep -v "^\?"'
 alias cvsedit='cvs edit'
-alias cvschanged='cvs -z9 -q status | grep Status | egrep -v "(Up-to|Needs Patch)"'
-alias cvschanged2="cvs -nqr update -dPR | grep '^[MARPC] '"
+alias cvschanged="cvs -n -f -q up -dPR 2>/dev/null | grep '^[MARC?] '"
+alias cvschanged2='cvs -z9 -q status 2>&1 | grep Status | egrep -v "(Up-to|Needs Patch)"'
 alias cvsstatus='cvs status | grep Status'
-alias cvschanged="cvs -n -q up -dPR 2>/dev/null | grep '^[MAR?] '"
+
 
 # Turn on vi-style command line editing.
 # If you prefer EMACS-style editing, use -o emacs
@@ -289,9 +295,9 @@ alias cvschanged="cvs -n -q up -dPR 2>/dev/null | grep '^[MAR?] '"
 if [ -z ${DISPLAY:=""} ]; then
     XSERVER=$(who am i | /bin/awk '{print $6}' | /bin/sed 's/[()]//g')
     XSERVER=${XSERVER%%:*}
-    if [[ -z ${XSERVER}  || ${XSERVER} == $(hostname) || ${XSERVER} == "unix" ]]; then
+    if [[ -z ${XSERVER}  || ${XSERVER} == $(hostname) || ${XSERVER} == "unix" ]]; then 
       export DISPLAY=$(hostname):0.0		# Display on local host
-    else
+    else		
       export DISPLAY=${XSERVER}:0.0	# Display on remote host
     fi
 fi
@@ -302,21 +308,4 @@ fi
 if [ -e ~/access-UK/bash/bashrc.local_for_zsh ]
 then
     source ~/access-UK/bash/bashrc.local_for_zsh
-fi
-#########################################################################
-#ALIAS - UDAY
-#########################################################################
-if [ -e ~/.aliases_bash ]
-then
-    source ~/.aliases_bash
-fi
-#########################################################################
-#UDAY
-#########################################################################
-if $(uname -a | grep -qi cygwin)
-then
-    export CSCOPE_EDITOR=/Program\ Files\ \(x86\)/Vim/vim74
-else
-    export CSCOPE_EDITOR=/usr/bin/vim
-    alias ctags='/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
 fi

@@ -27,5 +27,20 @@ __git_files () {
 [[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
-#Up arrow should not display global history
-setopt APPEND_HISTORY
+#Up arrow should not display global history. ctrl-p to display global history
+
+bindkey '^[[A' up-line-or-local-history
+bindkey '^[[B' down-line-or-local-history
+
+up-line-or-local-history() {
+   zle set-local-history 1
+   zle up-line-or-history
+   zle set-local-history 0
+}
+zle -N up-line-or-local-history
+down-line-or-local-history() {
+   zle set-local-history 1
+   zle down-line-or-history
+   zle set-local-history 0
+}
+zle -N down-line-or-local-history
