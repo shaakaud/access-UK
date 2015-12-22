@@ -20,3 +20,6 @@
 
 7. Install autojump following instructions in the below webpage
    https://github.com/joelthelion/autojump
+
+8.Now install the git prompt plugin which will tell the git-status in PS1 
+  cd ~/access-UK/zsh; git clone https://github.com/lakshmankumar12/zsh-git-prompt.git

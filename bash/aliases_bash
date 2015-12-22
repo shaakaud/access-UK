@@ -108,3 +108,6 @@ alias tb='cd ~/access-UK/testbeds'
 #CVS related
 alias cvsup='cvs update -d'
 alias cvsmod='cvsrw --cvs'
+
+#GIT related
+alias npgit='git --no-pager'
