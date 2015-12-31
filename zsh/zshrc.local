@@ -50,11 +50,11 @@ source /home/udayakut/access-UK/zsh/zsh-git-prompt/zshrc.sh
 
 #UDAY - change PS1 to have git info
 #With pwd in the PROMPT
-PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]$(get_pwd) %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}=>$ %{$reset_color%}'
+#PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]$(get_pwd) %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}=>$ %{$reset_color%}'
 
 #With just current working directory
-#PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_super_status)%{$fg_bold[blue]%}=>$ %{$reset_color%}'
-#
+PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_super_status)%{$fg_bold[blue]%}=>$ %{$reset_color%}'
+
 function get_pwd() {
   echo "${PWD/$HOME/~}"
 }

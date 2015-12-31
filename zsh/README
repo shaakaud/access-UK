@@ -4,22 +4,36 @@
    #google for "oh my zsh", click the first link and follow the steps - https://github.com/robbyrussell/oh-my-zsh
 3. curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-4. link ~/.zshrc to ~/access-UK/zsh/zshrc
+4. link ~/.zshrc to ~/access-UK/zsh/zshrc -> ln -s /home/udayakut/access-UK/zsh/zshrc .zshrc
 
 5. cd ~/access-UK/git/
    curl https://github.com/git/git/raw/master/contrib/completion/git-completion.zsh -OL
    cd ~/
    ln -s ~/access-UK/git/git-completion.zsh git-completion.zsh
 
-6. Create the below soft links (vim to use bundle)
+6.  No need to follow this step if you have done step 1 in ~/access-UK/README
+    Create the below soft links (vim to use bundle)
     $ls -lart .vimrc
     lrwxrwxrwx 1 udayakut udayakut 37 May 29 17:21 .vimrc -> /home/udayakut/access-UK/vim/vimfiles/vundle_vimrc*
     $mkdir ~/vimbundle; #Now open vim and give :PluginInstall
     $ ls -lart .vim
     lrwxrwxrwx 1 udayakut udayakut 35 May 29 17:22 .vim -> /home/udayakut/vimbundle/
+    commands:
+    ln -s ~/access-UK/vim/vimfiles/vundle_vimrc .vimrc;
+    mkdir ~/access-UK/vim/vimbundle;
+    ln -s /home/udayakut/access-UK/vim/vimbundle .vim;
+    ln -s /home/udayakut/access-UK/zsh/zshrc.local .zshrc.local
+
 
 7. Install autojump following instructions in the below webpage
    https://github.com/joelthelion/autojump
+   commands:
+   cd ~/software; git clone https://github.com/wting/autojump.git; cd autojump;./install.py
 
 8.Now install the git prompt plugin which will tell the git-status in PS1 
   cd ~/access-UK/zsh; git clone https://github.com/lakshmankumar12/zsh-git-prompt.git
+
+9. Change the default shell to zsh
+   chsh -s /bin/zsh;
+   safer side - open default terminal (gnome terminal) and right click in middel and go to Profiles->profile-preferences->Title and Command tab. 
+   Check "Run command as a login shell" and "Run a command command instead of my shell". Fill Custom command as /bin/zsh
