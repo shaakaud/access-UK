@@ -12,3 +12,29 @@
 
 5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s /home/udayakut/access-UK/git/git-prompt.sh .git-prompt.sh
 
+6. Download and install tmux: Follow instructions in https://gist.github.com/rothgar/cecfbd74597cc35a6018
+   ln -s /home/udayakut/access-UK/others/tmux.conf ~/.tmux.conf 
+
+
+Verify:
+=>$ pwd  
+/home/udayakut
+=>$ ls -lart .* | grep access
+lrwxrwxrwx  1 udayakut udayakut     42 May 27  2015 .git-prompt.sh -> /home/udayakut/access-UK/git/git-prompt.sh*
+lrwxrwxrwx  1 udayakut udayakut     36 Jun  1  2015 .bashrc.bak -> /home/udayakut/access-UK/bash/bashrc*
+lrwxrwxrwx  1 udayakut udayakut     42 Jun  1  2015 .bash_profile -> /home/udayakut/access-UK/bash/bash_profile*
+lrwxrwxrwx  1 udayakut udayakut     42 Jun  1  2015 .aliases_bash -> /home/udayakut/access-UK/bash/aliases_bash*
+lrwxrwxrwx  1 udayakut udayakut     34 Jun  1  2015 .zshrc -> /home/udayakut/access-UK/zsh/zshrc*
+lrwxrwxrwx  1 udayakut udayakut     37 Jun  1  2015 .netrc -> /home/udayakut/access-UK/others/netrc*
+lrwxrwxrwx  1 udayakut udayakut     40 Jun  1  2015 .screenrc -> /home/udayakut/access-UK/others/screenrc*
+lrwxrwxrwx  1 udayakut udayakut     39 Jun  1  2015 .inputrc -> /home/udayakut/access-UK/others/inputrc*
+lrwxrwxrwx  1 udayakut udayakut     36 Jun  1  2015 .gdbinit -> /home/udayakut/access-UK/gdb/gdbinit*
+lrwxrwxrwx  1 udayakut udayakut     50 Jun 25  2015 .vimrc -> /home/udayakut/access-UK/vim/vimfiles/vundle_vimrc*
+lrwxrwxrwx  1 udayakut udayakut     38 Jun 25  2015 .vim -> /home/udayakut/access-UK/vim/vimbundle/
+lrwxrwxrwx  1 udayakut udayakut     41 Aug 27 20:08 .tmux.conf -> /home/udayakut/access-UK/others/tmux.conf*
+lrwxrwxrwx  1 udayakut udayakut     40 Sep  1 13:58 .zshrc.local -> /home/udayakut/access-UK/zsh/zshrc.local*
+lrwxrwxrwx  1 udayakut udayakut     30 Sep 24 14:11 .bashrc -> /drive_c/access-UK/bash/bashrc*
+lrwxrwxrwx  1 udayakut udayakut     36 Sep 24 14:11 .bashrc.local -> /drive_c/access-UK/bash/bashrc.local*
+lrwxrwxrwx  1 udayakut udayakut     38 Sep 28 16:27 .gitconfig -> /home/udayakut/access-UK/git/gitconfig*
+? ~ =>$ 
+
