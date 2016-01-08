@@ -32,6 +32,7 @@
 
 8.Now install the git prompt plugin which will tell the git-status in PS1 
   cd ~/access-UK/zsh; git clone https://github.com/lakshmankumar12/zsh-git-prompt.git
+  NOTE: cd zsh-git-prompt; open gitstatus.py and make sure :gitbinary='/usr/bin/git" ie it should point to the same path as seen in "type git"
 
 9. Change the default shell to zsh
    chsh -s /bin/zsh;

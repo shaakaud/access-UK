@@ -4,7 +4,19 @@
    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim;
    Then open vim and give :PluginInstall
 
-2. ln -s ~/access-UK/bash/bashrc .bashrc; ln -s ~/access-UK/bash/bashrc.local .bashrc.local; ln -s ~/access-UK/bash/bash_profile .bash_profile; ln -s ~/access-UK/bash/aliases_bash .aliases_bash;
+   Note: Buffexplorer has an issue - https://github.com/jlanzarotta/bufexplorer/issues/37#issuecomment-119613896 (see comments by shaakaud). Fix is
+   a. Open ~/access-UK/vim/vimbundle/bundle/bufexplorer/plugin/bufexplorer.vim.
+   b. search for s:MapKeys function implementation
+   c. In that function, you can see several lines starting with "nnoremap <script> <silent> <nowait> <buffer> .."
+   d. Remove <nowait> from all these lines. Just change it to "nnoremap <script> <silent> <buffer>..." 
+   e. Close the files in VIM if you have oppened it. Reopen those files and you will see the issue is gone :-)
+
+2. Issue following commands
+ln -s ~/access-UK/bash/bashrc .bashrc;
+ln -s ~/access-UK/bash/bashrc.local .bashrc.local; 
+ln -s ~/access-UK/bash/bash_profile .bash_profile; 
+ln -s ~/access-UK/bash/aliases_bash .aliases_bash; 
+ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
 
 3. ln -s /home/udayakut/access-UK/zsh/zshrc .zshrc;ln -s /home/udayakut/access-UK/zsh/zshrc.local .zshrc.local;
 
@@ -14,6 +26,26 @@
 
 6. Download and install tmux: Follow instructions in https://gist.github.com/rothgar/cecfbd74597cc35a6018
    ln -s /home/udayakut/access-UK/others/tmux.conf ~/.tmux.conf 
+
+7. Clone Docs-UK. cd; https://gitlab.com/shaakaud/Docs-UK.git; 
+
+8. Downnload solarized color scheme for Gnome terminal
+   http://www.webupd8.org/2011/04/solarized-must-have-color-paletter-for.html
+
+9. Install for percol - This is for improved ctrl-r (searching history) - follow https://github.com/mooz/percol/blob/master/README.md#zsh-history-search 
+   cd ~/software/; git clone https://github.com/mooz/percol.git; cd percol;sudo python setup.py install;
+
+10. Install xsel - To make ctl-c to copy to clipboard on tmux window
+   sudo yum install xsel
+
+11. Install asciidoc if required
+   sudo yum install asciidoc
+
+12. Install Parcellite - Clip board manager - This will help to copy contents to clipboard when we vnc to centos machine from windows m/c and copy some contents to clipboard 
+    and try to paste it to windows m/c.
+    Download from http://parcellite.sourceforge.net/. Copy the *.tar.gz file to ~/software/ and untar it tar -xvf parcellite-*.tar.gz
+    Follow the instructions in README for installation.
+    Enable this from Centos GUI - menu - Applications->Accessories->Parcellite
 
 
 Verify:
