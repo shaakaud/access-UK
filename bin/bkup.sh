@@ -8,7 +8,7 @@ remote_bkup_server='queen2.mv.usa.alcatel.com'
 
 echo "Bakup file name is $bkup_file_path"
 
-cvs diff > $bkup_file_path
+git diff @{u}.. > $bkup_file_path
 
 if $(uname -a | grep -qi linux)
 then

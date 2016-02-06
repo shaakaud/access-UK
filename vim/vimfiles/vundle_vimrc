@@ -42,7 +42,8 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'shaakaud/vimfiles' "My own plugins - took from LK
 Plugin 'vim-scripts/vimtabs.vim'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,7 +79,7 @@ set ttyfast
 set expandtab
 set laststatus=2
 "set columns=80
-"colorscheme darkblue
+colorscheme phd
 set nowrap
 set tw=0
 if has('gui_running')
@@ -86,7 +87,7 @@ if has('gui_running')
 else
     set background=dark
 endif
-colorscheme solarized
+"colorscheme solarized
 filetype plugin on
 
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
@@ -111,12 +112,6 @@ let bufExplorerSplitHorzSize=10
 :map <S-Left>  :bprev<CR>
 :map <S-Up>  \bs
 
-
-"vimdiff color settings
-highlight DiffAdd term=reverse ctermbg=brown ctermfg=black
-highlight DiffChange term=reverse ctermbg=black ctermfg=white
-highlight DiffText term=reverse ctermbg=gray ctermfg=black
-highlight DiffDelete term=reverse ctermbg=black ctermfg=black
 
 "SHIFT-Insert are Paste
 nmap <S-Insert>        "+gP

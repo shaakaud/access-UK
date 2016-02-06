@@ -1,5 +1,5 @@
 [user]
-	email = "udayakumar.thimma_janarthanan@alcatel-lucent.com "
+	email = udayakumar.thimma_janarthanan@alcatel-lucent.com
 	name = udayakut
 [alias] 
     dt = difftool --dir-diff
@@ -39,4 +39,11 @@
 [remote "origin"]
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
-	githelperver = 917e3562aab02ed1c35c93bd07b77bafecf52dff
+	githelperver = 38aa5724cd808eab90648bbaf41a5118a0fe5149
+[merge]
+	tool = diffconflicts
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+	keepBackup = false
+
