@@ -70,3 +70,30 @@ lrwxrwxrwx  1 udayakut udayakut     36 Sep 24 14:11 .bashrc.local -> /drive_c/ac
 lrwxrwxrwx  1 udayakut udayakut     38 Sep 28 16:27 .gitconfig -> /home/udayakut/access-UK/git/gitconfig*
 ? ~ =>$ 
 
+Verify (ALU related mostly):
+? bin =>$ ls -lart
+total 24
+lrwxrwxrwx  1 udayakut udayakut   32 Feb 12  2015 blddb -> /drive_c/home/udayakut/bin/blddb*
+drwxrwxr-x  2 udayakut udayakut 4096 Feb 12  2015 cscope_related/
+lrwxrwxrwx  1 udayakut udayakut   29 Feb 12  2015 gv -> /drive_c/home/udayakut/bin/gv*
+lrwxrwxrwx  1 udayakut udayakut   31 Feb 12  2015 gxtb -> /drive_c/home/udayakut/bin/gxtb*
+lrwxrwxrwx  1 udayakut udayakut   31 Feb 12  2015 gxts -> /drive_c/home/udayakut/bin/gxts*
+lrwxrwxrwx  1 udayakut udayakut   30 Feb 12  2015 mod -> /drive_c/home/udayakut/bin/mod*
+drwxrwxr-x  2 udayakut udayakut 4096 Feb 12  2015 queen2-related/
+lrwxrwxrwx  1 udayakut udayakut   48 Feb 18  2015 upload.queen2.newHire -> /drive_c/home/udayakut/bin/upload.queen2.newHire*
+lrwxrwxrwx  1 udayakut udayakut   55 Nov  6 14:46 load_to_testbed.py -> /home/udayakut/access-UK/testbeds/testbed-mgmt/login.py
+-rwxrwxr-x  1 udayakut udayakut 4718 Feb  5 10:55 diffconflicts*
+lrwxrwxrwx  1 udayakut udayakut   36 Feb  5 14:15 bkup.sh -> /home/udayakut/access-UK/bin/bkup.sh*
+drwxrwxr-x  4 udayakut udayakut 4096 Feb  5 14:15 ./
+drwx------ 54 udayakut udayakut 4096 Feb 12 10:05 ../
+? bin =>$ 
+? bin =>$ cd queen2-related 
+? queen2-related =>$ ls -lart
+total 12
+lrwxrwxrwx 1 udayakut udayakut   52 Feb 12  2015 ftpxfer.sh -> /drive_c/home/udayakut/bin/queen2-related/ftpxfer.sh
+lrwxrwxrwx 1 udayakut udayakut   63 Feb 12  2015 upload.queen2.newHire -> /drive_c/home/udayakut/bin/queen2-related/upload.queen2.newHire
+drwxrwxr-x 2 udayakut udayakut 4096 Feb 12  2015 ./
+drwxrwxr-x 4 udayakut udayakut 4096 Feb  5 14:15 ../
+? queen2-related =>$ 
+
+

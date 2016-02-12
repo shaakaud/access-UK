@@ -12,7 +12,9 @@ git diff @{u}.. > $bkup_file_path
 
 if $(uname -a | grep -qi linux)
 then
-    cp $bkup_file_path $vb_win_dir/$bkup_filename
+    if [ -d "$DIRECTORY" ]; then
+        cp $bkup_file_path $vb_win_dir/$bkup_filename
+    fi
 fi
 
 echo "Local backup done as $bkup_file_path"
