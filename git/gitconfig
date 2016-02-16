@@ -39,7 +39,7 @@
 [remote "origin"]
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
-	githelperver = 38aa5724cd808eab90648bbaf41a5118a0fe5149
+	githelperver = b7a3e3ec809368a9ae66f2bf054f528a0d96b859
 [merge]
 	tool = diffconflicts
 [mergetool "diffconflicts"]
@@ -47,3 +47,5 @@
 	trustExitCode = true
 	keepBackup = false
 
+[apply]
+	whitespace = nowarn
