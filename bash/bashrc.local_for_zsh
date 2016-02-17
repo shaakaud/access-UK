@@ -89,7 +89,7 @@ alias f='rm -f *~; rm -f *#'
 # Modified Files 
 alias m='cvs -n up -P -d 2>/dev/null | grep -v "^[/?U]" 2>/dev/null'
 
-# Workspace related 
+# ALU Workspace related 
 alias panos='cd $PAN_DIR'
 
 alias  setcomment='COMMENT=`cat comment 2>1`'
@@ -174,3 +174,34 @@ queenhops () { cd bin/7xxx-hops/
           scp isa-aa.tim
           udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
           cd ../.. ;}
+
+#VHDL
+
+#
+# CVS things
+#
+export VHDLUSERNAME=udayakut
+export VHDLROOT=":pserver:$VHDLUSERNAME@172.22.0.10:/hwcvs"
+
+#
+# VHDL environment things
+#
+export HW_SYNCED=/hwdev/synced
+export OSTYPE=linux
+export OS=Linux
+export PERL=/usr
+export PATH=".:/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64:${PATH}"
+
+function vhdl() {
+    export MY_PROJECT=$HOME/ws/$1/vhdl
+    export PERL5LIB=$MY_PROJECT/common/scripts/lib
+    export PANOS=$HOME/ws/$1/panos 
+    DO_ALIAS=1
+    . ${MY_PROJECT}/common/scripts/unix/setup.bash
+    #caecfg
+    #. ${MY_PROJECT}/common/scripts/unix/caecfg_bash
+    cd $MY_PROJECT
+}
+
+export MODEL_TECH=/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64/modeltech
+export MGLS_LICENSE_FILE=3100@bkeyserver:1717@sls4m9.stgl.sel.alcatel.de:1717@sls1ki.stgl.sel.alcatel.de:1717@slsc5c.stgl.sel.alcatel.de
