@@ -22,7 +22,7 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
 
 4. ln -s ~/access-UK/others/netrc .netrc; ln -s ~/access-UK/others/screenrc .screenrc; ln -s ~/access-UK/others/inputrc .inputrc; ln -s ~/access-UK/gdb/gdbinit .gdbinit; 
 
-5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s /home/udayakut/access-UK/git/git-prompt.sh .git-prompt.sh
+5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s /home/udayakut/access-UK/git/git-prompt.sh .git-prompt.sh; ln -s ~/access-UK/bin/git ~/bin/git
 
 6. Download and install tmux: Follow instructions in https://gist.github.com/rothgar/cecfbd74597cc35a6018
    ln -s /home/udayakut/access-UK/others/tmux.conf ~/.tmux.conf 
@@ -46,6 +46,15 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
     Download from http://parcellite.sourceforge.net/. Copy the *.tar.gz file to ~/software/ and untar it tar -xvf parcellite-*.tar.gz
     Follow the instructions in README for installation.
     Enable this from Centos GUI - menu - Applications->Accessories->Parcellite
+
+13. Download the mergetool that is used in gitconfig. Make sure ~/bin/ is there in the $PATH
+    cd ~/bin/; wget 'https://github.com/whiteinge/dotfiles/raw/master/bin/diffconflicts';
+    chmod +x diffconflicts;
+
+14. Install mosh server by following the link - http://www.unixmen.com/mosh-a-brief-introduction/ 
+    First install epel by following step - "3.1 The easy method: (using yum)" and then do "sudo yum install mosh" as described in this link.
+
+15. Make sure the executable scripts has "+x" permission in ~/access-UK/alu/ and ~/access-UK/bin
 
 
 Verify:
