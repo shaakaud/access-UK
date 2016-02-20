@@ -175,7 +175,7 @@ queenhops () { cd bin/7xxx-hops/
           udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
           cd ../.. ;}
 
-#VHDL
+####ALU - VHDL#####
 
 #
 # CVS things
@@ -184,7 +184,7 @@ export VHDLUSERNAME=udayakut
 export VHDLROOT=":pserver:$VHDLUSERNAME@172.22.0.10:/hwcvs"
 
 #
-# VHDL environment things
+# ALU - VHDL environment things
 #
 export HW_SYNCED=/hwdev/synced
 export OSTYPE=linux
@@ -205,3 +205,45 @@ function vhdl() {
 
 export MODEL_TECH=/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64/modeltech
 export MGLS_LICENSE_FILE=3100@bkeyserver:1717@sls4m9.stgl.sel.alcatel.de:1717@sls1ki.stgl.sel.alcatel.de:1717@slsc5c.stgl.sel.alcatel.de
+
+function run_suite() {
+    if [ $# -eq 1 ]; then
+        suiteName=$1
+        if [ $UK_STYLE = 1 ]; then
+            ws=$MY_PROJECT
+            wsName=`basename $MY_PROJECT`
+        else
+            ws=$(expr "$PWD" : "\(/.*\(panos\|vhdl[^/]*\)\)")
+            if [ $OSTYPE = 'linux' ]; then
+                wsName=$(expr "$PWD" : "^$HOME\/ws\/\([^\/]*\)")
+            else
+                wsName=$(expr "$ws" : "\/\(.*\)")
+            fi
+        fi
+        if [ -z "$wsName" ]; then
+            echo "ERROR: Unable to determine workspace from current directory: $PWD"
+            exit
+        fi
+    else
+        wsName=$1
+        suiteName=$2
+        if [ $OSTYPE = 'linux' ]; then
+            ws=$HOME/ws/$wsName/vhdl
+        else
+            ws=/$wsName/vhdl
+        fi
+    fi
+    $ws/pchip/scripts/testbench_scripts/run_suite.sh $wsName $ws/pchip/scripts/testbench_scripts/testbench_suites/$suiteName.testsuite
+}
+
+function run_genrand() {
+    ws=$(expr "$PWD" : "\(/.*\(panos\|vhdl[^/]*\)\)")
+    $ws/pchip/scripts/testbench_scripts/run_genrand.sh $@
+}
+
+function run_genrand_fast() {
+    ws=$(expr "$PWD" : "\(/.*\(panos\|vhdl[^/]*\)\)")
+    $ws/pchip/scripts/testbench_scripts/run_genrand_fast.sh $@
+}
+
+

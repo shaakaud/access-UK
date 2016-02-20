@@ -41,7 +41,7 @@ else:
 
 #Match the origin
 omatch = re.search(r'\*\s(\w+)\s\(origin', out)
-if hmatch:
+if omatch:
     origin = omatch.group(1)
     iccrx_tags['iccrx_base'] = origin
     print 'origin is', origin
@@ -50,8 +50,9 @@ else:
 
 #Add the new tags
 for k in iccrx_tags.keys():
-    subprocess.call(["git", "tag", k, iccrx_tags[k]], cwd = os.path.dirname(wspath))
-    print k,'->',iccrx_tags[k], '*  added'
+    if iccrx_tags[k]:
+        subprocess.call(["git", "tag", k, iccrx_tags[k]], cwd = os.path.dirname(wspath))
+        print k,'->',iccrx_tags[k], '*  added'
 
 #print "Error : \n" + str(error)
 #print "out : \n" + str(out)
