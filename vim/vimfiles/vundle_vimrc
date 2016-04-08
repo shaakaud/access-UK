@@ -42,8 +42,12 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
 Plugin 'shaakaud/vimfiles' "My own plugins - took from LK
 Plugin 'vim-scripts/vimtabs.vim'
-"Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
+"For dong fzf stuff in vim
+Plugin 'junegunn/fzf.vim'
+"#for easy buffer switching
+"Plugin 'ctrlpvim/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -104,6 +108,14 @@ set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
 :map <C-Right> :cn<CR>
 :map <C-Left> :cp<CR>
 
+"my cscope.out is at a dir one level up!..so
+if has("cscope") && filereadable("../cscope.out")
+  cs add .. ..
+endif
+if filereadable("../tags")
+  set tags+=../tags
+endif
+
 "Key Mappings for BufExplorer - To work on multiple buffers in the same VIM window
 let bufExplorerOpenMode=1
 let bufExplorerSplitBelow=1
@@ -119,6 +131,13 @@ imap <S-Insert>        <ESC><S-Insert>i
 
 "vim-fugitive plugin command - To see git diff of a file type :<F9> in vim
 :cmap <F9> :tabnew %\|Gdiff<CR>
+
+"for fzf
+set rtp+=~/.fzf
+
+"Search for a file using fzf in vim
+"nmap gG     <Esc>:call PanosTags("../tags_f")<CR>
+"nmap gA     <Esc>:call PanosTags("../tags_s")<CR>
 
 "Added by Lakshman Kumar
 if has("win32unix")
@@ -143,3 +162,41 @@ if has("win32unix")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
 endif
 
+"To do fzf and open that file using cscope
+function! LoadCscopeToQuickFix(currword, oper)
+  execute "normal mZ"
+  execute "set csqf=" . a:oper . "-"
+  execute "cs find " a:oper . " " . a:currword
+  execute "copen"
+  execute "wincmd k"
+  execute "normal `Z"
+  execute "set csqf="
+endfunction
+
+function! PanosTagsSink(line)
+  call LoadCscopeToQuickFix(a:line,"s")
+  execute "cc"
+endfunction
+
+function! PanosTags(file)
+  call fzf#run({
+  \   'source': "sed '/^\\!/d;s/\t.*//' " . a:file . " | uniq",
+  \   'options' : '--exact',
+  \   'right' : '30%',
+  \   'sink':   function('PanosTagsSink')})
+endfunction
+
+function! PanosTagsSinkJustGo(line)
+  let g:last_name = a:line
+endfunction
+
+"To browse through the errors after compilation :LoadErrors
+function! LoadErrorsFunction()
+  execute ":cf log.txt"
+  execute ":copen"
+  execute "wincmd j"
+  execute "normal G"
+  execute "normal /\\<error\\>/s\<CR>"
+endfunction
+
+command! LoadErrors call LoadErrorsFunction()
