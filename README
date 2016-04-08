@@ -41,7 +41,8 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
 11. Install asciidoc if required
    sudo yum install asciidoc
 
-12. Install Parcellite - Clip board manager - This will help to copy contents to clipboard when we vnc to centos machine from windows m/c and copy some contents to clipboard 
+12. a) sudo yum install xsel
+    b) Install Parcellite - Clip board manager - This will help to copy contents to clipboard when we vnc to centos machine from windows m/c and copy some contents to clipboard 
     and try to paste it to windows m/c.
     Download from http://parcellite.sourceforge.net/. Copy the *.tar.gz file to ~/software/ and untar it tar -xvf parcellite-*.tar.gz
     Follow the instructions in README for installation.
@@ -55,6 +56,9 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
     First install epel by following step - "3.1 The easy method: (using yum)" and then do "sudo yum install mosh" as described in this link.
 
 15. Make sure the executable scripts has "+x" permission in ~/access-UK/alu/ and ~/access-UK/bin
+
+16. fzf: Install fzf from https://github.com/junegunn/fzf 
+    a. After installing fzf, make sure this installation has not modified my ~/.bashrc and ~/.zshrc. My git hub bashrc.local and zshrc.local already should have these changes.
 
 
 Verify:
@@ -105,4 +109,7 @@ drwxrwxr-x 2 udayakut udayakut 4096 Feb 12  2015 ./
 drwxrwxr-x 4 udayakut udayakut 4096 Feb  5 14:15 ../
 ? queen2-related =>$ 
 
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To do some keyboard shortcuts:
+http://duartes.org/gustavo/blog/post/home-row-computing/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
