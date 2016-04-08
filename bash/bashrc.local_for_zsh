@@ -246,4 +246,29 @@ function run_genrand_fast() {
     $ws/pchip/scripts/testbench_scripts/run_genrand_fast.sh $@
 }
 
+cmdsh2ndpart()
+{
+  FILE=/tmp/tmuxbuffer/resultcmdsh
+  DIR_PREFIX=$(dirname $FILE)
+  if [ -f $FILE ] ; then
+    :
+  else
+    /usr/bin/inotifywait $DIR_PREFIX -e create -e moved_to | while read path action file; do : ; done
+  fi
+  if [ -s $FILE ] ; then
+    :
+  else
+    echo " " > $FILE
+  fi
+  sed -i 's/;#.*$//g' $FILE
+  perl -pi -e 'chomp if eof' $FILE
+}
 
+cmdsh()
+{
+  FILE=/tmp/tmuxbuffer/resultcmdsh
+  DIR_PREFIX=$(dirname $FILE)
+  TXTFILES=~/Docs-UK/ALU-2/txtfiles.txt
+  rm -f /tmp/tmuxbuffer/resultcmdsh
+  cat $(grep -v '^#' $TXTFILES) | fzf-tmux -d 20% --exact --reverse --no-sort -m > $FILE
+}

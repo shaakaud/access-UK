@@ -39,7 +39,7 @@
 [remote "origin"]
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
-	githelperver = b7a3e3ec809368a9ae66f2bf054f528a0d96b859
+	githelperver = 708d42cd4cdadd2159a47b8833588f4fa981baad
 [merge]
 	tool = diffconflicts
 [mergetool "diffconflicts"]
