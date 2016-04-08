@@ -10,8 +10,8 @@ import os
 
 # Edit these with your values
 username='udaykumartj'
-hostname='udayakumar.ddns.net'
-interface_to_update='eth3'
+hostname='ukcentos.ddns.net'
+interface_to_update='eth0'
 passwordfile=os.path.join(os.path.expanduser("~"),".noippassword")
 
 password=None

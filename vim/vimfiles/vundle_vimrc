@@ -79,7 +79,7 @@ set ttyfast
 set expandtab
 set laststatus=2
 "set columns=80
-colorscheme phd
+colorscheme night
 set nowrap
 set tw=0
 if has('gui_running')
