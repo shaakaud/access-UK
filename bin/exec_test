@@ -1,0 +1,7 @@
+/home/udayakut/bin/dregress  -vfp  -pkg basic -reason vfp_mgquick_mg80f_dts234109 -vm
+sleep 1
+/home/udayakut/bin/dregress  -v1  -pkg basic -reason v1sim_mgquick_mg80f_dts234109 -vm
+sleep 1
+/home/udayakut/bin/dregress  -v2  -pkg basic -reason v2sim_mgquick_mg80f_dts234109 -vm
+sleep 1
+ /home/udayakut/bin/dregress  -v3  -pkg basic -reason v3sim_mgquick_mg80f_dts234109 -vm

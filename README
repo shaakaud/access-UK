@@ -61,6 +61,7 @@ Verify:
 =>$ pwd  
 /home/udayakut
 =>$ ls -lart .* | grep access
+lrwxrwxrwx   1 udayakut udayakut     18 Mar  2  2015 access-UK -> /drive_c/access-UK/
 lrwxrwxrwx  1 udayakut udayakut     42 May 27  2015 .git-prompt.sh -> /home/udayakut/access-UK/git/git-prompt.sh*
 lrwxrwxrwx  1 udayakut udayakut     36 Jun  1  2015 .bashrc.bak -> /home/udayakut/access-UK/bash/bashrc*
 lrwxrwxrwx  1 udayakut udayakut     42 Jun  1  2015 .bash_profile -> /home/udayakut/access-UK/bash/bash_profile*
