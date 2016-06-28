@@ -41,7 +41,8 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
 11. Install asciidoc if required
    sudo yum install asciidoc
 
-12. Install Parcellite - Clip board manager - This will help to copy contents to clipboard when we vnc to centos machine from windows m/c and copy some contents to clipboard 
+12. a) sudo yum install xsel
+    b) Install Parcellite - Clip board manager - This will help to copy contents to clipboard when we vnc to centos machine from windows m/c and copy some contents to clipboard 
     and try to paste it to windows m/c.
     Download from http://parcellite.sourceforge.net/. Copy the *.tar.gz file to ~/software/ and untar it tar -xvf parcellite-*.tar.gz
     Follow the instructions in README for installation.
@@ -55,6 +56,18 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
     First install epel by following step - "3.1 The easy method: (using yum)" and then do "sudo yum install mosh" as described in this link.
 
 15. Make sure the executable scripts has "+x" permission in ~/access-UK/alu/ and ~/access-UK/bin
+
+16. fzf: Install fzf from https://github.com/junegunn/fzf 
+    a. cd ~/software; git clone --depth 1 https://github.com/junegunn/fzf.git; cd fzf; ./install
+    b. ln -s ~/software/fzf .fzf 
+    c. After installing fzf, make sure this installation has not modified my ~/.bashrc and ~/.zshrc. My git hub bashrc.local and zshrc.local already should have these changes.
+    d. mkdir /tmp/tmuxbuffer/; touch /tmp/tmuxbuffer/resultcmdsh;
+    e. sudo yum install inotify-tools 
+    Below info comes from my dot files present in my git repo. No need to do anything for points 1-3.
+    1. vundle_vimrc: Contains changes to gG/gA to fzf functions and structures (right side of vim screen). When selected, it opens the function/struct in cscope
+    2. tmux.conf: tmux-esc-charac-y - will pull out ctrl-r kind of window at the bottom and shows all the tags from Txt files / my cheat sheets
+    3. bashrc.local_for_zsh - cmdsh,cmdsh2ndpart -   Files that needs to be indexed by fzf (tmux) is present in ~/Docs-UK/ALU-2/txtfiles.txt. These two functions cat's all these
+                              files and invokes fzf-tmux by giving the cat'ed file as input.
 
 
 Verify:
@@ -106,4 +119,7 @@ drwxrwxr-x 2 udayakut udayakut 4096 Feb 12  2015 ./
 drwxrwxr-x 4 udayakut udayakut 4096 Feb  5 14:15 ../
 ? queen2-related =>$ 
 
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To do some keyboard shortcuts:
+http://duartes.org/gustavo/blog/post/home-row-computing/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
