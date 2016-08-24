@@ -1,5 +1,5 @@
 [user]
-	email = udayakumar.thimma_janarthanan@alcatel-lucent.com
+	email = udayakumar.thimma_janarthanan@nokia.com
 	name = udayakut
 [alias] 
     dt = difftool --dir-diff
@@ -39,7 +39,7 @@
 [remote "origin"]
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
-	githelperver = bb33c8d08ca7af00f05d2271afb4dcb2bbccc44a
+	githelperver = 9342cdeeca603c5a66a3484e9332534df0be75f1
 [merge]
 	tool = diffconflicts
 [mergetool "diffconflicts"]

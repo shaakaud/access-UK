@@ -1,7 +1,23 @@
-/home/udayakut/bin/dregress  -vfp  -pkg basic -reason vfp_mgquick_mg80f_dts234109 -vm
+#/home/udayakut/bin/dregress  -vfp  -pkg basic -reason vfp_mgquick_mg80f_dts234109 -vm
+#sleep 1
+#/home/udayakut/bin/dregress  -v1  -pkg basic -reason v1sim_mgquick_mg80f_dts234109 -vm
+#sleep 1
+#/home/udayakut/bin/dregress  -v2  -pkg basic -reason v2sim_mgquick_mg80f_dts234109 -vm
+#sleep 1
+# /home/udayakut/bin/dregress  -v3  -pkg basic -reason v3sim_mgquick_mg80f_dts234109 -vm
+
+regress -notify Udayakumar.Thimma_Janarthanan@alcatel-lucent.com -testbed $1 -nobuild  -runLevel quick -runSuite mgQuick mgCli -reason iccrx_v1sim_mgquick_$5;
 sleep 1
-/home/udayakut/bin/dregress  -v1  -pkg basic -reason v1sim_mgquick_mg80f_dts234109 -vm
+regress -notify Udayakumar.Thimma_Janarthanan@alcatel-lucent.com -testbed $2 -subTopology ismMgB -nobuild  -runLevel quick -runSuite mgQuick mgCli -reason iccrx_v2sim_mgquick_$5;
 sleep 1
-/home/udayakut/bin/dregress  -v2  -pkg basic -reason v2sim_mgquick_mg80f_dts234109 -vm
+regress -notify Udayakumar.Thimma_Janarthanan@alcatel-lucent.com -testbed $3 -subTopology ismMgV3 -nobuild  -runLevel quick -runSuite mgQuick mgCli -reason iccrx_v3sim_mgquick_$5;
 sleep 1
- /home/udayakut/bin/dregress  -v3  -pkg basic -reason v3sim_mgquick_mg80f_dts234109 -vm
+regress -physTopology lteDefault -subTopology vfp  -testbed $4 -runSuite mgQuick -runLevel quick -nobuild -reason vfp_mgquick_$5;
+
+echo "==================================="
+echo "Reason --> sim_mgquick_$5"
+echo "==================================="
+echo "V1sim mgquick - $1"
+echo "V2sim mgquick - $2"
+echo "V3sim mgquick - $3"
+echo "VFP mgquick   - $4"
