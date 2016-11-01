@@ -31,17 +31,19 @@
 	checkoutbydate = "!sh -c \"git checkout `git rev-list -n 1 --before=\"$1\" HEAD`;\""
 [diff]  
     tool = meld
+	renameLimit = 25000
 
 [push]
-	default = simple
+	default = upstream
 [difftool]
 	prompt = false
 [remote "origin"]
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
-	githelperver = 9342cdeeca603c5a66a3484e9332534df0be75f1
+	githelperver = 9473ca293709f76bedbe6255fd45d84abd0d3488
 [merge]
 	tool = diffconflicts
+	renameLimit = 25000
 [mergetool "diffconflicts"]
 	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
 	trustExitCode = true
