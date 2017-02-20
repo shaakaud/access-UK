@@ -104,6 +104,16 @@ alias pid='cd /drive_c/Users/udayakut.ENG/AppData/Roaming/.purple/logs/sipe/uday
 alias doc='cd ~/Docs-UK'
 alias acc='cd ~/access-UK'
 alias tb='cd ~/Docs-UK/ALU-2/testbeds'
+#ALUT-2 Testbench
+alias tests='cd $MY_PROJECT/pchip/tb/tests'
+alias iom='cd $MY_PROJECT/pchip/tb/tests/iom'
+alias ingress='cd $MY_PROJECT/pchip/tb/tests/iom/ingress'
+alias egress='cd $MY_PROJECT/pchip/tb/tests/iom/egress'
+alias tb='cd $MY_PROJECT/pchip/tb/'
+alias nprt='cd $MY_PROJECT/npchip/sim/pumice_msm_ingress/rtl.linux/'
+alias np3rt='cd $MY_PROJECT/np3chip/sim/pumice_msm_ingress/rtl.linux/'
+alias npsim='cd $MY_PROJECT/npchip/sim/'
+alias np3sim='cd $MY_PROJECT/np3chip/sim/'
 
 #CVS related
 alias cvsup='cvs update -d'

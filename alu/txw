@@ -6,6 +6,8 @@ echo "bin/7xxx-i386/both.tim --> /home/udayakut/images/iccrx/i386-both.tim"
 scp bin/7xxx-i386/both.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/iccrx/i386-both.tim
 echo "bin/7xxx-i386/boot.tim --> /home/udayakut/images/iccrx/i386-boot.tim"
 scp bin/7xxx-i386/boot.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/iccrx/i386-boot.tim
+echo "bin/vm/7xxx-i386/sros-vm.qcow2 --> /home/udayakut/images/iccrx/sros-vm.qcow2"
+scp bin/vm/7xxx-i386/sros-vm.qcow2 udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/iccrx/sros-vm.qcow2
 echo "bin/7xxx-i386/isa-aa.tim --> /home/udayakut/images/iccrx/i386-isa-aa.tim"
 scp bin/7xxx-i386/isa-aa.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/iccrx/i386-isa-aa.tim
 echo "bin/7xxx-hops/iom.tim --> /home/udayakut/images/iccrx/iom.tim"

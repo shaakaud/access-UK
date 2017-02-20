@@ -31,6 +31,8 @@ autoload -U compinit && compinit -u
 
 bindkey '^[[A' up-line-or-local-history
 bindkey '^[[B' down-line-or-local-history
+bindkey '^[[1;5A' up-line-or-local-history
+bindkey '^[[1;5B' down-line-or-local-history
 
 up-line-or-local-history() {
    zle set-local-history 1
