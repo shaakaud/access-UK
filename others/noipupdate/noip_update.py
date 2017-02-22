@@ -4,9 +4,10 @@ import argparse
 import subprocess
 import requests
 import os
+import datetime
 
 #Suppress urllib3 warnings
-#requests.packages.urllib3.disable_warnings()
+requests.packages.urllib3.disable_warnings()
 
 # Edit these with your values
 username='udaykumartj'
@@ -48,12 +49,16 @@ def load_password():
 
 def update_ip(ip):
   payload={'myip':ip,'hostname':hostname}
+  print "<=================================================>"
+  print "noip_update.py run on  %s "%datetime.datetime.today()
+  print "<=================================================>"
   print "payload:%s"%payload
   result=requests.get(url,params=payload,auth=(username,password),verify=False)
   if not result.ok:
     print "Sorry.. didn't get a good result:%s"%result.text
   else:
     print "updated:%s"%result.text
+    print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 def main():
   global password

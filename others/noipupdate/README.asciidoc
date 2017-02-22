@@ -55,7 +55,7 @@ disk, you can add the script to your crontab so that it updates periodically)
 
 ----
 crontab -e
-*/15 * * * * /absolute/path/to/noip_update.py > /tmp/noip_log
+*/15 * * * * ~/access-UK/others/noipupdate/noip_update.py  2>&1 > /tmp/noip_log
 ----
 
 That's it. Enjoy using your domainname.

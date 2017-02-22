@@ -68,6 +68,7 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
     2. tmux.conf: tmux-esc-charac-y - will pull out ctrl-r kind of window at the bottom and shows all the tags from Txt files / my cheat sheets
     3. bashrc.local_for_zsh - cmdsh,cmdsh2ndpart -   Files that needs to be indexed by fzf (tmux) is present in ~/Docs-UK/ALU-2/txtfiles.txt. These two functions cat's all these
                               files and invokes fzf-tmux by giving the cat'ed file as input.
+17. Install free dns (noip.com). Refer the README from access-UK/others/noipupdate/
 
 
 Verify:
