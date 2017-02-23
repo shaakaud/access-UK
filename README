@@ -69,6 +69,7 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
     3. bashrc.local_for_zsh - cmdsh,cmdsh2ndpart -   Files that needs to be indexed by fzf (tmux) is present in ~/Docs-UK/ALU-2/txtfiles.txt. These two functions cat's all these
                               files and invokes fzf-tmux by giving the cat'ed file as input.
 17. Install free dns (noip.com). Refer the README from access-UK/others/noipupdate/
+18. Installed Unite.vim plugin. This inturn requires Plugin 'Shougo/vimproc.vim' for unite source "file_rec/async" to work.  Inorder for vimproc to work you need to do a make by doing :VimProcInstall in VIM window.
 
 
 Verify:
