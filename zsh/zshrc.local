@@ -81,4 +81,8 @@ function ppkill() {
     ppgrep $QUERY | xargs kill $*
 }
 
+#solarized - uday
+eval $(dircolors ~/software/dircolors-solarized/dircolors.ansi-dark )
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

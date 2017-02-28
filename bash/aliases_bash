@@ -33,7 +33,7 @@ alias conc='clt co -nc'
 
 # basic unix cmdset
 alias h=history
-alias ls='ls -F'
+alias ls='ls --color -F'
 #alias vi='gv'
 alias vi='vim'
 alias cls='clear'

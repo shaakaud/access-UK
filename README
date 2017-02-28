@@ -31,6 +31,11 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
 
 8. Downnload solarized color scheme for Gnome terminal
    http://www.webupd8.org/2011/04/solarized-must-have-color-paletter-for.html
+   (or)
+   git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git ~/software/solarized-terminal
+   cd ~/software/solarized-terminal
+   ./set_dark.sh
+   cd ~/software; git clone https://github.com/seebi/dircolors-solarized
 
 9. Install for percol - This is for improved ctrl-r (searching history) - follow https://github.com/mooz/percol/blob/master/README.md#zsh-history-search 
    cd ~/software/; git clone https://github.com/mooz/percol.git; cd percol;sudo python setup.py install;
