@@ -48,6 +48,9 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'unite.vim'
 "For dong fzf stuff in vim
 Plugin 'junegunn/fzf.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'majutsushi/tagbar'
 "#for easy buffer switching
 "Plugin 'ctrlpvim/ctrlp.vim'
 
@@ -141,15 +144,16 @@ set rtp+=~/.fzf
 "nmap gG     <Esc>:call PanosTags("../tags_f")<CR>
 "nmap gA     <Esc>:call PanosTags("../tags_s")<CR>
 
-"Added by Lakshman Kumar
-if has("win32unix")
-    let g:showfuncctagsbin="/usr/local/timostools/ctags"
-else
-    let g:showfuncctagsbin="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
-endif
-let g:ctags_statusline=1
-let g:ctags_title=0
-let generate_tags=1
+"To display function name in vim status bar - Added by Lakshman Kumar
+" This is commented as vim-airline + tagbar plugin together solves this problem
+"if has("win32unix")
+"    let g:showfuncctagsbin="/usr/local/timostools/ctags"
+"else
+"    let g:showfuncctagsbin="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+"endif
+"let g:ctags_statusline=1
+"let g:ctags_title=0
+"let generate_tags=1
 
 "To copy vbox centos vm to windows clipboard
 function! DumpToClipBoard()
@@ -227,3 +231,16 @@ function! s:unite_settings()
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
+
+"Below line is for VIM to support 256 colors
+set t_Co=256
+
+"Set vim-airline theme - You can also change with :AirlineTheme <theme name>
+let g:airline_theme='light'
+"To disable detection of trailing white space displayed on the airline statusbar
+let g:airline#extensions#whitespace#enabled = 0
+"To show buffers as tabs in the top
+let g:airline#extensions#tabline#enabled = 0
+
+"Tagbar - Displays function names. Also displays function names in vim-airline status bar
+nmap <F8> :TagbarToggle<CR>
