@@ -18,7 +18,8 @@ ln -s ~/access-UK/bash/bash_profile .bash_profile;
 ln -s ~/access-UK/bash/aliases_bash .aliases_bash; 
 ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
 
-3. ln -s /home/udayakut/access-UK/zsh/zshrc .zshrc;ln -s /home/udayakut/access-UK/zsh/zshrc.local .zshrc.local;
+3. Install zsh. Follow access-UK/zsh/README
+   ln -s /home/udayakut/access-UK/zsh/zshrc .zshrc;ln -s /home/udayakut/access-UK/zsh/zshrc.local .zshrc.local;
 
 4. ln -s ~/access-UK/others/netrc .netrc; ln -s ~/access-UK/others/screenrc .screenrc; ln -s ~/access-UK/others/inputrc .inputrc; ln -s ~/access-UK/gdb/gdbinit .gdbinit; 
 

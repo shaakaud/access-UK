@@ -29,6 +29,8 @@
    https://github.com/joelthelion/autojump
    commands:
    cd ~/software; git clone https://github.com/wting/autojump.git; cd autojump;./install.py
+   #That would install autojump in ~/.autojump/etc/profile.d/autojump.sh
+   #This is now sourced in your zshrc (The install script would edit ur .zshrc, but i guess, i anyway have that line in my access-UK-repo).
 
 8.Now install the git prompt plugin which will tell the git-status in PS1 
   cd ~/access-UK/zsh; git clone https://github.com/lakshmankumar12/zsh-git-prompt.git
