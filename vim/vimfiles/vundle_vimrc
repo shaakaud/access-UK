@@ -136,6 +136,8 @@ imap <S-Insert>        <ESC><S-Insert>i
 
 "vim-fugitive plugin command - To see git diff of a file type :<F9> in vim
 :cmap <F9> :tabnew %\|Gdiff<CR>
+"Override the git path for vim fugitive. It needs higher version of git.
+let g:fugitive_git_executable = '~/software/git_2.10.2/bin/git'
 
 "for fzf
 set rtp+=~/.fzf
@@ -235,12 +237,44 @@ endfunction
 "Below line is for VIM to support 256 colors
 set t_Co=256
 
-"Set vim-airline theme - You can also change with :AirlineTheme <theme name>
-let g:airline_theme='light'
 "To disable detection of trailing white space displayed on the airline statusbar
 let g:airline#extensions#whitespace#enabled = 0
 "To show buffers as tabs in the top
 let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#default#section_truncate_width = {
+      \ 'a': 20,
+      \ 'b': 100,
+      \ 'c': 20,
+      \ 'gutter': 100,
+      \ 'x': 20,
+      \ 'y': 100,
+      \ 'z': 20,
+      \ 'warning': 100,
+      \ 'error': 100,
+      \ }
+"Set vim-airline theme - You can also change with :AirlineTheme <theme name>
+let g:airline_theme='solarized'
+function! AirlineThemePatch(palette)
+  if g:airline_theme == 'solarized'
+    "greenish
+    let a:palette.normal.airline_a = [ '#1c1c1c', '#5fff00', 234, 82 ]
+    let a:palette.normal.airline_z = [ '#1c1c1c', '#5fff00', 234, 82 ]
+    "blue
+    let a:palette.visual.airline_a = [ '#ffffff', '#0087ff', 255, 33 ]
+    let a:palette.visual.airline_z = [ '#ffffff', '#0087ff', 255, 33 ]
+    "violetish
+    let a:palette.insert.airline_a = [ '#3a3a3a', '#af00ff', 237, 129 ]
+    let a:palette.insert.airline_z = [ '#3a3a3a', '#af00ff', 237, 129 ]
+    "reddish
+    let a:palette.replace.airline_a = [ '#ffffff', '#ff005f', 255, 197 ]
+    let a:palette.replace.airline_z = [ '#ffffff', '#ff005f', 255, 197 ]
+  endif
+endfunction
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+
 
 "Tagbar - Displays function names. Also displays function names in vim-airline status bar
 nmap <F8> :TagbarToggle<CR>

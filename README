@@ -85,7 +85,11 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
                               files and invokes fzf-tmux by giving the cat'ed file as input.
 17. Install free dns (noip.com). Refer the README from access-UK/others/noipupdate/
 18. Installed Unite.vim plugin. This inturn requires Plugin 'Shougo/vimproc.vim' for unite source "file_rec/async" to work.  Inorder for vimproc to work you need to do a make by doing :VimProcInstall in VIM window.
-
+19. Install powerline fonts - which will be used by vim-airline plugin
+    cd ~/software/
+    git clone https://github.com/powerline/fonts
+    cd fonts; sudo ./install.sh
+    Go to terminal profile preferences -> General. Change Font to DejaVu Sans Mono for Powerline Book 12
 
 Verify:
 =>$ pwd  
