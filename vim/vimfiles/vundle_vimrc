@@ -96,7 +96,12 @@ if has('gui_running')
 else
     set background=dark
 endif
-"colorscheme solarized
+
+"To set solaraized color scheme
+let g:solarized_termcolors=16
+let g:solarized_termtrans=1
+colorscheme solarized
+
 filetype plugin on
 
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
@@ -234,9 +239,6 @@ function! s:unite_settings()
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
-"Below line is for VIM to support 256 colors
-set t_Co=256
-
 "To disable detection of trailing white space displayed on the airline statusbar
 let g:airline#extensions#whitespace#enabled = 0
 "To show buffers as tabs in the top
@@ -257,6 +259,7 @@ let g:airline#extensions#default#section_truncate_width = {
       \ }
 "Set vim-airline theme - You can also change with :AirlineTheme <theme name>
 let g:airline_theme='solarized'
+"let g:airline_theme='light'
 function! AirlineThemePatch(palette)
   if g:airline_theme == 'solarized'
     "greenish
