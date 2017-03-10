@@ -126,7 +126,7 @@ if filereadable("../tags")
   set tags+=../tags
 endif
 
-"Key Mappings for BufExplorer - To work on multiple buffers in the same VIM window
+"Key Mappings for BufExplorer - To work on multiple buffers in the same VIM window - SHIFT-<options>
 let bufExplorerOpenMode=1
 let bufExplorerSplitBelow=1
 let bufExplorerSplitHorzSize=10

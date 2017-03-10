@@ -53,8 +53,7 @@ export WIN="/drive_c/"
 export WINH="/drive_c/home/udayakut/"
 
 #UDAY - To make c-R-Arrow, C-L-Arrow in Terminal for cscope searches
-#export TERM=xterm
-export TERM=screen-256color
+export TERM=xterm-256color
 
 ####
 #GIT related
