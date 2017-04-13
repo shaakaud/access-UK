@@ -82,8 +82,10 @@ LS_OPTIONS='--color=auto'
 export PAN_DIR=`pwd`
 export PANOS=`pwd`
 
+#ALU related
 #PATH
 export PATH=${PATH}:~/access-UK/alu
+export GIT_CO_USE_WORKTREES=1
 
 #Avoid screen feeze when Ctrl-S is pressed on VIM screen
 stty -ixon 

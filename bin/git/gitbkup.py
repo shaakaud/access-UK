@@ -4,5 +4,5 @@ import subprocess
 import os
 import sys
 
-subprocess.call(["git diff"])
+subprocess.call(["/usr/bin/git diff"])
 

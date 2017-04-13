@@ -192,6 +192,11 @@ export OS=Linux
 export PERL=/usr
 export PATH=".:/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64:${PATH}"
 
+#
+# ALU - General
+#
+export GIT_CO_USE_WORKTREES=1
+
 function vhdl() {
     export MY_PROJECT=$HOME/ws/$1/vhdl
     export PERL5LIB=$MY_PROJECT/common/scripts/lib
