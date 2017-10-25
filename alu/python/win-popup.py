@@ -67,7 +67,8 @@ def balloon_tip(title, msg):
 
 # Main
 if __name__ == '__main__':
-    UDP_IP = "135.227.232.98"   # host ip
+    #UDP_IP = "135.227.232.98"   # host ip - Change if windows ip changes
+    UDP_IP = "ukwindows.ddns.net"   # host ip
     UDP_PORT = 36000     # port chosen
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

@@ -86,7 +86,7 @@ eval $(dircolors ~/software/dircolors-solarized/dircolors.ansi-dark )
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#uday - Inovke !/bin/set_ws.py with argument(search string" - to set the workspace from the list
+#uday - mcd() - Inovke !/bin/set_ws.py with argument(search string" - to set the workspace from the list
 function mcd() {
     ~/bin/set_ws.py $1
     cd $(cat /tmp/mcd)

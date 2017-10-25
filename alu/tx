@@ -1,6 +1,6 @@
 echo "bin/7xxx-i386/iom.tim --> /home/udayakut/images/mg00/i386-iom.tim"
 scp bin/7xxx-i386/iom.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-iom.tim
-echo "bin/7xxx-i386/iom.tim --> /home/udayakut/images/mg00/i386-iom.tim"
+echo "bin/7xxx-i386/cpm.tim --> /home/udayakut/images/mg00/i386-cpm.tim"
 scp bin/7xxx-i386/cpm.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-cpm.tim
 echo "bin/7xxx-i386/both.tim --> /home/udayakut/images/mg00/i386-both.tim"
 scp bin/7xxx-i386/both.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-both.tim
