@@ -253,7 +253,7 @@ function run_genrand_fast() {
 
 cmdsh2ndpart()
 {
-  FILE=/tmp/tmuxbuffer/resultcmdsh
+  FILE=~/tmuxbuffer/resultcmdsh
   DIR_PREFIX=$(dirname $FILE)
   if [ -f $FILE ] ; then
     :
@@ -271,9 +271,9 @@ cmdsh2ndpart()
 
 cmdsh()
 {
-  FILE=/tmp/tmuxbuffer/resultcmdsh
+  FILE=~/tmuxbuffer/resultcmdsh
   DIR_PREFIX=$(dirname $FILE)
   TXTFILES=~/Docs-UK/ALU-2/txtfiles.txt
-  rm -f /tmp/tmuxbuffer/resultcmdsh
+  rm -f ~/tmuxbuffer/resultcmdsh
   cat $(grep -v '^#' $TXTFILES) | fzf-tmux -d 20% --exact --reverse --no-sort -m > $FILE
 }

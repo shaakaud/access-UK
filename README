@@ -76,7 +76,7 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
     a. cd ~/software; git clone --depth 1 https://github.com/junegunn/fzf.git; cd fzf; ./install
     b. ln -s ~/software/fzf .fzf 
     c. After installing fzf, make sure this installation has not modified my ~/.bashrc and ~/.zshrc. My git hub bashrc.local and zshrc.local already should have these changes.
-    d. mkdir /tmp/tmuxbuffer/; touch /tmp/tmuxbuffer/resultcmdsh;
+    d. mkdir ~/tmuxbuffer/; touch ~/tmuxbuffer/resultcmdsh;
     e. sudo yum install inotify-tools 
     Below info comes from my dot files present in my git repo. No need to do anything for points 1-3.
     1. vundle_vimrc: Contains changes to gG/gA to fzf functions and structures (right side of vim screen). When selected, it opens the function/struct in cscope
