@@ -39,7 +39,7 @@
 [remote "origin"]
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
-	githelperver = be197b38d12dd948bb187065b2344dbf57dc5e50
+	githelperver = 43c9f1b9a4616f5b51120f94aa35fe8bb297fc7b
 [merge]
 	tool = diffconflicts
 	renameLimit = 25000

@@ -6,7 +6,7 @@
 # 
 #   Author: Amod Deshpande
 # 
-#   Copyright (c) 2014-2016 Alcatel-Lucent
+#   Copyright (c) 2014-2016 Alcatel-Lucent, 2016 Nokia
 # 
 # $Id: Exp $
 #**************************************************************************
@@ -17,6 +17,7 @@ use IO::File;
 use File::Path;
 use File::Basename;
 use Net::Telnet;
+use Time::Local;
 use Cwd;
 our %regressParams = ();
 sub getRegressParams
@@ -33,7 +34,12 @@ close($fd);
 shift(@data);
 foreach my $line (@data) {
 chomp($line);
-unless( $line =~ /^$main::site/ ) {
+unless( $line =~ /^mvlte/ 
+|| $line =~ /^npv/ 
+|| $line =~ /^ba/ 
+|| $line =~ /^ath/ 
+|| $line =~ /^es/
+) {
 next;
 }
 unless( $line =~ /SITE/ 
@@ -46,6 +52,7 @@ unless( $line =~ /SITE/
 next;
 }
 if( $main::dflag) { printf("Working on: $line\n"); }
+my $origline = $line;
 $line =~ s/\s+/\;/g;    
 my @values = split(';', $line);
 $lab = $values[0];
@@ -65,6 +72,10 @@ $regressParams{$lab}{'deny'} = "ANY";
 next;
 }
 if( $line =~ /;DESCRIPTION;/ ) {
+if ( $origline =~ /(do[\s_-]*not[\s_-]*use|reservi?ed)/i ) {
+$regressParams{$lab}{'allowed'} = 0;
+next;
+}
 if( $line =~ /Hardware/ ) {
 $regressParams{$lab}{'type'} = "HW";
 next;
@@ -112,11 +123,31 @@ if( -e $rpfile ) {
 return($rpfile);
 }
 }
-my $timosRegress = "/usr/local/timostools/regress.params";
+my $timosRegress = `echo "\${HOME:-/tmp/\$USER}/.regress/$rpext"`;
+chomp($timosRegress);
+unless (-e $timosRegress) {
+`regress > /dev/null 2>&1`;
+}
 if( -e $timosRegress ) {
+my $now = time;
+my $sec = (localtime($now))[0];
+my $min = (localtime($now))[1];
+my $hrs = (localtime($now))[2];
+my $day = (localtime($now))[3];
+my $month = (localtime($now))[4] + 1;
+my $year = (localtime($now))[5] + 1900;
+my $month2 = $month - 1;
+my $begin_sec = timelocal($sec, $min, $hrs, $day, $month2, $year);
+my $regress_sec = (stat($timosRegress))[9];
+if($main::dflag){printf("$sec $min $hrs $day $month $year $begin_sec $regress_sec\n")};
+my $days = 7;
+if( $begin_sec - $regress_sec > ($days*24*3600) ) {
+printf("\nNeed to update $timosRegress\n");
+system("make timostools");
+}
 return($timosRegress);
 }
-die("regress.params not found\n");
+die("regress.params ($timosRegress) not found\n");
 }
 sub dumpRegressParams
 {
@@ -136,7 +167,8 @@ if( main::globalRoot() ) {
 my $t = new Net::Telnet ( Errmode => 'return' );
 $t->open($main::server);
 if($t->errmsg ) {
-die("Error: $t->errmsg \n");
+my $errmsg = $t->errmsg;
+die("Error: $errmsg \n");
 } 
 $t->login($main::login, $main::passwd);
 @lines = $t->cmd("ls /usr/global/regression/$state");
@@ -159,7 +191,9 @@ use Cwd;
 our @vmtestbed = ();
 our @hwtestbed = ();
 our @simtestbed = ();
-our $select = 0;    
+our $select = 0;     
+our $noselect = 0;   
+our $allowAllTb = 0; 
 our $tcount = 0;
 our $vmtcount = 0;
 our $hwtcount = 0;
@@ -209,12 +243,11 @@ $tcount = $vmtcount + $hwtcount + $simtcount;
 if($tcount == 0 ) {
 die("No testbeds are idle or inprogress - please check later\n");
 } 
-#my @a = sort {$a <=> $b} @testbed;
-my @a = sort {$a cmp $b} @vmtestbed;
+my @a = sort tbSort @vmtestbed;
 @vmtestbed = @a;
-my @a = sort {$a cmp $b} @hwtestbed;
+my @a = sort tbSort @hwtestbed;
 @hwtestbed = @a;
-my @a = sort {$a cmp $b} @simtestbed;
+my @a = sort tbSort @simtestbed;
 @simtestbed = @a;
 if( $main::showtb ) {
 my $index = 1;
@@ -252,7 +285,45 @@ exit;
 }
 }
 }
+sub tbSort
+{
+if ($a =~ /^$main::site/) { 
+return -1; 
+} elsif ($b =~ /^$main::site/) { 
+return 1; 
+} else { 
+return $a cmp $b; 
+} 
+}
 sub doit
+{
+my $status = shift;
+my $tbtype = shift;
+if( $main::site eq "npv" || $main::site eq "mvlte" ) {
+main::setServers("MtnView");
+regressParams::getRegressionStatus($tbfile, $status);
+_doit($status, $tbtype);
+main::setServers("Naperville");
+regressParams::getRegressionStatus($tbfile, $status);
+_doit($status, $tbtype);
+} 
+if($main::site eq "ba") {
+main::setServers("Bratislava");
+regressParams::getRegressionStatus($tbfile, $status);
+_doit($status, $tbtype);
+}
+if($main::site eq "ath") {
+main::setServers("Athens");
+regressParams::getRegressionStatus($tbfile, $status);
+_doit($status, $tbtype);
+}
+if($main::site eq "es") {
+main::setServers("Espoo");
+regressParams::getRegressionStatus($tbfile, $status);
+_doit($status, $tbtype);
+}
+}
+sub _doit
 {
 my $status = shift;
 my $tbtype = shift;
@@ -275,7 +346,6 @@ unless($tbed) {
 next;
 }
 if( $main::dflag) { printf("testbed $tbtype: $tbed  "); }
-if( $tbed =~ /^$main::site/ ) {
 if( isAllowed($tbed) ) {
 if( $tbtype eq "VM" && isVmTb($tbed) && isAlive($tbed) ) {
 $vmtestbed[$vmtcount++] = $tbed;
@@ -303,7 +373,6 @@ next;
 }
 if( $main::dflag) { printf("Ignore - VM, HW, SIM check failed\n"); }
 next;
-}
 }
 if( $main::dflag) { printf("Not allowed\n"); }
 }
@@ -359,7 +428,7 @@ return(0);
 sub isAllowed
 {
 my $host = shift;
-if( $select ) {
+if ( $allowAllTb ) {
 return(1);
 }
 if( $host =~ /scale/
@@ -527,7 +596,9 @@ if( ($lastvm + $lasthw + $lastsim) >= $tcount ) {
 $lastvm = $lastsim = $lasthw = 0;
 }
 if( $vmidle == 0 && $hwidle == 0 && $simidle == 0 ) {
+unless( $noselect ) {
 return( selectTestBed($tbtype) );
+}
 }
 if( $vmtcount && $lastvm <= ($vmtcount-1) ) {
 return($vmtestbed[$lastvm++]);
@@ -544,7 +615,9 @@ if( $lastvm >= $vmtcount ) {
 $lastvm = 0;
 }
 if( $vmidle == 0 ) {
+unless( $noselect ) {
 return( selectTestBed($tbtype) );
+}
 }
 if( $vmtcount && $lastvm <= ($vmtcount-1) ) {
 return($vmtestbed[$lastvm++]);
@@ -555,7 +628,9 @@ if( $lasthw >= $hwtcount ) {
 $lasthw = 0;
 }
 if( $hwidle == 0 ) {
+unless( $noselect ) {
 return( selectTestBed($tbtype) );
+}
 }
 if( $hwtcount && $lasthw <= ($hwtcount-1) ) {
 return($hwtestbed[$lasthw++]);
@@ -566,7 +641,9 @@ if( $lastsim >= $simtcount ) {
 $lastsim = 0;
 }
 if( $simidle == 0 ) {
+unless( $noselect ) {
 return( selectTestBed($tbtype) );
+}
 }
 if( $simtcount && $lastsim <= ($simtcount-1) ) {
 return($simtestbed[$lastsim++]);
@@ -575,10 +652,152 @@ return($simtestbed[$lastsim++]);
 return ("");
 }
 1;
+package forkMgr;
+use strict;
+use IO::File;
+use File::Basename;
+use File::Path;
+sub new 
+{
+my $proto = shift;
+my $class = ref($proto) || $proto;
+my $self = {};
+%{$self->{'pidList'}} = ();
+$self->{'max'} = 1;
+$self->{'nap'} = .200;
+$self->{'mgr'} = $$;
+$SIG{CHLD} = 'IGNORE';
+$SIG{PIPE} = 'IGNORE';
+$|++;
+bless $self, $class;
+return($self);
+}
+sub setNap
+{
+my $self = shift;
+my $nap = shift;
+if ( $nap == 0 ) {
+$nap = .01;
+}
+$self->{'nap'} = $nap;
+}
+sub config
+{
+my $self = shift;
+my $max = shift;
+$self->{'max'} = $max;
+%{$self->{'pidList'}} = ();
+$self->{'mgr'} = $$;
+}
+sub fork
+{
+my $self = shift;
+unless( $self->{'mgr'} == $$ ) {
+exit(0);
+}
+my $pid = fork();
+unless( $pid ) {
+return($pid);
+}
+$self->{'pidList'}{$pid} = 1;
+return($pid);
+}
+sub checkPoint
+{
+my $self = shift;
+unless( $self->{'mgr'} == $$ ) {
+exit(0);
+}
+if ( scalar keys %{$self->{'pidList'}} < $self->{'max'} ) {
+return(1);
+}
+while(1) {
+select( undef, undef, undef, $self->{'nap'} );
+foreach my $pid (keys %{$self->{'pidList'}} ) {
+if ( kill( 0, $pid ) ) {
+next;
+}
+delete $self->{'pidList'}{$pid};
+}
+if ( scalar keys %{$self->{'pidList'}} < $self->{'max'} ) {
+last;
+}
+}
+return(1);
+}
+sub wrapUp
+{
+my $self = shift;
+unless( $self->{'mgr'} == $$ ) {
+exit(0);
+}
+while(1) {
+select( undef, undef, undef, $self->{'nap'} );
+foreach my $pid (keys %{$self->{'pidList'}}) {
+if ( kill( 0, $pid ) ) {
+next;
+}
+delete $self->{'pidList'}{$pid};
+}
+if ( scalar keys %{$self->{'pidList'}} == 0 ) {
+last;
+}
+}
+return(1);
+}
+1;
+package sysInfo;
+use strict;
+use IO::File;
+use File::Basename;
+use File::Path;
+my $numCPU = 0;
+my $defaultCPU = 8;
+my $os = "";
+sub new 
+{
+my $proto = shift;
+my $class = ref($proto) || $proto;
+my $self = {};
+unless( $os ) {
+my @result = `uname -s`;
+chomp(@result);
+$os = $result[0];
+}
+bless $self, $class;
+return($self);
+}
+sub isLinux
+{
+my $self = shift;
+if ( $os =~ /Linux/ ) {
+return(1);
+}
+return(0);
+}
+sub getCPUcount
+{
+my $self = shift;
+if ( $numCPU > 0 ) {
+return($numCPU);
+}
+if ( $self->isLinux() ) {
+my $fd = new IO::File( "cat /proc/cpuinfo | grep processor |" );
+if ( $fd ) {
+while( <$fd> ) {
+$numCPU++;
+}
+close($fd);
+return($numCPU);
+}
+}
+$numCPU = $defaultCPU;
+return($numCPU);
+}
+1;
 package runSuite;
 use strict;
 use Cwd;
-my $rfile = "/tmp/regress$$.status";
 my $multiRun = 0;   
 our $vfp = 0;        
 our @express = ( 
@@ -702,7 +921,8 @@ our @li = (
 "lteLiSgwPgwAll-regular",
 "lteLiGGSN-regular",
 "lteLiGgsnMsisdn-regular",
-"lteLiGgsnMultipleTargets-regular"
+"lteLiGgsnMultipleTargets-regular",
+"lteLiSccg-regular"
 );
 our @timeofday = (
 "lteGxTimeOfDay-regular",
@@ -789,6 +1009,11 @@ our @custom = ();
 our @runtest = ();
 our $testflag = 0;
 my $printOnly = 0;
+my $sys = new sysInfo;
+my $numCPU = $sys->getCPUcount();
+# within the programmed 
+my $fm = new forkMgr; 
+$fm->config( $numCPU ); # Program Max CPUs (= max 
 sub scheduleRegress
 {
 my $pkg = $main::package;
@@ -808,6 +1033,11 @@ do_schedule($values[$cnt]);
 } else {
 printf("\n\tRegress Package: $pkg\n"); 
 do_schedule($pkg);
+}
+unless( $main::dryOnly ) {
+#sleep(1);
+#printf("Waiting for results . . .\n\n");
+$fm->wrapUp();
 }
 }
 sub do_schedule
@@ -1028,18 +1258,28 @@ $testbed = testBeds::getTestBed("ANY");
 }
 } 
 chdir($main::root);
-if( $multiRun == 1 ) {
+if( $multiRun == 1 and not $main::subTopChosen) {
 if( $testBeds::select ) {
 runRegressCmd($suite, $runlevel, $testbed, "run$str");
 } else {
 if( testBeds::isVmAllowed() ) {
 $testbed = testBeds::getTestBed("VM");
 runRegressCmd($suite, $runlevel, $testbed, "run$str");
-}
-if( testBeds::isSimAllowed() ) {
-$testbed = testBeds::getTestBed("SIM");
+#$testbed = testBeds::getTestBed("VM");
+#my $origTopo = $main::subTopology;
+#$main::subTopology = "vfp";
+#runRegressCmd($suite, $runlevel, $testbed, "run$str");
+#$main::subTopology = $origTopo;
+$testbed = testBeds::getTestBed("VM");
+my $origTopo = $main::subTopology;
+$main::subTopology = "ismMgV3";
 runRegressCmd($suite, $runlevel, $testbed, "run$str");
+$main::subTopology = $origTopo;
 }
+#if( testBeds::isSimAllowed() ) {
+#$testbed = testBeds::getTestBed("SIM");
+#runRegressCmd($suite, $runlevel, $testbed, "run$str");
+#}
 if( testBeds::isHwAllowed() ) {
 $testbed = testBeds::getTestBed("HW");
 runRegressCmd($suite, $runlevel, $testbed, "run$str");
@@ -1120,7 +1360,7 @@ if( $suite eq "express" ) {
 $cmd = "$regress -testbed $testbed -runLevel $runlevel -reason \"$main::reason\" ";
 if( $main::testTeam == 1 ) { 
 $main::smgrTest = 0;
-$main::Racctest = 0;
+$main::acctTest = 0;
 } else {
 if( $main::subTopology eq "" ) { 
 $main::smgrTest = 0;
@@ -1195,28 +1435,32 @@ if( $main::addargs ) {
 $cmd .= "$main::addargs ";
 }
 #$cmd .= "> /dev/null 2>&1";
-$cmd .= "> $rfile 2>&1";
+#$cmd .= "> $rfile 2>&1";
 if($main::dflag) { printf("$cmd\n"); }
-printf("\t\tScheduling $suite @ $testbed Level $runlevel ..");
+unless ( $fm->fork() ) {
 if( $main::dryOnly ) {
+printf("\t\t[Pid: $$] Scheduling $suite/$runlevel/$main::subTopology @ $testbed ..");
 printf(".. Dry\n");            
-return(0);
+exit(0);
 } else {
-system( $cmd );
+my $rfile = "/tmp/regress$$.status";
+printf("\t\t[Pid: $$] Scheduling $suite/$runlevel/$main::subTopology @ $testbed ..\n");
+system( "$cmd > $rfile 2>&1" );
 if( -e $rfile ) {
 my $status = `cat $rfile | grep "Regression test submitted"`;
 if ($status) {
-printf(".. Done\n");
+printf("\t\t[Pid: $$] Done $suite/$runlevel/$main::subTopology @ $testbed\n");
 unlink($rfile);
-return(0);
+exit(0);
 } else {
-printf(".. Failed\n");
-#if( $main::dflag ) {
+printf("\t\t[Pid: $$] Failed $suite/$runlevel/$main::subTopology @ $testbed\n");
+if( $main::dflag ) {
 printf("Regress Output:\n");
 system("cat $rfile");
-#}
+}
 unlink($rfile);
-return(-1);
+exit(-1);
+}
 }
 }
 }
@@ -1273,7 +1517,7 @@ scheduleRegress();
 }
 1;
 package main;
-my $version="v31.1";
+my $version="v33.9";
 use strict;
 use Cwd;
 our $dflag = 0;
@@ -1284,12 +1528,13 @@ our $vmonly = 0;
 our $allowhw = 0;   
 our $hwonly = 0;    
 our $simonly = 0;   
-our $smgrTest = 0;  
-our $acctTest = 0;  
+our $smgrTest = 1;  
+our $acctTest = 1;  
 our $latest = 0;    
 our $current = 0;    
 our $ptrCheck = 0;    
 our $subTopology = "ismMgB";    
+our $subTopChosen = 0; 
 our $regressDbg = 0;    
 our $startPriority = 0;    
 our $endPriority = 0;    
@@ -1394,7 +1639,7 @@ return;
 }
 die("Unable to get location for $user\n");
 }
-setServers($output);
+setSite($output);
 printf("Location: $output\t");
 }
 sub globalRoot
@@ -1404,17 +1649,39 @@ return(1);
 } 
 return(0);
 }
+sub setSite
+{
+my $input = shift;
+if ($input eq "MtnView") {
+$site = "mvlte";
+return;
+}
+if ($input eq "Bratislava") {
+$site = "ba";
+return;
+}
+if ($input eq "Naperville") {
+$site = "npv";
+return;
+}
+if ($input eq "Athens") {
+$site = "ath";
+return;
+}
+if ($input eq "Espoo") {
+$site = "es"
+}
+}
 sub setServers
 {
-my $output = shift;
-if( $output eq "MtnView" ) {
-$site = "mvlte";
+my $input = shift;
+if ($input eq "MtnView") {
 $server = "alphatest.mv.usa.alcatel.com";
 $login = "alphatest";
 $passwd = "tigris";
+return;
 }
-if( $output eq "Bratislava" ) {
-$site = "ba";
+if ($input eq "Bratislava") {
 $server = "baltehwrtb01.lab.sk.alcatel-lucent.com";
 if( testBeds::_isAlive($server) ) {
 $login = "baltehwrtb01";
@@ -1428,27 +1695,34 @@ die("Can not get Test Bed status - $server down\n");
 }
 }
 $passwd = "tigris";
+return;
 }
-if( $output eq "Naperville" ) {
-$site = "npv";
+if ($input eq "Naperville") {
 $server = "npvgui.ih.lucent.com";
 $login = "npvgui";
 $passwd = "tigris";
+return;
+}
+if ($input eq "Athens") {
+$server = "athrtb2vm01.athmg.eecloud.dynamic.nsn-net.net";
+$login = "athrtb2vm01";
+$passwd = "tigris";
+return;
+}
+if ( $input eq "Espoo" ) {
+$server = "esrtb2vm01.dev.cic.nsn-rdnet.net";
+$login = "esrtb2vm01";
+$passwd = "tigris";
+return;
 }
 }
 sub getCvsTag
 {
 my $cvsfile = "$main::root/CVS/Tag";
 my $lab = "";
-my $fd = new IO::File;
-unless( open($fd, "< $cvsfile") ){
-if($dflag){printf("Unable to open $cvsfile\n");}
-return(-1);
-}
-my $data = <$fd>;
-close($fd);
+my $data = `git symbolic-ref --short HEAD`;
 chomp($data);
-$data =~ s/TTiMOS-MG_//g;
+$data =~ s/TiMOS-MG_//g;
 $data =~ s/_current//g;
 $release = $data;
 $release =~ s/_/./g;
@@ -1545,6 +1819,10 @@ if ( $a eq "-st" ) {
 $testBeds::select = 1;
 next;
 }
+if ( $a eq "-nost" ) {
+$testBeds::noselect = 1;
+next;
+}
 if ( $a eq "-reason" || $a eq "-title" ) {
 $reason = shift(@T);
 $reason = $reason." :$version";
@@ -1565,6 +1843,14 @@ next;
 }
 if ( $a eq "-ping" ) {
 $noping = 0;
+next;
+}
+if ( $a eq "-nosmgr" ) {
+$smgrTest = 0;
+next;
+}
+if ( $a eq "-noacct" ) {
+$acctTest = 0;
 next;
 }
 if ( $a eq "-smgr" ) {
@@ -1612,36 +1898,55 @@ next;
 }
 if ( $a eq "-v1" ) {
 $subTopology = "";
+$subTopChosen = 1;
 next;
 }
 if ( $a eq "-site" ) {
 $site = shift(@T);
 if( $site eq "mv" ) {
+setSite("MtnView");
 setServers("MtnView");
 } elsif ($site eq "ba") {
+setSite("Bratislava");
 setServers("Bratislava");
 } elsif ($site eq "npv") {
+setSite("Naperville");
 setServers("Naperville");
+} elsif ($site eq "ath") {
+setSite("Athens");
+setServers("Athens");
+} elsif ($site eq "es") {
+setSite("Espoo");
+setServers("Espoo");
 } else {
-die("Incorrect site mentiond (mv, npv, ba allowed)");
+die("Incorrect site mentiond (mv, npv, ba, ath, es allowed)");
 }
 next;
 }
 if ( $a eq "-v2" ) {
 $subTopology = "ismMgB";
+$subTopChosen = 1;
 next;
 }
 if ( $a eq "-v3" ) {
 $subTopology = "ismMgV3";
+$subTopChosen = 1;
 next;
 }
 if ( $a eq "-plasma" ) {
 $subTopology = "plasmaMgV3";
+$subTopChosen = 1;
 next;
 }
 if ( $a eq "-vfp" ) {
 $subTopology = "vfp";
+$subTopChosen = 1;
 $runSuite::vfp = 1;
+next;
+}
+if ( $a eq "-sub" ) {
+$subTopology = shift(@T);
+$subTopChosen = 1;
 next;
 }
 if ( $a eq "-regressDbg" ) {
@@ -1661,6 +1966,10 @@ if ( $a eq "-rel" ) {
 $release = shift(@T);
 next;
 }
+if ( $a eq "-all" ) {
+$testBeds::allowAllTb = 1;
+next;
+}
 die("Unknown Command Line Option: '$a'\n");
 }
 }
@@ -1668,12 +1977,14 @@ sub help
 {
 printf("Following parameters are supported:\n");
 printf("\t-root <ws>: Provide workspace or you will be asked if not already in ws\n");
-printf("\t-site <site>: Provide mv / ba / npv for MtnView, Bratislava or Naperville sites\n");
+printf("\t-site <site>: Provide mv / ba / npv / ath / es for MtnView, Bratislava, Naperville, Athens or Espoo sites\n");
 printf("\t-pkg <code>: Provide pkg code to run regressions\n");
 printf("\t-suite <suite-runLevel>: Provide suite name and runlevel\n");
 printf("\t-runTest <test>: Provide test name and runlevel\n");
 printf("\t-reason <reason>: Provide reason to run regressions (optional default takes WS)\n");
 printf("\t-addargs <args>: Provide additional regress arguments besides already supported\n");
+printf("\t-nosmgr: Run express with SMGR test infra off (Default on)\n");
+printf("\t-noacct: Run express with ACCT test infra off (Default on)\n");
 printf("\t-smgr: Run express with SMGR test infra on (Default on)\n");
 printf("\t-acct: Run express with ACCT test infra on (Default on)\n");
 printf("\t-latest: Run package with latest image instead of local panos\n");
@@ -1686,11 +1997,14 @@ printf("\t-v1: Do not use subTopology option\n");
 printf("\t-v2: Use subTopology ismMgB (Default)\n");
 printf("\t-v3: Use subTopology ismMgV3\n");
 printf("\t-vfp: Use subTopology vfp\n");
+printf("\t-sub <subtopology>: Provide subtopology\n");
 printf("\t-vm : If used, only VM testbeds will used\n");
 printf("\t-hw : If used, only HW testbeds will used\n");
 printf("\t-sim : If used, only SIM testbeds will used\n");
 printf("\t-ping : If used, ping testbeds before selection\n");
 printf("\t-st : Select a testbed instead of random pickup of one\n");
+printf("\t-nost : Auto select a testbed even if no idle\n");
+printf("\t-all: Show private/reserved testbeds also\n");
 printf("\n\t-test: For test team use (express, quick or basic only)\n");
 printf("\t-customGash <tag>: For test team if they need custom gash\n");
 printf("\t-rel <release>: For test team if they need specific release images default 0.0\n");
