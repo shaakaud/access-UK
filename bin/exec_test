@@ -6,8 +6,10 @@
 #sleep 1
 # /home/udayakut/bin/dregress  -v3  -pkg basic -reason v3sim_mgquick_mg80f_dts234109 -vm
 
-regress -notify Udayakumar.Thimma_Janarthanan@alcatel-lucent.com -testbed $1 -nobuild  -runLevel quick -runSuite mgQuick mgCli -reason iccrx_v1sim_mgquick_$5;
-sleep 1
+if [[ $5 != *"10"*  &&  $5 != *"00"* ]]; then
+        regress -notify Udayakumar.Thimma_Janarthanan@alcatel-lucent.com -testbed $1  -subTopology default -nobuild  -runLevel quick -runSuite mgQuick mgCli -reason iccrx_v1sim_mgquick_$5;
+        sleep 1
+fi
 regress -notify Udayakumar.Thimma_Janarthanan@alcatel-lucent.com -testbed $2 -subTopology ismMgB -nobuild  -runLevel quick -runSuite mgQuick mgCli -reason iccrx_v2sim_mgquick_$5;
 sleep 1
 regress -notify Udayakumar.Thimma_Janarthanan@alcatel-lucent.com -testbed $3 -subTopology ismMgV3 -nobuild  -runLevel quick -runSuite mgQuick mgCli -reason iccrx_v3sim_mgquick_$5;
@@ -17,7 +19,11 @@ regress -physTopology lteDefault -subTopology vfp  -testbed $4 -runSuite mgQuick
 echo "==================================="
 echo "Reason --> sim_mgquick_$5"
 echo "==================================="
-echo "V1sim mgquick - $1"
+if [[ $5 != *"10"*  &&  $5 != *"00"* ]]; then
+        echo "V1sim mgquick - $1"
+    else
+        echo "V1sim mgquick - NULL"
+fi
 echo "V2sim mgquick - $2"
 echo "V3sim mgquick - $3"
 echo "VFP mgquick   - $4"

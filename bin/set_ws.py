@@ -30,7 +30,7 @@ if len(args) < 1:
     sys.exit(0)
 branch = args[0]
 
-if branch != '00' and branch != '80' and branch != '90' and branch != 'vh':
+if branch != '00' and branch != '80' and branch != '90' and branch != 'vh' and branch != '10s':
     print "Wrong branch - %s" %branch
     sys.exit(0)
 

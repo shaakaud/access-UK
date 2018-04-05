@@ -277,3 +277,8 @@ cmdsh()
   rm -f ~/tmuxbuffer/resultcmdsh
   cat $(grep -v '^#' $TXTFILES) | fzf-tmux -d 20% --exact --reverse --no-sort -m > $FILE
 }
+
+#
+# ALU - To make express commands work
+# 
+export REGRESS_FAMILY=MG
