@@ -90,6 +90,11 @@ ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
     git clone https://github.com/powerline/fonts
     cd fonts; sudo ./install.sh
     Go to terminal profile preferences -> General. Change Font to DejaVu Sans Mono for Powerline Book 12
+20. Install neovim
+    cd ~/software/
+    git clone https://github.com/neovim/neovim.git
+    cd neovim; make; sudo make install
+
 
 Verify:
 =>$ pwd  

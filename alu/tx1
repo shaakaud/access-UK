@@ -1,0 +1,36 @@
+#txw script
+echo "exports/internal/images/i386/iom.tim --> /home/udayakut/images/mg00/i386-iom.tim"
+scp exports/internal/images/i386/iom.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-iom.tim
+echo "exports/internal/images/i386/iom.tim --> /home/udayakut/images/mg00/i386-iom.tim"
+scp exports/internal/images/i386/cpm.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-cpm.tim
+echo "exports/internal/images/i386/both.tim --> /home/udayakut/images/mg00/i386-both.tim"
+scp exports/internal/images/i386/both.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-both.tim
+echo "exports/internal/images/i386/boot.tim --> /home/udayakut/images/mg00/i386-boot.tim"
+scp exports/internal/images/i386/boot.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-boot.tim
+echo "exports/internal/images/i386/sros-vm.qcow2 --> /home/udayakut/images/mg00/sros-vm.qcow2"
+scp exports/internal/images/i386/sros-vm.qcow2 udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/sros-vm.qcow2
+echo "exports/internal/images/i386/vmcontainer.qcow2 --> /home/udayakut/images/mg00/i386-vmcontainer.qcow2"
+scp exports/internal/images/i386/vmcontainer.qcow2 udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-vmcontainer.qcow2
+echo "exports/internal/images/i386/isa-aa.tim --> /home/udayakut/images/mg00/i386-isa-aa.tim"
+scp exports/internal/images/i386/isa-aa.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/i386-isa-aa.tim
+echo "exports/internal/images/i386/vxrom.bin --> /home/udayakut/images/mg00/i386-vxrom.bin"
+scp exports/internal/images/i386/vxrom.bin udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/vxrom.bin
+echo "exports/internal/images/hops/iom.tim --> /home/udayakut/images/mg00/iom.tim"
+scp exports/internal/images/hops/iom.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/iom.tim
+echo "exports/internal/images/hops/cpm.tim --> /home/udayakut/images/mg00/cpm.tim"
+scp exports/internal/images/hops/cpm.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/cpm.tim
+echo "exports/internal/images/hops/both.tim --> /home/udayakut/images/mg00/both.tim"
+scp exports/internal/images/hops/both.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/both.tim
+echo "exports/internal/images/hops/boot.tim --> /home/udayakut/images/mg00/boot.tim"
+scp exports/internal/images/hops/boot.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/boot.tim
+echo "exports/internal/images/hops/support.tim --> /home/udayakut/images/mg00/support.tim"
+scp exports/internal/images/hops/support.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/support.tim
+echo "exports/internal/images/chile/ipsec.tim --> /home/udayakut/images/mg00/ipsmg.tim"
+scp exports/internal/images/chile/ipsec.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/ipsec.tim
+echo "exports/internal/images/chile/ipsmg.tim --> /home/udayakut/images/mg00/ipsmg.tim"
+scp exports/internal/images/chile/ipsmg.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/ipsmg.tim
+echo "exports/internal/images/chile/ip_reas.tim --> /home/udayakut/images/mg00/ip_reas.tim/"
+scp exports/internal/images/chile/ip_reas.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/ip_reas.tim
+echo "exports/internal/images/chile/bb.tim --> /home/udayakut/images/mg00/bb.tim/"
+scp exports/internal/images/chile/bb.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/images/mg00/bb.tim
+

@@ -111,7 +111,8 @@ syntax on
 "Key Mappings for cscope
 "source  ~/.vim/plugin/cscope_maps.vim
 
-"Key Mappings for quickfix
+"Key Mappings for quickfix - To display the outputs of ":cscope f .." commands
+"at the bottom of the window and navigating through that
 set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
 :map <C-Up> :cope 15<CR>
 :map <C-Down> :ccl<CR>
@@ -214,7 +215,7 @@ endfunction
 
 command! LoadErrors call LoadErrorsFunction()
 
-"Unite UNITE unite - added by UDAY
+"Unite UNITE unite - added by UDAY - To search files from buffers/folders, lines within a file
 nmap <space> [unite]
 nnoremap [unite] <nop>
 

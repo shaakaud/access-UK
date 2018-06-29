@@ -1,0 +1,27 @@
+config="configTestBedNetOwl sgwPgw -sgiRouting true -sgwHA true -pgwHA true
+"
+attach="doAttach -numUE 1 -imsi 123456789012345 -pdn-type 4
+"
+detach="doDetach
+"
+traffic="sendAndVerifyTrafficSimMme 123456789012345 5 15.1.1.1 -count 1
+"
+mirror="configNetworkMirrorPgw sgwPgw 
+"
+attach6="doAttach -numUE 1 -imsi 123456789012345 -pdn-type 6
+"
+traffic6="sendAndVerifyTrafficSimMme 123456789012345 5 3FFE::F01:101 -count 1
+"
+reconnect="reconnect
+"
+save="duta exit all
+duta admin save
+dutb exit all
+dutb admin save
+dutc exit all
+dutc admin save
+"
+save2="Dut-A sendCliCommand \\\"admin save\\\"
+Dut-B sendCliCommand \\\"admin save\\\"
+Dut-C sendCliCommand \\\"admin save\\\"
+"
