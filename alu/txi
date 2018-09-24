@@ -1,0 +1,24 @@
+#txw script - usage: txw mvltevm201
+echo "exports/internal/images/i386/iom.tim --> /home/$1/images/i386-iom.tim"
+sshpass -p 'tigris' scp exports/internal/images/i386/iom.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/i386-iom.tim
+echo "exports/internal/images/i386/iom.tim --> /home/$1/images/i386-iom.tim"
+sshpass -p 'tigris' scp exports/internal/images/i386/cpm.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/i386-cpm.tim
+echo "exports/internal/images/i386/both.tim --> /home/$1/images/i386-both.tim"
+sshpass -p 'tigris' scp exports/internal/images/i386/both.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/i386-both.tim
+echo "exports/internal/images/i386/boot.tim --> /home/$1/images/i386-boot.tim"
+sshpass -p 'tigris' scp exports/internal/images/i386/boot.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/i386-boot.tim
+echo "exports/customer/vm/7xxx-i386/sros-vm.vmdk --> /home/$1/images/sros-vm.vmdk"
+sshpass -p 'tigris' scp exports/customer/vm/7xxx-i386/sros-vm.vmdk $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/sros-vm.vmdk
+echo "exports/internal/images/i386/isa-aa.tim --> /home/$1/images/i386-isa-aa.tim"
+sshpass -p 'tigris' scp exports/internal/images/i386/isa-aa.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/i386-isa-aa.tim
+echo "exports/internal/images/i386/vxrom.bin --> /home/$1/images/i386-vxrom.bin"
+sshpass -p 'tigris' scp exports/internal/images/i386/vxrom.bin $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/vxrom.bin
+echo "Get sros-vm.qcow2 image..."
+make/distws.sh -get "exports/customer/vm/7xxx-i386/,*.qcow2"
+echo "exports/customer/vm/7xxx-i386/sros-vm.qcow2 --> /home/$1/images/sros-vm.qcow2"
+sshpass -p 'tigris' scp exports/customer/vm/7xxx-i386/sros-vm.qcow2 $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/sros-vm.qcow2
+echo "exports/internal/images/i386/vmcontainer.qcow2 --> /home/$1/images/i386-vmcontainer.qcow2"
+sshpass -p 'tigris' scp exports/internal/images/i386/vmcontainer.qcow2 $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/i386-vmcontainer.qcow2
+
+
+

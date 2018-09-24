@@ -1,0 +1,24 @@
+#txw script - usage: txw mvltevm201
+echo "exports/internal/images/chile/ipsec.tim --> /home/$1/images/ipsmg.tim"
+sshpass -p 'tigris' scp exports/internal/images/chile/ipsec.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/ipsec.tim
+echo "exports/internal/images/chile/ipsmg.tim --> /home/$1/images/ipsmg.tim"
+sshpass -p 'tigris' scp exports/internal/images/chile/ipsmg.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/ipsmg.tim
+echo "exports/internal/images/chile/ip_reas.tim --> /home/$1/images/ip_reas.tim/"
+sshpass -p 'tigris' scp exports/internal/images/chile/ip_reas.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/ip_reas.tim
+echo "exports/internal/images/chile/bb.tim --> /home/$1/images/bb.tim/"
+sshpass -p 'tigris' scp exports/internal/images/chile/bb.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/bb.tim
+echo "exports/internal/support/setup_cli.cfg --> /home/$1/images/setup_cli.cfg"
+sshpass -p 'tigris' scp exports/internal/support/setup_cli.cfg $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images
+echo "exports/internal/support/teardown_cli.cfg --> /home/$1/images/teardown_cli.cfg"
+sshpass -p 'tigris' scp exports/internal/support/teardown_cli.cfg $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images
+echo "exports/internal/support/hmac-sha1.txt --> /home/$1/images/hmac-sha1.txt"
+sshpass -p 'tigris' scp exports/internal/support/hmac-sha1.txt $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images
+echo "exports/internal/support/dictionary-freeradius.txt --> /home/$1/images/dictionary-freeradius.txt"
+sshpass -p 'tigris' scp exports/internal/support/dictionary-freeradius.txt $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images
+echo "exports/internal/support/timos_features.mk --> /home/$1/images/timos_features.mk"
+sshpass -p 'tigris' scp exports/internal/support/timos_features.mk $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images
+echo "exports/internal/support/codeversion.mk --> /home/$1/images/codeversion.mk"
+sshpass -p 'tigris' scp exports/internal/support/codeversion.mk $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images
+echo "exports/internal/support/YANG.zip --> /home/$1/images/YANG.zip"
+sshpass -p 'tigris' scp exports/internal/management/YANG.zip $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images
+

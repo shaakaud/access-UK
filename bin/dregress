@@ -798,46 +798,135 @@ return($numCPU);
 package runSuite;
 use strict;
 use Cwd;
-my $multiRun = 0;   
-our $vfp = 0;        
-our @express = ( 
+our %packages = (
+"custom" => {
+"suites" => [],
+"hidden" => 1,
+},
+"runtest" => {
+"suites" => [],
+"hidden" => 1,
+},
+"express" => {
+"description" => "Express",
+"suites" => [
 "express-express",
-);
-our @quickonly = ( 
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "lteDefault",
+},
+{
+"sub" => "ismMgV3",
+"phys" => "lteDefault",
+},
+],
+},
+"quickonly" => {
+"description" => "Quick Only",
+"suites" => [
 "mgExpress-quick",
-);
-our @quick = ( 
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "lteDefault",
+},
+{
+"sub" => "ismMgV3",
+"phys" => "lteDefault",
+},
+],
+},
+"quick" => {
+"description" => "Quick",
+"suites" => [
 "mgQuick-quickOnly",
-);
-our @basic = ( 
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "lteDefault",
+},
+{
+"sub" => "ismMgV3",
+"phys" => "lteDefault",
+},
+],
+},
+"basic" => {
+"description" => "Basic",
+"suites" => [
 "express-express",
 "mgQuick-quickOnly",
-);
-our @basic1 = ( 
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "lteDefault",
+},
+{
+"sub" => "ismMgV3",
+"phys" => "lteDefault",
+},
+],
+},
+"basic1" => {
+"description" => "Basic (separated)",
+"suites" => [
 "mgExpress-quickOnly",
 "mgCli-express",
 "mgQuickSgwIcr-quickOnly",
 "mmeGracefulRestart-quickOnly",
 "gaQuick-quickOnly",
-);
-our @vfpBasic = ( 
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "lteDefault",
+},
+{
+"sub" => "ismMgV3",
+"phys" => "lteDefault",
+},
+],
+},
+"vfpBasic" => {
+"description" => "VFP Basic",
+"suites" => [
 "express-express",
 "mgQuick-quickOnly",
-);
-our @general = (
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "lteDefault",
+},
+],
+},
+"general" => {
+"description" => "General",
+"suites" => [
 "lteCallFlows-medium",
 "lteMBCmdSgwPgw-regular",
 "ltePathMgmtSgwPgw-regular",
 "ltePiggybackSgwPgw-regular",
-"gyMidSessionRgChg-regular"
-);
-our @ggsn = (
+"gyMidSessionRgChg-regular",
+],
+},
+"ggsn" => {
+"description" => "GGSN",
+"suites" => [
 "ggsnCallFlows-medium",
 "ggsnIdleSesTimeout-regular",
 "ggsnIdleSesTimeout_GTPv0-regular",
 "ggsnRadIdleSesTimeoutMApn-regular"
-);
-our @pmip = (
+],
+},
+"pmip" => {
+"description" => "PMIP",
+"suites" => [
 "pgwPmipS2aCallFlowsLteEhrpdCombo-regular",
 "pgwPmipS2aQos-regular",
 "pgwPmipS2aCallFlowsHA-regular",
@@ -846,67 +935,100 @@ our @pmip = (
 "pmipPgwRf-regular",
 "ehrpdPgwTests-medium",
 "pgwPmipS2aCallFlows-regular",
-"pgwPmipS2aCallFlowInteractions-regular"
-);
-our @combo =  (
+"pgwPmipS2aCallFlowInteractions-regular",
+],
+},
+"combo" => {
+"description" => "Combo",
+"suites" => [
 "sccgIratCallFlows-regular",
 "sccgIratCallFlowsHA-regular",
 "sccgS11CallFlows-regular",
 "sccgMiscFeatures-regular",
-"sccgS11CallFlowsICR-regular", 
+"sccgS11CallFlowsICR-regular",
 "sccgS2aIratCallFlows-regular",
 "sccgS11CallFlowsICRWithHA-regular ",
-"sccgS11ICRTrafficDetection-regular"
-);
-our @ubreq = (
+"sccgS11ICRTrafficDetection-regular",
+],
+},
+"ubreq" => {
+"description" => "Update Bearer",
+"suites" => [
 "UpdateBearerSgwPgw-regular",
-"lteS4S12nwInit-regular"
-);
-our @dbreq = (
+"lteS4S12nwInit-regular",
+],
+},
+"dbreq" => {
+"description" => "Delete Bearer",
+"suites" => [
 "lteS4S12Vprn-regular",
-"createDeleteDedBearersSgwPgw-regular"
-);
-our @spgwho  = (
+"createDeleteDedBearersSgwPgw-regular",
+],
+},
+"spgwho" => {
+"description" => "SGW/PGW Handovers",
+"suites" => [
 "handoverSgwPgw-regular",
 "s1HandoverSgwPgw-regular",
 "s1HandoverV6SgwPgw-regular",
 "multiplePdnHandover-regular",
-);
-our @sgwrelo =  (
+],
+},
+"sgwrelo" => {
+"description" => "SGW Relocation",
+"suites" => [
 "s1HandoverRelocation-regular",
 "multiApnS1HOReloc-regular",
 "x2HandoverRelocation-regular",
 "multiApnS1HORelocV6-regular",
-"mmeRelocNoSGWReloc-regular"
-);
-our @mmerelo  = (
-"mmeRelocNoSGWRelocHA-regular"
-);
-our @paging = (
+"mmeRelocNoSGWReloc-regular",
+],
+},
+"mmerelo" => {
+"description" => "MME Relocation",
+"suites" => [
+"mmeRelocNoSGWRelocHA-regular",
+],
+},
+"paging" => {
+"description" => "Paging",
+"suites" => [
 "pagingSgwOnly-regular",
 "pagingSgwPgw-regular",
 "pagingMpdn-regular",
 "pagingMpdnIdleToActive-regular",
-"pagingMpdnIdleToActiveHA-regular"
-);
-our @idlesesstimeout = (
+"pagingMpdnIdleToActiveHA-regular",
+],
+},
+"idlesesstimeout" => {
+"description" => "Idle Session Timeout",
+"suites" => [
 "lteRadIdleSesTimeout-regular",
 "pgwGaIdleSesTimeout-regular",
-"lteIdleSesTimeout-regular"
-);
-our @s2b = (
+"lteIdleSesTimeout-regular",
+],
+},
+"s2b" => {
+"description" => "S2b",
+"suites" => [
 "lteS2bCallFlows-regular",
 "s2bLteIRATHandover-regular",
 "s2b3gLteCcauPendingICR-regular",
 "s2bTo3gHoRatWlanICR-regular",
-"pgwS6bS2bVzWCallFlows-extensive"
-);
-our @redicr = (
+"pgwS6bS2bVzWCallFlows-extensive",
+],
+},
+"redicr" => {
+"description" => "Red/ICR",
+"suites" => [
 "mgRedundancyAll-medium",
 "pgwIcrCallFlows-regular",
-"lteGeoRedundancy-medium"
-);
-our @irat = ( 
+"lteGeoRedundancy-medium",
+],
+},
+"irat" => {
+"description" => "IRAT - No EHRPD/LTE handovers",
+"suites" => [
 "gnGxInterRatGprsLte-regular",
 "ggsnUpdatePdp-regular",
 "interRatGprsLteSgwHA-regular",
@@ -914,22 +1036,31 @@ our @irat = (
 "interRatGprsLte-regular",
 "interRatGprsLteMultiBr-regular",
 "s2bLteIRATHandover-regular",
-"s2bLteIRATHoWithHA-regular"
-);
-our @li = (
+"s2bLteIRATHoWithHA-regular",
+],
+},
+"li" => {
+"description" => "LI",
+"suites" =>  [
 "Li_CallFlows-regular",
 "lteLiSgwPgwAll-regular",
 "lteLiGGSN-regular",
 "lteLiGgsnMsisdn-regular",
 "lteLiGgsnMultipleTargets-regular",
-"lteLiSccg-regular"
-);
-our @timeofday = (
+"lteLiSccg-regular",
+],
+},
+"timeofday" => {
+"description" => "Time of Day",
+"suites" => [
 "lteGxTimeOfDay-regular",
 "lteGxTimeOfDayGeoRed-regular",
-"lteGxTimeOfDayScaling-regular"
-);
-our @usage = (
+"lteGxTimeOfDayScaling-regular",
+],
+},
+"usage" => {
+"description" => "Usage Monitoring",
+"suites" => [
 "gxUsgMonitorAll-regular",
 "gxRuleLevelUsageMonitoring-regular",
 "gxRuleLevelUsageMonitoringWithRf-regular",
@@ -938,38 +1069,53 @@ our @usage = (
 "gxTimeBasedUsageMonitoringHA-regular",
 "gxRuleLevelTimeUsageMonitoring-regular",
 "gxUsageMonitoringGeoRed-regular",
-"gxRuleLevelUsageMonitoringGeoRed-regular"
-);
-our @charging = (
+"gxRuleLevelUsageMonitoringGeoRed-regular",
+],
+},
+"charging" => {
+"description" => "Charging (general)",
+"suites" => [
 "chargingAll-medium",
 "lteBasicOnlineCharging-regular",
 "pdnLevelOnlineCharging-regular",
 "lteBasicOnlineOfflineChaStaticPol-regular",
 "ggsnBasicOnlineOfflineChaDynamicPol-regular",
-"onlineChargingDccaVersion2-regular ",
-"lteBasicOnline2-regular "
-);
-our @ocfuiredirect = (
+"onlineChargingDccaVersion2-regular",
+"lteBasicOnline2-regular",
+],
+},
+"ocfuiredirect" => {
+"description" => "Online Charging - FUI Redirect",
+"suites" => [
 "ggsnFUIRedirectDPI-regular",
 "ggsnFUIRedirectStaticPol-regular",
 "lteFUIRedirectDPI-regular",
 "redirectOnlineChargingDPI-regular",
 "cuRedirectOnlineCharging-regular",
-"nonFPTRedirect-regular"
-);
-our @ocfuiterm = (
+"nonFPTRedirect-regular",
+],
+},
+"ocfuiterm" => {
+"description" => "Online Charging - FUI Terminate",
+"suites" => [
 "lteFUITerminate-regular",
 "lteFUITerminateStaticPol-regular",
 "ggsnFUITerminate-regular",
 "ggsnFUITerminateStaticPol-regular",
-"cuTerminateOnlineCharging-regular"
-);
-our @home = (
+"cuTerminateOnlineCharging-regular",
+],
+},
+"home" => {
+"description" => "Home Agent",
+"suites" => [
 "mgHomeAgentCallFlows-regular",
 "mgHaRadiusAuthScenarios-regular",
-"mgHomeAgentOnlineCharging-regular"
-);
-our @epdg = (
+"mgHomeAgentOnlineCharging-regular",
+],
+},
+"epdg" => {
+"description" => "EPDG",
+"suites" => [
 "mgEpdgAll-medium",
 "ePdgICRCallFlows-regular",
 "ePdgWithoutICR-regular",
@@ -980,33 +1126,114 @@ our @epdg = (
 "ePdgRfMultiPdn-regular",
 "ePdgGaChargingProfile-regular",
 "ePdgGaTriggers-regular",
-"ePdgGaMultiPdn-regular"
-);
-our @twag = (
-"mgTwagAll--medium", 
-"twagOpenSSIDBasicCallFlows--medium" 
-);
-our @dslBonding = (
+"ePdgGaMultiPdn-regular",
+],
+},
+"twag" => {
+"description" => "TWAG",
+"suites" => [
+"mgTwagAll--medium",
+"twagOpenSSIDBasicCallFlows--medium",
+],
+},
+"dslBonding" => {
+"description" => "DSL Bonding",
+"suites" => [
 "lteDslBondingCallFlows-regular",
 "lteDslBondingComboGw-regular",
 "lteDslBondingPolicy-regular",
 "lteDslBondingPolicySCCG-regular",
 "lteChargingDslBonding-regular",
-"lteSccgChargingDslBonding-regular"
-);
-our @sponsorData = (
+"lteSccgChargingDslBonding-regular",
+],
+},
+"sponsorData" => {
+"description" => "Sponsor Data",
+"suites" => [
 "pgwGaSponsoredConn-regular",
 "pgwGaStaticSponsoredConnHA-regular",
 "pgwGaAttachDetachICRsponConn-regular",
-"pgwGaAttachDetachICRsponConnOffline-regular"
-);
-our @pco = (
+"pgwGaAttachDetachICRsponConnOffline-regular",
+],
+},
+"pco" => {
+"description" => "PCO",
+"suites" => [
 "ggsnPco-extensive",
 "ltePCOSgwPgw-extensive",
-"configurableGtpv2ExclPCO-regular"
+"configurableGtpv2ExclPCO-regular",
+],
+},
+"ueping" => {
+"description" => "UE Ping",
+"suites" => [
+"mg1205OamUePing--regular",
+"mg1205OamUePingCombo--regular",
+"mg1205OamUePingCombo2Mscp--regular",
+"oamUePingCallflows--regular",
+],
+},
+"dns" => {
+"description" => "DNS",
+"suites" => [
+"ePdgWithoutICR--regular",
+"ePdgDnsWithoutICR--regular",
+"ePdgICRDnsLoadControl--regular",
+"ltePcscfRecovery--regular",
+"ePdgICRDnsPgwScaling--regular",
+],
+},
+"cups" => {
+"description" => "CUPS",
+"suites" => [
+"cupsBasicCallFlows-regular",
+"cupsBasicCharging-regular",
+"cupsApnMgr-regular",
+"cupsBasicLi-regular",
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "cupsThreeDut",
+},
+],
+},
+"cupsBasic" => {
+"description" => "CUPS BASIC",
+"suites" => [
+"cupsBasicCallFlows-regular",
+"cupsPolicySanity-regular",
+"cupsBasicCharging-regular",
+"cupsBasicLi-regular",
+"cupsBasicChargingImsPgw-regular",
+"cupsApnMgr-regular",
+"cupsUPSelection-regular",
+"cupsPagingUpBuffering-regular",
+],
+"topos" => [
+{
+"sub" => "vfp",
+"phys" => "cupsThreeDut",
+},
+],
+},
+"cupsDb" => {
+"description" => "CUPS DB",
+"suites" => [
+"cupsDbBasicSuite-regular",
+"cupsBasicChargingCdb-regular",
+"cupsBasicChargingImsPgwCdb-regular",
+"cupsBasicCallFlows-regular",
+],
+"topos" => [
+{
+"sub" => "dbNK",
+"phys" => "cupsThreeDut",
+},
+],
+"addargs" => "-preGashCmd gash/tools/cmg/copycmgimages.sh",
+},
 );
-our @custom = ();
-our @runtest = ();
 our $testflag = 0;
 my $printOnly = 0;
 my $sys = new sysInfo;
@@ -1027,11 +1254,11 @@ my @values = split(',', $pkg);
 my $num = $#values + 1;
 printf("Num of packages to regress $num\n");
 for my $cnt (0 .. $#values ) {
-printf("\n\tRegress Package: $values[$cnt]\n"); 
+printf("\n\tRegress Package: $values[$cnt]\n");
 do_schedule($values[$cnt]);
 }
 } else {
-printf("\n\tRegress Package: $pkg\n"); 
+printf("\n\tRegress Package: $pkg\n");
 do_schedule($pkg);
 }
 unless( $main::dryOnly ) {
@@ -1043,185 +1270,53 @@ $fm->wrapUp();
 sub do_schedule
 {
 my $pkg = shift;
-if( $pkg eq "express" ) { 
-if( $main::testTeam == 1 ) {
-doitTestTeam(@express);
-} else {
-$multiRun = 1;
-doit(@express);
-$multiRun = 0;
-}
-return;
-}
-if( $pkg eq "quickonly" ) { 
-if( $main::testTeam == 1 ) {
-doitTestTeam(@quickonly);
-} else {
-$multiRun = 1;
-doit(@quickonly);
-$multiRun = 0;
-}
-return;
-}
-if( $pkg eq "quick" ) { 
-if( $main::testTeam == 1 ) {
-doitTestTeam(@quick);
-} else {
-$multiRun = 1;
-doit(@quick);
-$multiRun = 0;
-}
-return;
-}
-if( $pkg eq "basic" ) { 
-if( $main::testTeam == 1 ) {
-doitTestTeam(@basic);
-} else {
-$multiRun = 1;
-doit(@basic);
-$multiRun = 0;
-}
-return;
-}
-if( $pkg eq "basic1" ) { 
-if( $main::testTeam == 1 ) {
-doitTestTeam(@basic1);
-} else {
-$multiRun = 1;
-doit(@basic1);
-$multiRun = 0;
-}
-return;
-}
-if( $pkg eq "vfpbasic" ) { 
-if( $main::testTeam == 1 ) {
-doitTestTeam(@vfpBasic);
-} else {
-$vfp = 1;
-doit(@vfpBasic);
-$vfp = 0;
-}
-return;
-}
-if( $pkg eq "general" ) { 
-doit(@general);
-return;
-}
-if( $pkg eq "ggsn" ) { 
-doit(@ggsn);
-return;
-}
-if( $pkg eq "pmip" ) { 
-doit(@pmip);
-return;
-}
-if( $pkg eq "combo" ) { 
-doit(@combo);
-return;
-}
-if( $pkg eq "ubreq" ) { 
-doit(@ubreq);
-return;
-}
-if( $pkg eq "dbreq" ) { 
-doit(@dbreq);
-return;
-}
-if( $pkg eq "spgwho" ) { 
-doit(@spgwho); 
-return;
-}
-if( $pkg eq "sgwrelo" ) { 
-doit(@sgwrelo);
-return;
-}
-if( $pkg eq "mmerelo" ) { 
-doit(@mmerelo);
-return;
-}
-if( $pkg eq "paging" ) { 
-doit(@paging);
-return;
-}
-if( $pkg eq "idlesesstimeout" ) { 
-doit(@idlesesstimeout);
-return;
-}
-if( $pkg eq "s2b" ) { 
-doit(@s2b);
-return;
-}
-if( $pkg eq "redicr" ) { 
-doit(@redicr);
-return;
-}
-if( $pkg eq "irat" ) { 
-doit(@irat);
-return;
-}
-if( $pkg eq "li" ) { 
-doit(@li);
-return;
-}
-if( $pkg eq "timeofday" ) { 
-doit(@timeofday);
-return;
-}
-if( $pkg eq "usage" ) { 
-doit(@usage);
-return;
-}
-if( $pkg eq "charging" ) { 
-doit(@charging);
-return;
-}
-if( $pkg eq "ocfuiredirect" ) { 
-doit(@ocfuiredirect);
-return;
-}
-if( $pkg eq "ocfuiterm" ) { 
-doit(@ocfuiterm);
-return;
-}
-if( $pkg eq "home" ) { 
-doit(@home);
-return;
-}
-if( $pkg eq "epdg" ) { 
-doit(@epdg);
-return;
-}
-if( $pkg eq "twag" ) { 
-doit(@twag);
-return;
-}
-if( $pkg eq "dslBonding" ) { 
-doit(@dslBonding);
-return;
-}
-if( $pkg eq "sponsorData" ) { 
-doit(@sponsorData);
-return;
-}
-if( $pkg eq "pco" ) { 
-doit(@pco);
-return;
-}
-if( $pkg eq "custom" ) { 
-doit(@custom);
-return;
-}
-if( $pkg eq "runtest" ) { 
-doit(@runtest);
-return;
-}
+unless (exists $packages{$pkg}) {
 printf("Unknown package $pkg\n");
+return;
+}
+my @suites = @{$packages{$pkg}{"suites"}};
+if (exists $packages{$pkg}{"addargs"}) {
+$main::addargs.= " $packages{$pkg}{'addargs'} ";
+}
+if( $main::testTeam == 1 ) {
+doitTestTeam(@suites);
+return;
+}
+my @topos;
+if (exists $packages{$pkg}{"topos"}) {
+@topos = @{$packages{$pkg}{"topos"}};
+} else {
+@topos = (
+{
+"sub" => $main::subTopology,
+"phys"=> $main::physTopology,
+},
+);
+}
+my %doneTopo = ();
+for my $cnt (0 .. $#topos) {
+my $topo = $topos[$cnt];
+my $topoParams = "";
+if ($main::subTopChosen) {
+$topo->{"sub"} = $main::subTopology;
+}
+if ($main::physTopChosen) {
+$topo->{"phys"} = $main::physTopology;
+}
+$topoParams = "$topo->{'sub'} $topo->{'phys'}";
+unless (exists $doneTopo{$topoParams}) {
+$doneTopo{$topoParams} = 1;
+doit(\@suites, $topo);
+}
+}
 }
 my $testbed = "";
 sub doit
 {
-my @array = @_;
-my $numsuites = scalar(@array);
+my $suitesRef = shift;
+my $topoRef = shift;
+my @suites = @{$suitesRef};
+my $numsuites = scalar(@suites);
 my $dir = cwd();
 my $strs = "";
 my $str = "";
@@ -1234,17 +1329,9 @@ $strs = "Suites";
 $str = "Suite";
 }
 printf("\t\tNum of $strs to regress $numsuites\n");
-for my $cnt (0 .. $#array) {
-my @values = ();
-my $suite = "";
-my $runlevel = "";
+for my $cnt (0 .. $#suites) {
 my $regress = "regress";
-@values = split('-', $array[$cnt]);
-$suite = @values[0]; 
-$runlevel = @values[1]; #get runlevel
-if( $runlevel eq "" ) {
-$runlevel = "regular";
-}
+my ($suite, $runlevel) = getTestAndRunLevel($suites[$cnt]);
 if( $printOnly ) {
 my $num = $cnt + 1;
 printf("\t\t$num: $str: $suite\trunLevel: $runlevel\n");
@@ -1256,47 +1343,18 @@ unless( $testbed ) {
 printf("\t\tAuto assign testbed . . .\n");
 $testbed = testBeds::getTestBed("ANY");
 }
-} 
+}
 chdir($main::root);
-if( $multiRun == 1 and not $main::subTopChosen) {
-if( $testBeds::select ) {
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
-} else {
-if( testBeds::isVmAllowed() ) {
-$testbed = testBeds::getTestBed("VM");
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
-#$testbed = testBeds::getTestBed("VM");
-#my $origTopo = $main::subTopology;
-#$main::subTopology = "vfp";
-#runRegressCmd($suite, $runlevel, $testbed, "run$str");
-#$main::subTopology = $origTopo;
-$testbed = testBeds::getTestBed("VM");
-my $origTopo = $main::subTopology;
-$main::subTopology = "ismMgV3";
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
-$main::subTopology = $origTopo;
-}
-#if( testBeds::isSimAllowed() ) {
-#$testbed = testBeds::getTestBed("SIM");
-#runRegressCmd($suite, $runlevel, $testbed, "run$str");
-#}
-if( testBeds::isHwAllowed() ) {
-$testbed = testBeds::getTestBed("HW");
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
-}
-}
-} else {
 unless( $testBeds::select ) {
-if( $vfp == 1 ) {
+if( $topoRef->{"sub"} eq "vfp" ) {
 $testbed = testBeds::getTestBed("VM");
 } else {
 $testbed = testBeds::getTestBed("ANY");
 }
 }
-my $rc = runRegressCmd($suite, $runlevel, $testbed, "run$str");
+my $rc = runRegressCmd($suite, $runlevel, $testbed, "run$str", $topoRef);
 if( $rc != 0 ) {
 $cnt = $cnt - 1;
-}
 }
 }
 }
@@ -1310,31 +1368,27 @@ my $strs = "Suites";
 my $str = "Suite";
 printf("\t\tNum of $strs to regress $numsuites\n");
 for my $cnt (0 .. $#array) {
-my @values = ();
-my $suite = "";
-my $runlevel = "";
-@values = split('-', $array[$cnt]);
-$suite = @values[0]; 
-$runlevel = @values[1]; #get runlevel
+my ($suite, $runlevel) = getTestAndRunLevel($array[$cnt]);
 if( $printOnly ) {
 printf("\t$str: $suite Runlevel $runlevel\n");
 } else {
+my %topo = ();
 $testbed = testBeds::getTestBed("VM");
-$main::subTopology = "";
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
+$topo{"sub"} = "";
+runRegressCmd($suite, $runlevel, $testbed, "run$str", \%topo);
 $testbed = testBeds::getTestBed("VM");
-$main::subTopology = "ismMgB";
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
+$topo{"sub"} = "ismMgB";
+runRegressCmd($suite, $runlevel, $testbed, "run$str", \%topo);
 $testbed = testBeds::getTestBed("SIM");
-$main::subTopology = "";
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
+$topo{"sub"} = "";
+runRegressCmd($suite, $runlevel, $testbed, "run$str", \%topo);
 $testbed = testBeds::getTestBed("SIM");
-$main::subTopology = "ismMgB";
-runRegressCmd($suite, $runlevel, $testbed, "run$str");
-$main::subTopology = "";
-runRegressCmd($suite, $runlevel, "mvltetb3", "run$str");
-$main::subTopology = "ismMgB";
-runRegressCmd($suite, $runlevel, "mvltetb4", "run$str");
+$topo{"sub"} = "ismMgB";
+runRegressCmd($suite, $runlevel, $testbed, "run$str", \%topo);
+$topo{"sub"} = "";
+runRegressCmd($suite, $runlevel, "mvltetb3", "run$str", \%topo);
+$topo{"sub"} = "ismMgB";
+runRegressCmd($suite, $runlevel, "mvltetb4", "run$str", \%topo);
 }
 if ($numsuites > 1 ) {
 testBeds::findTestBeds();
@@ -1347,6 +1401,7 @@ my $suite = shift;
 my $runlevel = shift;
 my $testbed = shift;
 my $run = shift;
+my $topo = shift;
 if( $testbed eq "" ) {
 printf("Invalid Testbed [$testbed]\n");
 return(-1);
@@ -1358,11 +1413,11 @@ $regress = "$main::root/regress";
 my $cmd = "";
 if( $suite eq "express" ) {
 $cmd = "$regress -testbed $testbed -runLevel $runlevel -reason \"$main::reason\" ";
-if( $main::testTeam == 1 ) { 
+if( $main::testTeam == 1 ) {
 $main::smgrTest = 0;
 $main::acctTest = 0;
 } else {
-if( $main::subTopology eq "" ) { 
+if( $topo->{"sub"} eq "" ) {
 $main::smgrTest = 0;
 $main::acctTest = 0;
 }
@@ -1389,20 +1444,19 @@ die("-endPriority is $main::endPriority - error\n");
 $cmd = "$regress -testbed $testbed -runLevel $runlevel -$run $suite -reason \"$main::reason\" ";
 }
 if( $suite eq "chargingAll" ) {
-$cmd .= "-subTopology mgScalingV2 ";
-} elsif( $vfp == 1 ) {
-$cmd .= "-subTopology vfp ";
-} elsif( $suite =~ /twag/ ) {
+$cmd .= "-subTopology mgScalingV3 ";
+} elsif ( $suite =~ /twag/ ) {
 $cmd .= "-subTopology plasmaMgV3 ";
-} else {
-if( $main::subTopology ne "" ) { 
-$cmd .= "-subTopology $main::subTopology ";
+} elsif ( $topo->{"sub"} ne "" ) {
+$cmd .= "-subTopology $topo->{'sub'} ";
 }
+if ($topo->{"phys"}  ne "") {
+$cmd .= "-physTopology $topo->{'phys'} ";
 }
-if( $main::testTeam == 1 || main::globalRoot() ) { 
+if( $main::testTeam == 1 || main::globalRoot() ) {
 $cmd .= "-useimages /usr/global/images/7750mg/$main::release/latest/ ";
-if( $main::customGash ne "" ) { 
-$cmd .= "-customGash $main::customGash "; 
+if( $main::customGash ne "" ) {
+$cmd .= "-customGash $main::customGash ";
 }
 $cmd .= "-emailMode result ";
 } else {
@@ -1428,7 +1482,7 @@ if($main::current == 1 ) {
 }
 $cmd .= "-nobuild ";
 }
-if( $main::regressDbg == 1 ) { 
+if( $main::regressDbg == 1 ) {
 $cmd .= "-debugOnFailure tkcon -exitOnFailure true ";
 }
 if( $main::addargs ) {
@@ -1439,21 +1493,21 @@ $cmd .= "$main::addargs ";
 if($main::dflag) { printf("$cmd\n"); }
 unless ( $fm->fork() ) {
 if( $main::dryOnly ) {
-printf("\t\t[Pid: $$] Scheduling $suite/$runlevel/$main::subTopology @ $testbed ..");
-printf(".. Dry\n");            
+printf("\t\t[Pid: $$] Scheduling $suite/$runlevel/$topo->{'sub'}/$topo->{'phys'} @ $testbed ..\n");
+printf("\t\t\t$cmd .. Dry\n");
 exit(0);
 } else {
 my $rfile = "/tmp/regress$$.status";
-printf("\t\t[Pid: $$] Scheduling $suite/$runlevel/$main::subTopology @ $testbed ..\n");
+printf("\t\t[Pid: $$] Scheduling $suite/$runlevel/$topo->{'sub'}/$topo->{'phys'} @ $testbed ..\n");
 system( "$cmd > $rfile 2>&1" );
 if( -e $rfile ) {
 my $status = `cat $rfile | grep "Regression test submitted"`;
 if ($status) {
-printf("\t\t[Pid: $$] Done $suite/$runlevel/$main::subTopology @ $testbed\n");
+printf("\t\t[Pid: $$] Done $suite/$runlevel/$topo->{'sub'}/$topo->{'phys'} @ $testbed\n");
 unlink($rfile);
 exit(0);
 } else {
-printf("\t\t[Pid: $$] Failed $suite/$runlevel/$main::subTopology @ $testbed\n");
+printf("\t\t[Pid: $$] Failed $suite/$runlevel/$topo->{'sub'}/$topo->{'phys'} @ $testbed\n");
 if( $main::dflag ) {
 printf("Regress Output:\n");
 system("cat $rfile");
@@ -1468,41 +1522,16 @@ exit(-1);
 sub dumpPackages
 {
 my $num = 1;
-printf("\tNum\tPackage Desc.\t\tCode\n");
-printf("\t--------------------------------------------------\n");
-printf("\t$num\tExpress\t\t\texpress\n"); $num++;
-printf("\t$num\tQuick Only\t\tquickonly\n"); $num++;
-printf("\t$num\tQuick\t\t\tquick\n"); $num++;
-printf("\t$num\tBasic\t\t\tbasic (express & quick)\n"); $num++;
-printf("\t$num\tBasic1\t\t\tbasic1 (Split express & quick)\n"); $num++;
-printf("\t$num\tvfpBasic\t\tvfpbasic\n"); $num++;
-printf("\t$num\tGeneral\t\t\tgeneral\n"); $num++;
-printf("\t$num\tGGSN\t\t\tggsn\n"); $num++;
-printf("\t$num\tPMIP\t\t\tpmip\n"); $num++;
-printf("\t$num\tCombo\t\t\tcombo\n"); $num++;
-printf("\t$num\tUpdate Brearer\t\tubreq\n"); $num++;
-printf("\t$num\tDelete Brearer\t\tdbreq\n"); $num++;
-printf("\t$num\tSGW/PGW Handovers\tspgwho\n");  $num++;
-printf("\t$num\tSGW Relocation\t\tsgwrelo\n"); $num++;
-printf("\t$num\tMME Relocation \t\tmmerelo \n"); $num++;
-printf("\t$num\tPaging\t\t\tpaging\n"); $num++;
-printf("\t$num\tIdle Session Timeout\tidlesesstimeout\n"); $num++;
-printf("\t$num\tS2b\t\t\ts2b\n"); $num++;
-printf("\t$num\tRed/ICR\t\t\tredicr\n"); $num++;
-printf("\t$num\tIRAT No EHRPD/LTE HO\tirat\n"); $num++;
-printf("\t$num\tLI\t\t\tli\n"); $num++;
-printf("\t$num\tTime of Day\t\ttimeofday\n"); $num++;
-printf("\t$num\tUsage Monitoring\tusage\n"); $num++;
-printf("\t$num\tCharging (general)\tcharging\n"); $num++;
-printf("\t$num\tOC - FUI Redirect\tocfuiredirect\n"); $num++;
-printf("\t$num\tOC - FUI Terminate\tocfuiterm\n"); $num++;
-printf("\t$num\tHome Agent\t\thome\n"); $num++;
-printf("\t$num\tePDG\t\t\tepdg\n"); $num++;
-printf("\t$num\tTWAG\t\t\ttwag\n"); $num++;
-printf("\t$num\tPCO\t\t\tpco\n"); $num++;
-printf("\t$num\tSponsor Data\t\tsponsorData\n"); $num++;
-printf("\t$num\tDsl Bonding\t\tdslBonding\n"); $num++;
-printf("\t--------------------------------------------------\n");
+printf("\tNum\t%-35s\tCode\n", "Package Desc.");
+printf("\t-------------------------------------------------------------\n");
+foreach my $pkg (sort keys %packages) {
+if (defined $packages{$pkg}{"hidden"}) {
+next;
+}
+printf("\t$num\t%-35s\t$pkg\n", $packages{$pkg}{"description"});
+$num++;
+}
+printf("\t-------------------------------------------------------------\n");
 }
 sub dumpPkgDetails
 {
@@ -1515,9 +1544,25 @@ printf("Package $main::package:\n");
 $printOnly = 1;
 scheduleRegress();
 }
+sub getTestAndRunLevel
+{
+my $testAndLevel = shift;
+my $test = "";
+my $level = "";
+my @values = split('-', $testAndLevel);
+if (scalar(@values) > 1) {
+$level = $values[-1];
+splice(@values, -1, 1);
+$test = join("-", @values);
+} else {
+$test = $values[0];
+$level = "regular";
+}
+return ($test, $level);
+}
 1;
 package main;
-my $version="v33.9";
+my $version="v34.2";
 use strict;
 use Cwd;
 our $dflag = 0;
@@ -1528,13 +1573,15 @@ our $vmonly = 0;
 our $allowhw = 0;   
 our $hwonly = 0;    
 our $simonly = 0;   
-our $smgrTest = 1;  
+our $smgrTest = 0;  
 our $acctTest = 1;  
 our $latest = 0;    
 our $current = 0;    
 our $ptrCheck = 0;    
-our $subTopology = "ismMgB";    
+our $subTopology = "ismMgV3";    
 our $subTopChosen = 0; 
+our $physTopology = "lteDefault"; 
+our $physTopChosen = 0; 
 our $regressDbg = 0;    
 our $startPriority = 0;    
 our $endPriority = 0;    
@@ -1553,7 +1600,7 @@ our $release = "0.0";
 parseArgs();
 unless( $package ) {
 unless( $showtb ) {
-printf("Nothing to run\n"); 
+printf("Nothing to run\n");
 printf("For help, Enter: $0 -h\n");
 exit;
 }
@@ -1604,7 +1651,7 @@ if( $dirs[$index - 1] =~ /$dir/ ) {
 $root = $dirs[$index - 1];
 if( $dflag ) {printf("WS: $root\n");}
 return;
-} 
+}
 $index++;
 }
 }
@@ -1646,7 +1693,7 @@ sub globalRoot
 {
 if( $root eq "/usr/global/bin" ) {
 return(1);
-} 
+}
 return(0);
 }
 sub setSite
@@ -1676,8 +1723,8 @@ sub setServers
 {
 my $input = shift;
 if ($input eq "MtnView") {
-$server = "alphatest.mv.usa.alcatel.com";
-$login = "alphatest";
+$server = "mvltevm01.us.alcatel-lucent.com";
+$login = "mvltevm01";
 $passwd = "tigris";
 return;
 }
@@ -1686,12 +1733,12 @@ $server = "baltehwrtb01.lab.sk.alcatel-lucent.com";
 if( testBeds::_isAlive($server) ) {
 $login = "baltehwrtb01";
 } else {
-printf("$server down - trying again\n"); 
+printf("$server down - trying again\n");
 $server = "baltehwrtb02.lab.sk.alcatel-lucent.com";
 if( testBeds::_isAlive($server) ) {
 $login = "baltehwrtb02";
 } else {
-die("Can not get Test Bed status - $server down\n"); 
+die("Can not get Test Bed status - $server down\n");
 }
 }
 $passwd = "tigris";
@@ -1721,6 +1768,12 @@ sub getCvsTag
 my $cvsfile = "$main::root/CVS/Tag";
 my $lab = "";
 my $data = `git symbolic-ref --short HEAD`;
+unless ($data =~ /TiMOS-MG_/) {
+$data = `git for-each-ref --format='%(upstream:short)' \$(git symbolic-ref -q HEAD)`;
+if ($data =~ /(TiMOS-MG_.*)/) {
+$data = $1;
+}
+}
 chomp($data);
 $data =~ s/TiMOS-MG_//g;
 $data =~ s/_current//g;
@@ -1733,7 +1786,7 @@ sub parseArgs
 my @T = @ARGV;
 my $argTest = 0;
 if ( scalar @T == 0 ) {
-printf("Must supply one or more parameters\n"); 
+printf("Must supply one or more parameters\n");
 printf("For more help, Enter: $0 -h\n");
 exit(0);
 }
@@ -1766,11 +1819,11 @@ $iput =~ s/\s+//g;
 my @values = split(',', $iput);
 for my $cnt (0 .. $#values ) {
 if($dflag) { printf("Suite-RunLevel: $values[$cnt]\n"); }
-push(@runSuite::custom, $values[$cnt]);
+push(@{$runSuite::packages{"custom"}{"suites"}}, $values[$cnt]);
 }
 } else {
 if($dflag) { printf("Suite-RunLevel: $iput\n"); }
-push(@runSuite::custom, $iput);
+push(@{$runSuite::packages{"custom"}{"suites"}}, $iput);
 }
 $package = "custom";
 next;
@@ -1785,14 +1838,8 @@ my @values = split(',', $iput);
 for my $cnt (0 .. $#values ) {
 my $testRun = $values[$cnt];
 if($dflag) { printf("Test-RunLevel: $testRun\n"); }
-my @tmp = split('-', $testRun);
-my $test = $tmp[0];
-my $runLvl = $tmp[1];
-if( $runLvl eq "" ) {
-$runLvl = "regular";
-}
-#printf("$test $runLvl - ");
-unless( $comboTest{$runLvl} ) { 
+my ($test, $runLvl) = runSuite::getTestAndRunLevel($values[$cnt]);
+unless( $comboTest{$runLvl} ) {
 $comboTest{$runLvl} = $test;
 } else {
 $comboTest{$runLvl} = $comboTest{$runLvl}." $test";
@@ -1800,12 +1847,12 @@ $comboTest{$runLvl} = $comboTest{$runLvl}." $test";
 #printf(" $comboTest{$runLvl}\n");
 }
 foreach my $key (keys %comboTest ) {
-push(@runSuite::runtest, "$comboTest{$key}-$key");
+push(@{$runSuite::packages{"runtest"}{"suites"}}, "$comboTest{$key}-$key");
 #printf("Adding $comboTest{$key}-$key\n");
 }
 } else {
 if($dflag) { printf("test-RunLevel: $iput\n"); }
-push(@runSuite::runtest, $iput);
+push(@{$runSuite::packages{"runtest"}{"suites"}}, $iput);
 }
 $package = "runtest";
 $runSuite::testflag = 1;
@@ -1970,6 +2017,11 @@ if ( $a eq "-all" ) {
 $testBeds::allowAllTb = 1;
 next;
 }
+if ( $a eq "-phys" ) {
+$physTopology = shift(@T);
+$physTopChosen = 1;
+next;
+}
 die("Unknown Command Line Option: '$a'\n");
 }
 }
@@ -1997,7 +2049,8 @@ printf("\t-v1: Do not use subTopology option\n");
 printf("\t-v2: Use subTopology ismMgB (Default)\n");
 printf("\t-v3: Use subTopology ismMgV3\n");
 printf("\t-vfp: Use subTopology vfp\n");
-printf("\t-sub <subtopology>: Provide subtopology\n");
+printf("\t-sub <subTopology>: Provide subTopology\n");
+printf("\t-phys <physTopology>: Provide physTopology\n");
 printf("\t-vm : If used, only VM testbeds will used\n");
 printf("\t-hw : If used, only HW testbeds will used\n");
 printf("\t-sim : If used, only SIM testbeds will used\n");

@@ -125,7 +125,7 @@ alias cpm="cd lte_gtp"
 alias gtp="cd lte_gtp"
 alias mscp="cd lte_mscp"
 
-express () { regress -testbed $1 -runLevel express -nobuild; }
+#express () { regress -testbed $1 -runLevel express -nobuild; }
 regular () { regress -testbed $1 -runLevel regular -nobuild -runSuite $2; }
 i386 () { cd bin/7xxx-i386/
           cp iom.tim i386-iom.tim

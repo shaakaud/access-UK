@@ -1,52 +1,5 @@
 #txw script - usage: txw mvltevm201
-echo "exports/internal/images/i386/iom.tim --> /home/$1/images/i386-iom.tim"
-sshpass -p 'tigris' scp exports/internal/images/i386/iom.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/i386-iom.tim
-echo "exports/internal/images/i386/iom.tim --> /home/$1/images/i386-iom.tim"
-sshpass -p 'tigris' scp exports/internal/images/i386/cpm.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/i386-cpm.tim
-echo "exports/internal/images/i386/both.tim --> /home/$1/images/i386-both.tim"
-sshpass -p 'tigris' scp exports/internal/images/i386/both.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/i386-both.tim
-echo "exports/internal/images/i386/boot.tim --> /home/$1/images/i386-boot.tim"
-sshpass -p 'tigris' scp exports/internal/images/i386/boot.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/i386-boot.tim
-echo "exports/customer/vm/7xxx-i386/sros-vm.qcow2 --> /home/$1/images/sros-vm.qcow2"
-sshpass -p 'tigris' scp exports/customer/vm/7xxx-i386/sros-vm.qcow2 $1@$1.us.alcatel-lucent.com:/home/$1/images/sros-vm.qcow2
-echo "exports/internal/images/i386/vmcontainer.qcow2 --> /home/$1/images/i386-vmcontainer.qcow2"
-sshpass -p 'tigris' scp exports/internal/images/i386/vmcontainer.qcow2 $1@$1.us.alcatel-lucent.com:/home/$1/images/i386-vmcontainer.qcow2
-echo "exports/customer/vm/7xxx-i386/sros-vm.vmdk --> /home/$1/images/sros-vm.vmdk"
-sshpass -p 'tigris' scp exports/customer/vm/7xxx-i386/sros-vm.vmdk $1@$1.us.alcatel-lucent.com:/home/$1/images/sros-vm.vmdk
-echo "exports/internal/images/i386/isa-aa.tim --> /home/$1/images/i386-isa-aa.tim"
-sshpass -p 'tigris' scp exports/internal/images/i386/isa-aa.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/i386-isa-aa.tim
-echo "exports/internal/images/i386/vxrom.bin --> /home/$1/images/i386-vxrom.bin"
-sshpass -p 'tigris' scp exports/internal/images/i386/vxrom.bin $1@$1.us.alcatel-lucent.com:/home/$1/images/vxrom.bin
-echo "exports/internal/images/hops/iom.tim --> /home/$1/images/iom.tim"
-sshpass -p 'tigris' scp exports/internal/images/hops/iom.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/iom.tim
-echo "exports/internal/images/hops/cpm.tim --> /home/$1/images/cpm.tim"
-sshpass -p 'tigris' scp exports/internal/images/hops/cpm.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/cpm.tim
-echo "exports/internal/images/hops/both.tim --> /home/$1/images/both.tim"
-sshpass -p 'tigris' scp exports/internal/images/hops/both.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/both.tim
-echo "exports/internal/images/hops/boot.tim --> /home/$1/images/boot.tim"
-sshpass -p 'tigris' scp exports/internal/images/hops/boot.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/boot.tim
-echo "exports/internal/images/hops/support.tim --> /home/$1/images/support.tim"
-sshpass -p 'tigris' scp exports/internal/images/hops/support.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/support.tim
-echo "exports/internal/images/chile64/ipsec.tim --> /home/$1/images/ipsmg.tim"
-sshpass -p 'tigris' scp exports/internal/images/chile64/ipsec.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/ipsec.tim
-echo "exports/internal/images/chile64/ipsmg.tim --> /home/$1/images/ipsmg.tim"
-sshpass -p 'tigris' scp exports/internal/images/chile64/ipsmg.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/ipsmg.tim
-echo "exports/internal/images/chile64/ip_reas.tim --> /home/$1/images/ip_reas.tim/"
-sshpass -p 'tigris' scp exports/internal/images/chile64/ip_reas.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/ip_reas.tim
-echo "exports/internal/images/chile64/bb.tim --> /home/$1/images/bb.tim/"
-sshpass -p 'tigris' scp exports/internal/images/chile64/bb.tim $1@$1.us.alcatel-lucent.com:/home/$1/images/bb.tim
-echo "exports/internal/support/setup_cli.cfg --> /home/$1/images/setup_cli.cfg"
-sshpass -p 'tigris' scp exports/internal/support/setup_cli.cfg $1@$1.us.alcatel-lucent.com:/home/$1/images
-echo "exports/internal/support/teardown_cli.cfg --> /home/$1/images/teardown_cli.cfg"
-sshpass -p 'tigris' scp exports/internal/support/teardown_cli.cfg $1@$1.us.alcatel-lucent.com:/home/$1/images
-echo "exports/internal/support/hmac-sha1.txt --> /home/$1/images/hmac-sha1.txt"
-sshpass -p 'tigris' scp exports/internal/support/hmac-sha1.txt $1@$1.us.alcatel-lucent.com:/home/$1/images
-echo "exports/internal/support/dictionary-freeradius.txt --> /home/$1/images/dictionary-freeradius.txt"
-sshpass -p 'tigris' scp exports/internal/support/dictionary-freeradius.txt $1@$1.us.alcatel-lucent.com:/home/$1/images
-echo "exports/internal/support/timos_features.mk --> /home/$1/images/timos_features.mk"
-sshpass -p 'tigris' scp exports/internal/support/timos_features.mk $1@$1.us.alcatel-lucent.com:/home/$1/images
-echo "exports/internal/support/codeversion.mk --> /home/$1/images/codeversion.mk"
-sshpass -p 'tigris' scp exports/internal/support/codeversion.mk $1@$1.us.alcatel-lucent.com:/home/$1/images
-echo "exports/internal/support/YANG.zip --> /home/$1/images/YANG.zip"
-sshpass -p 'tigris' scp exports/internal/management/YANG.zip $1@$1.us.alcatel-lucent.com:/home/$1/images
+~/access-UK/alu/txh $1
+~/access-UK/alu/txcmn $1
+~/access-UK/alu/txi $1
 

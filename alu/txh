@@ -1,0 +1,12 @@
+#txw script - usage: txw mvltevm201
+echo "exports/internal/images/hops/iom.tim --> /home/$1/images/iom.tim"
+sshpass -p 'tigris' scp exports/internal/images/hops/iom.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/iom.tim
+echo "exports/internal/images/hops/cpm.tim --> /home/$1/images/cpm.tim"
+sshpass -p 'tigris' scp exports/internal/images/hops/cpm.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/cpm.tim
+echo "exports/internal/images/hops/both.tim --> /home/$1/images/both.tim"
+sshpass -p 'tigris' scp exports/internal/images/hops/both.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/both.tim
+echo "exports/internal/images/hops/boot.tim --> /home/$1/images/boot.tim"
+sshpass -p 'tigris' scp exports/internal/images/hops/boot.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/boot.tim
+echo "exports/internal/images/hops/support.tim --> /home/$1/images/support.tim"
+sshpass -p 'tigris' scp exports/internal/images/hops/support.tim $1@$1.mvcalab.us.alcatel-lucent.com:/home/$1/images/support.tim
+
