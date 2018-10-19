@@ -122,3 +122,6 @@ alias cvsmod='cvsrw --cvs'
 #GIT related
 alias npgit='git --no-pager'
 alias lg='/home/udayakut/software/git_2.10.2/bin/git'
+
+#versa
+alias img='cd ~/images/'
