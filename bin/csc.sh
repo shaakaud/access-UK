@@ -1,17 +1,17 @@
 #! /bin/sh
 
-if [ ! -d panos ] ; then
-  echo "no panos dir found here"
+if [ ! -d flexvnf ] ; then
+  echo "no flexvnf dir found here"
   exit 1
 fi
 
 LIST_FILE=cscope.files
 
 echo -n "Generating files list .."
-(cd panos && git ls-files) | \
-    egrep -i '\.([chlys](xx|pp)*|cc|hh|tcl|inc)$' | \
+(cd flexvnf && git ls-files) | \
+    egrep -i '\.([chlys](xx|pp)*|cc|hh|tcl|py)$' | \
     sed -e '/\/CVS\//d' -e '/\/RCS\//d' -e 's/^\.\///' -r -e '/^(lib|bin|deps|objs|\.git|\.hg)\//d' | \
-    sort | awk ' {print "panos/" $0 } ' > $LIST_FILE
+    sort | awk ' {print "flexvnf/" $0 } ' > $LIST_FILE
 echo "done"
 
 rm -f tmpcsc*

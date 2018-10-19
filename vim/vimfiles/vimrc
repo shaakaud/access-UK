@@ -33,15 +33,15 @@ set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
 :map <C-Left> :cp<CR>
 
 "Tells where to search for tags
-set tags=./tags,tags;/home/udayakut
+set tags=./tags,tags;/home/udaytj
 
 "Taglist settings
 :map <C-L> :Tlist<CR>
-""let Tlist_Ctags_Cmd="/home/udayakut/bin/ctags"
+""let Tlist_Ctags_Cmd="~/bin/ctags"
 if has("win32unix")
     let Tlist_Ctags_Cmd="/usr/local/timostools/ctags"
 else
-    let Tlist_Ctags_Cmd="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+    let Tlist_Ctags_Cmd="~/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
 endif
 let Tlist_Show_One_File=1
 let Tlist_Exist_OnlyWindow=1
@@ -95,7 +95,7 @@ imap <S-Insert>        <ESC><S-Insert>i
 if has("win32unix")
     let g:showfuncctagsbin="/usr/local/timostools/ctags"
 else
-    let g:showfuncctagsbin="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+    let g:showfuncctagsbin="~/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
 endif
 let g:ctags_statusline=1
 let g:ctags_title=0
@@ -107,7 +107,7 @@ if has("win32unix")
 endif
 
 "if has("gui_running")
-  "let &runtimepath.=',C:\home\udayakut\.vim'
+  "let &runtimepath.=',C:\home\udaytj\.vim'
   ""let g:showfuncctagsbin='C:\\usr\\local\\timostools\\ctags.exe'
   "let g:showfuncctagsbin='~/ctags/ctags.exe'
 "endif

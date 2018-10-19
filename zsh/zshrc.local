@@ -1,6 +1,6 @@
 function exists { which $1 &> /dev/null }
 
-export PATH="/usr/local/timostools:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:/home/udayakut/bin:.:/home/udayakut/access-UK/alu:/home/udayakut/bin:/usr/local/timostools"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:~/bin:.:~/access-UK/alu:~/bin"
 
 if exists percol; then
     function percol_select_history() {
@@ -24,7 +24,7 @@ __git_files () {
 }
 
 #autojump
-[[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
 #Up arrow should not display global history. ctrl-p to display global history
@@ -48,7 +48,7 @@ down-line-or-local-history() {
 zle -N down-line-or-local-history
 
 #UDAY - Below line shows git-status of git working dir w.r.t origin in PS1
-source /home/udayakut/access-UK/zsh/zsh-git-prompt/zshrc.sh
+source ~/access-UK/zsh/zsh-git-prompt/zshrc.sh
 
 #UDAY - change PS1 to have git info
 #With pwd in the PROMPT

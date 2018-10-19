@@ -34,7 +34,7 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'justinmk/vim-sneak'
-Plugin 'edsono/vim-matchit'
+Plugin 'tmhedberg/matchit'                    " % given a new life
 Plugin 'sjl/gundo.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
@@ -111,7 +111,7 @@ syntax on
 "Key Mappings for cscope
 "source  ~/.vim/plugin/cscope_maps.vim
 
-"Key Mappings for quickfix - To display the outputs of ":cscope f .." commands
+"Key Mappings for quickfix - To display the outputs of ":cscope f .." commands (up/down/right/left arrow)
 "at the bottom of the window and navigating through that
 set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
 :map <C-Up> :cope 15<CR>
@@ -157,7 +157,7 @@ set rtp+=~/.fzf
 "if has("win32unix")
 "    let g:showfuncctagsbin="/usr/local/timostools/ctags"
 "else
-"    let g:showfuncctagsbin="/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
+"    let g:showfuncctagsbin="~/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
 "endif
 "let g:ctags_statusline=1
 "let g:ctags_title=0

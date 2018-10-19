@@ -1,0 +1,24 @@
+In Ubuntu:
+(https://www.krizna.com/ubuntu/install-vnc-server-ubuntu-14-04/)
+
+sudo apt-get update
+sudo apt-get install --no-install-recommends ubuntu-desktop
+sudo apt-get install gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+sudo apt-get install vnc4server
+edit /usr/bin/vncserver (add below lines after "# exec /etc/X11/xinit/xinit**".)
+       "gnome-panel &n".
+       "gnome-settings-daemon &n".
+       "metacity &n".
+       "nautilus &n".
+       "gnome-terminal &n".
+
+vncserver -geometry 1920x1080 :1
+
+If you find copy paste issue try this:
+======================================
+
+sudo apt-get install autocutsel
+autocutsel -s PRIMARY -fork <== This is added to .vnc/xstartup
+
+
+

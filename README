@@ -1,6 +1,6 @@
 1. ln -s ~/access-UK/vim/vimfiles/vundle_vimrc .vimrc; 
    mkdir ~/access-UK/vim/vimbundle; 
-   ln -s /home/udayakut/access-UK/vim/vimbundle .vim; 
+   ln -s ~/access-UK/vim/vimbundle .vim; 
    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim;
    Then open vim and give :PluginInstall
 
@@ -25,17 +25,17 @@ ln -s ~/access-UK/bash/bashrc .bashrc;
 ln -s ~/access-UK/bash/bashrc.local .bashrc.local; 
 ln -s ~/access-UK/bash/bash_profile .bash_profile; 
 ln -s ~/access-UK/bash/aliases_bash .aliases_bash; 
-ln -s /home/udayakut/access-UK/bash/bash_profile ~/.bash_profile;
+ln -s ~/access-UK/bash/bash_profile ~/.bash_profile;
 
 3. Install zsh. Follow access-UK/zsh/README
-   ln -s /home/udayakut/access-UK/zsh/zshrc .zshrc;ln -s /home/udayakut/access-UK/zsh/zshrc.local .zshrc.local;
+   ln -s ~/access-UK/zsh/zshrc .zshrc;ln -s ~/access-UK/zsh/zshrc.local .zshrc.local;
 
 4. ln -s ~/access-UK/others/netrc .netrc; ln -s ~/access-UK/others/screenrc .screenrc; ln -s ~/access-UK/others/inputrc .inputrc; ln -s ~/access-UK/gdb/gdbinit .gdbinit; 
 
-5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s /home/udayakut/access-UK/git/git-prompt.sh .git-prompt.sh; ln -s ~/access-UK/bin/git ~/bin/git
+5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s ~/access-UK/git/git-prompt.sh .git-prompt.sh; ln -s ~/access-UK/bin/git ~/bin/git
 
 6. Download and install tmux: Follow instructions in https://gist.github.com/rothgar/cecfbd74597cc35a6018
-   ln -s /home/udayakut/access-UK/others/tmux.conf ~/.tmux.conf 
+   ln -s ~/access-UK/tmux/tmux.conf ~/.tmux.conf 
 
 7. Clone Docs-UK. cd; https://gitlab.com/shaakaud/Docs-UK.git; 
 

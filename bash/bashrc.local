@@ -40,13 +40,13 @@ then
     export CSCOPE_EDITOR=/Program\ Files\ \(x86\)/Vim/vim74
 else
     export CSCOPE_EDITOR=/usr/bin/vim
-    alias ctags='/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
+    alias ctags='~/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
 fi
 
 #######################################################################
 #AUTOJUMP
 #######################################################################
-[[ -s /home/udayakut/.autojump/etc/profile.d/autojump.sh ]] && source /home/udayakut/.autojump/etc/profile.d/autojump.sh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 
 #UDAY
 export WIN="/drive_c/"

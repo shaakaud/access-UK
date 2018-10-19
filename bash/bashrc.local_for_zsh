@@ -1,8 +1,7 @@
 # personal configurations
 export LOC=0.0MG
 export USERINITIALS=mv
-export EMAIL_ADDR=Udayakumar.Thimma_Janarthanan@Alcatel-Lucent.com
-export CVSUSERNAME=udayakut
+export EMAIL_ADDR=udaytj@versa-networks.com
 export EDITOR=vim
 
 # .bashrc overrides
@@ -16,12 +15,12 @@ if $(uname -a | grep -qi cygwin)
 then
     if [ -d /Program\ Files\ \(x86\)/Vim/vim74 ]
     then
-        export PATH=${PATH}:/Program\ Files\ \(x86\)/Vim/vim74
+        PATH=$PATH:/Program\ Files\ \(x86\)/Vim/vim74
     fi
 else
     if [ -f /usr/bin/vim ]
     then
-        export PATH=${PATH}:/usr/bin/vim
+        PATH=$PATH:/usr/bin/vim
     fi
 fi
 
@@ -40,12 +39,8 @@ then
     export CSCOPE_EDITOR=/Program\ Files\ \(x86\)/Vim/vim74
 else
     export CSCOPE_EDITOR=/usr/bin/vim
-    alias ctags='/home/udayakut/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
+    alias ctags='~/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
 fi
-
-#UDAY
-export WIN="/drive_c/"
-export WINH="/drive_c/home/udayakut/"
 
 #UDAY - To make c-R-Arrow, C-L-Arrow in Terminal for cscope searches
 export TERM=xterm-256color
@@ -74,7 +69,7 @@ export PAN_DIR=`pwd`
 export PANOS=`pwd`
 
 #PATH
-export PATH=${PATH}:~/access-UK/alu:~/access-UK/bin/git
+PATH=$PATH:/home/udaytj/access-UK/alu:/home/udaytj/access-UK/bin/git
 
 #Avoid screen feeze when Ctrl-S is pressed on VIM screen
 stty -ixon
@@ -102,7 +97,7 @@ alias 30bm='LOC=3.0B.MG;  setspace;'
 alias 31sm='LOC=3.1S.MG;  setspace;'
 alias 31bm='LOC=3.1B.MG;  setspace;'
 
-PATH=$PATH:~/bin:/usr/local/timostools;
+#PATH=$PATH:~/bin:/usr/local/timostools;
 alias mks='mk --summary'
 alias mkioms='mks iom'
 alias mksims='mks sim'
@@ -186,30 +181,30 @@ export VHDLROOT=":pserver:$VHDLUSERNAME@172.22.0.10:/hwcvs"
 #
 # ALU - VHDL environment things
 #
-export HW_SYNCED=/hwdev/synced
-export OSTYPE=linux
-export OS=Linux
-export PERL=/usr
-export PATH=".:/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64:${PATH}"
+#export HW_SYNCED=/hwdev/synced
+#export OSTYPE=linux
+#export OS=Linux
+#export PERL=/usr
+#export PATH=".:/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64:${PATH}"
 
 #
 # ALU - General
 #
-export GIT_CO_USE_WORKTREES=1
+#export GIT_CO_USE_WORKTREES=1
 
-function vhdl() {
-    export MY_PROJECT=$HOME/ws/$1/vhdl
-    export PERL5LIB=$MY_PROJECT/common/scripts/lib
-    export PANOS=$HOME/ws/$1/panos 
-    DO_ALIAS=1
-    . ${MY_PROJECT}/common/scripts/unix/setup.bash
+#function vhdl() {
+#    export MY_PROJECT=$HOME/ws/$1/vhdl
+#    export PERL5LIB=$MY_PROJECT/common/scripts/lib
+#    export PANOS=$HOME/ws/$1/panos 
+#    DO_ALIAS=1
+#    . ${MY_PROJECT}/common/scripts/unix/setup.bash
     #caecfg
     #. ${MY_PROJECT}/common/scripts/unix/caecfg_bash
-    cd $MY_PROJECT
-}
+#    cd $MY_PROJECT
+#}
 
-export MODEL_TECH=/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64/modeltech
-export MGLS_LICENSE_FILE=3100@bkeyserver:1717@sls4m9.stgl.sel.alcatel.de:1717@sls1ki.stgl.sel.alcatel.de:1717@slsc5c.stgl.sel.alcatel.de
+#export MODEL_TECH=/hwdev/hwmisc/apps/modeltech/6.1g/linux_x86_64/modeltech
+#export MGLS_LICENSE_FILE=3100@bkeyserver:1717@sls4m9.stgl.sel.alcatel.de:1717@sls1ki.stgl.sel.alcatel.de:1717@slsc5c.stgl.sel.alcatel.de
 
 function run_suite() {
     if [ $# -eq 1 ]; then
