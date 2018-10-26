@@ -125,3 +125,8 @@ alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 
 #versa
 alias img='cd ~/images/'
+alias lib='cd usr/lib'
+alias suri='cd usr/lib/libips/suricata-2.0'
+alias vsf='cd usr/lib/libvsf'
+alias ips='cd usr/module/ips'
+alias str='cd usr/module/strm/'

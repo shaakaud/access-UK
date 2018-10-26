@@ -33,7 +33,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,f-,e-
 :map <C-Left> :cp<CR>
 
 "Tells where to search for tags
-set tags=./tags,tags;/home/udaytj
+set tags=./tags,tags;$HOME
 
 "Taglist settings
 :map <C-L> :Tlist<CR>

@@ -94,6 +94,7 @@ ln -s ~/access-UK/bash/bash_profile ~/.bash_profile;
     cd ~/software/
     git clone https://github.com/neovim/neovim.git
     cd neovim; make; sudo make install
+21. Note - vim-fugitive plugin works with git version > 2.10.2
 
 
 Verify:

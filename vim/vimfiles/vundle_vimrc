@@ -143,7 +143,7 @@ imap <S-Insert>        <ESC><S-Insert>i
 "vim-fugitive plugin command - To see git diff of a file type :<F9> in vim
 :cmap <F9> :tabnew %\|Gdiff<CR>
 "Override the git path for vim fugitive. It needs higher version of git.
-let g:fugitive_git_executable = '~/software/git_2.10.2/bin/git'
+"let g:fugitive_git_executable = '~/software/git_2.10.2/bin/git'
 
 "for fzf
 set rtp+=~/.fzf
