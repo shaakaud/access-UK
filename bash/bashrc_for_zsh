@@ -227,8 +227,10 @@ fi
 #export PS1="\w > "
 
 # Set size of history
-export HISTSIZE=500
-export HISTFILESIZE=500
+export HISTSIZE=2000
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
+export HISTFILESIZE=2000
 
 # Ignore duplicate cmds in history log; ignore cmds beginning with whitespace
 export HISTCONTROL=ignoreboth

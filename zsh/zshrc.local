@@ -2,11 +2,13 @@ function exists { which $1 &> /dev/null }
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:~/bin:.:~/access-UK/alu:~/bin"
 
+function exists { which $1 &> /dev/null }
+
 if exists percol; then
     function percol_select_history() {
         local tac
         exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-        BUFFER=$($tac ~/.zsh_history | sed 's/^: [0-9]*:[0-9]*;//' | percol --query "$LBUFFER")
+        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
         CURSOR=$#BUFFER         # move cursor
         zle -R -c               # refresh
     }
@@ -82,8 +84,8 @@ function ppkill() {
 }
 
 #solarized - uday
-#eval $(dircolors ~/software/dircolors-solarized/dircolors.ansi-dark )
-eval $(dircolors ~/.dir_colors/dircolors )
+eval $(dircolors ~/software/dircolors-solarized/dircolors.ansi-dark )
+#eval $(dircolors ~/.dir_colors/dircolors )
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

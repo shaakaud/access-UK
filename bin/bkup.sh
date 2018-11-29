@@ -3,8 +3,8 @@
 bkup_filename=$1
 bkup_gitdiff_filename=$1_gitdiff
 bkup_dir=$HOME/bkup
-vb_win_dir=/drive_c/$bkup_dir
-remote_bkup_server='queen2.mv.usa.alcatel.com'
+vb_win_dir=$bkup_dir
+remote_bkup_server='ukhost2.ddns.net'
 
 git diff @{u} > $bkup_dir/$bkup_filename
 git diff > $bkup_dir/$bkup_gitdiff_filename

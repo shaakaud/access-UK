@@ -92,7 +92,8 @@ colorscheme night
 set nowrap
 set tw=0
 if has('gui_running')
-    set background=light
+    "set background=light
+    set background=dark
 else
     set background=dark
 endif
