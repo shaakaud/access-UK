@@ -126,8 +126,9 @@ alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 
 #versa
 export cs=10.40.59.13
-export branch1=10.40.59.14
-export branch2=10.40.59.16
+export branch1=10.40.59.11
+export branch2=10.40.59.12
+export branch3=10.40.59.13
 alias img='cd ~/images/'
 alias lib='cd usr/lib'
 alias suri='cd usr/lib/libips/suricata-2.0'
@@ -140,4 +141,5 @@ alias ud='ssh udaytj@ukhost1.ddns.net'
 alias gr='grep -R --exclude-dir={build,vendor}'
 alias c1='ssh versa@$cs'
 alias b1='ssh admin@$branch1'
-alias b2='ssh admin@$branch1'
+alias b2='ssh admin@$branch2'
+alias b3='ssh admin@$branch3'
