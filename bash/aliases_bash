@@ -125,10 +125,15 @@ alias npgit='git --no-pager'
 alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 
 #versa
-export cs=10.40.59.13
+export cs1=10.40.59.31
+export ctrl1=10.40.59.21
+export rtr1=10.40.59.41
 export branch1=10.40.59.11
 export branch2=10.40.59.12
 export branch3=10.40.59.13
+export dev1=10.40.59.1
+export test1=10.40.59.2
+export test2=10.48.59.1
 alias img='cd ~/images/'
 alias lib='cd usr/lib'
 alias suri='cd usr/lib/libips/suricata-2.0'
@@ -138,10 +143,14 @@ alias ips='cd usr/module/ips'
 alias pbf='cd usr/module/pbf'
 alias appid='cd usr/module/appid'
 alias str='cd usr/module/strm/'
-alias ut='ssh udaytj@ukhost2.ddns.net'
-alias ud='ssh udaytj@ukhost1.ddns.net'
+alias t1='ssh versa@ukhost2.ddns.net'
+alias t2='ssh versa@$test2'
+alias d1='ssh udaytj@ukhost1.ddns.net'
 alias gr='grep -R --exclude-dir={build,vendor}'
 alias c1='ssh versa@$cs'
 alias b1='ssh admin@$branch1'
 alias b2='ssh admin@$branch2'
 alias b3='ssh admin@$branch3'
+alias cs1='ssh versa@$cs1'
+alias c1='ssh admin@$ctrl1'
+alias r1='ssh admin@$rtr1'
