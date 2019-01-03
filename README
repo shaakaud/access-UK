@@ -95,10 +95,25 @@ ln -s ~/access-UK/bash/bash_profile ~/.bash_profile;
     git clone https://github.com/neovim/neovim.git
     cd neovim; make; sudo make install
 21. Note - vim-fugitive plugin works with git version > 2.10.2
+22. samba server - to access linux folders from windows
+    sudo apt-get install samba
+    sudo smbpasswd -a udaytj
+    sudo vi /etc/samba/smb.conf - at the end add
+      [bkup]
+      path = /home/udaytj/bkup
+      available = yes
+      valid users = udaytj
+      read only = no
+      browsable = yes
+      public = yes
+      writable = yes
+    sudo service smbd restart
+    from windows - win-r -> \\ukhost2.ddns.net\bkup
+
 
 
 Verify:
-=>$ pwd  
+=>$ pwd
 /home/udayakut
 =>$ ls -lart .* | grep access
 lrwxrwxrwx   1 udayakut udayakut     18 Mar  2  2015 access-UK -> /drive_c/access-UK/

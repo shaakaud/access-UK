@@ -18,7 +18,7 @@ wsdir = home+'/ws/'
 ws =  os.listdir(home+'/ws/')
 
 #ws folder validation
-if os.path.isdir('/home/udayakut/ws') is False:
+if os.path.isdir('/home/udaytj/ws') is False:
     print "Folder not present - %s" %wsdir
     sys.exit(0)
 
@@ -30,18 +30,17 @@ if len(args) < 1:
     sys.exit(0)
 branch = args[0]
 
-if branch != '00' and branch != '80' and branch != '90' and branch != 'vh' and branch != '10s':
-    print "Wrong branch - %s" %branch
-    sys.exit(0)
+#if branch != '00' and branch != '80' and branch != '90' and branch != 'vh' and branch != '10s':
+#    print "Wrong branch - %s" %branch
+#    sys.exit(0)
 
 count = 1
 dir_dict = {}
 for dir in ws:
     if branch in dir:
-        if 'vh' in branch or 'vh' not in dir:
-            dir_dict[count] = dir
-            print "%u. %s" % (count, dir_dict[count])
-            count = count + 1
+       dir_dict[count] = dir
+       print "%u. %s" % (count, dir_dict[count])
+       count = count + 1
 #Print last option as quit
 dir_dict[count] = "quit"
 print "%u. %s" % (count, dir_dict[count])
@@ -56,10 +55,7 @@ if (user_input == count):
     sys.exit(0)
 
 ws_path = os.path.join(wsdir, dir_dict[user_input])
-if ('vh' in dir_dict[user_input]):
-    ws_full_path = ws_path
-else:
-    ws_full_path = os.path.join(ws_path, 'panos/')
+ws_full_path = os.path.join(ws_path, 'flexvnf/')
 
 #Write the ws path in /tmp/mcd
 file_mcd = "/tmp/mcd"
