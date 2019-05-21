@@ -32,6 +32,7 @@
 [difftool]
 	prompt = false
 [remote "origin"]
+    url = ssh://git@gitlab.versa-networks.com/software/flexvnf.git
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
 	githelperver = 4424b55b15187095872cabeaf441a67c0293c497
