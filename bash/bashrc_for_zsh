@@ -295,7 +295,7 @@ alias cvsstatus='cvs status | grep Status'
 
 #make an intelligent guess as to what your DISPLAY env var should be
 if [ -z ${DISPLAY:=""} ]; then
-    XSERVER=$(who am i | /bin/awk '{print $6}' | /bin/sed 's/[()]//g')
+    XSERVER=$(who am i | /usr/bin/awk '{print $6}' | /bin/sed 's/[()]//g')
     XSERVER=${XSERVER%%:*}
     if [[ -z ${XSERVER}  || ${XSERVER} == $(hostname) || ${XSERVER} == "unix" ]]; then 
       export DISPLAY=$(hostname):0.0		# Display on local host
