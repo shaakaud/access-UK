@@ -88,6 +88,11 @@ set ttyfast
 set expandtab
 set laststatus=2
 "set columns=80
+
+"to draw a vertical line at column 80 and highlight all red after that
+set colorcolumn=80
+match ErrorMsg '\%>80v.\+'
+
 colorscheme night
 "colorscheme White
 set nowrap

@@ -32,11 +32,12 @@
    #That would install autojump in ~/.autojump/etc/profile.d/autojump.sh
    #This is now sourced in your zshrc (The install script would edit ur .zshrc, but i guess, i anyway have that line in my access-UK-repo).
 
-8.Now install the git prompt plugin which will tell the git-status in PS1 
-  cd ~/access-UK/zsh; git clone https://github.com/lakshmankumar12/zsh-git-prompt.git
+8.Now install the git prompt plugin which will tell the git-status in PS1
+  //cd ~/access-UK/zsh; git clone https://github.com/lakshmankumar12/zsh-git-prompt.git
+  cd ~/access-UK/zsh; git clone https://github.com/shaakaud/zsh-git-prompt.git
   NOTE: cd zsh-git-prompt; open gitstatus.py and make sure :gitbinary='/usr/bin/git" ie it should point to the same path as seen in "type git"
 
 9. Change the default shell to zsh
    chsh -s /bin/zsh;
-   safer side - open default terminal (gnome terminal) and right click in middel and go to Profiles->profile-preferences->Title and Command tab. 
+   safer side - open default terminal (gnome terminal) and right click in middel and go to Profiles->profile-preferences->Title and Command tab.
    Check "Run command as a login shell" and "Run a command command instead of my shell". Fill Custom command as /bin/zsh

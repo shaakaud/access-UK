@@ -49,3 +49,6 @@
 
 [reviewboard]
     url = http://review.versa-networks.com
+#if remote is http based, below creditial config will store your password after you enter for your first git command in .git-credentials in your %HOME% directory
+[credential]
+	helper = store
