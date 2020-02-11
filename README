@@ -109,6 +109,8 @@ ln -s ~/access-UK/bash/bash_profile ~/.bash_profile;
       writable = yes
     sudo service smbd restart
     from windows - win-r -> \\ukhost2.ddns.net\bkup
+23. If you want to install python, https://www.anaconda.com/distribution/
+    If you want python IDE, download pycharm - https://www.jetbrains.com/pycharm/download/#section=linux
 
 
 
