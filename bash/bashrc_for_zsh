@@ -27,7 +27,7 @@
 
 java=`which java`   # Must be before we overwrite the Windows path
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin
+export PATH=/usr/bin:/usr/local/bin:/bin:/usr/X11R6/bin
 
 if $(uname -a | grep -qi cygwin)
 then
@@ -102,12 +102,6 @@ fi
 if [ -d ${EMACS_BASE}/bin ]
 then
     export PATH=${PATH}:${EMACS_BASE}/bin
-fi
-
-# VI-clone
-if [ -d /usr/local/vim56 ]
-then
-    export PATH=${PATH}:/usr/local/vim56
 fi
 
 # TCL

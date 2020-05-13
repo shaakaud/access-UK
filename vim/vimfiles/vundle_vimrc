@@ -51,6 +51,8 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
+"Plugin 'klen/python-mode.git' "To add python-mode features to vim
+Plugin 'python-mode/python-mode.git' "To add python-mode features to vim
 "#for easy buffer switching
 "Plugin 'ctrlpvim/ctrlp.vim'
 
