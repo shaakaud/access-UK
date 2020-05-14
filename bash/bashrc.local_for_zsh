@@ -18,13 +18,13 @@ then
         PATH=$PATH:/Program\ Files\ \(x86\)/Vim/vim74
     fi
 else
-    if [ -f /usr/bin/vim ]
+    if [ -f /usr/local/bin/vim ]
     then
-        PATH=$PATH:/usr/bin/vim
+        PATH=$PATH:/usr/local/bin/vim
     else
-        if [ -f /usr/local/bin/vim ]
+        if [ -f /usr/bin/vim ]
         then
-           PATH=$PATH:/usr/local/bin/vim
+           PATH=$PATH:/usr/bin/vim
         fi
     fi
 fi
@@ -43,13 +43,13 @@ if $(uname -a | grep -qi cygwin)
 then
     export CSCOPE_EDITOR=/Program\ Files\ \(x86\)/Vim/vim74
 else
-    if [ -f /usr/bin/vim ]
+    if [ -f /usr/local/bin/vim ]
     then
-        export CSCOPE_EDITOR=/usr/bin/vim
+        export CSCOPE_EDITOR=/usr/local/bin/vim
     else
-        if [ -f /usr/local/bin/vim ]
+        if [ -f /usr/bin/vim ]
         then
-           export CSCOPE_EDITOR=/usr/local/bin/vim
+           export CSCOPE_EDITOR=/usr/bin/vim
         fi
     fi
     alias ctags='~/software/ctags/ctags-5.8/installed_binaries/bin/ctags'

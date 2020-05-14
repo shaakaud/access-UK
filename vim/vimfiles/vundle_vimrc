@@ -45,7 +45,7 @@ Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'unite.vim'
+"Plugin 'unite.vim' "vim8 throws errors when this plugin is enabled
 "For dong fzf stuff in vim
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-airline/vim-airline'

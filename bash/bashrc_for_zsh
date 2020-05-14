@@ -27,7 +27,7 @@
 
 java=`which java`   # Must be before we overwrite the Windows path
 
-export PATH=/usr/bin:/usr/local/bin:/bin:/usr/X11R6/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin
 
 if $(uname -a | grep -qi cygwin)
 then
