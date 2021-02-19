@@ -4,10 +4,11 @@
    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim;
    Then open vim and give :PluginInstall
 
+   *****NOTE: The below issue has been fixed in latest bufexplorer****
    Note: Buffexplorer has an issue - https://github.com/jlanzarotta/bufexplorer/issues/37#issuecomment-119613896 (see comments by shaakaud). Fix is to do either of the below options (preferably option 1).
 
    Option 1:
-   a. go to ~/.vim/bundle/buffexlorer/plugin. Do git apply ~/access-UK/vim/vim_bundle_bufexplorer.diff
+   a. go to ~/.vim/bundle/bufexplorer/plugin. Do git apply ~/access-UK/vim/vim_bundle_bufexplorer.diff
    b. Also, i see that the latest bufexlorer plugin does not work with VIM version < 7.3. Get older version tag and checkout that version.
       go to ~/.vim/bundle/bufexplorer. Do "git tag -l". Get a older version and do "git checkout <tag>"
       As of now, i see v7.4.6 works with VIM 7.2 (beyond which it requires vim 7.3) and also this version already has the fix for the issue
@@ -20,12 +21,11 @@
    d. Remove <nowait> from all these lines. Just change it to "nnoremap <script> <silent> <buffer>..."
    e. Close the files in VIM if you have oppened it. Reopen those files and you will see the issue is gone :-)
 
-2. Issue following commands
+2. Issue following commands from ~/
 ln -s ~/access-UK/bash/bashrc .bashrc;
 ln -s ~/access-UK/bash/bashrc.local .bashrc.local;
 ln -s ~/access-UK/bash/bash_profile .bash_profile;
 ln -s ~/access-UK/bash/aliases_bash .aliases_bash;
-ln -s ~/access-UK/bash/bash_profile ~/.bash_profile;
 
 3. Install zsh. Follow access-UK/zsh/README
    ln -s ~/access-UK/zsh/zshrc ~/.zshrc;ln -s ~/access-UK/zsh/zshrc.local ~/.zshrc.local;
@@ -51,7 +51,7 @@ ln -s ~/access-UK/bash/bash_profile ~/.bash_profile;
    cd ~/software/; git clone https://github.com/mooz/percol.git; cd percol;sudo python setup.py install;
 
 10. Install xsel - To make ctl-c to copy to clipboard on tmux window
-   sudo yum install xsel
+   sudo apt-get install xsel
 
 11. Install asciidoc if required
    sudo yum install asciidoc

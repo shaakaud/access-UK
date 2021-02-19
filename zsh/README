@@ -1,7 +1,7 @@
-1. sudo yum install zsh
+1. sudo apt-get install zsh or sudo yum install zsh
 2. cd ~/software
 
-   #google for "oh my zsh", click the first link and follow the steps - https://github.com/robbyrussell/oh-my-zsh
+   #google for "oh my zsh", click the first link and follow the steps (authored by robbyrussell - https://github.com/ohmyzsh/ohmyzsh/blob/master/README.md
 3. curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 4. link ~/.zshrc to ~/access-UK/zsh/zshrc -> ln -s ~/access-UK/zsh/zshrc .zshrc
@@ -11,19 +11,7 @@
    cd ~/
    ln -s ~/access-UK/git/git-completion.zsh git-completion.zsh
 
-6.  No need to follow this step if you have done step 1 in ~/access-UK/README
-    Create the below soft links (vim to use bundle)
-    $ls -lart .vimrc
-    lrwxrwxrwx 1 udayakut udayakut 37 May 29 17:21 .vimrc -> /home/udayakut/access-UK/vim/vimfiles/vundle_vimrc*
-    $mkdir ~/vimbundle; #Now open vim and give :PluginInstall
-    $ ls -lart .vim
-    lrwxrwxrwx 1 udayakut udayakut 35 May 29 17:22 .vim -> /home/udayakut/vimbundle/
-    commands:
-    ln -s ~/access-UK/vim/vimfiles/vundle_vimrc .vimrc;
-    mkdir ~/access-UK/vim/vimbundle;
-    ln -s ~/access-UK/vim/vimbundle .vim;
-    ln -s ~/access-UK/zsh/zshrc.local .zshrc.local
-
+6. ln -s ~/access-UK/zsh/zshrc.local .zshrc.local
 
 7. Install autojump following instructions in the below webpage
    https://github.com/joelthelion/autojump
