@@ -124,6 +124,9 @@ alias cvsmod='cvsrw --cvs'
 alias npgit='git --no-pager'
 alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 
+#python related
+alias py3='python3'
+
 #versa
 export t1cs=10.40.59.31
 export t1ctrl=10.40.59.21
@@ -143,11 +146,13 @@ export t3cs=10.48.59.32
 export t3ctrl=10.48.59.22
 export t3rtr=10.48.59.42
 export dev1=10.40.59.1
-export dev2=10.40.195.86 #18.04 dev machine common
+export dev2=10.40.199.86 #18.04 dev machine common
 export dev3=10.40.2.25 #18.04 dev machine ashwin kini's
-export test1=10.40.59.2
-export test2=10.48.59.1
-export test3=10.48.59.2
+export test1=10.40.59.2 #sdwan-ha
+export test2=10.48.59.1 #sdwan
+export test3=10.48.59.2 #L2
+alias gcp='cd $HOME/gcp-ws'
+alias msbtest='cd $HOME/gcp-ws/msb/test-scripts'
 alias img='cd ~/images/'
 alias base='cd $WS'
 alias lib='cd $WS/usr/lib'
@@ -190,3 +195,5 @@ alias st3b3='ssh admin@$t3b3'
 alias st3cs='ssh versa@$t3cs'
 alias st3ctrl='ssh admin@$t3ctrl'
 alias st3rtr='ssh admin@$t3rtr'
+alias sess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
+alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'

@@ -24,6 +24,7 @@
 	incoming = "!f() { git rev-parse --abbrev-ref HEAD;}; git fetch -q origin `f`; git log ..@{u}" # show commits from the server that are not yet in your working copy
 	incomingf = !br=$(git rev-parse --abbrev-ref HEAD) && git fetch -q origin $br && git diff --stat $mb ...@{u} # show file changes from the server that are not yet in your working copy
 	checkoutbydate = "!sh -c \"git checkout `git rev-list -n 1 --before=\"$1\" HEAD`;\""
+    pullall = "!git pull && git submodule update --init --recursive"
 [diff]
     tool = meld
 	renameLimit = 25000
@@ -53,3 +54,5 @@
 #if remote is http based, below creditial config will store your password after you enter for your first git command in .git-credentials in your %HOME% directory
 [credential]
 	helper = store
+[submodule]
+	recurse = true

@@ -9,7 +9,7 @@ LIST_FILE=cscope.files
 
 echo -n "Generating files list .."
 (cd flexvnf && git ls-files) | \
-    egrep -i '\.([chlys](xx|pp)*|cc|hh|py|xml|yang|proto|sh)$' | \
+    egrep -i '\.([chlys](xx|pp)*|cc|hh|py|xml|yang|ini|proto|sh|yaml)$' | \
     sed -e '/\/CVS\//d' -e '/\/RCS\//d' -e 's/^\.\///' -r -e '/^(lib|bin|deps|objs|\.git|\.hg)\//d' | \
     sort | awk ' {print "flexvnf/" $0 } ' > $LIST_FILE
 echo "done"

@@ -1,6 +1,6 @@
 function exists { which $1 &> /dev/null }
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:~/bin:.:~/access-UK/alu:~/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:~/bin:.:~/access-UK/alu:~/bin:~/gcp-ws/scripts"
 
 function exists { which $1 &> /dev/null }
 
@@ -100,3 +100,10 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY
+
+#UDAY - GCP/gcp/gcloud
+#gcp file-analyzer App Engine default service account key ID
+export GOOGLE_APPLICATION_CREDENTIALS="/home/udaytj/gcp-ws/msb/file-analyzer-53005f07db9d.json"
+#gsutil supports Python version 2.7.x or 3.5 and up
+export CLOUDSDK_PYTHON=/usr/bin/python
+

@@ -10,29 +10,12 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
 Plugin 'vim-scripts/ctags.vim--Johnson'
-Plugin 'vim-scripts/MultipleSearch'
 Plugin 'vim-scripts/DirDiff.vim'
 Plugin 'antiAgainst/cscope-macros.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
 Plugin 'justinmk/vim-sneak'
 Plugin 'tmhedberg/matchit'                    " % given a new life
 Plugin 'sjl/gundo.vim'
@@ -40,21 +23,22 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/python_match.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jeetsukumaran/vim-buffersaurus'
-Plugin 'shaakaud/vimfiles' "My own plugins - took from LK
+Plugin 'shaakaud/vimfiles'                 "My own plugins - took from LK
 Plugin 'vim-scripts/vimtabs.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Shougo/vimproc.vim'
-"Plugin 'unite.vim' "vim8 throws errors when this plugin is enabled
-"For dong fzf stuff in vim
-Plugin 'junegunn/fzf.vim'
+"Plugin 'unite.vim'   " Commented out - vim8 throws errors when this plugin is enabled
+Plugin 'junegunn/fzf.vim'                  " :Fzf and other commands in vim
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
-"Plugin 'klen/python-mode.git' "To add python-mode features to vim
-Plugin 'python-mode/python-mode.git' "To add python-mode features to vim
-"#for easy buffer switching
-"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'klen/python-mode.git'             "To add python-mode features to vim
+"Plugin 'python-mode/python-mode.git'      "To add python-mode features to vim
+Plugin 'vim-scripts/Mark--Karkat'          " Multiple color search
+Plugin 'xolox/vim-misc'                    " vim-session plugin requires this
+Plugin 'xolox/vim-session'                 " vim session management - mksession
+"Plugin 'ctrlpvim/ctrlp.vim'               "for easy buffer switching
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -91,9 +75,12 @@ set expandtab
 set laststatus=2
 "set columns=80
 
+"to remember the cursor position/location in the files of the vim buffers
+"autocmd BufEnter * silent! normal! g`"
+
 "to draw a vertical line at column 80 and highlight all red after that
 set colorcolumn=80
-match ErrorMsg '\%>80v.\+'
+"match ErrorMsg '\%>80v.\+'
 
 colorscheme night
 "colorscheme White
@@ -117,6 +104,10 @@ set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 set complete-=k complete+=k
 syntax on
 
+"vim-session plugin configuration
+let g:session_autosave='yes'
+let g:session_autosave_periodic=60
+
 "Key Mappings for cscope
 "source  ~/.vim/plugin/cscope_maps.vim
 
@@ -136,10 +127,14 @@ if filereadable("../tags")
   set tags+=../tags
 endif
 
-"Key Mappings for BufExplorer - To work on multiple buffers in the same VIM window - SHIFT-<options>
-let bufExplorerOpenMode=1
-let bufExplorerSplitBelow=1
-let bufExplorerSplitHorzSize=10
+"Key Mappings for bufexplorer - To work on multiple buffers in the same VIM window - SHIFT-<options>
+"let bufExplorerOpenMode=0
+let g:bufExplorerUseCurrentWindow=0   " Open using current window(0) or new window(1).
+let g:bufExplorerSplitBelow=1
+let g:bufExplorerSplitHorzSize=10
+let g:bufExplorerSortBy='mru'        " Sort by most recently used.
+let g:bufExplorerDefaultHelp=0       " Do not show default help.
+let g:bufExplorerShowRelativePath=1  " Show relative paths.
 :map <S-Right> :bnext<CR>
 :map <S-Left>  :bprev<CR>
 :map <S-Up>  \bs
@@ -151,35 +146,9 @@ imap <S-Insert>        <ESC><S-Insert>i
 
 "vim-fugitive plugin command - To see git diff of a file type :<F9> in vim
 :cmap <F9> :tabnew %\|Gdiff<CR>
-"Override the git path for vim fugitive. It needs higher version of git.
-"let g:fugitive_git_executable = '~/software/git_2.10.2/bin/git'
 
 "for fzf
 set rtp+=~/.fzf
-
-"Search for a file using fzf in vim
-"nmap gG     <Esc>:call PanosTags("../tags_f")<CR>
-"nmap gA     <Esc>:call PanosTags("../tags_s")<CR>
-
-"To display function name in vim status bar - Added by Lakshman Kumar
-" This is commented as vim-airline + tagbar plugin together solves this problem
-"if has("win32unix")
-"    let g:showfuncctagsbin="/usr/local/timostools/ctags"
-"else
-"    let g:showfuncctagsbin="~/software/ctags/ctags-5.8/installed_binaries/bin/ctags"
-"endif
-"let g:ctags_statusline=1
-"let g:ctags_title=0
-"let generate_tags=1
-
-"To copy vbox centos vm to windows clipboard
-function! DumpToClipBoard()
-    "call writefile(split(@","\n"), '/dev/clipboard')
-    call system("xsel -i -b", getreg("\""))
-endfunction
-
-map <Leader>clip :call DumpToClipBoard()<CR>
-vmap <C-c> y:call DumpToClipBoard()<CR>
 
 if has("win32unix")
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 13
@@ -255,6 +224,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
+let g:airline#extensions#nerdtree_status = 1 "enable/disable nerdtree's statusline integration
 let g:airline_powerline_fonts=1
 let g:airline#extensions#default#section_truncate_width = {
       \ 'a': 20,
