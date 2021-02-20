@@ -9,7 +9,7 @@
 5. cd ~/software
    curl https://github.com/git/git/raw/master/contrib/completion/git-completion.zsh -OL
    cd ~/
-   ln -s ~//git-completion.zsh git-completion.zsh
+   ln -s ~/software/git-completion.zsh git-completion.zsh
 
 6. ln -s ~/access-UK/zsh/zshrc.local .zshrc.local
 
