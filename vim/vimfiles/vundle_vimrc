@@ -34,7 +34,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
 "Plugin 'klen/python-mode.git'             "To add python-mode features to vim
-"Plugin 'python-mode/python-mode.git'      "To add python-mode features to vim
+Plugin 'python-mode/python-mode.git'      "To add python-mode features to vim
 Plugin 'vim-scripts/Mark--Karkat'          " Multiple color search
 Plugin 'xolox/vim-misc'                    " vim-session plugin requires this
 Plugin 'xolox/vim-session'                 " vim session management - mksession

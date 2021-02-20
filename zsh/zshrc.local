@@ -84,7 +84,7 @@ function ppkill() {
 }
 
 #solarized - uday
-eval $(dircolors ~/software/dircolors-solarized/dircolors.ansi-dark )
+#eval $(dircolors ~/software/dircolors-solarized/dircolors.ansi-dark )
 #eval $(dircolors ~/.dir_colors/dircolors )
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
