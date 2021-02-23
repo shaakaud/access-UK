@@ -126,6 +126,7 @@ alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 
 #python related
 alias py3='python3'
+alias python='python3'
 
 #versa
 export t1cs=10.40.59.31
