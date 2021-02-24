@@ -26,6 +26,7 @@ ln -s ~/access-UK/bash/bashrc .bashrc;
 ln -s ~/access-UK/bash/bashrc.local .bashrc.local;
 ln -s ~/access-UK/bash/bash_profile .bash_profile;
 ln -s ~/access-UK/bash/aliases_bash .aliases_bash;
+ln -s ~/access-UK/bin/ ~/bin
 
 3. Install zsh. Follow access-UK/zsh/README
    ln -s ~/access-UK/zsh/zshrc ~/.zshrc;ln -s ~/access-UK/zsh/zshrc.local ~/.zshrc.local;
