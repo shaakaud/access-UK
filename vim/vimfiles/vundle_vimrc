@@ -107,6 +107,7 @@ syntax on
 "vim-session plugin configuration
 let g:session_autosave='yes'
 let g:session_autosave_periodic=60
+let g:session_autoload = 'no' "to not load default session when vim is opened
 
 "Key Mappings for cscope
 "source  ~/.vim/plugin/cscope_maps.vim
