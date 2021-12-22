@@ -89,7 +89,6 @@ alias acc='cd ~/access-UK'
 alias win='cd /mnt/ukwin-c/'
 alias dot='cd dot1ag'
 alias svc='cd svcmgr'
-alias pip='cd pip'
 alias qos='cd qos'
 alias mka='mk; if [ $? -ne 0 ] ; then inform.sh "$PWD - **mk failed**" ; else inform.sh "BUILD SUCCEEDED - mk - $PWD"; fi'
 alias mki='mk i386; if [ $? -ne 0 ] ; then inform.sh "$PWD - **mk i386 FAILED**u" ; else inform.sh "BUILD SUCCEEDED - mk i386 - $PWD"; fi'
@@ -126,7 +125,6 @@ alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 
 #python related
 alias py3='python3'
-alias python='python3'
 
 #versa
 export t1cs=10.40.59.31
@@ -147,9 +145,11 @@ export t3cs=10.48.59.32
 export t3ctrl=10.48.59.22
 export t3rtr=10.48.59.42
 export dev1=10.40.59.1
+export dev2host=10.40.40.100
 export dev2=10.40.40.101
-export dev3=10.40.199.86 #18.04 bionic dev machine common
-export dev4=10.40.2.25 #18.04 bionic dev machine ashwin kini's
+export dev3=10.40.40.102
+export dev7=10.40.199.86 #18.04 bionic dev machine common
+export dev8=10.40.2.25 #18.04 bionic dev machine ashwin kini's
 export test1=10.40.59.2 #sdwan-ha
 export test2=10.48.59.1 #sdwan
 export test3=10.48.59.2 #L2
@@ -176,11 +176,21 @@ alias policy='cd $WS/usr/lib/libpolicy'
 alias pbf='cd $WS/usr/module/pbf'
 alias appid='cd $WS/usr/module/appid'
 alias str='cd $WS/usr/module/strm/'
+alias frs='cd $WS/services/frs/src'
+alias fss='cd $WS/services/fss/src'
+alias rns='cd $WS/services/rns/src'
+alias aiml='cd $WS/services/ml-service/src'
+alias frst='cd $WS/services/frs/terraform'
+alias fsst='cd $WS/services/fss/terraform'
+alias rnst='cd $WS/services/rns/terraform'
+alias aimlt='cd $WS/services/ml-service/terraform'
+alias fsslog='gcloud logging read 'resource.type=gae_app AND resource.labels.module_id="versa-fss"'  --format "value(timestamp,textPayload)"'
+alias rnslog='gcloud logging read 'resource.type=gae_app AND resource.labels.module_id="versa-rns" AND logName=projects/uday-project-msb3/logs/appengine.googleapis.com%2Fstderr'  --format "value(timestamp,textPayload)"'
 alias t1='ssh versa@ukhost2.ddns.net'
 alias ut1='ssh udaytj@ukhost2.ddns.net'
 alias t2='ssh versa@$test2'
 alias d1='ssh udaytj@ukhost1.ddns.net'
-alias gr='grep -R --exclude-dir={build,vendor}'
+alias gr='grep -rRI --exclude-dir="\.swp" --exclude-dir={build,vendor}'
 alias grc='grep -R --exclude-dir={build,vendor} DO_NOT_COMMIT'
 alias st1b1='ssh admin@$t1b1'
 alias st1b2='ssh admin@$t1b2'
@@ -199,6 +209,9 @@ alias st3b3='ssh admin@$t3b3'
 alias st3cs='ssh versa@$t3cs'
 alias st3ctrl='ssh admin@$t3ctrl'
 alias st3rtr='ssh admin@$t3rtr'
+alias sdev1='ssh udaytj@$dev1'
+alias sdev2='ssh udaytj@$dev2'
+alias sdev3='ssh udaytj@$dev3'
 alias sess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
 alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
 alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.

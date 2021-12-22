@@ -110,6 +110,7 @@ ln -s ~/access-UK/bin/ ~/bin
       writable = yes
     sudo service smbd restart
     from windows - win-r -> \\ukhost2.ddns.net\bkup
+    if windows asks for password, username should be Computer name\username eg. 10.40.40.101\udaytj and then password.
 23. If you want to install python, https://www.anaconda.com/distribution/
     If you want python IDE, download pycharm - https://www.jetbrains.com/pycharm/download/#section=linux
 24. To export DISPLAY of a linux server to Windows machin - https://seanthegeek.net/234/graphical-linux-applications-bash-ubuntu-windows/

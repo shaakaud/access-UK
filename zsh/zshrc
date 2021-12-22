@@ -80,3 +80,6 @@ plugins=(git)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source ~/.zshrc.local
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
