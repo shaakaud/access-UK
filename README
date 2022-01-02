@@ -35,7 +35,9 @@ ln -s ~/access-UK/bin/ ~/bin
 
 5. ln -s ~/access-UK/git/gitconfig .gitconfig; ln -s ~/access-UK/git/git-prompt.sh .git-prompt.sh; ln -s ~/access-UK/bin/git ~/bin/git
 
-6. Download and install tmux: Follow instructions in https://gist.github.com/rothgar/cecfbd74597cc35a6018
+6. Download and install tmux: Follow instructions in
+   centos:https://gist.github.com/rothgar/cecfbd74597cc35a6018
+   ubuntu:sudo apt install tmux
    ln -s ~/access-UK/tmux/tmux.conf ~/.tmux.conf
 
 7. Clone Docs-UK. cd; https://gitlab.com/shaakaud/Docs-UK.git;
