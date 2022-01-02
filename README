@@ -59,7 +59,7 @@ ln -s ~/access-UK/bin/ ~/bin
    cd ~/software; git clone https://github.com/seebi/dircolors-solarized
 
 9. Install for percol - This is for improved ctrl-r (searching history) - follow https://github.com/mooz/percol/blob/master/README.md#zsh-history-search
-   cd ~/software/; git clone https://github.com/mooz/percol.git; cd percol;sudo python setup.py install;
+   cd ~/software/; git clone https://github.com/mooz/percol.git; cd percol;sudo python3 setup.py install;
 
 10. Install xsel - To make ctl-c to copy to clipboard on tmux window
    sudo apt-get install xsel
@@ -80,6 +80,8 @@ ln -s ~/access-UK/bin/ ~/bin
 
 14. Install mosh server by following the link - http://www.unixmen.com/mosh-a-brief-introduction/
     First install epel by following step - "3.1 The easy method: (using yum)" and then do "sudo yum install mosh" as described in this link.
+    (or)
+    ubuntu: sudo apt-get install mosh
 
 15. Make sure the executable scripts has "+x" permission in ~/access-UK/alu/ and ~/access-UK/bin
 
