@@ -110,3 +110,8 @@ export CLOUDSDK_PYTHON=/usr/bin/python
 
 #UDAY - TERRAFORM
 #export TF_LOG=DEBUG
+
+#UDAY - KUBERNETES
+source <(kubectl completion zsh)
+alias k=kubectl
+compdef __start_kubectl k #to autocomplete kubectl commands

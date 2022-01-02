@@ -212,6 +212,6 @@ alias st3rtr='ssh admin@$t3rtr'
 alias sdev1='ssh udaytj@$dev1'
 alias sdev2='ssh udaytj@$dev2'
 alias sdev3='ssh udaytj@$dev3'
-alias sess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
+alias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
 alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
 alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
