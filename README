@@ -1,3 +1,11 @@
+0. Clone access-UK repo from the github:
+   - Create ssh key on the new machine: ssh-keygen -t rsa
+   - copy the public key ~/.ssh/id_rsa.pub
+   - on the browser loginto github.com, go to settings by clicking myname on right.
+   - Go to SSH and GPG keys
+   - Create a new SSH key for the machine from where you are going to do git clone.
+     Enter the .ssh/id_rsa.pub that you copied above
+   - Now try to do git clone git@github.com:shaakaud/access-UK.git
 1. ln -s ~/access-UK/vim/vimfiles/vundle_vimrc .vimrc;
    mkdir ~/access-UK/vim/vimbundle;
    ln -s ~/access-UK/vim/vimbundle .vim;
