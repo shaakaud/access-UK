@@ -126,6 +126,7 @@ ln -s ~/access-UK/bin/ ~/bin
     in Enter network credential dialogue box, click More choices, select Use a different username.
     Here give the username should be Computer name\username eg. 10.40.40.101\udaytj (udaytj is the username
     created in the samba server_and then password (samba password created in the samba server ie 10.40.40.101).
+24. Install vncserver - https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-18-04
 23. If you want to install python, https://www.anaconda.com/distribution/
     If you want python IDE, download pycharm - https://www.jetbrains.com/pycharm/download/#section=linux
 24. To export DISPLAY of a linux server to Windows machin - https://seanthegeek.net/234/graphical-linux-applications-bash-ubuntu-windows/
