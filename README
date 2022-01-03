@@ -112,7 +112,7 @@ ln -s ~/access-UK/bin/ ~/bin
     git clone https://github.com/powerline/fonts
     cd fonts; sudo ./install.sh
     Go to terminal profile preferences -> General. Change Font to DejaVu Sans Mono for Powerline Book 12
-20. Install neovim
+20. (OPTIONAL) Install neovim
     cd ~/software/
     git clone https://github.com/neovim/neovim.git
     cd neovim; make; sudo make install
@@ -140,9 +140,24 @@ ln -s ~/access-UK/bin/ ~/bin
     Solution: sudo apt remove xfce4 xfce4-goodies
               sudo apt remove tightvncserver
               Now reinstall again as described in above link.
-23. If you want to install python, https://www.anaconda.com/distribution/
+23. (OPTIONAL) If you want to install ubuntu-desktop, so that when you open the ubuntu-VM from ubuntu hosts virt-manager, it will open in the GUI
+    - https://www.techrepublic.com/article/how-to-install-the-gnome-desktop-on-ubuntu-server-18-04/
+    Issues seen:
+    On vnc client if you use xfce4, the Terminal (gnome-terminal) will not work. When the ubuntu-desktop is running on the virt-manager VM the
+    display of gnome-teriminal always will go there even though if you execute gnome-terminal from vncclient or ssh -Y client.
+    Solution:
+    https://askubuntu.com/questions/1050614/how-to-forward-x-over-ssh-to-run-gnome-terminal-remotely-18-04
+    - gnome-terminal --disable-factory on the vncclient works. Right click, Applications->Run Program and type gnome-terminal --disable-factory
+      (or), create a Launcher, Right click Create Launcher, name->when you type Terminal here, there will be drop downs for Terminal, select that
+      and you will get all information required for gnome-terminal. Just add --disable-factory in the Command along with gnome-terminal.
+    https://unix.stackexchange.com/questions/407831/how-can-i-launch-gnome-terminal-remotely-on-my-headless-server-fails-to-launch
+    - To make it work in ssh. Do ssh -Y <ubuntu VM>. Now do export $(dbus-launch) and then issue gnome-terminal. This creates gnome-terminal
+      using X11 forwarding correctly.
+
+24. (OPTIONAL) If you want to install python, https://www.anaconda.com/distribution/
     If you want python IDE, download pycharm - https://www.jetbrains.com/pycharm/download/#section=linux
-24. To export DISPLAY of a linux server to Windows machin - https://seanthegeek.net/234/graphical-linux-applications-bash-ubuntu-windows/
+
+25. (OPTIONAL) To export DISPLAY of a linux server to Windows machin - https://seanthegeek.net/234/graphical-linux-applications-bash-ubuntu-windows/
     1. Install ubuntu in windows
     2. In bash run: echo "export DISPLAY=localhost:0.0" >> ~/.bashrc
     3. source ~/.bashrc
