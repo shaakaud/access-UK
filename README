@@ -48,13 +48,14 @@ ln -s ~/access-UK/bin/ ~/bin
    ubuntu:sudo apt install tmux
    ln -s ~/access-UK/tmux/tmux.conf ~/.tmux.conf
 
-   #To save tmux sessions to survive reboots
+   #To save tmux sessions AUTOMATICALLY in order to survive reboots (For fresh setup, just do step 1 and just read other steps)
    #1. Install tmux plugin manager -  https://github.com/tmux-plugins/tpm
        - $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
    #2. All required tmux plugins (tmux-resurrect, tmux-continuum) are already present in ~/access-UK/tmux/tmux.conf. No need to add any plugins.
    #3. If you are going to start first tmux session now only, then tmux.conf will get sourced automatically. Otherwise - tmux source ~/.tmux.conf
    #4. If you add new plugins in tmux.conf, and if tmux is already running, then inside tmux, Press prefix + I (capital i, as in Install) to fetch the plugin.
    #5. ******All the stored tmux environments are stored in ~/.tmux/resurrect/
+   #6. If you want to manually save/restore: prefix + Ctrl-s - save, prefix + Ctrl-r - restore
 
 7. Clone Docs-UK. cd; https://gitlab.com/shaakaud/Docs-UK.git;
 
