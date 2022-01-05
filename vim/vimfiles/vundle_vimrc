@@ -259,6 +259,11 @@ function! AirlineThemePatch(palette)
 endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 
-
 "Tagbar - Displays function names. Also displays function names in vim-airline status bar
 nmap <F8> :TagbarToggle<CR>
+
+"python-mode configuration
+"Check code on every save (if file has been modified)
+let g:pymode_lint_on_write = 1
+"Auto open cwindow (quickfix) if any errors have been found
+let g:pymode_lint_cwindow = 0
