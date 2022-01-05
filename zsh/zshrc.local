@@ -113,8 +113,9 @@ export CLOUDSDK_PYTHON=/usr/bin/python
 
 #UDAY - KUBERNETES
 #Set the kubectl alias only if kubectl is installed here
-FILE_KUBECTL=/usr/local/bin/kubectl
-if [[ -f "$FILE_KUBECTL" ]]; then
+FILE_KUBECTL_LOCAL=/usr/local/bin/kubectl
+FILE_KUBECTL=/usr/bin/kubectl
+if [[ -f "$FILE_KUBECTL" ]] || [[ -f "$FILE_KUBECTL_LOCAL" ]]; then
     source <(kubectl completion zsh)
     alias k=kubectl
     compdef __start_kubectl k #to autocomplete kubectl commands
