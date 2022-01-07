@@ -136,6 +136,21 @@ ln -s ~/access-UK/bin/ ~/bin
     Here give the username should be Computer name\username eg. 10.40.40.101\udaytj (udaytj is the username
     created in the samba server_and then password (samba password created in the samba server ie 10.40.40.101).
 24. Install vncserver - https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-18-04
+    chmod 764 /home/udaytj/.vnc/xstartup
+    sudo apt install autocutsel #This is for using Clipboard with xfce and tightvnc (copy paste between windows and vnc)
+    cat /.vnc/xstartup
+    #!/bin/bash
+    unset SESSION_MANAGER
+    unset DBUS_SESSION_BUS_ADDRESS
+    xrdb $HOME/.Xresources
+    /usr/bin/autocutsel -s CLIPBOARD -fork
+    startxfce4 &
+
+    Issue: If whatever change you make in ~/.vnc/xstartup does not take effect.
+    Solution: do below copy after taking backup of /etc/X11/Xvnc-session
+              sudo cp ~/.vnc/xstartup /etc/X11/Xvnc-session
+              Now create a vncserver instance "vncserver -geometry 1920x1080 :2"
+
     Issue: In the xfce vncclient, if you are not able to launch terminal, then follow below workaround.
     Solution: sudo apt remove xfce4 xfce4-goodies
               sudo apt remove tightvncserver
