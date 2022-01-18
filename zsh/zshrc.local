@@ -103,8 +103,7 @@ setopt SHARE_HISTORY
 
 #UDAY - GCP/gcp/gcloud
 #gcp file-analyzer App Engine default service account key ID
-export GOOGLE_APPLICATION_CREDENTIALS="/home/udaytj/gcp-ws/keys/file-analyzer-53005f07db9d.json"
-#export GOOGLE_APPLICATION_CREDENTIALS="/home/udaytj/gcp-ws/keys/malware-sandboxing-102c71938292.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/udaytj/gcp-ws/keys/versa-sandbox-33e8673ecd1d.json"
 #gsutil supports Python version 2.7.x or 3.5 and up
 export CLOUDSDK_PYTHON=/usr/bin/python
 
