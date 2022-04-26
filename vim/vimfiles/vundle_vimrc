@@ -39,6 +39,7 @@ Plugin 'vim-scripts/Mark--Karkat'          " Multiple color search
 Plugin 'xolox/vim-misc'                    " vim-session plugin requires this
 Plugin 'xolox/vim-session'                 " vim session management - mksession
 "Plugin 'ctrlpvim/ctrlp.vim'               "for easy buffer switching
+"tmux - to restore tmux sessions after reboot - tmux-resurrect and tmux-continuum is there in .tmux.conf
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
