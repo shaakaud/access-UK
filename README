@@ -130,8 +130,8 @@ ln -s ~/access-UK/bin/ ~/bin
       public = yes
       writable = yes
     sudo service smbd restart
-    from windows - win-r -> \\ukhost2.ddns.net\bkup or explorer->Networks->right click, Map network drive ->
-    In folder, give \10.40.40.101\ and enable "Connect using different credentials" and then finish. Now when
+    from windows - win-r -> \\ukhost2.ddns.net\bkup or explorer->Network->right click, Map network drive ->
+    In folder, give \\10.40.40.101\ and enable "Connect using different credentials" and then finish. Now when
     in Enter network credential dialogue box, click More choices, select Use a different username.
     Here give the username should be Computer name\username eg. 10.40.40.101\udaytj (udaytj is the username
     created in the samba server_and then password (samba password created in the samba server ie 10.40.40.101).
