@@ -127,6 +127,33 @@ alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 alias py3='python3'
 
 #versa
+
+#my host machines
+export dev1host=10.40.59.1
+export dev1=10.40.59.1 #baremetal dev1host - flexvnf dev
+export dev2host=10.40.59.220
+export dev3host=10.40.40.100
+export test1=10.40.59.2 #sdwan-ha - baremetal/host (kvm VMs - 10.40.59.11, 10.40.59.31, 10.40.59.41, 10.40.59.21, 10.40.59.12, 10.40.59.13)
+export test2=10.48.59.1 #sdwan - baremetal/host (kvm VMs - 10.48.59.11, 10.48.59.31, 10.48.59.41, 10.48.59.21, 10.48.59.13)
+export test3=10.48.59.2 #L2/l2(root/versa123) - baremetal/host (vmware vsphere VMs - 10.48.59.42, 10.48.59.17, 10.48.59.32, 10.48.59.16, 10.48.59.15, 10.48.59.22)
+alias d1='ssh udaytj@ukhost1.ddns.net'
+alias sdev1='ssh udaytj@$dev1'
+
+#my dev VM
+export dev2=10.40.59.3 #VM on dev2host gcp/cloud dev
+export dev3=10.40.40.102 #VM on dev3host - shiva's machine
+alias sdev2='ssh udaytj@$dev2'
+alias sdev3='ssh udaytj@$dev3'
+
+#common builder machines
+export devb2=dev-bionic-builder2 #common builder machine
+export devb4=dev-bionic-builder4 #common builder machine
+export dev7=10.40.199.86 #18.04 bionic dev machine common
+export dev8=10.40.2.25 #18.04 bionic dev machine ashwin kini's
+alias sdevb2='ssh udaytj@$devb2'
+alias sdevb4='ssh udaytj@$devb4'
+
+#testbed vms/VMs
 export t1cs=10.40.59.31
 export t1ctrl=10.40.59.21
 export t1rtr=10.40.59.41
@@ -144,19 +171,28 @@ export t3b3=10.48.59.17
 export t3cs=10.48.59.32
 export t3ctrl=10.48.59.22
 export t3rtr=10.48.59.42
-export dev1=10.40.59.1
-export dev2=10.40.59.3
-export dev3=10.40.40.102
-export devb2=dev-bionic-builder2 #common builder machine
-export devb4=dev-bionic-builder4 #common builder machine
-export dev1host=10.40.59.1
-export dev2host=10.40.59.220
-export dev3host=10.40.40.100
-export dev7=10.40.199.86 #18.04 bionic dev machine common
-export dev8=10.40.2.25 #18.04 bionic dev machine ashwin kini's
-export test1=10.40.59.2 #sdwan-ha
-export test2=10.48.59.1 #sdwan
-export test3=10.48.59.2 #L2
+alias t1='ssh versa@uktest.ddns.net'
+alias ut1='ssh udaytj@ukhost2.ddns.net'
+alias t2='ssh versa@$test2'
+alias st1b1='ssh admin@$t1b1'
+alias st1b2='ssh admin@$t1b2'
+alias st1b3='ssh admin@$t1b3'
+alias st1cs='ssh versa@$t1cs'
+alias st1ctrl='ssh admin@$t1ctrl'
+alias st1rtr='ssh admin@$t1rtr'
+alias st2b1='ssh admin@$t2b1'
+alias st2b3='ssh admin@$t2b3'
+alias st2cs='ssh versa@$t2cs'
+alias st2ctrl='ssh admin@$t2ctrl'
+alias st2rtr='ssh admin@$t2rtr'
+alias st3b1='ssh admin@$t3b1'
+alias st3b2='ssh admin@$t3b2'
+alias st3b3='ssh admin@$t3b3'
+alias st3cs='ssh versa@$t3cs'
+alias st3ctrl='ssh admin@$t3ctrl'
+alias st3rtr='ssh admin@$t3rtr'
+
+#others
 alias gcp='cd $HOME/gcp-ws'
 alias fss='cd $HOME/gcp-ws/msb/fss'
 alias fsslb='cd $HOME/gcp-ws/msb/fsslb'
@@ -190,35 +226,9 @@ alias rnst='cd $WS/services/rns/terraform'
 alias aimlt='cd $WS/services/ml-service/terraform'
 alias fsslog='gcloud logging read 'resource.type=gae_app AND resource.labels.module_id="versa-fss"'  --format "value(timestamp,textPayload)"'
 alias rnslog='gcloud logging read 'resource.type=gae_app AND resource.labels.module_id="versa-rns" AND logName=projects/uday-project-msb3/logs/appengine.googleapis.com%2Fstderr'  --format "value(timestamp,textPayload)"'
-alias t1='ssh versa@ukhost2.ddns.net'
-alias ut1='ssh udaytj@ukhost2.ddns.net'
-alias t2='ssh versa@$test2'
-alias d1='ssh udaytj@ukhost1.ddns.net'
 alias gr='grep -rRI --exclude-dir="\.swp" --exclude-dir={build,vendor}'
 alias grc='grep -R --exclude-dir={build,vendor} DO_NOT_COMMIT'
-alias st1b1='ssh admin@$t1b1'
-alias st1b2='ssh admin@$t1b2'
-alias st1b3='ssh admin@$t1b3'
-alias st1cs='ssh versa@$t1cs'
-alias st1ctrl='ssh admin@$t1ctrl'
-alias st1rtr='ssh admin@$t1rtr'
-alias st2b1='ssh admin@$t2b1'
-alias st2b3='ssh admin@$t2b3'
-alias st2cs='ssh versa@$t2cs'
-alias st2ctrl='ssh admin@$t2ctrl'
-alias st2rtr='ssh admin@$t2rtr'
-alias st3b1='ssh admin@$t3b1'
-alias st3b2='ssh admin@$t3b2'
-alias st3b3='ssh admin@$t3b3'
-alias st3cs='ssh versa@$t3cs'
-alias st3ctrl='ssh admin@$t3ctrl'
-alias st3rtr='ssh admin@$t3rtr'
-alias sdev1='ssh udaytj@$dev1'
-alias sdev2='ssh udaytj@$dev2'
-alias sdev3='ssh udaytj@$dev3'
-alias sdevb2='ssh udaytj@$devb2'
-alias sdevb4='ssh udaytj@$devb4'
-alias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
+lias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
 alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
 alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
 
