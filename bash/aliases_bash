@@ -228,7 +228,7 @@ alias fsslog='gcloud logging read 'resource.type=gae_app AND resource.labels.mod
 alias rnslog='gcloud logging read 'resource.type=gae_app AND resource.labels.module_id="versa-rns" AND logName=projects/uday-project-msb3/logs/appengine.googleapis.com%2Fstderr'  --format "value(timestamp,textPayload)"'
 alias gr='grep -rRI --exclude-dir="\.swp" --exclude-dir={build,vendor}'
 alias grc='grep -R --exclude-dir={build,vendor} DO_NOT_COMMIT'
-lias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
+alias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
 alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
 alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
 
