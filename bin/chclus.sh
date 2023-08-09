@@ -3,8 +3,11 @@
 ################################################################################
 #Author: udaytj@versa-networks.com
 #Usage:
+#export KUBECONFIG=$HOME/gcp-ws/kube-config/kube_config_***
 #~/bin/chclus.sh -c gke
-#~/bin/chclus.sh -c hedc
+#~/bin/chclus.sh -c vgke
+#~/bin/chclus.sh -c kblab
+#~/bin/chclus.sh -c vlab
 ################################################################################
 
 
@@ -37,10 +40,14 @@ echo "Cluster: $cluster"
 echo
 
 export KUBECONFIG=$HOME/gcp-ws/kube-config/kube_config
-if [ $cluster = "hedc" ]; then
-    kubectl config --kubeconfig=$KUBECONFIG use-context kubernetes-admin@kubernetes
+if [ $cluster = "uklab" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_uklab  use-context kubernetes-admin@kubernetes
+elif [ $cluster = "kblab" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_kblab  use-context kubernetes-admin@kubernetes
 elif [ $cluster = "gke" ]; then
-    kubectl config --kubeconfig=$KUBECONFIG use-context gke_uday-msb-2_us-central1_example-cluster
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_uday_msb_2 use-context gke_uday-msb-2_us-central1_apidp-cluster
+elif [ $cluster = "vgke" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_udaytj_apidp_1 use-context gke_udaytj-apidp-1_us-central1_apidp-cluster
+elif [ $cluster = "vlab" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vlab use-context kubernetes-admin@kubernetes
 fi
-
-

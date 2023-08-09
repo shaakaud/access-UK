@@ -39,7 +39,12 @@ Plugin 'vim-scripts/Mark--Karkat'          " Multiple color search
 Plugin 'xolox/vim-misc'                    " vim-session plugin requires this
 Plugin 'xolox/vim-session'                 " vim session management - mksession
 "Plugin 'ctrlpvim/ctrlp.vim'               "for easy buffer switching
-"tmux - to restore tmux sessions after reboot - tmux-resurrect and tmux-continuum is there in .tmux.conf
+"tmux - to restore tmux sessions after reboot/restart - tmux-resurrect and tmux-continuum is there in .tmux.conf. To restore tmux after reboot/restart - just type tmux on the shell after reboot/restart, it will automatically restore the tmux sessions
+"below c9s plugin is Vikube - Operating Kubernetes Cluster from Vim, in Vim - https://github.com/c9s/vikube.vim
+Plugin 'c9s/helper.vim'
+Plugin 'c9s/treemenu.vim'
+Plugin 'c9s/vikube.vim'
+"Plugin 'fatih/vim-go' "https://github.com/fatih/vim-go
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -83,7 +88,7 @@ set laststatus=2
 set colorcolumn=80
 "match ErrorMsg '\%>80v.\+'
 
-colorscheme night
+"colorscheme night
 "colorscheme White
 set nowrap
 set tw=0
@@ -137,6 +142,7 @@ let g:bufExplorerSplitHorzSize=10
 let g:bufExplorerSortBy='mru'        " Sort by most recently used.
 let g:bufExplorerDefaultHelp=0       " Do not show default help.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
+" :bnext and :bprev are vim commands to navigate the vim buffers and \bs is from bufexplorer plugin
 :map <S-Right> :bnext<CR>
 :map <S-Left>  :bprev<CR>
 :map <S-Up>  \bs
@@ -241,6 +247,7 @@ let g:airline#extensions#default#section_truncate_width = {
       \ }
 "Set vim-airline theme - You can also change with :AirlineTheme <theme name>
 let g:airline_theme='solarized'
+"let g:airline_theme='gruvbox'
 "let g:airline_theme='light'
 function! AirlineThemePatch(palette)
   if g:airline_theme == 'solarized'

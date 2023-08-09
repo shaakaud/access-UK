@@ -57,7 +57,8 @@ source ~/access-UK/zsh/zsh-git-prompt/zshrc.sh
 #PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]$(get_pwd) %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}=>$ %{$reset_color%}'
 
 #With just current working directory
-PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_super_status)%{$fg_bold[blue]%}=>$ %{$reset_color%}'
+#PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_super_status)%{$fg_bold[blue]%}=>$ %{$reset_color%}'
+PROMPT='${ret_status}%{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[blue]%}%{$fg_bold[blue]%}=>$ %{$reset_color%}'
 
 function get_pwd() {
   echo "${PWD/$HOME/~}"
@@ -103,7 +104,7 @@ setopt SHARE_HISTORY
 
 #UDAY - GCP/gcp/gcloud
 #gcp file-analyzer App Engine default service account key ID
-export GOOGLE_APPLICATION_CREDENTIALS="/home/udaytj/gcp-ws/keys/versa-sandbox-33e8673ecd1d.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/udaytj/gcp-ws/keys/qa-puja-11-bf134f97edeb.json"
 #gsutil supports Python version 2.7.x or 3.5 and up
 export CLOUDSDK_PYTHON=/usr/bin/python
 
@@ -119,3 +120,7 @@ if [[ -f "$FILE_KUBECTL" ]] || [[ -f "$FILE_KUBECTL_LOCAL" ]]; then
     alias k=kubectl
     compdef __start_kubectl k #to autocomplete kubectl commands
 fi
+
+#UDAY GOLANG/golang/go
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin

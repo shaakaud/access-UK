@@ -116,6 +116,7 @@ ln -s ~/access-UK/bin/ ~/bin
     cd ~/software/
     git clone https://github.com/neovim/neovim.git
     cd neovim; make; sudo make install
+    ln -s ~/access-UK/neovim/config ~/.config/nvim;
 21. Note - vim-fugitive plugin works with git version > 2.10.2
 22. samba server - to access linux folders from windows
     sudo apt-get install samba
