@@ -3,8 +3,8 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-	'pyright',
-        'pylsp',
+--	'pyright',
+     'pylsp',
 	'golangci_lint_ls',
 	'gopls',
 	'clangd',
@@ -29,6 +29,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
+cmp_mappings['<C-n>'] = nil
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings
@@ -47,18 +48,18 @@ lsp.set_preferences({
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
-  vim.keymap.set("n", "gD", function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+  vim.keymap.set("n", "gD", function() vim.lsp.buf.definition() end, opts) -- Jumps to the definition of the symbol under the cursor.
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts) -- Displays hover information about the symbol under the cursor
+  vim.keymap.set("n", "<leader>vs", function() vim.lsp.buf.workspace_symbol() end, opts) -- Lists all symbols in the current workspace in the quickfix window.
   -- To open the error in a separate small window. Need to run this command on the line where error/warning/hints are seen
-  vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+  vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts) -- Show diagnostics in a floating window.
   -- To navigate in the above error window
-  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-  vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set("i", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts) -- Move to the next diagnostic.
+  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts) -- Move to the previous diagnostic in the current buffer
+  vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts) -- Selects a code action available at the current cursor position
+  vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts) -- Lists all the references to the symbol under the cursor
+  vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts) -- rename feature may not be supported by all the LSP servers. Check LSP server documentation.
+  vim.keymap.set("i", "<leader>h", function() vim.lsp.buf.signature_help() end, opts) -- Displays signature information about the symbol under the cursor
 end)
 
 lsp.setup()

@@ -1,7 +1,7 @@
 -- Lua Configuration (init.lua)
 
 require("udaytj.remap")
-require'lspconfig'.pyright.setup{}
+-- require'lspconfig'.pyright.setup{}
 require'lspconfig'.pylsp.setup{}
 require'lspconfig'.golangci_lint_ls.setup{}
 require'lspconfig'.gopls.setup{}
@@ -39,6 +39,8 @@ vim.g.solarized_termcolors=16  -- To set solaraized color scheme
 vim.g.solarized_termtrans=1    -- To set solaraized color scheme
 
 -- global key bindings
+-- <C-Space> - to force autocomplete. This is coming from cmp package. :help cmp for more info
+
 -- look into :help wildmenu or :help wildchar to find default keybindings in command-line mode
 -- vim.api.nvim_set_keymap('c', '<Down>', '<C-n>', { noremap = true, silent = true }) -- Remap wildmenu navigation keys (Down arrow key is remapped to the <C-n> (Ctrl + n))
 -- vim.api.nvim_set_keymap('c', '<Up>', '<C-p>', { noremap = true, silent = true }) -- Remap wildmenu navigation keys (Up arrow key is remapped to <C-p> (Ctrl + p))

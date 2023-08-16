@@ -25,7 +25,7 @@ require('telescope').setup({
       -- Options for the buffers picker
       theme = "dropdown", -- Use the dropdown theme for the picker
       previewer = false, -- Disable buffer previews in the picker
-      sort_lastused = true, -- Sort buffers based on last used time
+      sort_mru = true -- Sorts all buffers after  most receent used
     },
     -- You can define options for other pickers here if needed
   },

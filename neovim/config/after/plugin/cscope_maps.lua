@@ -31,12 +31,12 @@ vim.cmd([[
 ]])
 
 -- Check if cscope.out exists one level up and add it to cscope
--- if vim.fn.has("cscope") and vim.fn.filereadable("../cscope.out") == 1 then
+-- if vim.fn.has("cscope") and vim.fn.filereadable("cscope.out") == 1 then
 --     vim.api.nvim_command("cs add .. ..")
 -- end
 
 -- Check if tags file exists one level up and add it to tags
-if vim.fn.filereadable("../tags") == 1 then
+if vim.fn.filereadable("tags") == 1 then
     vim.o.tags = vim.o.tags .. ";../tags"
 end
 
