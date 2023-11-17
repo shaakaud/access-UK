@@ -135,7 +135,6 @@ alias py3='python3'
 export dev1host=10.40.59.1
 export dev1=10.40.59.1 #baremetal dev1host - flexvnf dev
 export dev2host=10.40.59.220
-export dev3host=10.40.73.2 #veera's machine
 export dev4host=10.40.40.100 #shiva's machine
 export test1=10.40.59.2 #sdwan-ha - baremetal/host (kvm VMs - 10.40.59.11, 10.40.59.31, 10.40.59.41, 10.40.59.21, 10.40.59.12, 10.40.59.13)
 export test2=10.48.59.1 #sdwan - baremetal/host (kvm VMs - 10.48.59.11, 10.48.59.31, 10.48.59.41, 10.48.59.21, 10.48.59.13)
@@ -145,10 +144,10 @@ alias sdev1='ssh udaytj@$dev1'
 
 #my dev VM
 export dev2=10.40.59.3 #VM on dev2host gcp/cloud dev
-export dev3=10.40.73.2 #VM on dev3host - veera's machine
+export dev3=10.40.73.2 #VM - veera's machine
 export dev4=10.40.40.102 #VM on dev4host - shiva's machine
 alias sdev2='ssh udaytj@$dev2'
-alias sdev3='ssh udaytj@$dev3'
+alias sdev3='ssh uday@$dev3'
 alias sdev4='ssh udaytj@$dev4'
 
 #common builder machines
