@@ -8,6 +8,7 @@
 #~/bin/chclus.sh -c vgke
 #~/bin/chclus.sh -c kblab
 #~/bin/chclus.sh -c vlab
+#~/bin/chclus.sh -c vprod
 ################################################################################
 
 
@@ -50,4 +51,6 @@ elif [ $cluster = "vgke" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_udaytj_apidp_1 use-context gke_udaytj-apidp-1_us-central1_apidp-cluster
 elif [ $cluster = "vlab" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vlab use-context kubernetes-admin@kubernetes
+elif [ $cluster = "vprod" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vprod use-context kubernetes-admin@kubernetes
 fi

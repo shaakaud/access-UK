@@ -9,8 +9,6 @@ lsp.ensure_installed({
 	'gopls',
 	'clangd',
 	'helm_ls',
-	'terraformls',
-	'tflint',
 	'jsonls',
 })
 
@@ -65,5 +63,10 @@ end)
 lsp.setup()
 
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = true,
+    update_in_insert = false
+--    virtual_text = {
+--      prefix = " » ",
+--      spacing = 2,
+--    },
 })

@@ -8,7 +8,7 @@ echo "done"
 
 echo -n "Generating files list .."
 (find . -type f) | \
-    egrep -i '\.([chlys](xx|pp)*|go|cc|hh|py|xml|yang|ini|proto|sh|yaml|tf)$' | \
+    egrep -i '\.([chlys](xx|pp)*|go|cc|hh|py|xml|yang|ini|proto|sh|yaml|tf|tfvars)$' | \
     sed -e '/\/CVS\//d' -e '/\/RCS\//d' -e '/waf/d' -e 's/^\.\///' -r -e '/^(lib|bin|deps|objs|build|\.git|\.hg)\//d' | \
     sort > $LIST_FILE
 echo "done"

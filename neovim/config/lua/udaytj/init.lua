@@ -1,14 +1,13 @@
 -- Lua Configuration (init.lua)
 
 require("udaytj.remap")
+require("udaytj.set")
 -- require'lspconfig'.pyright.setup{}
 require'lspconfig'.pylsp.setup{}
 require'lspconfig'.golangci_lint_ls.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.helm_ls.setup{}
 require'lspconfig'.jsonls.setup{}
-require'lspconfig'.terraformls.setup{}
-require'lspconfig'.tflint.setup{}
 require'lspconfig'.clangd.setup{}
 require('cscope_maps').setup()
 
