@@ -9,6 +9,8 @@ lsp.ensure_installed({
 	'gopls',
 	'clangd',
 	'helm_ls',
+	'terraformls',
+	'tflint',
 	'jsonls',
 })
 
