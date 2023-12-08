@@ -4,14 +4,14 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 --	'pyright',
-     'pylsp',
-	'golangci_lint_ls',
-	'gopls',
-	'clangd',
-	'helm_ls',
-	'terraformls',
-	'tflint',
-	'jsonls',
+    'pylsp',
+    'golangci_lint_ls',
+    'gopls',
+    'clangd',
+    'helm_ls',
+    'terraformls',
+    'tflint',
+--    'jsonls',
 })
 
 -- Fix Undefined global 'vim'
