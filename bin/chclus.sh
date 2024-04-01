@@ -8,8 +8,10 @@
 #~/bin/chclus.sh -c vgke
 #~/bin/chclus.sh -c kblab
 #~/bin/chclus.sh -c vlab1
-#~/bin/chclus.sh -c vlab2
+#~/bin/chclus.sh -c devbm1
+#~/bin/chclus.sh -c devbm2
 #~/bin/chclus.sh -c vprod
+#~/bin/chclus.sh -c vinline
 ################################################################################
 
 
@@ -52,8 +54,12 @@ elif [ $cluster = "vgke" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_udaytj_apidp_1 use-context gke_udaytj-apidp-1_us-central1_apidp-cluster
 elif [ $cluster = "vlab1" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vlab1 use-context kubernetes-admin@kubernetes
-elif [ $cluster = "vlab2" ]; then
-    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vlab2 use-context kubernetes-admin@kubernetes
+elif [ $cluster = "devbm1" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_devbm1 use-context kubernetes-admin@kubernetes
+elif [ $cluster = "devbm2" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_devbm2 use-context kubernetes-admin@kubernetes
 elif [ $cluster = "vprod" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vprod use-context kubernetes-admin@kubernetes
+elif [ $cluster = "vinline" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vinline use-context kubernetes-admin@kubernetes
 fi

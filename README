@@ -117,6 +117,10 @@ ln -s ~/access-UK/bin/ ~/bin
     git clone https://github.com/neovim/neovim.git
     cd neovim; make; sudo make install
     ln -s ~/access-UK/neovim/config ~/.config/nvim;
+    Issue: E492: Not an editor command: PackerSync --> error is seen when yo do :PackerSync from neovim window
+    Workaround:
+      If you dont find :PackerInstall or :PackerSync on neovim window, then go to ~/.config/nvim/lua/udaytj/packer.lua and then do :so. Now you will be able to do :PackerSync and :PackerInstall.
+      Refer - https://github.com/wbthomason/packer.nvim/issues/834
 21. Note - vim-fugitive plugin works with git version > 2.10.2
 22. samba server - to access linux folders from windows
     sudo apt-get install samba

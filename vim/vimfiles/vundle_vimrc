@@ -154,6 +154,7 @@ imap <S-Insert>        <ESC><S-Insert>i
 
 "vim-fugitive plugin command - To see git diff of a file type :<F9> in vim
 :cmap <F9> :tabnew %\|Gdiff<CR>
+set diffopt+=vertical
 
 "for fzf
 set rtp+=~/.fzf
