@@ -131,7 +131,7 @@ alias py3='python3'
 
 #versa
 
-#my host machines
+#versa: my host machines
 export dev1host=10.40.59.1
 export dev1=10.40.59.1 #baremetal dev1host - flexvnf dev
 export dev2host=10.40.59.220
@@ -150,7 +150,7 @@ alias sdev2='ssh udaytj@$dev2'
 alias sdev3='ssh uday@$dev3'
 alias sdev4='ssh udaytj@$dev4'
 
-#common builder machines
+#versa: common builder machines
 export devb2=dev-bionic-builder2 #common builder machine
 export devb4=dev-bionic-builder4 #common builder machine
 export dev7=10.40.199.86 #18.04 bionic dev machine common
@@ -158,7 +158,7 @@ export dev8=10.40.2.25 #18.04 bionic dev machine ashwin kini's
 alias sdevb2='ssh udaytj@$devb2'
 alias sdevb4='ssh udaytj@$devb4'
 
-#testbed vms/VMs
+#versa: testbed vms/VMs
 export t1cs=10.40.59.31
 export t1ctrl=10.40.59.21
 export t1rtr=10.40.59.41
@@ -197,11 +197,8 @@ alias st3cs='ssh versa@$t3cs'
 alias st3ctrl='ssh admin@$t3ctrl'
 alias st3rtr='ssh admin@$t3rtr'
 
-#others
+#versa: others
 alias gcp='cd $HOME/gcp-ws'
-alias fss='cd $HOME/gcp-ws/msb/fss'
-alias fsslb='cd $HOME/gcp-ws/msb/fsslb'
-alias rns='cd $HOME/gcp-ws/msb/rns'
 alias img='cd ~/images/'
 alias base='cd $WS'
 alias lib='cd $WS/usr/lib'
@@ -224,6 +221,7 @@ alias str='cd $WS/usr/module/strm/'
 alias frs='cd $WS/services/frs/src'
 alias fss='cd $WS/services/fss/src'
 alias rns='cd $WS/services/rns/src'
+alias rnsk='cd $WS/services/rns_k8s/src'
 alias pandora='cd $WS/services/pandora/src'
 alias aiml='cd $WS/services/ml-service/src'
 alias frst='cd $WS/services/frs/terraform'
@@ -239,6 +237,19 @@ alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
 alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
 alias fsstest='cd /home/udaytj/gcp-ws/upvt1/msb/fss/test'
 alias fsswsclient='cd /home/udaytj/gcp-ws/upvt1/msb/rns/test/ws_client'
+
+#versa: asc setups
+alias bm1us='ssh versa@10.48.190.6' #bm1-us.apidp.versa-test.net
+alias dbm1='ssh versa@10.43.80.51' #dev-bm1.apidp.versa-test.net
+alias dbm2='ssh versa@10.43.80.52' #dev-bm2.apidp.versa-test.net
+alias gartner='ssh versa@10.43.151.50' #prod1-us.asc.versanow.net
+alias inline='ssh versa@10.43.160.1' #asc-inline.us.versanow.net
+alias qbm1='ssh versa@10.40.184.126' #bm1-qa-us.apidp.versa-test.net
+alias qbm2='ssh versa@10.40.178.151' #bm1-qa-reg-30.apidp.versa-test.net, ~/gitLab/APIDP
+alias qbm1blr='ssh versa@10.192.105.128' #bm1-qa-blr.apidp.versa-test.net
+alias rbi='ssh versa@10.43.155.1' #rb1-us.apidp.versa-test.net
+alias ui='ssh versa@10.43.5.101' #bm1-us-ui-dev.apidp.versa-test.net
+
 
 #kubernetes
 alias k="kubectl"

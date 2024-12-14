@@ -12,6 +12,7 @@
 #~/bin/chclus.sh -c devbm2
 #~/bin/chclus.sh -c vprod
 #~/bin/chclus.sh -c vinline
+#~/bin/chclus.sh -c esxi
 ################################################################################
 
 
@@ -62,4 +63,6 @@ elif [ $cluster = "vprod" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vprod use-context kubernetes-admin@kubernetes
 elif [ $cluster = "vinline" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_vinline use-context kubernetes-admin@kubernetes
+elif [ $cluster = "esxi" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_esxi use-context kubernetes-admin@kubernetes
 fi
