@@ -141,15 +141,7 @@ ln -s ~/access-UK/bin/ ~/bin
     Here give the username should be Computer name\username eg. 10.40.40.101\udaytj (udaytj is the username
     created in the samba server_and then password (samba password created in the samba server ie 10.40.40.101).
 24. Install vncserver - https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-18-04
-    chmod 764 /home/udaytj/.vnc/xstartup
     sudo apt install autocutsel #This is for using Clipboard with xfce and tightvnc (copy paste between windows and vnc)
-    cat /.vnc/xstartup
-    #!/bin/bash
-    unset SESSION_MANAGER
-    unset DBUS_SESSION_BUS_ADDRESS
-    xrdb $HOME/.Xresources
-    /usr/bin/autocutsel -s CLIPBOARD -fork
-    startxfce4 &
     #Point the vnc config to access-UK xstartup config
     ln -s ~/access-UK/vnc/xstartup ~/.vnc/xstartup
 
@@ -157,11 +149,19 @@ ln -s ~/access-UK/bin/ ~/bin
     Solution: do below copy after taking backup of /etc/X11/Xvnc-session
               sudo cp ~/.vnc/xstartup /etc/X11/Xvnc-session
               Now create a vncserver instance "vncserver -geometry 1920x1080 :2"
+    (or)
 
-    Issue: In the xfce vncclient, if you are not able to launch terminal, then follow below workaround.
-    Solution: sudo apt remove xfce4 xfce4-goodies
-              sudo apt remove tightvncserver
-              Now reinstall again as described in above link.
+    TigerVNC (only one vnc connection allowed here):
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    steps to install tigervnc and gnome-classing in ubuntu:
+    sudo apt remove tightvncserver #uninstall tightvncserver if it is installed
+    #install gnome-classic (better GUI compared to gnome)
+    sudo apt install gnome-shell-extensions
+    sudo apt install tigervnc-standalone-server
+    sudo apt install dbus-x11
+    #below command is to start the vncserver - equivalent of "vncserver -geometry 1920x1080 :1" command. .vnc/xstartup file is not required for this.
+    tigervncserver -xstartup /usr/bin/gnome-session-classic -SecurityTypes VncAuth,TLSVnc -geometry 1600x900 -localhost no
+
 23. (OPTIONAL) If you want to install ubuntu-desktop, so that when you open the ubuntu-VM from ubuntu hosts virt-manager, it will open in the GUI
     - https://www.techrepublic.com/article/how-to-install-the-gnome-desktop-on-ubuntu-server-18-04/
     Issues seen:
