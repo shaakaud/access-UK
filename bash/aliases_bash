@@ -130,7 +130,6 @@ alias lg='/home/udayakut/software/git_2.10.2/bin/git'
 alias py3='python3'
 
 #versa
-
 #versa: my host machines
 export dev1host=10.40.59.1
 export dev1=10.40.59.1 #baremetal dev1host - flexvnf dev
@@ -254,5 +253,17 @@ alias ui='ssh versa@10.43.5.101' #bm1-us-ui-dev.apidp.versa-test.net
 #kubernetes
 alias k="kubectl"
 alias kl="kubectl logs -f"
+alias ki="kubectl -n asc-infra"
+alias ka="kubectl -n apidp"
+alias klh="kubectl logs -f -n hawkeye"
+alias kla="kubectl logs -f -n apidp"
+alias kgh="kubectl get pods -n hawkeye"
+alias kga="kubectl get pods -n apidp"
+alias kli="kubectl logs -f -n asc-infra"
+alias kgi="kubectl get pods -n asc-infra"
 alias kd="kubectl describe pods"
+alias kdi="kubectl describe pods -n asc-infra"
+alias kda="kubectl describe pods -n apidp"
 alias kdel="kubectl delete pods"
+alias kdeli="kubectl delete pods -n asc-infra"
+alias kdela="kubectl delete pods -n apidp"
