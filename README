@@ -150,6 +150,8 @@ ln -s ~/access-UK/bin/ ~/bin
     xrdb $HOME/.Xresources
     /usr/bin/autocutsel -s CLIPBOARD -fork
     startxfce4 &
+    #Point the vnc config to access-UK xstartup config
+    ln -s ~/access-UK/vnc/xstartup ~/.vnc/xstartup
 
     Issue: If whatever change you make in ~/.vnc/xstartup does not take effect.
     Solution: do below copy after taking backup of /etc/X11/Xvnc-session

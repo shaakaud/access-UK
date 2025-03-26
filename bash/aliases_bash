@@ -37,7 +37,7 @@ alias ls='ls --color -F'
 
 #alias vi='gv'
 #alias vi='vim'
-alias vi='/usr/local/nvim'
+alias vi='/usr/local/bin/nvim'
 alias gv='gvim'
 alias nv='/usr/local/nvim'
 alias gnv='nvim-qt'

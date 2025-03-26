@@ -1,13 +1,30 @@
-!/bin/sh
+#!/bin/bash
 
-# Uncomment the following two lines for normal desktop:
-# unset SESSION_MANAGER
-# exec /etc/X11/xinit/xinitrc
+###############################################################################
+# You may need to install gnome utils
+# sudo apt update && sudo apt upgrade -y
+#sudo apt install ubuntu-gnome-desktop -y
+#During installation, you may be asked to choose a display manager: GDM3 (GNOME Display Manager) → Recommended
+#sudo apt install gnome-panel
+#sudo apt install gnome-settings-daemon
+#sudo apt install metacity
+#sudo apt install nautilus
+#sudo apt install gnome-terminal
+#sudo apt install xterm
+#sudo apt install x11-xserver-utils
+#sudo apt install x11-xserver-utils
+###############################################################################
 
-gnome-panel &ngnome-settings-daemon &nmetacity &nnautilus &ngnome-terminal &n[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+export XKL_XMODMAP_DISABLE=1
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+gnome-panel &
+gnome-settings-daemon &
+metacity &
+nautilus &
+gnome-terminal &n[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
 [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
 xsetroot -solid grey
 vncconfig -iconic &
-x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
-x-window-manager &
-
+x-terminal-emulator -geometry 80x24+10+10 -ls title "$VNCDESKTOP Desktop"&
+x-window-manager&
