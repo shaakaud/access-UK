@@ -65,7 +65,7 @@ end)
 lsp.setup()
 
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = false,
     update_in_insert = false
 --    virtual_text = {
 --      prefix = " » ",

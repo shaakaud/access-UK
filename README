@@ -155,12 +155,18 @@ ln -s ~/access-UK/bin/ ~/bin
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     steps to install tigervnc and gnome-classing in ubuntu:
     sudo apt remove tightvncserver #uninstall tightvncserver if it is installed
-    #install gnome-classic (better GUI compared to gnome)
-    sudo apt install gnome-shell-extensions
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install ubuntu-gnome-desktop -y
+    sudo apt install gnome-tweaks -y
+    sudo apt install gnome-shell-extensions #install gnome-classic (better GUI compared to gnome)
     sudo apt install tigervnc-standalone-server
     sudo apt install dbus-x11
     #below command is to start the vncserver - equivalent of "vncserver -geometry 1920x1080 :1" command. .vnc/xstartup file is not required for this.
-    tigervncserver -xstartup /usr/bin/gnome-session-classic -SecurityTypes VncAuth,TLSVnc -geometry 1600x900 -localhost no
+    tigervncserver -xstartup /usr/bin/gnome-session-classic -SecurityTypes VncAuth,TLSVnc -geometry 1920x1080 -localhost no
+
+23. access-UK/bin folder has pwd.sh. Below source commands stores the 'pwd' in $WS. Now if you use alias "base" as defined in aliases_bash,
+    it will return to the $WS. Also the aliases_bash file uses $WS to navigate to different folders.
+    - source ~/.zshrc && source ~/bin/pwd.sh
 
 23. (OPTIONAL) If you want to install ubuntu-desktop, so that when you open the ubuntu-VM from ubuntu hosts virt-manager, it will open in the GUI
     - https://www.techrepublic.com/article/how-to-install-the-gnome-desktop-on-ubuntu-server-18-04/

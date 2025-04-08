@@ -131,23 +131,22 @@ alias py3='python3'
 
 #versa
 #versa: my host machines
-export dev1host=10.40.59.1
-export dev1=10.40.59.1 #baremetal dev1host - flexvnf dev
-export dev2host=10.40.59.220
-export dev4host=10.40.40.100 #shiva's machine
-export test1=10.40.59.2 #sdwan-ha - baremetal/host (kvm VMs - 10.40.59.11, 10.40.59.31, 10.40.59.41, 10.40.59.21, 10.40.59.12, 10.40.59.13)
+export dev1host=10.70.59.1
+export dev2host=10.70.59.2
+export shivahost=10.70.40.100 #shiva's machine
+alias sdev1host='ssh udaytj@$dev1host'
+alias sdev2host='ssh udaytj@$dev2host'
+export test1=10.70.59.2 #sdwan-ha - baremetal/host (kvm VMs - 10.40.59.11, 10.40.59.31, 10.40.59.41, 10.40.59.21, 10.40.59.12, 10.40.59.13)
 export test2=10.48.59.1 #sdwan - baremetal/host (kvm VMs - 10.48.59.11, 10.48.59.31, 10.48.59.41, 10.48.59.21, 10.48.59.13)
 export test3=10.48.59.2 #L2/l2(root/versa123) - baremetal/host (vmware vsphere VMs - 10.48.59.42, 10.48.59.17, 10.48.59.32, 10.48.59.16, 10.48.59.15, 10.48.59.22)
-alias d1='ssh udaytj@ukhost1.ddns.net'
-alias sdev1='ssh udaytj@$dev1'
 
 #my dev VM
-export dev2=10.40.59.3 #VM on dev2host gcp/cloud dev
-export dev3=10.40.73.2 #VM - veera's machine
-export dev4=10.40.40.102 #VM on dev4host - shiva's machine
+export dev1=10.70.59.11 #baremetal dev1host - cloud dev
+export dev2=10.70.59.21 #VM on dev2host flexvnf dev
+export shiva=10.40.40.102 #VM on shivahost - shiva's machine
+alias sdev1='ssh udaytj@$dev1'
 alias sdev2='ssh udaytj@$dev2'
-alias sdev3='ssh uday@$dev3'
-alias sdev4='ssh udaytj@$dev4'
+alias sshiva='ssh udaytj@$shiva'
 
 #versa: common builder machines
 export devb2=dev-bionic-builder2 #common builder machine
@@ -233,7 +232,8 @@ alias gr='grep -rRI --exclude-dir="\.swp" --exclude-dir={build,vendor,.mypy_cach
 alias grc='grep -R --exclude-dir={build,vendor,.mypy_cache} DO_NOT_COMMIT'
 alias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
 alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
-alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
+#alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
+alias vncs='tigervncserver -xstartup /usr/bin/gnome-session-classic -SecurityTypes VncAuth,TLSVnc -geometry 1920x1080 -localhost no'
 alias fsstest='cd /home/udaytj/gcp-ws/upvt1/msb/fss/test'
 alias fsswsclient='cd /home/udaytj/gcp-ws/upvt1/msb/rns/test/ws_client'
 
