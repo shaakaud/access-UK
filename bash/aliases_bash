@@ -239,8 +239,8 @@ alias fsswsclient='cd /home/udaytj/gcp-ws/upvt1/msb/rns/test/ws_client'
 
 #versa: asc setups
 alias bm1us='ssh versa@10.48.190.6' #bm1-us.apidp.versa-test.net
-alias dbm1='ssh versa@10.43.80.51' #dev-bm1.apidp.versa-test.net
-alias dbm2='ssh versa@10.43.80.52' #dev-bm2.apidp.versa-test.net
+alias dbm1='ssh versa@172.20.35.6' #dev-bm1.apidp.versa-test.net
+alias dbm2='ssh versa@172.20.35.11' #dev-bm2.apidp.versa-test.net
 alias gartner='ssh versa@10.43.151.50' #prod1-us.asc.versanow.net
 alias inline='ssh versa@10.43.160.1' #asc-inline.us.versanow.net
 alias qbm1='ssh versa@10.40.184.126' #bm1-qa-us.apidp.versa-test.net

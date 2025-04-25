@@ -66,7 +66,9 @@ lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = false,
-    update_in_insert = false
+    update_in_insert = false,
+    underline = false,
+    signs = false,
 --    virtual_text = {
 --      prefix = " » ",
 --      spacing = 2,

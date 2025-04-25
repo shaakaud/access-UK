@@ -25,6 +25,12 @@ __git_files () {
       _wanted files expl 'local files' _files
 }
 
+# Fix Home/End keys in tmux or terminals sending weird codes
+bindkey '\e[H' beginning-of-line
+bindkey '\e[F' end-of-line
+bindkey '\eOH' beginning-of-line
+bindkey '\eOF' end-of-line
+
 #autojump
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
