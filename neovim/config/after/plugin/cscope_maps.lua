@@ -6,8 +6,8 @@ require'cscope_maps'.setup {
 
   -- cscope related defaults
   cscope = {
-    -- location of cscope db file
-    db_file = "cscope.out",
+    -- location of cscope db file. cscope db file is one level up from the current working directory
+    db_file = "../cscope.out",
     -- cscope executable
     exec = "cscope", -- "cscope" or "gtags-cscope"
     -- choose your fav picker

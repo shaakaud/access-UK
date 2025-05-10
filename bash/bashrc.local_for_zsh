@@ -52,7 +52,7 @@ else
            export CSCOPE_EDITOR=/usr/bin/vim
         fi
     fi
-    alias ctags='~/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
+    alias ctags='/usr/bin/ctags'
 fi
 
 #UDAY - To make c-R-Arrow, C-L-Arrow in Terminal for cscope searches
