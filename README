@@ -96,7 +96,7 @@ ln -s ~/access-UK/bin/ ~/bin
 
 16. fzf: Install fzf from https://github.com/junegunn/fzf
     a. cd ~/software; git clone --depth 1 https://github.com/junegunn/fzf.git; cd fzf; ./install
-    b. ln -s ~/software/fzf .fzf
+    b. ln -s ~/software/fzf ~/.fzf
     c. After installing fzf, make sure this installation has not modified my ~/.bashrc and ~/.zshrc. My git hub bashrc.local and zshrc.local already should have these changes.
     d. mkdir ~/tmuxbuffer/; touch ~/tmuxbuffer/resultcmdsh;
     e. sudo yum install inotify-tools
@@ -115,12 +115,34 @@ ln -s ~/access-UK/bin/ ~/bin
 20. (OPTIONAL) Install neovim
     cd ~/software/
     git clone https://github.com/neovim/neovim.git
+    sudo apt update
+    sudo apt install cmake
     cd neovim; make; sudo make install
-    ln -s ~/access-UK/neovim/config ~/.config/nvim;
-    Issue: E492: Not an editor command: PackerSync --> error is seen when yo do :PackerSync from neovim window
-    Workaround:
-      If you dont find :PackerInstall or :PackerSync on neovim window, then go to ~/.config/nvim/lua/udaytj/packer.lua and then do :so. Now you will be able to do :PackerSync and :PackerInstall.
-      Refer - https://github.com/wbthomason/packer.nvim/issues/834
+    #To use uday's neovim config
+        ln -s ~/access-UK/neovim/config ~/.config/nvim;
+        Issue: E492: Not an editor command: PackerSync --> error is seen when yo do :PackerSync from neovim window
+        Workaround:
+          If you dont find :PackerInstall or :PackerSync on neovim window, then go to ~/.config/nvim/lua/udaytj/packer.lua and then do :so. Now you will be able to do :PackerSync and :PackerInstall.
+          Refer - https://github.com/wbthomason/packer.nvim/issues/834
+    #To use (nvchad's) NvChad's neovim config (https://nvchad.com/ <-- Docs and Features link available on top of this page)
+        - Install ripgrep (https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation)
+           - $ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep_14.1.0-1_amd64.deb
+             $ sudo dpkg -i ripgrep_14.1.0-1_amd64.deb
+        - Install pyright which will be used by lsp server later - sudo pip3 install pyright
+        - Install clangd (used by the lsp.lua)
+          - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          - echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" | sudo tee /etc/apt/sources.list.d/llvm.list
+          - sudo apt update
+          - sudo apt install clangd
+        - Delete or rename old neovim config folder - mv ~/.config/nvim ~/.config/oldnvim
+        - cd ~/software; git clone https://github.com/shaakaud/starter ~/software/nvimcfg/starter
+        - ln -s ~/software/nvimcfg/starter ~/.config/nvim
+        - Open neovim, lazy vim will install all plugins. Press q and then run :MasonInstallAll.
+        - you can find various theme names in https://nvchad.com/themes. Change the theme name at ~/software/nvimcfg/starter/lua/chadrc.lua and save file. Effect will be immediate.
+        - Note: With nvchad the select text copy/paste may not work (based on the terminal mouse settings). Work around is as below:
+          - GNOME Terminal	Shift + Mouse Drag
+          - iTerm2 (macOS)	Use Option + Mouse Drag (or set Shift in preferences)
+
 21. Note - vim-fugitive plugin works with git version > 2.10.2
 22. samba server - to access linux folders from windows
     sudo apt-get install samba

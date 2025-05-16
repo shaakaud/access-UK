@@ -4,14 +4,14 @@
    #google for "oh my zsh", click the first link and follow the steps (authored by robbyrussell - https://github.com/ohmyzsh/ohmyzsh/blob/master/README.md
 3. curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-4. link ~/.zshrc to ~/access-UK/zsh/zshrc -> ln -s ~/access-UK/zsh/zshrc .zshrc
+4. link ~/.zshrc to ~/access-UK/zsh/zshrc -> ln -s ~/access-UK/zsh/zshrc ~/.zshrc
 
 5. cd ~/software
    curl https://github.com/git/git/raw/master/contrib/completion/git-completion.zsh -OL
    cd ~/
    ln -s ~/software/git-completion.zsh git-completion.zsh
 
-6. ln -s ~/access-UK/zsh/zshrc.local .zshrc.local
+6. ln -s ~/access-UK/zsh/zshrc.local ~/.zshrc.local
 
 7. Install autojump following instructions in the below webpage
    https://github.com/joelthelion/autojump
