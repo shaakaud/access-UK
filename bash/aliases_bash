@@ -139,6 +139,8 @@ alias sdev2host='ssh udaytj@$dev2host'
 export test1=10.70.59.2 #sdwan-ha - baremetal/host (kvm VMs - 10.40.59.11, 10.40.59.31, 10.40.59.41, 10.40.59.21, 10.40.59.12, 10.40.59.13)
 export test2=10.48.59.1 #sdwan - baremetal/host (kvm VMs - 10.48.59.11, 10.48.59.31, 10.48.59.41, 10.48.59.21, 10.48.59.13)
 export test3=10.48.59.2 #L2/l2(root/versa123) - baremetal/host (vmware vsphere VMs - 10.48.59.42, 10.48.59.17, 10.48.59.32, 10.48.59.16, 10.48.59.15, 10.48.59.22)
+alias mongopass='kubectl -n asc-infra get secret mongo-express -o jsonpath="{.data.basic-auth-password}" | base64 -d;echo'
+alias grafanapass='kubectl -n monitoring get secrets versa-monitoring-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo'
 
 #my dev VM
 export dev1=10.70.59.11 #baremetal dev1host - cloud dev
@@ -236,24 +238,32 @@ alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
 alias vncs='tigervncserver -xstartup /usr/bin/gnome-session-classic -SecurityTypes VncAuth,TLSVnc -geometry 1920x1080 -localhost no'
 alias fsstest='cd /home/udaytj/gcp-ws/upvt1/msb/fss/test'
 alias fsswsclient='cd /home/udaytj/gcp-ws/upvt1/msb/rns/test/ws_client'
+alias scripts='cd ~/gcp-ws/msb/scripts'
+alias build='cd ~/gcp-ws/msb/scripts/build'
+alias build_af1='$HOME/gcp-ws/msb/scripts/build/build_af1.sh'
+alias build_msb81='$HOME/gcp-ws/msb/scripts/build/build_msb81.sh'
+alias build_msb2='$HOME/gcp-ws/msb/scripts/build/build_msb2.sh'
+alias build_vatp='$HOME/gcp-ws/msb/scripts/build/build_vatp.sh'
+alias build_internal='$HOME/gcp-ws/msb/scripts/build/build_internal.sh'
 
 #versa: asc setups
 alias bm1us='ssh versa@10.48.190.6' #bm1-us.apidp.versa-test.net
 alias dbm1='ssh versa@172.20.35.6' #dev-bm1.apidp.versa-test.net
 alias dbm2='ssh versa@172.20.35.11' #dev-bm2.apidp.versa-test.net
+alias dbm3='ssh versa@172.20.35.51' #dev-bm3.apidp.versa-test.net
 alias gartner='ssh versa@10.43.151.50' #prod1-us.asc.versanow.net
 alias inline='ssh versa@10.43.160.1' #asc-inline.us.versanow.net
 alias qbm1='ssh versa@10.40.184.126' #bm1-qa-us.apidp.versa-test.net
 alias qbm2='ssh versa@10.40.178.151' #bm1-qa-reg-30.apidp.versa-test.net, ~/gitLab/APIDP
 alias qbm1blr='ssh versa@10.192.105.128' #bm1-qa-blr.apidp.versa-test.net
 alias rbi='ssh versa@10.43.155.1' #rb1-us.apidp.versa-test.net
-alias ui='ssh versa@10.43.5.101' #bm1-us-ui-dev.apidp.versa-test.net
 
 
 #kubernetes
 alias k="kubectl"
 alias kl="kubectl logs -f"
 alias ki="kubectl -n asc-infra"
+alias khe="kubectl -n hawkeye-8-2"
 alias ka="kubectl -n apidp"
 alias klh="kubectl logs -f -n hawkeye"
 alias kla="kubectl logs -f -n apidp"
@@ -267,3 +277,6 @@ alias kda="kubectl describe pods -n apidp"
 alias kdel="kubectl delete pods"
 alias kdeli="kubectl delete pods -n asc-infra"
 alias kdela="kubectl delete pods -n apidp"
+
+#claude
+alias cfss="claude --resume 'FSS MIGRATION TO GOLANG' --dangerously-skip-permissions"

@@ -119,7 +119,7 @@ ln -s ~/access-UK/bin/ ~/bin
     sudo apt install cmake
     cd neovim; make; sudo make install
     #To use uday's neovim config
-        ln -s ~/access-UK/neovim/config ~/.config/nvim;
+        ln -s ~/access-UK/neovim/config ~/.config/nvim; --> if your ~/.config/nvim is pointing here, you are using uday's neovim config
         Issue: E492: Not an editor command: PackerSync --> error is seen when yo do :PackerSync from neovim window
         Workaround:
           If you dont find :PackerInstall or :PackerSync on neovim window, then go to ~/.config/nvim/lua/udaytj/packer.lua and then do :so. Now you will be able to do :PackerSync and :PackerInstall.
@@ -136,7 +136,7 @@ ln -s ~/access-UK/bin/ ~/bin
           - sudo apt install clangd
         - Delete or rename old neovim config folder - mv ~/.config/nvim ~/.config/oldnvim
         - cd ~/software; git clone https://github.com/shaakaud/starter ~/software/nvimcfg/starter
-        - ln -s ~/software/nvimcfg/starter ~/.config/nvim
+        - ln -s ~/software/nvimcfg/starter ~/.config/nvim --> if your ~/.config/nvim is pointing here, you are using nchad's neovim config
         - Open neovim, lazy vim will install all plugins. Press q and then run :MasonInstallAll.
         - you can find various theme names in https://nvchad.com/themes. Change the theme name at ~/software/nvimcfg/starter/lua/chadrc.lua and save file. Effect will be immediate.
         - Note: With nvchad the select text copy/paste may not work (based on the terminal mouse settings). Work around is as below:
@@ -216,6 +216,15 @@ ln -s ~/access-UK/bin/ ~/bin
        Now run the GUI application on that ssh prompt. The GUI display will be
        exported to Windows machine.
 
+26. (OPTIONAL) If you want to have github copilot cli installed:
+    - sudo apt install gh
+    - gh extension install github/gh-copilot
+    - gh copilot alias -- zsh > ~/.gh-copilot-aliases.zsh
+    - .zshrc.local sources .gh-copilot-aliases.zsh if present
+
+26. (OPTIONAL) If you are using claude code,
+    ln -s ~/access-UK/claude/settings.json ~/.claude/settings.json
+    ln -s ~/access-UK/claude/CLAUDE.md ~/.claude/CLAUDE.md
 
 
 Verify:

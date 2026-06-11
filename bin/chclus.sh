@@ -8,6 +8,7 @@
 #~/bin/chclus.sh -c vgke
 #~/bin/chclus.sh -c kblab
 #~/bin/chclus.sh -c bm1us
+#~/bin/chclus.sh -c qastaging #pradeep
 #~/bin/chclus.sh -c devbm1
 #~/bin/chclus.sh -c devbm2
 #~/bin/chclus.sh -c vprod
@@ -55,6 +56,8 @@ elif [ $cluster = "vgke" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_udaytj_apidp_1 use-context gke_udaytj-apidp-1_us-central1_apidp-cluster
 elif [ $cluster = "bm1us" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_bm1us use-context default
+elif [ $cluster = "qastaging" ]; then
+    kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_qastaging use-context kubernetes-admin@kubernetes
 elif [ $cluster = "devbm1" ]; then
     kubectl config --kubeconfig=$HOME/gcp-ws/kube-config/kube_config_devbm1 use-context kubernetes-admin@kubernetes
 elif [ $cluster = "devbm2" ]; then

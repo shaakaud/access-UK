@@ -1,6 +1,6 @@
 function exists { which $1 &> /dev/null }
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:.::/usr/bin/vim:~/bin:.:~/access-UK/alu:~/bin:~/gcp-ws/scripts"
+export PATH="/usr/local/bin:/usr/bin:/bin:~/.local/bin:/usr/X11R6/bin:.:/usr/bin/vim:~/bin:~/gcp-ws/scripts"
 
 function exists { which $1 &> /dev/null }
 
@@ -130,3 +130,7 @@ fi
 #UDAY GOLANG/golang/go
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
+
+#Incase you have github copilot cli installed
+# Add this to ~/.zshrc.local
+[[ -f ~/.gh-copilot-aliases.zsh ]] && source ~/.gh-copilot-aliases.zsh

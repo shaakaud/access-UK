@@ -84,7 +84,7 @@ export PAN_DIR=`pwd`
 export PANOS=`pwd`
 
 #PATH
-PATH=$PATH:~/access-UK/alu:~/access-UK/bin/git:/sbin
+PATH=$PATH:~/access-UK/bin/git:/sbin
 
 #Avoid screen feeze when Ctrl-S is pressed on VIM screen
 stty -ixon
