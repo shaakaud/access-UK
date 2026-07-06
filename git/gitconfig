@@ -1,6 +1,6 @@
 [user]
-	email = udaytj@versa-networks.com
-	name = udaytj
+        name = Uday Thimma
+        email = udayakumart@microsoft.com
 [alias]
     dt = difftool --dir-diff
     cset = diff-tree --no-commit-id --name-only -r
@@ -36,7 +36,6 @@
 [difftool]
 	prompt = false
 [remote "origin"]
-    #url = ssh://git@gitlab.versa-networks.com/software/flexvnf.git
 	fetch = +refs/notes/*:refs/notes/*
 [sr]
 	githelperver = 4424b55b15187095872cabeaf441a67c0293c497
@@ -52,8 +51,6 @@
 	whitespace = nowarn
 
 [reviewboard]
-    url = http://review.versa-networks.com
-#if remote is http based, below creditial config will store your password after you enter for your first git command in .git-credentials in your %HOME% directory
 [credential]
 	helper = store
 [submodule]
