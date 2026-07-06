@@ -51,7 +51,11 @@
 	whitespace = nowarn
 
 [reviewboard]
-[credential]
-	helper = store
 [submodule]
 	recurse = true
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+[core]
+	editor = vim
