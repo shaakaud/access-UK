@@ -31,6 +31,9 @@
     tool = meld
 	renameLimit = 25000
 
+[core]
+    pager = less -FX
+
 [push]
 	default = upstream
 [difftool]
@@ -55,7 +58,13 @@
 	recurse = true
 [credential "https://dev.azure.com"]
 	useHttpPath = true
-[credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 [core]
 	editor = vim
+[credential]
+    #helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+	helper = store
+	credentialStore = secretservice
+	azreposCredentialType = oauth
+[credential "azrepos:org/msazure"]
+	azureAuthority = https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47
+	username = udayakumart@microsoft.com

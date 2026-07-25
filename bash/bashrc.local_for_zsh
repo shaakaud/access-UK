@@ -283,7 +283,7 @@ cmdsh()
 {
   RFILE=~/tmuxbuffer/resultcmdsh
   DIR_PREFIX=$(dirname $RFILE)
-  TXTFILES=~/Docs-UK/Versa/txtfiles.txt
+  TXTFILES=~/Docs-UK/txtfiles.txt
   rm -f ~/tmuxbuffer/resultcmdsh
   #cat $(grep -v '^#' $TXTFILES) | fzf-tmux -d 20% --exact --reverse --no-sort -m > $RFILE
   cat $(grep -v '^#' $TXTFILES) | fzf-tmux -p 80%,60% --exact --reverse --no-sort -m > $RFILE

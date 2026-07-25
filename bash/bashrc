@@ -1,337 +1,136 @@
-###########################################################################
-#
-#   Filename:           .bashrc
-#
-#   Author:             smorton based on .bashrc for cygwin 1.3 by mbs
-#
-#   Created:            2010/06/03 17:45:10
-#
-#   Description:        Default .bashrc for new developers on PANOS using DESKTOP_2: Win7 + Cygwin 1.5
-#
-# Note - you should try not to modify this file if you can help it. You can
-# put your personal settings in .bashrc.local which this file will 'source'
-# automatically.
-#
-#
-###########################################################################
-#
-#                 Source Control System Information
-#
-#   $Id: .bashrc,v 1.11 2015/07/30 17:45:15 jswart Exp $
-#
-###########################################################################
-#
-#                  Copyright (c) 2010-2010 Alcatel-Lucent
-#
-###########################################################################
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
-java=`which java`   # Must be before we overwrite the Windows path
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
-if $(uname -a | grep -qi cygwin)
-then
-    export OSTYPE=cygwin
-    cygwin=1
-    export WIND_HOST_TYPE=x86-win32
-    export DESKTOP_2=1
-else
-    export OSTYPE=linux
-    cygwin=0
-    export WIND_HOST_TYPE=x86-linux
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-if [ -z $USER ] && [ ! -z $USERNAME ]
-then
-    export USER=$USERNAME
-fi
-if [ -z $USERNAME ] && [ ! -z $USER ]
-then
-    export USERNAME=$USER
-fi
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
 
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
 
-# This is not needed to build TiMOS. The build environment figures it out
-# automatically. But, it is here just to catch incorrecty installed software
-# installations to make it easier for me to debug an installation somebody
-# has screwed up.
-export WIND_BASE=/usr/local/tornado-2.0
-export EMACS_BASE=/usr/local/emacs-20.6
-
-export TMP=/tmp
-export TEMP=/tmp
-
-#
-# CVS things
-#
-export CVSROOT=":pserver:$USER@cvspc.mv.usa.alcatel.com:/swdev/cvsrep"
-export GASHROOT=":pserver:$USER@gashpc.mv.usa.alcatel.com:/swdev/cvsrep"
-export ADMINROOT=":pserver:$USER@cvspc.mv.usa.alcatel.com:/swdev/adminrep"
-export CVSREAD=TRUE
-
-#
-# Things for building PANOS
-#
-export MAKE_MODE=UNIX
-# The default TiMOS build targets.
-export TGT_HW=i386
-export TGT_SYS=both
-
-#
-# Set up the path. It's done in stages...
-#
-
-if [ $cygwin -eq 1 -a -d /etc/alternatives ]
-then
-    export PATH=${PATH}:/etc/alternatives
-fi
-
-#
-# Wind River Tornado
-# 
-if [ -d ${WIND_BASE}/host/${WIND_HOST_TYPE}/bin ]
-then
-    export PATH=${PATH}:${WIND_BASE}/host/${WIND_HOST_TYPE}/bin
-fi
-
-#
-# Various tools that may or may not exist
-#
-
-# Emacs
-if [ -d ${EMACS_BASE}/bin ]
-then
-    export PATH=${PATH}:${EMACS_BASE}/bin
-fi
-
-# VI-clone
-if [ -d /usr/local/vim56 ]
-then
-    export PATH=${PATH}:/usr/local/vim56
-fi
-
-# TCL
-if [ -d /usr/local/tcl/bin ]
-then
-    export PATH=${PATH}:/usr/local/tcl/bin
-fi
-
-# WinCVS, use its version of cvs over what is in /bin
-# 4/14/05 mbs: Not any more. With newer wincvs versions, they
-# have severely screwed things up. You can't script a login (which might
-# be intentional). And, often 'cvs edit' leaves a file still read-only.
-# Plus, it seems to have totally messed up execute permissions. It seems
-# make all .c and .h files executable.
-#if [ -d /usr/local/wincvs/CVSNT ]
-#then
-#    export PATH=/usr/local/wincvs/CVSNT:${PATH}
-#fi
-
-
-#
-# Sun's java compiler. The thing gets installed in different
-# places depending upon the particular versions. Something that revs
-# once per month is sort of a problem... Try and "guess" at the most recent
-# one. Surely the most recent is the "best", right?
-#
-
-if [ -n "$java" ]; then
-    PATH=${PATH}:$(dirname $java)
-else
-    jdk='/ProgramData/Oracle/Java/javapath'
-    if [ -d $jdk ]; then
-        export PATH="${PATH}:$jdk"   #no /bin here
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-        jdk=$(/bin/ls -d -t /j2sdk* 2>/dev/null | head -1)
-        if [ "${jdk}" != "" ]
-        then
-            export PATH="${PATH}:${jdk}/bin"
-        else
-            jdk=$(/bin/ls -d -t /jdk* 2>/dev/null | head -1)
-            if [ "${jdk}" != "" ]
-            then
-                export PATH="${PATH}:${jdk}/bin"
-            fi
-        fi
+        color_prompt=
     fi
 fi
 
-#
-# If you have timostools, then use it
-#
-if [ -d /usr/local/timostools ]
-then
-    export PATH="/usr/local/timostools:${PATH}"
-
-    # Enable git tab-complete and fancy git prompting for linux users
-    if [ $cygwin -eq 0 ]; then
-        source /usr/local/timostools/git.d/git-completion.bash
-        source /usr/local/timostools/git.d/git-prompt.sh
-
-        # git prompt configuration
-        GIT_PS1_SHOWUPSTREAM=auto
-        GIT_PS1_SHOWCOLORHINTS=1
-        GIT_PS1_SHOWDIRTYSTATE=1
-        GIT_PS1_SHOWUNTRACKEDFILES=1
-        GIT_PS1_STATESEPARATOR=' '
-        export PROMPT_COMMAND='__git_ps1 "\w" " > "'
-    fi
-
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    echo "You do not appear to have the SW development tools."
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
-#
-# Put standard Windows system path next
-#
-if [ $cygwin -eq 1 ]
-then
-    export PATH="${PATH}:$(cygpath -a -u $SYSTEMROOT)/system32"
-    export PATH="${PATH}:$(cygpath -a -u $SYSTEMROOT)"
-    export PATH="${PATH}:$(cygpath -a -u $SYSTEMROOT)/system32/Wbem"
-    export PATH="${PATH}:$(cygpath -a -u $SYSTEMROOT)/system32/WindowsPowerShell/v1.0"
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
-#
-# If you have a bin in your home directory, we'll use it
-#
-if [ -d ${HOME}/bin ]
-then
-    export PATH="${PATH}:${HOME}/bin"
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
-#
-# Finally, use current directory
-#
-export PATH="${PATH}:."
-
-#
-# Make sure the temp directories exist
-#
-if [ ! -d $TMP ]
-then
-    mkdir -p $TMP
-fi
-if [ -d /cygdrive/c -a ! -d /cygdrive/c/tmp ]
-then
-    mkdir -p /cygdrive/c/tmp
-fi
-if [ -d /cygdrive/d -a ! -d /cygdrive/d/tmp ]
-then
-    mkdir -p /cygdrive/d/tmp
+# Source per-user local shell overrides.
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
 fi
 
-#
-# Set prompt to <working directory>, space, ">", space
-#
-export PS1="\w > "
-
-# Set size of history
-export HISTSIZE=500
-export HISTFILESIZE=500
-
-# Ignore duplicate cmds in history log; ignore cmds beginning with whitespace
-export HISTCONTROL=ignoreboth
-
-# When doing file completion, ignore files ending in these
-export FIGNORE=".o:~"
-
-# Ignore EOF character
-export IGNOREEOF
-
-# Executed just before printing every prompt. You probably don't
-# want to do anything with this.
-#export PROMPT_COMMAND="printf '\e]0;$HOSTNAME\7'"
-
-# Don't allow redirection to overwrite existing file
-export noclobber
-
-# If you do 'cd <val>' and val isn't a directory, then assume
-# it's a variable and cd to the contents of the variable.
-export cdable_vars
-
-#
-# Generic aliases.
-# You may want to add more or override (unalias) these in your .bashrc.local
-# These aliases put training wheels on commands like rm and mv to prevent
-# overwriting existing files
-#
-alias copy='cp -i'
-alias del='rm -i'
-alias dir='ls -lF'
-alias h=history
-alias la='ls -a'
-alias ll='ls -l'
-alias ls='ls -F'
-alias more=less
-alias mv='mv -i'
-alias ren='mv -i'
-alias rm='rm -i'
-
-#
-# Some aliases specific to our development
-#
-alias panos='cd $HOME/ws/panos'
-
-#
-# Do a 'cvs -n up' which shows all files in the currrent directory
-# and below which need to be updated or are modified. But, filter out
-# all of the noise lines that cvs generates as it traverses a file tree
-#
-alias cvsnup='cvs -n -q up -P -d 2>/dev/null | grep -v "^\?"'
-alias cvsup='cvs -z9 -q up -P -d 2>/dev/null | grep -v "^\?"'
-alias cvsedit='cvs edit'
-alias cvschanged="cvs -n -f -q up -dPR 2>/dev/null | grep '^[MARC?] '"
-alias cvschanged2='cvs -z9 -q status 2>&1 | grep Status | egrep -v "(Up-to|Needs Patch)"'
-alias cvsstatus='cvs status | grep Status'
-
-
-# Turn on vi-style command line editing.
-# If you prefer EMACS-style editing, use -o emacs
-# If you prefer windows-style editing (using arrow keys), don't use anything.
-#set -o vi
-
-#make an intelligent guess as to what your DISPLAY env var should be
-if [ -z ${DISPLAY:=""} ]; then
-    XSERVER=$(who am i | /bin/awk '{print $6}' | /bin/sed 's/[()]//g')
-    XSERVER=${XSERVER%%:*}
-    if [[ -z ${XSERVER}  || ${XSERVER} == $(hostname) || ${XSERVER} == "unix" ]]; then 
-      export DISPLAY=$(hostname):0.0		# Display on local host
-    else		
-      export DISPLAY=${XSERVER}:0.0	# Display on remote host
-    fi
+# BEGIN Agency MANAGED BLOCK
+if [[ ":${PATH}:" != *":/home/udayakumart/.config/agency/CurrentVersion:"* ]]; then
+    export PATH="/home/udayakumart/.config/agency/CurrentVersion:${PATH}"
 fi
+# END Agency MANAGED BLOCK
 
-#
-# Finally, if a ~/.bashrc.local exists, source it
-#
-if [ -e ~/.bashrc.local ]
-then
-    source ~/.bashrc.local
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/udaytj/software/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/udaytj/software/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/udaytj/software/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/udaytj/software/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
-complete -C /usr/bin/terraform terraform
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-
-. "$HOME/.cargo/env"
+# win-edge / passkey login fix: route browser to Windows Edge (WSL)
+export PATH="$HOME/.local/bin:$PATH"
+export BROWSER="$HOME/.local/bin/microsoft-edge"

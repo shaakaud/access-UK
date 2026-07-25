@@ -1,36 +1,5 @@
 alias a=alias
 
-alias tset='unsetenv TERMCAP; set noglob ; set terms=(`/usr/ucb/tset - -AQS`) ; set term=$terms[1] ; setenv TERMCAP "$terms[2]";unset terms noglob'
-
-# clearcase
-alias clt='cleartool'
-alias ct='cleartool'
-alias xc='xclearcase &'
-alias cltco='clt co -nc'
-alias cltunco='clt unco'
-alias cltci='clt ci'
-alias xlsvtree='xc -vtree \!*'
-alias xcleardiffp='xcleardiff -pred \!* &'
-alias ctdiffs='clt diff -predecessor -serial'
-alias cltlsco='clt lsco -s -cview -avob'
-alias cltfmerge='clt findmerge `clt lsco -s -cview -avob` -flatest -log /dev/null -print'
-alias cltdomerge='clt findmerge `clt lsco -recurse -cview -s .` -flatest -merge -gmerge'
-# cltdogmerge = graphical version of cltdomerge
-alias cltdogmerge='clt findmerge `clt lsco -recurse -cview -s .` -flatest -gmerge -query'
-alias cltsv='clt setview \!*'
-alias setview='cleartool setview'
-alias rs='cd /vobs/rs'
-alias rls='cd /vobs/rs/bin/hw/ssr_main/rlse'
-alias sv='clt setview'
-alias rmv='ct rmview -tag'
-alias lsv='clt lsvtree -g'
-alias ctdiff='clt diff -g -pred'
-alias lsco='clt lsco -cview -all'
-alias fmerge='cleartool findmerge `cleartool lscheckout -cview -all -s` -flatest -log /dev/null -print'
-alias unco='clt unco'
-alias co='clt co'
-alias conc='clt co -nc'
-
 # basic unix cmdset
 alias h=history
 alias ls='ls --color -F'
@@ -47,9 +16,13 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias mkdir='mkdir -p'
 alias ll='ls -lart'
-alias tftp='cd /tftpboot/uthimmaja'
-alias cfg='cd /tftpboot/uthimmaja/config'
-alias gd='cd /vobs/rs/bin/hw/ssr_main/rlse'
+alias gr='grep -rRI --exclude-dir="\.swp" --exclude-dir={build,vendor,.mypy_cache}'
+alias grc='grep -R --exclude-dir={build,vendor,.mypy_cache} DO_NOT_COMMIT'
+alias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
+alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
+#alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
+alias vncs='tigervncserver -xstartup /usr/bin/gnome-session-classic -SecurityTypes VncAuth,TLSVnc -geometry 1920x1080 -localhost no'
+
 
 alias xtw='xterm -fn -sun-screen-medium-r-normal--14-140-72-72-m-80-iso8859-1 -sl 5000 -fg black -bg white -sb &'
 alias xtbk='xterm -fn -sun-screen-medium-r-normal--14-140-72-72-m-80-iso8859-1 -sl 5000 -fg white -bg black -sb &'
@@ -58,69 +31,6 @@ alias xtb='xterm -fn -sun-screen-medium-r-normal--14-140-72-72-m-80-iso8859-1 -s
 alias xt='xterm -fn -sun-screen-medium-r-normal--14-140-72-72-m-80-iso8859-1 -sl 5000 &'
 alias xtg='xterm -fn -sun-screen-medium-r-normal--14-140-72-72-m-80-iso8859-1 -sl 5000 -fg white -bg gray50 -sb &'
 alias xtd='xterm -fn -sun-screen-medium-r-normal--14-140-72-72-m-80-iso8859-1 -sl 5000 -fg black -bg pink -display 172.24.2.24:0.0 -sb &'
-alias ddd='ddd --debugger mips64orion-elf-gdb ssr_main&'
-alias addr='addr2line --function -e ssr_main'
-
-# nis
-alias ypa='niscat mail_aliases.org_dir'
-alias ypg='niscat group.org_dir'
-alias yph='niscat hosts.org_dir'
-alias ypng='niscat netgroup.org_dir'
-alias ypp='niscat passwd.org_dir'
-
-
-#IP Address
-alias sparta='telnet sparta'
-#alias sparta='135.254.170.22'
-alias q2='ssh queen2.mv.usa.alcatel.com'
-alias vnc1='telnet vnc1'
-alias fire='telnet fire'
-alias fs='ftp sparta'
-
-#FILE PATHS
-
-WORK=$HOME/ws/icc_rx_mar18/panos
-#WORK=$HOME/ws/mg70s/panos
-PANOS=$HOME/ws/mg00/panos
-PANOS6=$HOME/ws/mg60s/panos
-alias ws='cd $HOME/ws*'
-alias work='cd $WORK'
-alias panos='cd $PANOS'
-alias panos6='cd $PANOS6'
-alias acc='cd ~/access-UK'
-#alias head='cd $HOME/work/Head/panos'
-alias win='cd /mnt/ukwin-c/'
-alias dot='cd dot1ag'
-alias svc='cd svcmgr'
-alias qos='cd qos'
-alias mka='mk; if [ $? -ne 0 ] ; then inform.sh "$PWD - **mk failed**" ; else inform.sh "BUILD SUCCEEDED - mk - $PWD"; fi'
-alias mki='mk i386; if [ $? -ne 0 ] ; then inform.sh "$PWD - **mk i386 FAILED**u" ; else inform.sh "BUILD SUCCEEDED - mk i386 - $PWD"; fi'
-alias mkh='mk hops; if [ $? -ne 0 ] ; then inform.sh "$PWD - **mk hops FAILED**" ; else inform.sh "BUILD SUCCEEDED - mk hops - $PWD"; fi'
-alias mkio='mk i386 iom; if [ $? -ne 0 ] ; then inform.sh "$PWD - **mk i386 iom FAILED**" ; else inform.sh "BUILD SUCCEEDED - mk i386 iom - $PWD"; fi'
-alias mkho='mk hops iom; if [ $? -ne 0 ] ; then inform.sh "$PWD - **mk hops iom FAILED**" ; else inform.sh "BUILD SUCCEEDED - mk hops iom - $PWD"; fi'
-
-#ALU-2
-alias up0='upload.queen2.newHire images/mg00'
-alias up6='upload.queen2.newHire images/mg60'
-alias upi='upload.queen2.newHire images/iccrx'
-alias pid='cd /drive_c/Users/udayakut.ENG/AppData/Roaming/.purple/logs/sipe/udayakumar.thimma_janarthanan@alcatel-lucent.com%2cudayakumar.thimma_janarthanan@alcatel-lucent.com'
-alias doc='cd ~/Docs-UK'
-alias acc='cd ~/access-UK'
-alias tb='cd ~/Docs-UK/ALU-2/testbeds'
-#ALUT-2 Testbench
-alias tests='cd $MY_PROJECT/pchip/tb/tests'
-alias iom='cd $MY_PROJECT/pchip/tb/tests/iom'
-alias ingress='cd $MY_PROJECT/pchip/tb/tests/iom/ingress'
-alias egress='cd $MY_PROJECT/pchip/tb/tests/iom/egress'
-alias tb='cd $MY_PROJECT/pchip/tb/'
-alias nprt='cd $MY_PROJECT/npchip/sim/pumice_msm_ingress/rtl.linux/'
-alias np3rt='cd $MY_PROJECT/np3chip/sim/pumice_msm_ingress/rtl.linux/'
-alias npsim='cd $MY_PROJECT/npchip/sim/'
-alias np3sim='cd $MY_PROJECT/np3chip/sim/'
-
-#CVS related
-alias cvsup='cvs update -d'
-alias cvsmod='cvsrw --cvs'
 
 #GIT related
 alias npgit='git --no-pager'
@@ -133,7 +43,6 @@ alias py3='python3'
 #versa: my host machines
 export dev1host=10.70.59.1
 export dev2host=10.70.59.2
-export shivahost=10.70.40.100 #shiva's machine
 alias sdev1host='ssh udaytj@$dev1host'
 alias sdev2host='ssh udaytj@$dev2host'
 export test1=10.70.59.2 #sdwan-ha - baremetal/host (kvm VMs - 10.40.59.11, 10.40.59.31, 10.40.59.41, 10.40.59.21, 10.40.59.12, 10.40.59.13)
@@ -142,67 +51,13 @@ export test3=10.48.59.2 #L2/l2(root/versa123) - baremetal/host (vmware vsphere V
 alias mongopass='kubectl -n asc-infra get secret mongo-express -o jsonpath="{.data.basic-auth-password}" | base64 -d;echo'
 alias grafanapass='kubectl -n monitoring get secrets versa-monitoring-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo'
 
-#my dev VM
 export dev1=10.70.59.11 #baremetal dev1host - cloud dev
 export dev2=10.70.59.21 #VM on dev2host flexvnf dev
-export shiva=10.40.40.102 #VM on shivahost - shiva's machine
 alias sdev1='ssh udaytj@$dev1'
 alias sdev2='ssh udaytj@$dev2'
-alias sshiva='ssh udaytj@$shiva'
-
-#versa: common builder machines
-export devb2=dev-bionic-builder2 #common builder machine
-export devb4=dev-bionic-builder4 #common builder machine
-export dev7=10.40.199.86 #18.04 bionic dev machine common
-export dev8=10.40.2.25 #18.04 bionic dev machine ashwin kini's
-alias sdevb2='ssh udaytj@$devb2'
-alias sdevb4='ssh udaytj@$devb4'
-
-#versa: testbed vms/VMs
-export t1cs=10.40.59.31
-export t1ctrl=10.40.59.21
-export t1rtr=10.40.59.41
-export t1b1=10.40.59.11
-export t1b2=10.40.59.12
-export t1b3=10.40.59.13
-export t2cs=10.48.59.31
-export t2ctrl=10.48.59.21
-export t2rtr=10.48.59.41
-export t2b1=10.48.59.11
-export t2b3=10.48.59.13
-export t3b1=10.48.59.15
-export t3b2=10.48.59.16
-export t3b3=10.48.59.17
-export t3cs=10.48.59.32
-export t3ctrl=10.48.59.22
-export t3rtr=10.48.59.42
-alias t1='ssh versa@uktest.ddns.net'
-alias ut1='ssh udaytj@ukhost2.ddns.net'
-alias t2='ssh versa@$test2'
-alias st1b1='ssh admin@$t1b1'
-alias st1b2='ssh admin@$t1b2'
-alias st1b3='ssh admin@$t1b3'
-alias st1cs='ssh versa@$t1cs'
-alias st1ctrl='ssh admin@$t1ctrl'
-alias st1rtr='ssh admin@$t1rtr'
-alias st2b1='ssh admin@$t2b1'
-alias st2b3='ssh admin@$t2b3'
-alias st2cs='ssh versa@$t2cs'
-alias st2ctrl='ssh admin@$t2ctrl'
-alias st2rtr='ssh admin@$t2rtr'
-alias st3b1='ssh admin@$t3b1'
-alias st3b2='ssh admin@$t3b2'
-alias st3b3='ssh admin@$t3b3'
-alias st3cs='ssh versa@$t3cs'
-alias st3ctrl='ssh admin@$t3ctrl'
-alias st3rtr='ssh admin@$t3rtr'
 
 #versa: others
-alias gcp='cd $HOME/gcp-ws'
-alias img='cd ~/images/'
 alias base='cd $WS'
-alias lib='cd $WS/usr/lib'
-alias libvsha='cd $WS/usr/lib/libvsha'
 alias suri='cd $WS/usr/lib/libips/suricata-2.0'
 alias rfm='cd $WS/usr/lib/librfm'
 alias l2ld='cd $WS/usr/sbin/l2ld'
@@ -213,7 +68,6 @@ alias ips='cd $WS/usr/module/ips'
 alias cos='cd $WS/usr/lib/libcos'
 alias rfd='cd $WS/usr/sbin/rfd'
 alias vsm='cd $WS/usr/sbin/vsm'
-alias id='cd $WS/usr/lib/libidentity'
 alias policy='cd $WS/usr/lib/libpolicy'
 alias pbf='cd $WS/usr/module/pbf'
 alias appid='cd $WS/usr/module/appid'
@@ -230,12 +84,6 @@ alias rnst='cd $WS/services/rns/terraform'
 alias aimlt='cd $WS/services/ml-service/terraform'
 alias fsslog='gcloud logging read 'resource.type=gae_app AND resource.labels.module_id="versa-fss"'  --format "value(timestamp,textPayload)"'
 alias rnslog='gcloud logging read 'resource.type=gae_app AND resource.labels.module_id="versa-rns" AND logName=projects/uday-project-msb3/logs/appengine.googleapis.com%2Fstderr'  --format "value(timestamp,textPayload)"'
-alias gr='grep -rRI --exclude-dir="\.swp" --exclude-dir={build,vendor,.mypy_cache}'
-alias grc='grep -R --exclude-dir={build,vendor,.mypy_cache} DO_NOT_COMMIT'
-alias vimsess='cd /home/udaytj/access-UK/vim/vimbundle/sessions'
-alias pycharm='/home/udaytj/software/pycharm-community-2019.3.3/bin/pycharm.sh&'
-#alias vncs='env -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver -geometry 1920x1080' #ubuntu 18.04 had issues of running xfce desktop environment only for one vnc instance. This allows to run xfce session manager for multpile vnc instance.
-alias vncs='tigervncserver -xstartup /usr/bin/gnome-session-classic -SecurityTypes VncAuth,TLSVnc -geometry 1920x1080 -localhost no'
 alias fsstest='cd /home/udaytj/gcp-ws/upvt1/msb/fss/test'
 alias fsswsclient='cd /home/udaytj/gcp-ws/upvt1/msb/rns/test/ws_client'
 alias scripts='cd ~/gcp-ws/msb/scripts'
@@ -257,7 +105,6 @@ alias qbm1='ssh versa@10.40.184.126' #bm1-qa-us.apidp.versa-test.net
 alias qbm2='ssh versa@10.40.178.151' #bm1-qa-reg-30.apidp.versa-test.net, ~/gitLab/APIDP
 alias qbm1blr='ssh versa@10.192.105.128' #bm1-qa-blr.apidp.versa-test.net
 alias rbi='ssh versa@10.43.155.1' #rb1-us.apidp.versa-test.net
-
 
 #kubernetes
 alias k="kubectl"

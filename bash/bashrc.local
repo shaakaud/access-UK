@@ -1,65 +1,19 @@
-# personal configurations
-export LOC=0.0MG
-export USERINITIALS=mv
-export EMAIL_ADDR=Udayakumar.Thimma_Janarthanan@Alcatel-Lucent.com
-export CVSUSERNAME=udayakut
 export EDITOR=vim
 
-# .bashrc overrides
-export CVSROOT=":pserver:$CVSUSERNAME@cvspc.mv.usa.alcatel.com:/swdev/cvsrep"
-export EMACS_BASE=/usr/local/emacs
-export TEMP=/temp
-export TGT_PF=7750
-
-# VI-clone
-if $(uname -a | grep -qi cygwin)
-then
-    if [ -d /Program\ Files\ \(x86\)/Vim/vim74 ]
-    then
-        export PATH=${PATH}:/Program\ Files\ \(x86\)/Vim/vim74
-    fi
-else
-    if [ -f /usr/bin/vim ]
-    then
-        export PATH=${PATH}:/usr/bin/vim
-    fi
-fi
-
-#########################################################################
-#ALIAS - UDAY
-#########################################################################
 if [ -e ~/.aliases_bash ]
 then
     source ~/.aliases_bash
 fi
-#########################################################################
-#UDAY
-#########################################################################
-if $(uname -a | grep -qi cygwin)
-then
-    export CSCOPE_EDITOR=/Program\ Files\ \(x86\)/Vim/vim74
-else
-    export CSCOPE_EDITOR=/usr/bin/vim
-    alias ctags='~/software/ctags/ctags-5.8/installed_binaries/bin/ctags'
-fi
-
 #######################################################################
 #AUTOJUMP
 #######################################################################
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 
-#UDAY
-export WIN="/drive_c/"
-export WINH="/drive_c/home/udayakut/"
-
-#UDAY - To make c-R-Arrow, C-L-Arrow in Terminal for cscope searches
-export TERM=xterm-256color
-
 ####
 #GIT related
 ###
 #Show git Branch in the prompt
-source ~/.git-prompt.sh
+[ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 export PS1="\w=>$ "
 #export PS1="\h \w=>$ "
 #export PS1="\$(__git_ps1)\w=>$ "
@@ -69,119 +23,28 @@ if [ -f /etc/bash_completion.d/git ]; then
 fi
 
 # History Size
-HISTSIZE=100
-
-# PROMPT
-COMMENT=
-PROMPT_COMMAND='echo -ne "\033]0;PANOS: ${PANOS} ${COMMENT}\007"'
-
-# Use Colors
-LS_OPTIONS='--color=auto'
-
-# Setup Context Related Variables
-export PAN_DIR=`pwd`
-export PANOS=`pwd`
-
-#ALU related
-#PATH
-#export PATH=${PATH}:~/access-UK/alu
-#export GIT_CO_USE_WORKTREES=1
+HISTSIZE=1000
 
 #Avoid screen feeze when Ctrl-S is pressed on VIM screen
 stty -ixon 
 
-#
-# ALIASES : START 
-#
-
 # Remove all unnecassary files 
 alias f='rm -f *~; rm -f *#'
 
-# Modified Files 
-alias m='cvs -n up -P -d 2>/dev/null | grep -v "^[/?U]" 2>/dev/null'
+# Keep personal user bin on PATH for interactive shells.
+if [ -d "$HOME/bin" ] && [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+    export PATH="$PATH:$HOME/bin"
+fi
 
-# Workspace related 
-alias panos='cd $PAN_DIR'
+# Preserve legacy DISPLAY discovery behavior when DISPLAY is unset.
+if [ -z "${DISPLAY:-}" ]; then
+    XSERVER=$(who am i | /bin/awk '{print $6}' | /bin/sed 's/[()]//g')
+    XSERVER=${XSERVER%%:*}
+    if [[ -z "$XSERVER" || "$XSERVER" == "$(hostname)" || "$XSERVER" == "unix" ]]; then
+        export DISPLAY="$(hostname):0.0"
+    else
+        export DISPLAY="$XSERVER:0.0"
+    fi
+fi
 
-alias  setcomment='COMMENT=`cat comment 2>1`'
-alias setspace='PAN_DIR=/$USERNAME/$LOC/panos/;  panos; PANOS=$PAN_DIR; setcomment; clear'
-
-alias  00m='LOC=0.0MG;    setspace;'
-alias 002m='LOC=0.0-2MG;  setspace;'
-alias 30sm='LOC=3.0S.MG;  setspace;'
-alias 30bm='LOC=3.0B.MG;  setspace;'
-alias 31sm='LOC=3.1S.MG;  setspace;'
-alias 31bm='LOC=3.1B.MG;  setspace;'
-
-PATH=$PATH:~/bin:/usr/local/timostools;
-alias mks='mk --summary'
-alias mkioms='mks iom'
-alias mksims='mks sim'
-alias mkhops='mks hops'
-alias mkcpms='mks cpms'
-
-#GTP Related
-alias cpm="cd lte_gtp"
-alias gtp="cd lte_gtp"
-alias mscp="cd lte_mscp"
-
-#express () { regress -testbed $1 -runLevel express -nobuild; }
-regular () { regress -testbed $1 -runLevel regular -nobuild -runSuite $2; }
-i386 () { cd bin/7xxx-i386/
-          cp iom.tim i386-iom.tim
-          cp cpm.tim i386-cpm.tim
-          cp boot.tim i386-boot.tim
-          cp both.tim i386-both.tim
-          cp isa-aa.tim i386-isa-aa.tim
-          scp i3*.tim $1@$1.mv.usa.alcatel.com:/home/$1/images
-          cd ../.. ;}
-i386n () { cd bin/7xxx-i386/
-          cp iom.tim i386-iom.tim
-          cp cpm.tim i386-cpm.tim
-          cp boot.tim i386-boot.tim
-          cp both.tim i386-both.tim
-          cp isa-aa.tim i386-isa-aa.tim
-          scp i3*.tim $1@$1.us.alcatel-lucent.com:/home/$1/images
-          cd ../.. ;}
-i386np () { cd bin/7xxx-i386/
-          cp iom.tim i386-iom.tim
-          cp cpm.tim i386-cpm.tim
-          cp boot.tim i386-boot.tim
-          cp both.tim i386-both.tim
-          cp isa-aa.tim i386-isa-aa.tim
-          scp i3*.tim $1@$1.ih.lucent.com:/home/$1/images
-          cd ../.. ;}
-hops () { cd bin/7xxx-hops/
-          scp *.tim $1@$1.mv.usa.alcatel.com:/home/$1/images
-          cd ../7xxx-chile/
-          scp isa-aa.tim $1@$1.mv.usa.alcatel.com:/home/$1/images
-          cd ../.. ;}
-hopsn () { cd bin/7xxx-hops/
-          scp *.tim $1@$1.us.alcatel-lucent.com:/home/$1/images
-          cd ../7xxx-chile/
-          scp isa-aa.tim $1@$1.us.alcatel-lucent.com:/home/$1/images
-          cd ../.. ;}
-
-
-hopsnp () { cd bin/7xxx-hops/
-          scp *.tim $1@$1.ih.lucent.com:/home/$1/images
-          cd ../7xxx-chile/
-          scp isa-aa.tim $1@$1.ih.lucent.com:/home/$1/images
-          cd ../.. ;}
-
-queen () { cd bin/7xxx-i386/
-           cp iom.tim i386-iom.tim
-           cp cpm.tim i386-cpm.tim
-           cp boot.tim i386-boot.tim
-           cp both.tim i386-both.tim
-           cp isa-aa.tim i386-isa-aa.tim
-           scp i3*.tim
-           udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
-           cd ../.. ;}
-
-queenhops () { cd bin/7xxx-hops/
-          scp *.tim udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
-          cd ../7xxx-chile/
-          scp isa-aa.tim
-          udayakut@queen2.mv.usa.alcatel.com:/home/udayakut/$1
-          cd ../.. ;}
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

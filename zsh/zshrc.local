@@ -1,6 +1,70 @@
 function exists { which $1 &> /dev/null }
 
-export PATH="/usr/local/bin:/usr/bin:/bin:~/.local/bin:/usr/X11R6/bin:.:/usr/bin/vim:~/bin:~/gcp-ws/scripts"
+export PATH="/usr/local/bin:/usr/bin:/bin:$HOME/.local/bin:/usr/X11R6/bin:/usr/bin/vim:$HOME/bin:$HOME/gcp-ws/scripts"
+export TMPDIR="/tmp"
+export POWERLEVEL9K_WHITESPACE_BETWEEN_LEFT_SEGMENTS=""
+typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+typeset -g POWERLEVEL9K_PROMPT_ON_NEWLINE=false
+
+# Disable right-side prompt segments (time/status/etc.) for powerlevel9k.
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+
+# Migrated from bash/bashrc_for_zsh
+if [[ -z "$USER" && -n "$USERNAME" ]]; then
+    export USER="$USERNAME"
+fi
+if [[ -z "$USERNAME" && -n "$USER" ]]; then
+    export USERNAME="$USER"
+fi
+
+if [[ -d "$HOME/bin" && ":$PATH:" != *":$HOME/bin:"* ]]; then
+    export PATH="$PATH:$HOME/bin"
+fi
+
+if [[ -n "$TMP" && ! -d "$TMP" ]]; then
+    mkdir -p "$TMP"
+fi
+
+HISTSIZE=1000
+SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
+HISTFILESIZE=2000
+HISTCONTROL=ignoreboth
+FIGNORE=".o:~"
+
+setopt ignore_eof
+setopt noclobber
+setopt cdablevars
+
+alias copy='cp -i'
+alias del='rm -i'
+alias dir='ls -lF'
+alias h=history
+alias la='ls -a'
+alias ll='ls -l'
+alias ls='ls -F'
+alias more=less
+alias mv='mv -i'
+alias ren='mv -i'
+alias rm='rm -i'
+
+if [[ -z "${DISPLAY:-}" ]]; then
+    XSERVER=$(who am i | /usr/bin/awk '{print $6}' | /bin/sed 's/[()]//g')
+    XSERVER=${XSERVER%%:*}
+    if [[ -z "$XSERVER" || "$XSERVER" == "$(hostname)" || "$XSERVER" == "unix" ]]; then
+        export DISPLAY="$(hostname):0.0"
+    else
+        export DISPLAY="$XSERVER:0.0"
+    fi
+fi
+
+if [[ -e ~/access-UK/bash/bashrc.local_for_zsh ]]; then
+    source ~/access-UK/bash/bashrc.local_for_zsh
+fi
+
+[ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 
 function exists { which $1 &> /dev/null }
 
@@ -18,7 +82,6 @@ if exists percol; then
 fi
 
 setopt extendedglob
-emulate bash -c 'source ~/access-UK/bash/bashrc_for_zsh'
 export DISABLE_AUTO_TITLE=true
 
 __git_files () {
@@ -55,8 +118,9 @@ down-line-or-local-history() {
 }
 zle -N down-line-or-local-history
 
-#UDAY - Below line shows git-status of git working dir w.r.t origin in PS1
-source ~/access-UK/zsh/zsh-git-prompt/zshrc.sh
+# UDAY - show git status in prompt when plugin repo is available.
+[[ -f ~/access-UK/zsh/zsh-git-prompt/zshrc.sh ]] && \
+    source ~/access-UK/zsh/zsh-git-prompt/zshrc.sh
 
 #UDAY - change PS1 to have git info
 #With pwd in the PROMPT
@@ -91,8 +155,7 @@ function ppkill() {
 }
 
 #solarized - uday
-#eval $(dircolors ~/software/dircolors-solarized/dircolors.ansi-dark )
-#eval $(dircolors ~/.dir_colors/dircolors )
+eval "$(dircolors -b ~/software/dircolors-solarized/dircolors.ansi-dark)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -128,7 +191,7 @@ if [[ -f "$FILE_KUBECTL" ]] || [[ -f "$FILE_KUBECTL_LOCAL" ]]; then
 fi
 
 #UDAY GOLANG/golang/go
-export GOPATH=~/go
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 #Incase you have github copilot cli installed

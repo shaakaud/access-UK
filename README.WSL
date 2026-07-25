@@ -1,0 +1,422 @@
+0. Clone access-UK repo from github inside WSL:
+   - Create an SSH key (ed25519 is the recommended key type):
+     ssh-keygen -t ed25519 -a 100
+   - Copy the public key:
+     cat ~/.ssh/id_ed25519.pub
+   - Add it in github.com -> Settings -> SSH and GPG keys.
+   - Clone the repo:
+     git clone git@github.com:shaakaud/access-UK.git
+   - Keep repo under Linux filesystem (example: ~/access-UK).
+
+1. Install base dev tools required by other steps:
+   - `curl`, `wget`, `unzip`, `tar`, `ca-certificates`:
+     download and extract tools safely.
+   - `build-essential`, `make`, `pkg-config`: compile native tools.
+   - `jq`: JSON processor. `yq`: YAML processor.
+   - Install:
+     sudo apt update
+     sudo apt install -y curl wget unzip tar ca-certificates
+     sudo apt install -y build-essential make pkg-config jq yq
+
+2. Set up shell dotfiles:
+   - Link your bash files from the repo:
+     ln -s ~/access-UK/bash/bashrc ~/.bashrc
+     ln -s ~/access-UK/bash/bashrc.local ~/.bashrc.local
+     ln -s ~/access-UK/bash/bash_profile ~/.bash_profile
+     ln -s ~/access-UK/bash/aliases_bash ~/.aliases_bash
+     ln -s ~/access-UK/bin ~/bin
+   - GUI-only helpers in [bash/aliases_bash](bash/aliases_bash):
+     - `alias gv='gvim'`
+     - `alias xtw='xterm ... &'`
+   - Keep those aliases only if you run GUI apps via WSLg.
+
+3. Install zsh:
+   - zsh: shell with better completion and prompt support.
+   - Install:
+     sudo apt update
+     sudo apt install -y zsh
+   - Link your zsh files:
+     ln -s ~/access-UK/zsh/zshrc ~/.zshrc
+     ln -s ~/access-UK/zsh/zshrc.local ~/.zshrc.local
+   - Optional: oh-my-zsh framework install:
+     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/\
+master/tools/install.sh)"
+   - Install powerlevel9k theme (required by this repo's `ZSH_THEME`):
+     git clone https://github.com/Powerlevel9k/powerlevel9k.git \
+~/.oh-my-zsh/custom/themes/powerlevel9k
+   - Install zsh git prompt dependency expected by your `.zshrc.local`:
+     git clone https://github.com/shaakaud/zsh-git-prompt.git \
+~/access-UK/zsh/zsh-git-prompt
+   - Ensure oh-my-zsh is enabled in your linked `~/.zshrc`:
+     - Open `~/.zshrc`
+     - Ensure this line is NOT commented:
+       source $ZSH/oh-my-zsh.sh
+   - Set zsh as login shell:
+     chsh -s /usr/bin/zsh
+   - Start a new shell to validate:
+     exec zsh
+   - If you see this error:
+     `/home/<user>/access-UK/zsh/zsh-git-prompt/zshrc.sh: no such file`
+     clone the repo line above again and then run `exec zsh`.
+   - For additional zsh setup steps from the original zsh/README, see
+     section "zsh README details" below.
+
+4. Configure general dotfiles (on need basis):
+   - Link the common files:
+     ln -s ~/access-UK/others/inputrc ~/.inputrc
+     ln -s ~/access-UK/gdb/gdbinit ~/.gdbinit
+
+5. Configure git:
+   - Link git files:
+     ln -s ~/access-UK/git/gitconfig ~/.gitconfig
+     ln -s ~/access-UK/git/git-prompt.sh ~/.git-prompt.sh
+     ln -s ~/access-UK/bin/git ~/bin/git
+   - Install git (if not already installed):
+     sudo apt update
+     sudo apt install -y git
+   - Install git-lfs only if your repos track large binaries:
+     sudo apt install -y git-lfs
+     git lfs install
+   - Recommendation for your usage pattern:
+     - Use Ubuntu git by default.
+     - Use Git PPA only if you need a specific new feature or fix.
+   - Git PPA path (optional):
+     sudo add-apt-repository ppa:git-core/ppa
+     sudo apt update
+     sudo apt install -y git
+
+6. Install tmux:
+   - tmux: terminal multiplexer (persistent sessions).
+   - Install:
+     sudo apt update
+     sudo apt install -y tmux
+   - Link config:
+     ln -s ~/access-UK/tmux/tmux.conf ~/.tmux.conf
+   - TPM (tmux plugin manager): installs and updates tmux plugins.
+     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+   - Your [tmux/tmux.conf](tmux/tmux.conf) already includes:
+     - `tmux-resurrect`: saves/restores tmux sessions, windows, panes.
+     - `tmux-continuum`: auto-saves tmux state periodically.
+  - No need to add these plugins manually.
+  - Install via TPM inside tmux: `prefix + I`.
+   - Load config:
+     tmux source-file ~/.tmux.conf
+   - Plugin install inside tmux:
+     prefix + I
+   - Expected TPM output after install:
+     `TMUX environment reloaded. Done, press ENTER to continue.`
+   - Verify plugins are present:
+     ls ~/.tmux/plugins
+   - Verify resurrect save files (new default path):
+     ls ~/.local/share/tmux/resurrect
+   - If no save files yet, trigger one manually inside tmux:
+     prefix + Ctrl-s
+   - Restore manually inside tmux:
+     prefix + Ctrl-r
+
+7. Clone Docs-UK (if still used):
+   - Reuse the same SSH key from step 0 if already created.
+   - If not created yet, generate one:
+     ssh-keygen -t ed25519 -a 100
+   - Add your key to GitLab:
+     cat ~/.ssh/id_ed25519.pub
+     # paste the key in gitlab.com -> Preferences -> SSH Keys
+   - Clone in Linux home:
+     cd ~
+     git clone git@gitlab.com:shaakaud/Docs-UK.git
+
+8. Terminal colors and fonts:
+   - dircolors-solarized: consistent LS colors across machines.
+   - Install dircolors-solarized:
+     cd ~/software
+     git clone https://github.com/seebi/dircolors-solarized
+     echo 'eval "$(dircolors -b ~/software/dircolors-solarized/\
+dircolors.ansi-dark)"' >> ~/.zshrc.local
+   - If you use bash sessions too, add the same line to `~/.bashrc.local`.
+   - Nerd Font setup for Windows Terminal / VS Code terminal:
+     - Download from: https://www.nerdfonts.com/font-downloads
+     - Pick one font family (example: MesloLGS NF or CaskaydiaCove NF).
+     - Extract the downloaded zip to a normal folder first.
+     - Install all .ttf files at once (recommended):
+       1. Open Windows Settings -> Personalization -> Fonts.
+       2. Select all .ttf files in File Explorer.
+       3. Drag and drop them into the Fonts install area.
+     - If drag-drop is not convenient, use font preview install:
+       1. Double-click any .ttf file.
+       2. Click Install in the preview window.
+       3. Repeat as needed.
+     - If right-click does not show "Install for all users", this is okay.
+       Use the Settings -> Fonts drag-drop method above.
+     - Open Windows Terminal -> Settings -> Ubuntu -> Appearance
+     - Set Font face to the CaskaydiaCove Nerd Font.
+     - Restart Windows Terminal and run `exec zsh` in WSL.
+
+9. Install fzf:
+   - fzf: fuzzy finder for files/history/commands.
+   - Install latest fzf in software directory (same as old README flow):
+     mkdir -p ~/software
+     git clone --depth 1 https://github.com/junegunn/fzf.git ~/software/fzf
+     ln -s ~/software/fzf ~/.fzf
+     cd ~/software/fzf
+     ./install --no-update-rc
+   - Do not let installer change ~/.bashrc or ~/.zshrc.
+  - Continue with step 15 for tmux/dotfile integration used by this repo.
+
+10. Clipboard tools in WSL (if required):
+   - For Windows Terminal, extra clipboard packages are usually not required.
+   - `clip.exe` bridges text from WSL to Windows clipboard.
+   - Example:
+     echo hello | clip.exe
+   - Optional only if you have clipboard issues:
+     - `wl-clipboard`: helper for WSLg/Wayland GUI clipboard paths.
+       sudo apt update
+       sudo apt install -y wl-clipboard
+     - `xsel`: legacy X11 clipboard helper.
+       sudo apt install -y xsel
+
+11. Install asciidoc if required:
+   - asciidoc: text-to-doc converter.
+   - Install:
+     sudo apt update
+     sudo apt install -y asciidoc
+
+12. Install mergetool helper used in gitconfig:
+   - diffconflicts: custom merge-conflict helper script.
+   - Your [git/gitconfig](git/gitconfig) already refers to this as merge
+     tool (`merge.tool=diffconflicts`).
+   - Install:
+     cd ~/bin
+     wget https://github.com/whiteinge/dotfiles/raw/master/bin/diffconflicts
+     chmod +x diffconflicts
+
+13. Install mosh only if needed:
+   - mosh: resilient remote shell over unstable connections.
+   - Install:
+     sudo apt update
+     sudo apt install -y mosh
+
+14. Ensure executable permissions for scripts:
+   - Run:
+     chmod +x ~/access-UK/bin/*
+
+15. fzf-related helper files:
+   - Create files expected by your current shell helpers:
+     mkdir -p ~/tmuxbuffer
+     touch ~/tmuxbuffer/resultcmdsh
+   - inotify-tools: filesystem event watcher.
+     sudo apt update
+     sudo apt install -y inotify-tools
+   - Below info comes from my dot files present in my git repo.
+   - No need to do anything for points 1-3.
+   - 1. [vim/vimfiles/vundle_vimrc](vim/vimfiles/vundle_vimrc):
+        Contains changes to gG/gA to fzf functions and structures
+        (right side of vim screen). When selected, it opens the
+        function/struct in cscope.
+   - 2. [tmux/tmux.conf](tmux/tmux.conf):
+        `prefix + y` will pull out ctrl-r kind of window at the bottom
+        and shows all the tags from Txt files / my cheat sheets
+        (`~/Docs-UK/txtfiles.txt`).
+   - 3. [bash/bashrc.local_for_zsh](bash/bashrc.local_for_zsh):
+        `cmdsh`, `cmdsh2ndpart` - Files that needs to be indexed by
+        fzf (tmux) is present in `~/Docs-UK/txtfiles.txt`.
+        These two functions cat all these files and invoke `fzf-tmux`
+        by giving the catted file as input.
+   - If `~/Docs-UK/txtfiles.txt` does not exist, create/populate it
+     before expecting `prefix + y` to return results.
+
+16. noip dynamic DNS (optional):
+   - noip: dynamic DNS updater.
+   - Use only if you need public DNS updates from home/lab.
+   - WSL office/dev usage usually does not require this.
+
+17. Vim legacy plugins (optional):
+   - Unite.vim and vimproc are legacy.
+   - If you keep them, use your old Vim flow from the original README.
+
+18. Neovim setup:
+   - Use one install method only: official Neovim release tarball.
+   - Download in `~/software`, install in `/opt/nvim`, and link binary.
+   - Commands:
+     mkdir -p ~/software
+     cd ~/software
+     sudo apt remove -y neovim || true
+     sudo apt install -y curl tar
+     NVIM_TAG=$(curl -fsSL \
+https://api.github.com/repos/neovim/neovim/releases/latest | \
+grep -Po '"tag_name": "\K[^"]+')
+     echo "$NVIM_TAG"
+    NVIM_URL="https://github.com/neovim/neovim/releases/download/\
+  ${NVIM_TAG}/nvim-linux-x86_64.tar.gz"
+    curl -fLO "$NVIM_URL"
+     tar xzf nvim-linux-x86_64.tar.gz
+     sudo rm -rf /opt/nvim
+     sudo mv nvim-linux-x86_64 /opt/nvim
+     sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
+     which nvim
+     nvim --version | head -n 1
+
+   #Preferred: use NvChad config (kept from old README intent)
+   - Install dependencies:
+     sudo apt update
+     sudo apt install -y ripgrep python3-pip clangd nodejs npm
+   - pyright (TypeScript-based Python language server):
+     sudo npm install -g pyright
+   - Move old config and clone NvChad starter:
+     mv ~/.config/nvim ~/.config/oldnvim
+     mkdir -p ~/software/nvimcfg
+     git clone https://github.com/shaakaud/starter \
+~/software/nvimcfg/starter
+     ln -s ~/software/nvimcfg/starter ~/.config/nvim
+   - Open nvim and run:
+     :MasonInstallAll
+
+   - lazy.nvim and Mason note:
+     - If using NvChad/starter, lazy.nvim and Mason are already wired.
+     - Use `:Lazy` and `:Mason` inside nvim.
+
+   #Alternative: use uday's neovim config
+   - Link your existing config:
+     ln -s ~/access-UK/neovim/config ~/.config/nvim
+   - Open Neovim and run:
+     :PackerSync
+
+19. Install Python base toolchain:
+   - Install:
+     sudo apt update
+     sudo apt install -y python3 python3-pip python3-venv
+   - Optional uv (fast Python package/env manager):
+     curl -LsSf https://astral.sh/uv/install.sh | sh
+
+20. WSLg GUI apps (optional):
+   - WSLg is Windows Subsystem for Linux GUI support on Windows 11.
+   - Ensure WSLg components are updated from PowerShell:
+     wsl --update
+     wsl --shutdown
+   - Install GUI apps in Ubuntu:
+     sudo apt update
+     sudo apt install -y gnome-text-editor x11-apps nautilus
+   - Test WSLg:
+     xeyes
+   - Examples:
+     - gnome-text-editor
+     - nautilus
+
+21. Sharing files with Windows:
+   - Use \\wsl$ in Windows Explorer.
+   - Do not set up Samba inside WSL for normal file sharing.
+
+22. Workspace helper from old README:
+   - access-UK/bin has `pwd.sh`.
+   - Running the source commands below stores current `pwd` in `$WS`.
+   - Alias `base` from `aliases_bash` returns you to `$WS`.
+   - `aliases_bash` also uses `$WS` for folder navigation shortcuts.
+   - Commands:
+     source ~/.zshrc && source ~/bin/pwd.sh
+
+23. DISPLAY/X11 note:
+   - On modern WSLg, do not set DISPLAY=localhost:0.0 manually.
+   - For old non-WSLg setups only, use an X server workflow.
+
+24. GitHub Copilot CLI (optional):
+   - gh: GitHub CLI.
+     sudo apt update
+     sudo apt install -y gh
+   - Authenticate and install extension:
+     gh auth login
+     gh extension install github/gh-copilot
+   - alias setup:
+     gh copilot alias -- zsh > ~/.gh-copilot-aliases.zsh
+   - `.zshrc.local` sources `~/.gh-copilot-aliases.zsh` if present.
+
+25. Claude Code config (optional):
+   - Link claude files:
+     ln -s ~/access-UK/claude/settings.json ~/.claude/settings.json
+     ln -s ~/access-UK/claude/CLAUDE.md ~/.claude/CLAUDE.md
+
+26. Verify symlinks:
+=>$ pwd
+/home/youruser
+=>$ ls -lart ~ | grep access
+lrwxrwxrwx ... access-UK -> ~/access-UK
+lrwxrwxrwx ... .bashrc -> ~/.bashrc
+lrwxrwxrwx ... .zshrc -> ~/.zshrc
+lrwxrwxrwx ... .gitconfig -> ~/.gitconfig
+lrwxrwxrwx ... .tmux.conf -> ~/.tmux.conf
+
+27. Azure + C# + Go setup (single source of truth):
+   - Azure CLI: Azure resource and subscription operations.
+     curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+   - azd: Azure Developer CLI for app+infra bootstrap.
+     curl -fsSL https://aka.ms/install-azd.sh | bash
+
+   - .NET SDK (C# build/runtime toolchain):
+     wget https://packages.microsoft.com/config/ubuntu/24.04/\
+packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+     sudo dpkg -i packages-microsoft-prod.deb
+     rm packages-microsoft-prod.deb
+     sudo apt update
+     sudo apt install -y dotnet-sdk-8.0
+     dotnet --info
+     dotnet --list-sdks
+
+   - Go toolchain:
+     sudo apt update
+     sudo apt install -y golang-go
+     go env GOPATH GOMODCACHE GOCACHE
+
+   - Go language tools for editors:
+     go install golang.org/x/tools/gopls@latest
+     go install github.com/go-delve/delve/cmd/dlv@latest
+     go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+   - Kubernetes tools (if needed for networking workflows):
+     sudo apt update
+     sudo apt install -y kubectl
+     curl -fsSL \
+https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+   - Azure login defaults:
+     az login
+     az account set --subscription <your-subscription>
+     az account show
+
+zsh README details:
+   - Additional setup steps from [zsh/README](zsh/README) for reference.
+   - Git completion:
+     cd ~/software
+     curl -L https://github.com/git/git/raw/master/contrib/completion/\
+git-completion.zsh -OL
+     cd ~/
+     ln -s ~/software/git-completion.zsh git-completion.zsh
+   - Autojump (command directory navigation):
+     - Installation:
+       cd ~/software
+       git clone https://github.com/wting/autojump.git
+       cd autojump
+       ./install.py
+     - This installs autojump to ~/.autojump/etc/profile.d/autojump.sh
+     - zshrc already sources this file if installed.
+   - Git binary verification for zsh-git-prompt:
+     - If you experience git status issues in your prompt:
+       cd ~/access-UK/zsh/zsh-git-prompt
+     - Edit `gitstatus.py` and verify line with git binary path.
+     - Ensure it matches the output of `type git` or `which git`.
+     - Example: `gitbinary='/usr/bin/git'` if `which git` returns
+       `/usr/bin/git`.
+
+Items intentionally skipped from old README (WSL not required):
+- Old CentOS/yum/epel specific commands.
+- Parcellite clipboard manager on Linux desktop.
+- Samba server setup inside WSL.
+- VNC server and full ubuntu-desktop setup inside WSL.
+- Manual DISPLAY export for modern WSLg environments.
+- Legacy percol flow (replaced by fzf).
+- Legacy Vundle patching flow unless you keep old Vim path.
+
+Coverage checklist from old README:
+- SSH clone, Vim, Bash, Zsh, netrc/screen/inputrc/gdbinit, git, tmux.
+- Docs-UK, Solarized/dircolors, percol->fzf, xsel, asciidoc.
+- diffconflicts, mosh, executable bits, noip, Unite/vimproc, fonts.
+- Neovim (uday config + NvChad path), fugitive/git version.
+- samba/vnc/desktop/display guidance, python, copilot CLI, claude.
+- pwd.sh / WS helper and ALU-related notes.

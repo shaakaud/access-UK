@@ -52,7 +52,7 @@ plugins=(git)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-#source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -87,7 +87,16 @@ complete -o nospace -C /usr/bin/terraform terraform
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# BEGIN Agency MANAGED BLOCK
+if [[ ":${PATH}:" != *":/home/udayakumart/.config/agency/CurrentVersion:"* ]]; then
+    export PATH="/home/udayakumart/.config/agency/CurrentVersion:${PATH}"
+fi
+# END Agency MANAGED BLOCK
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# win-edge / passkey login fix: route browser to Windows Edge (WSL)
+export PATH="$HOME/.local/bin:$PATH"
+export BROWSER="$HOME/.local/bin/microsoft-edge"
