@@ -23,7 +23,7 @@ In VS Code Copilot chat, type:
 
 The agent will:
 1. Perform pre-flight system checks
-2. Guide you through 27 setup steps
+2. Guide you through 28 setup steps (0, 0.5, 1-27)
 3. Ask for approval before each step
 4. Create backups automatically
 5. Handle errors with rollback options
