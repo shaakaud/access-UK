@@ -252,14 +252,11 @@ sudo apt update
 sudo apt install -y zsh
 
 # Link zsh configs from repo
-ln -s ~/access-UK/zsh/zshrc ~/.zshrc
-ln -s ~/access-UK/zsh/zshrc.local ~/.zshrc.local
+ln -sfn ~/access-UK/zsh/zshrc ~/.zshrc
+ln -sfn ~/access-UK/zsh/zshrc.local ~/.zshrc.local
 
-# Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Install powerlevel9k theme
-git clone https://github.com/Powerlevel9k/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+# Install oh-my-zsh (use unattended mode)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
 
 # Install zsh-git-prompt plugin
 git clone https://github.com/shaakaud/zsh-git-prompt.git ~/access-UK/zsh/zsh-git-prompt
@@ -278,6 +275,87 @@ exec zsh
 
 ---
 
+## STEP 3.5: Install DejaVu Font (Recommended Default)
+
+**What will happen:**
+- Download and install DejaVu Sans Mono on Windows side (for Windows Terminal)
+- Install DejaVu fonts in WSL for consistency
+- Configure Windows Terminal to use DejaVu Sans Mono
+
+**STEP 1: Install on Windows Side (REQUIRED):**
+
+DejaVu Font must be installed on Windows, not just WSL, to work in Windows Terminal.
+
+```bash
+# On Windows PowerShell (as Administrator):
+# Download URL: https://github.com/dejavu-fonts/dejavu/releases
+# Extract ZIP to: C:\Users\YourUsername\Downloads\dejavu-fonts\
+
+cd "$env:USERPROFILE\Downloads\dejavu-fonts\ttf"
+Copy-Item *.ttf "C:\Windows\Fonts\"
+
+# Verify in Windows Settings:
+# Settings → Fonts → Search "DejaVu" → Should see "DejaVu Sans Mono"
+```
+
+**STEP 2: Install on WSL Side (for consistency):**
+
+```bash
+sudo apt update
+sudo apt install -y fonts-dejavu fonts-dejavu-core
+
+# Verify:
+fc-list | grep -i dejavu
+```
+
+**STEP 3: Configure Windows Terminal:**
+
+```bash
+# Open Windows Terminal settings (Ctrl+,)
+# In Ubuntu profile, add or update:
+"fontFace": "DejaVu Sans Mono"
+
+# Restart Windows Terminal
+# Ubuntu app should now use DejaVu Sans Mono
+```
+
+**Pros:** Simple ✓ | Clean ✓ | Works in Windows Terminal ✓ | Fast rendering ✓
+**Cons:** No git icons in prompt
+
+---
+
+**OPTIONAL ALTERNATIVE: Powerlevel9k Theme**
+
+If you want fancy prompt with git status icons (requires Nerd Font on Windows):
+
+**Powerlevel9k Pros:**
+- Beautiful multi-line prompt with git status
+- Shows branch, commit, changes
+- Highly customizable
+- Visual developers love it
+
+**Powerlevel9k Cons:**
+- Requires CaskaydiaCove Nerd Font installed on Windows (similar process as DejaVu)
+- Slower rendering on large repos
+- More setup complexity
+
+To use powerlevel9k:
+```bash
+# Download CaskaydiaCove Nerd Font from: https://www.nerdfonts.com/font-downloads
+# Install on Windows side like DejaVu above
+# Then in WSL:
+
+git clone https://github.com/Powerlevel9k/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+# Uncomment in ~/.zshrc:
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# Update Windows Terminal settings.json:
+# "fontFace": "CaskaydiaCove NF"
+```
+
+---
+
 ## STEP 4: Configure General Dotfiles
 
 <!-- README.WSL STEP 4 START -->
@@ -287,8 +365,8 @@ exec zsh
 
 **Commands:**
 ```bash
-ln -s ~/access-UK/others/inputrc ~/.inputrc
-ln -s ~/access-UK/gdb/gdbinit ~/.gdbinit
+ln -sfn ~/access-UK/others/inputrc ~/.inputrc
+ln -sfn ~/access-UK/gdb/gdbinit ~/.gdbinit
 ```
 
 <!-- README.WSL STEP 4 END -->
@@ -316,9 +394,9 @@ sudo apt update
 sudo apt install -y git
 
 # Link git files
-ln -s ~/access-UK/git/gitconfig ~/.gitconfig
-ln -s ~/access-UK/git/git-prompt.sh ~/.git-prompt.sh
-ln -s ~/access-UK/bin/git ~/bin/git
+ln -sfn ~/access-UK/git/gitconfig ~/.gitconfig
+ln -sfn ~/access-UK/git/git-prompt.sh ~/.git-prompt.sh
+ln -sfn ~/access-UK/bin/git ~/bin/git
 
 # Optional: git-lfs (only if you track large binaries)
 # sudo apt install -y git-lfs
@@ -765,7 +843,7 @@ gh auth login
 
 ## STEP 25: Claude Code Config (Optional)
 
-<!-- README.WSL STEP 25 START -->
+<!-- README.WSL STEP 24 START -->
 
 **What will happen:**
 - Create backup of existing claude config (if present)
@@ -782,13 +860,13 @@ ln -s ~/access-UK/claude/settings.json ~/.claude/settings.json
 ln -s ~/access-UK/claude/CLAUDE.md ~/.claude/CLAUDE.md
 ```
 
-<!-- README.WSL STEP 25 END -->
+<!-- README.WSL STEP 24 END -->
 
 ---
 
 ## STEP 26: Verify Symlinks
 
-<!-- README.WSL STEP 26 START -->
+<!-- README.WSL STEP 24 START -->
 
 **What will happen:**
 - Verify all symlinks are correctly created
@@ -808,13 +886,13 @@ lrwxrwxrwx ... .gitconfig -> ~/.gitconfig
 lrwxrwxrwx ... .tmux.conf -> ~/.tmux.conf
 ```
 
-<!-- README.WSL STEP 26 END -->
+<!-- README.WSL STEP 24 END -->
 
 ---
 
 ## STEP 27: Azure + C# + Go Setup
 
-<!-- README.WSL STEP 27 START -->
+<!-- README.WSL STEP 24 START -->
 
 **What will happen:**
 - Install Azure CLI
@@ -860,7 +938,7 @@ az account set --subscription <your-subscription>
 az account show
 ```
 
-<!-- README.WSL STEP 27 END -->
+<!-- README.WSL STEP 24 END -->
 
 ---
 

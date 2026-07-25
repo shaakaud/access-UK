@@ -35,17 +35,17 @@
      cp ~/.bashrc.local ~/.bashrc.local.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
      cp ~/.bash_profile ~/.bash_profile.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
    - Link your bash files from the repo:
-     ln -s ~/access-UK/bash/bashrc ~/.bashrc
-     ln -s ~/access-UK/bash/bashrc.local ~/.bashrc.local
-     ln -s ~/access-UK/bash/bash_profile ~/.bash_profile
-     ln -s ~/access-UK/bash/aliases_bash ~/.aliases_bash
-     ln -s ~/access-UK/bin ~/bin
+     ln -sfn ~/access-UK/bash/bashrc ~/.bashrc
+     ln -sfn ~/access-UK/bash/bashrc.local ~/.bashrc.local
+     ln -sfn ~/access-UK/bash/bash_profile ~/.bash_profile
+     ln -sfn ~/access-UK/bash/aliases_bash ~/.aliases_bash
+     ln -sfn ~/access-UK/bin ~/bin
    - GUI-only helpers in [bash/aliases_bash](bash/aliases_bash):
      - `alias gv='gvim'`
      - `alias xtw='xterm ... &'`
    - Keep those aliases only if you run GUI apps via WSLg.
 
-3. Install zsh:
+3. Install zsh and Oh-My-Zsh:
    - zsh: shell with better completion and prompt support.
    - ⚠️ BACKUP: Create backups of existing dotfiles:
      cp ~/.zshrc ~/.zshrc.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
@@ -54,15 +54,12 @@
      sudo apt update
      sudo apt install -y zsh
    - Link your zsh files:
-     ln -s ~/access-UK/zsh/zshrc ~/.zshrc
-     ln -s ~/access-UK/zsh/zshrc.local ~/.zshrc.local
-   - Optional: oh-my-zsh framework install:
+     ln -sfn ~/access-UK/zsh/zshrc ~/.zshrc
+     ln -sfn ~/access-UK/zsh/zshrc.local ~/.zshrc.local
+   - Install oh-my-zsh framework (use unattended mode):
      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/\
-master/tools/install.sh)"
-   - Install powerlevel9k theme (required by this repo's `ZSH_THEME`):
-     git clone https://github.com/Powerlevel9k/powerlevel9k.git \
-~/.oh-my-zsh/custom/themes/powerlevel9k
-   - Install zsh git prompt dependency expected by your `.zshrc.local`:
+master/tools/install.sh)" "" --unattended || true
+   - Install zsh git prompt dependency:
      git clone https://github.com/shaakaud/zsh-git-prompt.git \
 ~/access-UK/zsh/zsh-git-prompt
    - Ensure oh-my-zsh is enabled in your linked `~/.zshrc`:
@@ -76,21 +73,84 @@ master/tools/install.sh)"
    - If you see this error:
      `/home/<user>/access-UK/zsh/zsh-git-prompt/zshrc.sh: no such file`
      clone the repo line above again and then run `exec zsh`.
-   - For additional zsh setup steps from the original zsh/README, see
-     section "zsh README details" below.
 
-4. Configure general dotfiles (on need basis):
+4. Install DejaVu Font (recommended default):
+   - DejaVu Sans Mono is stable, simple, and works everywhere.
+   
+   **Step 1: Install on Windows Side (REQUIRED for Windows Terminal):**
+   
+   - Download DejaVu ZIP from: https://github.com/dejavu-fonts/dejavu/releases
+   - Extract the ZIP file (e.g., to ~/Downloads/dejavu-fonts/)
+   - Open Windows PowerShell as Administrator:
+     # Navigate to extracted fonts folder
+     cd "$env:USERPROFILE\Downloads\dejavu-fonts\ttf"
+     
+     # Copy all .ttf files to Windows Fonts folder
+     Copy-Item *.ttf "C:\Windows\Fonts\"
+     
+   - Verify in Windows: Settings → Fonts → Search "DejaVu" (should see DejaVu Sans Mono)
+   
+   **Step 2: Install on WSL Side (for consistency):**
+   
+   - Install DejaVu fonts in WSL:
+     sudo apt update
+     sudo apt install -y fonts-dejavu fonts-dejavu-core
+   - Verify:
+     fc-list | grep -i dejavu
+   
+   **Step 3: Configure Windows Terminal:**
+   
+   - Open Windows Terminal settings.json (Ctrl+,)
+   - Find the Ubuntu profile and add/update:
+     "fontFace": "DejaVu Sans Mono"
+   - Restart Windows Terminal
+   - Ubuntu app should now display DejaVu Sans Mono font
+
+   ⚠️ OPTIONAL ALTERNATIVE: Powerlevel9k Theme
+   
+   If you prefer fancy prompt with git status icons (Nerd Font required):
+
+   **Powerlevel9k Pros:**
+   - Beautiful multi-line prompt with git status
+   - Shows branch, commit status, uncommitted changes
+   - Customizable colors and icons
+   - Great for visual developers
+
+   **Powerlevel9k Cons:**
+   - Requires Nerd Font (CaskaydiaCove) on Windows Terminal
+   - Slower prompt rendering (noticeable on large repos)
+   - More dependencies (external font installation)
+   - Harder to troubleshoot if font config issues arise
+
+   **DejaVu Font Pros:**
+   - Simple, clean, professional look
+   - No special font installation needed
+   - Faster prompt rendering
+   - Works consistently across all terminals
+
+   **DejaVu Font Cons:**
+   - Less visual flair than Nerd Fonts
+   - No git icons in prompt
+
+   To install powerlevel9k instead, run:
+     git clone https://github.com/Powerlevel9k/powerlevel9k.git \
+~/.oh-my-zsh/custom/themes/powerlevel9k
+
+   Then uncomment `ZSH_THEME="powerlevel9k/powerlevel9k"` in ~/.zshrc
+   (Note: Requires CaskaydiaCove Nerd Font on Windows Terminal)
+
+5. Configure general dotfiles (on need basis):
    - Link the common files:
-     ln -s ~/access-UK/others/inputrc ~/.inputrc
-     ln -s ~/access-UK/gdb/gdbinit ~/.gdbinit
+     ln -sfn ~/access-UK/others/inputrc ~/.inputrc
+     ln -sfn ~/access-UK/gdb/gdbinit ~/.gdbinit
 
-5. Configure git:
+6. Configure git:
    - ⚠️ BACKUP: Create backup of existing dotfile:
      cp ~/.gitconfig ~/.gitconfig.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
    - Link git files:
-     ln -s ~/access-UK/git/gitconfig ~/.gitconfig
-     ln -s ~/access-UK/git/git-prompt.sh ~/.git-prompt.sh
-     ln -s ~/access-UK/bin/git ~/bin/git
+     ln -sfn ~/access-UK/git/gitconfig ~/.gitconfig
+     ln -sfn ~/access-UK/git/git-prompt.sh ~/.git-prompt.sh
+     ln -sfn ~/access-UK/bin/git ~/bin/git
    - Install git (if not already installed):
      sudo apt update
      sudo apt install -y git
@@ -105,7 +165,7 @@ master/tools/install.sh)"
      sudo apt update
      sudo apt install -y git
 
-6. Install tmux:
+7. Install tmux:
    - tmux: terminal multiplexer (persistent sessions).
    - ⚠️ BACKUP: Create backup of existing dotfile:
      cp ~/.tmux.conf ~/.tmux.conf.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
@@ -113,7 +173,7 @@ master/tools/install.sh)"
      sudo apt update
      sudo apt install -y tmux
    - Link config:
-     ln -s ~/access-UK/tmux/tmux.conf ~/.tmux.conf
+     ln -sfn ~/access-UK/tmux/tmux.conf ~/.tmux.conf
    - TPM (tmux plugin manager): installs and updates tmux plugins.
      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
    - Your [tmux/tmux.conf](tmux/tmux.conf) already includes:
@@ -210,8 +270,13 @@ dircolors.ansi-dark)"' >> ~/.zshrc.local
      tool (`merge.tool=diffconflicts`).
    - Install:
      cd ~/bin
-     wget https://github.com/whiteinge/dotfiles/raw/master/bin/diffconflicts
-     chmod +x diffconflicts
+     if wget -O diffconflicts https://github.com/whiteinge/dotfiles/raw/master/bin/diffconflicts; then
+         chmod +x diffconflicts
+         echo "✓ diffconflicts installed"
+     else
+         echo "✗ Failed to download diffconflicts"
+         exit 1
+     fi
 
 13. Install mosh only if needed:
    - mosh: resilient remote shell over unstable connections.
@@ -257,8 +322,7 @@ dircolors.ansi-dark)"' >> ~/.zshrc.local
    - Unite.vim and vimproc are legacy.
    - If you keep them, use your old Vim flow from the original README.
 
-18. Neovim setup:
-   - Use one install method only: official Neovim release tarball.
+19. Neovim setup (NvChad only):
    - ⚠️ BACKUP: Create backup of existing nvim config:
      cp -r ~/.config/nvim ~/.config/nvim.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
    - Download in `~/software`, install in `/opt/nvim`, and link binary.
@@ -266,14 +330,18 @@ dircolors.ansi-dark)"' >> ~/.zshrc.local
      mkdir -p ~/software
      cd ~/software
      sudo apt remove -y neovim || true
-     sudo apt install -y curl tar
-     NVIM_TAG=$(curl -fsSL \
-https://api.github.com/repos/neovim/neovim/releases/latest | \
-grep -Po '"tag_name": "\K[^"]+')
-     echo "$NVIM_TAG"
-    NVIM_URL="https://github.com/neovim/neovim/releases/download/\
-  ${NVIM_TAG}/nvim-linux-x86_64.tar.gz"
-    curl -fLO "$NVIM_URL"
+     sudo apt install -y curl tar jq
+
+     # Get latest Neovim release with error handling
+     NVIM_TAG=$(curl -fsSL https://api.github.com/repos/neovim/neovim/releases/latest 2>/dev/null | jq -r '.tag_name' 2>/dev/null)
+     if [ -z "$NVIM_TAG" ]; then
+         echo "Failed to fetch Neovim version. Using v0.9.0"
+         NVIM_TAG="v0.9.0"
+     fi
+     echo "Installing Neovim: $NVIM_TAG"
+
+     NVIM_URL="https://github.com/neovim/neovim/releases/download/${NVIM_TAG}/nvim-linux-x86_64.tar.gz"
+     curl -fLO "$NVIM_URL" || { echo "Failed to download Neovim"; exit 1; }
      tar xzf nvim-linux-x86_64.tar.gz
      sudo rm -rf /opt/nvim
      sudo mv nvim-linux-x86_64 /opt/nvim
@@ -281,30 +349,21 @@ grep -Po '"tag_name": "\K[^"]+')
      which nvim
      nvim --version | head -n 1
 
-   #Preferred: use NvChad config (kept from old README intent)
-   - Install dependencies:
-     sudo apt update
+   - Install NvChad (recommended, single path):
      sudo apt install -y ripgrep python3-pip clangd nodejs npm
-   - pyright (TypeScript-based Python language server):
      sudo npm install -g pyright
-   - Move old config and clone NvChad starter:
-     mv ~/.config/nvim ~/.config/oldnvim
+
+     mv ~/.config/nvim ~/.config/oldnvim 2>/dev/null || true
      mkdir -p ~/software/nvimcfg
-     git clone https://github.com/shaakaud/starter \
-~/software/nvimcfg/starter
-     ln -s ~/software/nvimcfg/starter ~/.config/nvim
+     git clone https://github.com/shaakaud/starter ~/software/nvimcfg/starter
+     ln -sfn ~/software/nvimcfg/starter ~/.config/nvim
+
    - Open nvim and run:
      :MasonInstallAll
 
-   - lazy.nvim and Mason note:
+   - lazy.nvim and Mason notes:
      - If using NvChad/starter, lazy.nvim and Mason are already wired.
      - Use `:Lazy` and `:Mason` inside nvim.
-
-   #Alternative: use uday's neovim config
-   - Link your existing config:
-     ln -s ~/access-UK/neovim/config ~/.config/nvim
-   - Open Neovim and run:
-     :PackerSync
 
 19. Install Python base toolchain:
    - Install:
@@ -358,20 +417,20 @@ grep -Po '"tag_name": "\K[^"]+')
    - ⚠️ BACKUP: Create backup of existing claude config:
      cp -r ~/.claude ~/.claude.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
    - Link claude files:
-     ln -s ~/access-UK/claude/settings.json ~/.claude/settings.json
-     ln -s ~/access-UK/claude/CLAUDE.md ~/.claude/CLAUDE.md
+     ln -sfn ~/access-UK/claude/settings.json ~/.claude/settings.json
+     ln -sfn ~/access-UK/claude/CLAUDE.md ~/.claude/CLAUDE.md
 
-26. Verify symlinks:
-=>$ pwd
+27. Verify symlinks:
+=> $ pwd
 /home/youruser
-=>$ ls -lart ~ | grep access
+=> $ ls -lart ~ | grep access
 lrwxrwxrwx ... access-UK -> ~/access-UK
 lrwxrwxrwx ... .bashrc -> ~/.bashrc
 lrwxrwxrwx ... .zshrc -> ~/.zshrc
 lrwxrwxrwx ... .gitconfig -> ~/.gitconfig
 lrwxrwxrwx ... .tmux.conf -> ~/.tmux.conf
 
-27. Azure + C# + Go setup (single source of truth):
+28. Azure + C# + Go setup (optional):
    - Azure CLI: Azure resource and subscription operations.
      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
    - azd: Azure Developer CLI for app+infra bootstrap.
@@ -403,10 +462,11 @@ packages-microsoft-prod.deb -O packages-microsoft-prod.deb
      curl -fsSL \
 https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-   - Azure login defaults:
-     az login
-     az account set --subscription <your-subscription>
-     az account show
+   - Azure login (optional - skip if not using Azure):
+     # az login
+     # az account set --subscription <your-subscription>
+     # az account show
+     echo "✓ Azure tools installed. Run 'az login' if you need Azure access."
 
 zsh README details:
    - Additional setup steps from [zsh/README](zsh/README) for reference.
@@ -415,7 +475,7 @@ zsh README details:
      curl -L https://github.com/git/git/raw/master/contrib/completion/\
 git-completion.zsh -OL
      cd ~/
-     ln -s ~/software/git-completion.zsh git-completion.zsh
+     ln -sfn ~/software/git-completion.zsh git-completion.zsh
    - Autojump (command directory navigation):
      - Installation:
        cd ~/software
