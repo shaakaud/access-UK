@@ -185,7 +185,29 @@ master/tools/install.sh)" "" --unattended || true
    - Restore manually inside tmux:
      prefix + Ctrl-r
 
-7. Clone Docs-UK (if still used):
+7.5 Set up GitHub Copilot Chat instructions globally:
+   - GitHub Copilot Chat automatically loads instructions from `~/.copilot/instructions/`
+   - This allows Copilot Chat to enforce coding standards and git workflow rules across ALL projects
+   - Create the global instructions directory:
+     mkdir -p ~/.copilot/instructions
+   - Link the access-UK Copilot instructions:
+     ln -sfn ~/access-UK/copilot/instructions.md ~/.copilot/instructions/access-uk.instructions.md
+   - Verify the symlink:
+     ls -la ~/.copilot/instructions/
+     # Should show: access-uk.instructions.md@ -> /home/youruser/access-UK/copilot/instructions.md
+   - After setup, restart VS Code for Copilot Chat to reload the instructions
+   - Verify instructions are loaded:
+     1. Open VS Code with access-UK workspace
+     2. Open GitHub Copilot Chat
+     3. Type: /instructions (should list "Access-UK Development Standards")
+     4. OR check Configure Chat (gear icon) → Instructions tab
+   - Instructions include:
+     - CRITICAL git workflow rules (never commit/push without permission)
+     - Coding standards (80-character line limit)
+     - grill-me interview mode for detailed planning
+     - Conventions (commit format, file references)
+
+8. Clone Docs-UK (if still used):
    - Reuse the same SSH key from step 0 if already created.
    - If not created yet, generate one:
      ssh-keygen -t ed25519 -a 100
@@ -196,7 +218,7 @@ master/tools/install.sh)" "" --unattended || true
      cd ~
      git clone git@gitlab.com:shaakaud/Docs-UK.git
 
-8. Terminal Colors and Fonts:
+9. Terminal Colors and Fonts:
    - ⏭️ SKIP THIS STEP - DO NOT RUN
    - Dircolors-solarized is already configured in ~/.zshrc.local
    - Running manual dircolors setup would:
@@ -222,7 +244,7 @@ master/tools/install.sh)" "" --unattended || true
      - Set Font face to the CaskaydiaCove Nerd Font.
      - Restart Windows Terminal and run `exec zsh` in WSL.
 
-9. Install fzf:
+10. Install fzf:
    - ⏭️ SKIP THIS STEP - DO NOT RUN
    - Zsh already includes fzf via Oh-My-Zsh plugin (enabled by default).
    - Why skip? The fzf installer will pollute bash files despite --no-update-rc flag:
@@ -240,10 +262,10 @@ master/tools/install.sh)" "" --unattended || true
      ./install --no-update-rc  ← installer ignores this flag!
    - Continue with step 15 for tmux/dotfile integration used by this repo.
 
-10. Clipboard tools in WSL (if required):
+11. Clipboard tools in WSL (if required):
    - For Windows Terminal, extra clipboard packages are usually not required.
 
-10. Clipboard tools in WSL (if required):
+11. Clipboard tools in WSL (if required):
    - For Windows Terminal, extra clipboard packages are usually not required.
    - `clip.exe` bridges text from WSL to Windows clipboard.
    - Example:
@@ -255,14 +277,14 @@ master/tools/install.sh)" "" --unattended || true
      - `xsel`: legacy X11 clipboard helper.
        sudo apt install -y xsel
 
-11. Install asciidoc if required:
+12. Install asciidoc if required:
    - ⚠️ SKIP THIS STEP unless you specifically need to convert .asciidoc files
    - asciidoc: text-to-doc converter (not required for standard development)
    - Install only if needed:
      sudo apt update
      sudo apt install -y asciidoc
 
-12. Install mergetool helper used in gitconfig:
+13. Install mergetool helper used in gitconfig:
    - diffconflicts: custom merge-conflict helper script.
    - ⚠️ BACKUP: Create backup of existing gitconfig if modified:
      cp ~/.gitconfig ~/.gitconfig.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
@@ -278,17 +300,17 @@ master/tools/install.sh)" "" --unattended || true
          exit 1
      fi
 
-13. Install mosh only if needed:
+14. Install mosh only if needed:
    - mosh: resilient remote shell over unstable connections.
    - Install:
      sudo apt update
      sudo apt install -y mosh
 
-14. Ensure executable permissions for scripts:
+15. Ensure executable permissions for scripts:
    - Run:
      chmod +x ~/access-UK/bin/*
 
-15. fzf-related helper files:
+16. fzf-related helper files:
    - Create files expected by your current shell helpers:
      mkdir -p ~/tmuxbuffer
      touch ~/tmuxbuffer/resultcmdsh

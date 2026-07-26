@@ -24,6 +24,11 @@ applyTo: ["**/README.md", "**/README.WSL", "**/wsl*"]
    - Bash files are skipped (not needed for zsh-only workflow)
    - fzf installer is skipped (fzf included in Oh-My-Zsh plugin)
 
+3.5 **GitHub Copilot Chat Integration**
+   - Global instructions auto-load from `~/.copilot/instructions/` (see STEP 7.5 in README.WSL)
+   - Copilot Chat will enforce git workflow rules and coding standards automatically
+   - CRITICAL: Always ask before committing/pushing
+
 4. **Important - Sudo Password:**
    - STEP 1 will cache your sudo credentials (you'll enter password once)
    - This allows all 46+ sudo commands to work without repeated prompts
