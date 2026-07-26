@@ -27,12 +27,7 @@ if [[ -n "$TMP" && ! -d "$TMP" ]]; then
     mkdir -p "$TMP"
 fi
 
-HISTSIZE=1000
-SAVEHIST=$HISTSIZE
-setopt hist_ignore_all_dups
-HISTFILESIZE=2000
-HISTCONTROL=ignoreboth
-FIGNORE=".o:~"
+# HISTSIZE settings moved to end of file for consistency
 
 setopt ignore_eof
 setopt noclobber
@@ -60,13 +55,101 @@ if [[ -z "${DISPLAY:-}" ]]; then
     fi
 fi
 
-if [[ -e ~/access-UK/bash/bashrc.local_for_zsh ]]; then
-    source ~/access-UK/bash/bashrc.local_for_zsh
+# ============================================================================
+# PERSONAL CONFIGURATIONS (Migrated from bash/bashrc.local_for_zsh)
+# ============================================================================
+
+# Personal configurations
+export LOC=0.0MG
+export USERINITIALS=mv
+export EMAIL_ADDR=udaytj@versa-networks.com
+export EDITOR=vim
+
+# .bashrc overrides
+export CVSROOT=":pserver:$CVSUSERNAME@cvspc.mv.usa.alcatel.com:/swdev/cvsrep"
+export EMACS_BASE=/usr/local/emacs
+export TEMP=/temp
+export TGT_PF=7750
+
+# VI-clone path setup
+if ! uname -a | grep -qi cygwin; then
+    if [[ -f /usr/local/bin/vim ]]; then
+        PATH=$PATH:/usr/local/bin/vim
+    elif [[ -f /usr/bin/vim ]]; then
+        PATH=$PATH:/usr/bin/vim
+    fi
 fi
 
+# CSCOPE_EDITOR setup (Linux only)
+if ! uname -a | grep -qi cygwin; then
+    if [[ -f /usr/local/bin/vim ]]; then
+        export CSCOPE_EDITOR=/usr/local/bin/vim
+    elif [[ -f /usr/bin/vim ]]; then
+        export CSCOPE_EDITOR=/usr/bin/vim
+    fi
+    alias ctags='/usr/bin/ctags'
+fi
+
+# To make Ctrl-Right-Arrow, Ctrl-Left-Arrow work in Terminal for cscope searches
+export TERM=xterm-256color
+
+# ============================================================================
+# GIT RELATED
+# ============================================================================
 [ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 
-function exists { which $1 &> /dev/null }
+# HISTSIZE is set later in the configuration
+
+# PROMPT and context variables
+COMMENT=
+export PAN_DIR=$(pwd)
+export PANOS=$(pwd)
+
+# PATH updates
+PATH=$PATH:~/access-UK/bin/git:/sbin
+
+# Avoid screen freeze when Ctrl-S is pressed on VIM screen
+stty -ixon
+
+# ============================================================================
+# GENERAL UTILITIES
+# ============================================================================
+
+# Remove all unnecessary files
+alias f='rm -f *~; rm -f *#'
+
+# Modified Files
+alias m='cvs -n up -P -d 2>/dev/null | grep -v "^[/?U]" 2>/dev/null'
+
+# ============================================================================
+# FZF-TMUX FILE SEARCH FUNCTIONS (Docs-UK integration)
+# ============================================================================
+
+cmdsh2ndpart() {
+    local RFILE=~/tmuxbuffer/resultcmdsh
+    local DIR_PREFIX=$(dirname $RFILE)
+    
+    if [[ ! -f $RFILE ]]; then
+        /usr/bin/inotifywait $DIR_PREFIX -e create -e moved_to | while read path action file; do :; done
+    fi
+    
+    if [[ ! -s $RFILE ]]; then
+        echo " " > $RFILE
+    fi
+    
+    sed -i 's/;#.*$//g' $RFILE
+    perl -pi -e 'chomp if eof' $RFILE
+}
+
+cmdsh() {
+    local RFILE=~/tmuxbuffer/resultcmdsh
+    local DIR_PREFIX=$(dirname $RFILE)
+    local TXTFILES=~/Docs-UK/txtfiles.txt
+    
+    rm -f ~/tmuxbuffer/resultcmdsh
+    cat $(grep -v '^#' $TXTFILES) | fzf-tmux -p 80%,60% --exact --reverse --no-sort -m > $RFILE
+}
+
 
 if exists percol; then
     function percol_select_history() {

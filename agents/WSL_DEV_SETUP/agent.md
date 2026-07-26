@@ -1,6 +1,6 @@
 ---
 name: wsl_dev_setup
-applyTo: ["**/*"]
+applyTo: ["**/README.md", "**/README.WSL", "**/wsl*"]
 ---
 
 # @wsl_dev_setup: Interactive WSL Development Environment Setup Agent
@@ -19,12 +19,17 @@ applyTo: ["**/*"]
    - In VS Code Copilot Chat, type: `@wsl_dev_setup`
    - Agent will guide you through each STEP interactively
 
-3. **Important - Sudo Password:**
+3. **🔴 Primary Shell: Zsh**
+   - This setup assumes **zsh as your primary shell** (installed in STEP 3)
+   - Bash files are skipped (not needed for zsh-only workflow)
+   - fzf installer is skipped (fzf included in Oh-My-Zsh plugin)
+
+4. **Important - Sudo Password:**
    - STEP 1 will cache your sudo credentials (you'll enter password once)
-   - This allows all 47+ sudo commands to work without repeated prompts
+   - This allows all 46+ sudo commands to work without repeated prompts
    - Credentials cached for 15 minutes during setup
 
-4. **Logs saved to:**
+5. **Logs saved to:**
    ```
    ~/access-UK/.wsl_setup_logs/wsl_setup.<timestamp>.log
    ```
@@ -68,12 +73,14 @@ All steps documented in [README.md](../../README.md) with:
 Agent: "Ready for STEP X: [Title]?"
        "Open README.md STEP X"
        "Run commands from README.md"
+       [Skips STEP 2 (bash) and STEP 9 (fzf) — zsh-only setup]
 
 You:   "Done! Output: [paste]"
   or   "Skip this step"
   or   "Error: [describe issue]"
 
 Agent: [Validates or troubleshoots]
+       [Checks for existing changes before appending to zshrc.local]
        "Proceeding to STEP X+1..."
 ```
 
@@ -85,17 +92,24 @@ Agent: [Validates or troubleshoots]
 
 ---
 
-## What Gets Installed
+## What Gets Installed (Zsh-Optimized)
 
-- **Shells**: Zsh, Oh-My-Zsh
+All installations optimized for **zsh as primary shell**:
+- **Shells**: Zsh, Oh-My-Zsh (bash files skipped — not used for zsh)
 - **Version Control**: Git, GitHub CLI
 - **Terminal**: Tmux + plugins
 - **Editors**: Neovim (NvChad)
-- **Utilities**: fzf, diffconflicts, mosh, asciidoc
+- **Utilities**: fzf (via Oh-My-Zsh plugin, installer skipped), diffconflicts, mosh, asciidoc
 - **Languages**: Python 3, Go, .NET SDK 8
 - **Cloud**: Azure CLI, azd
 - **Fonts**: DejaVu Sans Mono
 - **Helpers**: GitHub Copilot CLI, Claude Code
+
+**Smart Installation:**
+- **Skips STEP 2**: Bash configuration (not needed for zsh)
+- **Skips STEP 9**: fzf installer (redundant with Oh-My-Zsh plugin)
+- **Checks before appending**: Verifies changes don't already exist in ~/.zshrc.local
+- **Prevents repo pollution**: No installation tools modify repo files
 
 ---
 
@@ -120,10 +134,24 @@ If a step fails:
 
 ---
 
-## Optional Steps (Can Skip)
+## Steps: Zsh-Optimized Workflow
 
+**All users follow this flow:**
+- ✅ STEP 1: Base Tools (always)
+- ⏭️ **STEP 2: Bash** — **SKIP** (not needed for zsh-only)
+- ✅ STEP 3-4: Zsh/Oh-My-Zsh (always)
+- ✅ STEP 5-7: Git, Tmux, Docs-UK (as desired)
+- ✅ STEP 8: Dircolors — Agent checks ~/.zshrc.local first, skips if already present
+- ⏭️ **STEP 9: fzf installer** — **SKIP** (fzf already in Oh-My-Zsh plugin)
+- ✅ STEP 10+: Continue as desired
+
+**After Setup (Make Zsh Your Default Login Shell):**
+```bash
+chsh -s $(which zsh)
+```
+
+**Always Optional:**
 - STEP 7: Clone Docs-UK
-- STEP 8: Terminal Colors/Fonts
 - STEP 10: Clipboard Tools
 - STEP 13: Mosh
 - STEP 16: Noip DNS

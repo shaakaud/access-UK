@@ -127,9 +127,14 @@ yq --version
 
 ---
 
-## STEP 2: Set Up Shell Dotfiles (Bash)
+## STEP 2: Set Up Shell Dotfiles (Bash) — ⏭️ SKIP FOR ZSH-ONLY SETUP
 
-**What will happen:**
+**SKIP this step.** This setup uses **zsh as primary shell** (STEP 3 installs zsh).
+Bash files are not needed for zsh-only workflow.
+
+Only use this step if maintaining both bash and zsh shells.
+
+**What will happen (if running for bash users):**
 - Backup existing bash configuration files
 - Link bash files from access-UK repository
 - Preserve aliases and bash settings
@@ -226,6 +231,16 @@ grep "source.*oh-my-zsh.sh" ~/.zshrc | grep -v "#"
   - Re-clone zsh-git-prompt: `git clone https://github.com/shaakaud/zsh-git-prompt.git ~/access-UK/zsh/zsh-git-prompt`
   - Then start new shell: `exec zsh`
 - If oh-my-zsh not loading: Verify `.zshrc` contains line `source $ZSH/oh-my-zsh.sh` (not commented)
+
+**Make Zsh Your Default Login Shell (Recommended):**
+```bash
+# Set zsh as default shell
+chsh -s $(which zsh)
+
+# Verify (exit and log back in)
+echo $SHELL
+# Should output: /usr/bin/zsh
+```
 
 ---
 
@@ -347,7 +362,6 @@ file ~/.inputrc ~/.gdbinit
 - Backup existing gitconfig
 - Link git configuration from repository
 - Install git (if not present)
-- Optionally install git-lfs for large files
 
 **Git Pager Configuration:**
 The gitconfig contains `pager = less -FX` which:
@@ -369,10 +383,6 @@ sudo apt install -y git
 ln -sfn ~/access-UK/git/gitconfig ~/.gitconfig
 ln -sfn ~/access-UK/git/git-prompt.sh ~/.git-prompt.sh
 ln -sfn ~/access-UK/bin/git ~/bin/git
-
-# Optional: git-lfs (only if tracking large binaries)
-sudo apt install -y git-lfs
-git lfs install
 ```
 
 **Optional: Git PPA (latest version)**
@@ -475,21 +485,20 @@ ls -la ~/Docs-UK
 
 ## STEP 8: Terminal Colors and Fonts (Optional)
 
-**What will happen:**
-- Install dircolors-solarized for consistent LS colors
-- Configure Nerd Font support (if desired)
+**⏭️ SKIP FOR ZSH-ONLY SETUP:**
+- Dircolors-solarized is already configured in ~/.zshrc.local (added during merge from bash/bashrc.local_for_zsh)
+- No additional setup needed for terminal colors
+- Nerd Font installation is optional (see below if desired for fancy icons)
 
-**Dircolors Setup:**
+**Legacy Information (for reference):**
+If you need to manually add dircolors for any reason:
 ```bash
 mkdir -p ~/software
 cd ~/software
 git clone https://github.com/seebi/dircolors-solarized
 
-# Add to ~/.zshrc.local
-echo 'eval "$(dircolors -b ~/software/dircolors-solarized/dircolors.ansi-dark)"' >> ~/.zshrc.local
-
-# Also add to ~/.bashrc.local if using bash
-echo 'eval "$(dircolors -b ~/software/dircolors-solarized/dircolors.ansi-dark)"' >> ~/.bashrc.local
+# Check if already present in ~/.zshrc.local
+grep -q 'dircolors.ansi-dark' ~/.zshrc.local && echo "Already configured"
 ```
 
 **Nerd Font Setup (Alternative to DejaVu):**
@@ -512,13 +521,16 @@ ls --color=auto ~/ | head
 
 ---
 
-## STEP 9: Install fzf
+## STEP 9: Install fzf — ⏭️ SKIP FOR ZSH-ONLY SETUP
 
-**What will happen:**
+**SKIP this step.** Zsh includes fzf via Oh-My-Zsh plugin (enabled by default).
+Fzf installer is not needed.
+
+**If you were using bash:**
 - Install fzf (fuzzy finder for files, history, commands)
 - Link fzf configuration
 
-**Commands:**
+**Legacy for bash users:**
 ```bash
 mkdir -p ~/software
 cd ~/software
@@ -531,7 +543,9 @@ ln -sfn ~/software/fzf ~/.fzf
 cd ~/.fzf
 ./install --no-update-rc
 
-# Note: Do not let installer modify ~/.bashrc or ~/.zshrc
+# Note: Installer may attempt to modify ~/.bashrc or ~/.zshrc despite --no-update-rc flag
+# For bash users: verify ~/.bashrc has fzf sourced
+# For zsh users: verify fzf plugin is enabled in ~/.zshrc
 ```
 
 **Verify:**

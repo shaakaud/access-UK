@@ -30,20 +30,9 @@
      sudo apt install -y build-essential make pkg-config jq yq
 
 2. Set up shell dotfiles:
-   - ⚠️ BACKUP: Create backups of existing dotfiles:
-     cp ~/.bashrc ~/.bashrc.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
-     cp ~/.bashrc.local ~/.bashrc.local.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
-     cp ~/.bash_profile ~/.bash_profile.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
-   - Link your bash files from the repo:
-     ln -sfn ~/access-UK/bash/bashrc ~/.bashrc
-     ln -sfn ~/access-UK/bash/bashrc.local ~/.bashrc.local
-     ln -sfn ~/access-UK/bash/bash_profile ~/.bash_profile
-     ln -sfn ~/access-UK/bash/aliases_bash ~/.aliases_bash
-     ln -sfn ~/access-UK/bin ~/bin
-   - GUI-only helpers in [bash/aliases_bash](bash/aliases_bash):
-     - `alias gv='gvim'`
-     - `alias xtw='xterm ... &'`
-   - Keep those aliases only if you run GUI apps via WSLg.
+   - ⏭️ SKIP THIS STEP: This setup uses zsh as primary shell (STEP 3 installs it).
+   - Bash files are not needed for zsh-only workflow.
+   - No need to symlink bash files (~/.bashrc, ~/.bashrc.local, etc.).
 
 3. Install zsh and Oh-My-Zsh:
    - zsh: shell with better completion and prompt support.
@@ -154,9 +143,6 @@ master/tools/install.sh)" "" --unattended || true
    - Install git (if not already installed):
      sudo apt update
      sudo apt install -y git
-   - Install git-lfs only if your repos track large binaries:
-     sudo apt install -y git-lfs
-     git lfs install
    - Recommendation for your usage pattern:
      - Use Ubuntu git by default.
      - Use Git PPA only if you need a specific new feature or fix.
@@ -207,15 +193,10 @@ master/tools/install.sh)" "" --unattended || true
      cd ~
      git clone git@gitlab.com:shaakaud/Docs-UK.git
 
-8. Terminal colors and fonts:
-   - dircolors-solarized: consistent LS colors across machines.
-   - Install dircolors-solarized:
-     cd ~/software
-     git clone https://github.com/seebi/dircolors-solarized
-     echo 'eval "$(dircolors -b ~/software/dircolors-solarized/\
-dircolors.ansi-dark)"' >> ~/.zshrc.local
-   - If you use bash sessions too, add the same line to `~/.bashrc.local`.
-   - Nerd Font setup for Windows Terminal / VS Code terminal:
+8. Terminal Colors and Fonts:
+   - ⏭️ SKIP FOR ZSH-ONLY SETUP: Dircolors-solarized is already in ~/.zshrc.local
+   - No additional setup needed for terminal colors
+   - Optional: Nerd Font setup for Windows Terminal / VS Code terminal:
      - Download from: https://www.nerdfonts.com/font-downloads
      - Pick one font family (example: MesloLGS NF or CaskaydiaCove NF).
      - Extract the downloaded zip to a normal folder first.
@@ -234,15 +215,18 @@ dircolors.ansi-dark)"' >> ~/.zshrc.local
      - Restart Windows Terminal and run `exec zsh` in WSL.
 
 9. Install fzf:
-   - fzf: fuzzy finder for files/history/commands.
-   - Install latest fzf in software directory (same as old README flow):
+   - ⏭️ SKIP THIS STEP: Zsh includes fzf via Oh-My-Zsh plugin (enabled by default).
+   - Fzf installer is not needed.
+   - Why skip? Installer attempts to modify ~/.bashrc despite --no-update-rc, wasting time and polluting files.
+   - Legacy for bash users (not applicable here):
      mkdir -p ~/software
      git clone --depth 1 https://github.com/junegunn/fzf.git ~/software/fzf
      ln -s ~/software/fzf ~/.fzf
      cd ~/software/fzf
      ./install --no-update-rc
-   - Do not let installer change ~/.bashrc or ~/.zshrc.
-  - Continue with step 15 for tmux/dotfile integration used by this repo.
+   - Note: Installer may attempt to modify ~/.bashrc despite --no-update-rc flag.
+     Verify ~/.bashrc has the fzf sourcing line if needed.
+   - Continue with step 15 for tmux/dotfile integration used by this repo.
 
 10. Clipboard tools in WSL (if required):
    - For Windows Terminal, extra clipboard packages are usually not required.
@@ -306,13 +290,13 @@ dircolors.ansi-dark)"' >> ~/.zshrc.local
         `prefix + y` will pull out ctrl-r kind of window at the bottom
         and shows all the tags from Txt files / my cheat sheets
         (`~/Docs-UK/txtfiles.txt`).
-   - 3. [bash/bashrc.local_for_zsh](bash/bashrc.local_for_zsh):
-        `cmdsh`, `cmdsh2ndpart` - Files that needs to be indexed by
-        fzf (tmux) is present in `~/Docs-UK/txtfiles.txt`.
-        These two functions cat all these files and invoke `fzf-tmux`
-        by giving the catted file as input.
+   - 3. [zsh/zshrc.local](zsh/zshrc.local):
+        Contains personal configurations, Git settings, and workspace functions:
+        - `cmdsh()` and `cmdsh2ndpart()` - fzf-tmux file search for ~/Docs-UK/txtfiles.txt
+        - Platform detection for VI, CSCOPE_EDITOR, TERM settings
+        - General utilities and aliases (f, m, etc.)
    - If `~/Docs-UK/txtfiles.txt` does not exist, create/populate it
-     before expecting `prefix + y` to return results.
+     before expecting `cmdsh()` to return results.
 
 16. noip dynamic DNS (optional):
    - noip: dynamic DNS updater.
