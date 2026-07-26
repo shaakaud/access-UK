@@ -156,7 +156,7 @@ Use rollback option (e) to ask the agent for help with the specific error.
 
 Ask the agent:
 ```
-@wsl_dev_setup What would step 18 (Neovim) do? Don't execute yet.
+@wsl_dev_setup What would step 19 (Neovim) do? Don't execute yet.
 ```
 
 The agent will explain without making changes.

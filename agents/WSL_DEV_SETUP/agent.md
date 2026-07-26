@@ -76,7 +76,7 @@ All steps documented in [README.WSL](../../README.WSL) with:
 
 ```
 Agent: "Ready for STEP X: [Title]?"
-      "Open README.WSL STEP X"
+   "Open README.WSL and locate the numbered step X"
       "Run commands from README.WSL"
        [Skips STEP 2 (bash) and STEP 9 (fzf) — zsh-only setup]
 
@@ -209,7 +209,7 @@ done
 
 2. **For each STEP:**
    - Open [README.WSL](../../README.WSL)
-   - Find "## STEP X: [Title]"
+   - Find the numbered "STEP X" entry
    - Read: What will happen, Backups, Commands, Verify
    - Run commands
    - Report results to agent

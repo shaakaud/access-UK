@@ -264,12 +264,10 @@ master/tools/install.sh)" "" --unattended || true
 
 11. Clipboard tools in WSL (if required):
    - For Windows Terminal, extra clipboard packages are usually not required.
-
-11. Clipboard tools in WSL (if required):
-   - For Windows Terminal, extra clipboard packages are usually not required.
    - `clip.exe` bridges text from WSL to Windows clipboard.
    - Example:
      echo hello | clip.exe
+
    - Optional only if you have clipboard issues:
      - `wl-clipboard`: helper for WSLg/Wayland GUI clipboard paths.
        sudo apt update
@@ -335,12 +333,12 @@ master/tools/install.sh)" "" --unattended || true
    - If `~/Docs-UK/txtfiles.txt` does not exist, create/populate it
      before expecting `cmdsh()` to return results.
 
-16. noip dynamic DNS (optional):
+17. noip dynamic DNS (optional):
    - noip: dynamic DNS updater.
    - Use only if you need public DNS updates from home/lab.
    - WSL office/dev usage usually does not require this.
 
-17. Vim legacy plugins (optional):
+18. Vim legacy plugins (optional):
    - Unite.vim and vimproc are legacy.
    - If you keep them, use your old Vim flow from the original README.
 
@@ -387,14 +385,14 @@ master/tools/install.sh)" "" --unattended || true
      - If using NvChad/starter, lazy.nvim and Mason are already wired.
      - Use `:Lazy` and `:Mason` inside nvim.
 
-19. Install Python base toolchain:
+20. Install Python base toolchain:
    - Install:
      sudo apt update
      sudo apt install -y python3 python3-pip python3-venv
    - Optional uv (fast Python package/env manager):
      curl -LsSf https://astral.sh/uv/install.sh | sh
 
-20. WSLg GUI apps (optional):
+21. WSLg GUI apps (optional):
    - ⚠️ SKIP THIS STEP - GUI tools are not required for standard development
    - Only install if you specifically need graphical applications in WSL
    - WSLg is Windows Subsystem for Linux GUI support on Windows 11.
@@ -403,11 +401,11 @@ master/tools/install.sh)" "" --unattended || true
      wsl --shutdown
    - DO NOT install: gnome-text-editor, x11-apps, nautilus (not needed)
 
-21. Sharing files with Windows:
+22. Sharing files with Windows:
    - Use \\wsl$ in Windows Explorer.
    - Do not set up Samba inside WSL for normal file sharing.
 
-22. Workspace helper from old README:
+23. Workspace helper from old README:
    - access-UK/bin has `pwd.sh`.
    - Running the source commands below stores current `pwd` in `$WS`.
    - Alias `base` from `aliases_bash` returns you to `$WS`.
@@ -415,11 +413,11 @@ master/tools/install.sh)" "" --unattended || true
    - Commands:
      source ~/.zshrc && source ~/bin/pwd.sh
 
-23. DISPLAY/X11 note:
+24. DISPLAY/X11 note:
    - On modern WSLg, do not set DISPLAY=localhost:0.0 manually.
    - For old non-WSLg setups only, use an X server workflow.
 
-24. GitHub Copilot CLI (optional):
+25. GitHub Copilot CLI (optional):
    - gh: GitHub CLI.
      sudo apt update
      sudo apt install -y gh
@@ -430,7 +428,7 @@ master/tools/install.sh)" "" --unattended || true
      gh copilot alias -- zsh > ~/.gh-copilot-aliases.zsh
    - `.zshrc.local` sources `~/.gh-copilot-aliases.zsh` if present.
 
-25. Claude Code config (optional):
+26. Claude Code config (optional):
    - ⚠️ BACKUP: Create backup of existing claude config:
      cp -r ~/.claude ~/.claude.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
    - Link claude files:
