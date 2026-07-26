@@ -1151,21 +1151,22 @@ type git
 
 ---
 
-## Maintenance: Keeping README.md and Agent in Sync
+## Maintenance: Keeping README.WSL and Agent in Sync
 
-**Future Architecture (Single Source of Truth):**
+**Future Architecture (Single Source of Truth for WSL):**
 
-README.md is the single source of truth for all setup steps. When README.md is updated, the agent automatically reflects changes.
+README.WSL is the source of truth for WSL setup. When README.WSL is updated,
+update agents/WSL_DEV_SETUP/agent.md in the same change.
 
 **Workflow:**
-1. Edit README.md with your changes
-2. The agent (@wsl_dev_setup) reads steps directly from README.md
-3. No sync script needed
-4. Commit README.md and agent together
+1. Edit README.WSL with your changes.
+2. Update agents/WSL_DEV_SETUP/agent.md manually to match.
+3. Review both files together with git diff.
+4. Commit both files together.
 
 **For Future Linux/Ubuntu Direct Setup:**
 
-Same README.md can serve multiple contexts:
+Keep the same manual pattern for other setup docs:
 - Add markers: `<!-- WSL ONLY -->`, `<!-- LINUX ONLY -->`, `<!-- ALL -->`
 - Agent intelligently shows context-specific instructions
 - One documentation source for all deployment scenarios

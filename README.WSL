@@ -520,17 +520,15 @@ Items intentionally skipped from old README (WSL not required):
 
 Maintenance:
    - Keeping README.WSL and Agent in Sync:
-     When you update README.WSL steps, the agent.md should be updated too.
-     Use the sync script to automate this:
-     
-     1. Edit README.WSL with your changes
-     2. Run the sync script:
-        ./scripts/sync_agent_from_readme.sh
-     3. Review the changes:
-        git diff agents/WSL_DEV_SETUP/agent.md
-     4. Commit both files together:
-        git add README.WSL agents/WSL_DEV_SETUP/agent.md
-        git commit -m "docs: Update README.WSL and sync agent"
+    README.WSL is the source of truth for WSL setup.
+    Update agents/WSL_DEV_SETUP/agent.md in the same change when setup
+    steps change.
+    No sync script is used or maintained.
+
+    1. Edit README.WSL with your changes.
+    2. Update agents/WSL_DEV_SETUP/agent.md manually to match.
+    3. Review both files together with git diff.
+    4. Commit both files together.
 
    - Agent Usage:
      In VS Code Copilot chat, invoke the agent with:

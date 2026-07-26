@@ -5,7 +5,7 @@ applyTo: ["**/README.md", "**/README.WSL", "**/wsl*"]
 
 # @wsl_dev_setup: Interactive WSL Development Environment Setup Agent
 
-> **Single Source of Truth:** All steps, commands, and configurations are in [README.md](../../README.md). This agent guides you through each step interactively with per-step approval and error recovery.
+> **Single Source of Truth:** All steps, commands, and configurations are in [README.WSL](../../README.WSL). This agent guides you through each step interactively with per-step approval and error recovery.
 
 ## Quick Start
 
@@ -41,27 +41,27 @@ applyTo: ["**/README.md", "**/README.WSL", "**/wsl*"]
 
 ---
 
-## Architecture: README.md is Single Source of Truth
+## Architecture: README.WSL is Single Source of Truth
 
-- **README.md** contains all 28 STEPS with complete commands, backups, verification, and troubleshooting
+- **README.WSL** contains all WSL STEPS with complete commands, backups, verification, and troubleshooting
 - **Agent (this file)** is a lightweight **interactive wrapper** that:
-  - Displays each STEP from README.md
+   - Displays each STEP from README.WSL
   - Asks for approval before running commands
   - Handles errors and recovery
   - Tracks progress across sessions
 
 ## Why This Approach?
 
-✅ **No duplication** - Changes to README.md auto-reflected in agent
-✅ **Easy maintenance** - Edit README.md, agent automatically updated
-✅ **Future-proof** - Same README.md for WSL, Linux, Ubuntu direct
+✅ **No duplication** - Changes to README.WSL are manually mirrored in agent
+✅ **Easy maintenance** - Edit README.WSL, then update agent.md in the same change
+✅ **Future-proof** - Same manual pattern for WSL-specific setup docs
 ✅ **Single source of truth** - One place to maintain all instructions
 
 ---
 
 ## 28 Complete Steps (STEP 0 to STEP 27)
 
-All steps documented in [README.md](../../README.md) with:
+All steps documented in [README.WSL](../../README.WSL) with:
 - **What will happen** - Pre-flight briefing
 - **Backups created** - What gets backed up before changes
 - **Commands** - Exact commands to run
@@ -76,8 +76,8 @@ All steps documented in [README.md](../../README.md) with:
 
 ```
 Agent: "Ready for STEP X: [Title]?"
-       "Open README.md STEP X"
-       "Run commands from README.md"
+      "Open README.WSL STEP X"
+      "Run commands from README.WSL"
        [Skips STEP 2 (bash) and STEP 9 (fzf) — zsh-only setup]
 
 You:   "Done! Output: [paste]"
@@ -182,7 +182,7 @@ ln -sfn ~/access-UK/agents ~/.vscode/agents
 ```
 
 ### Step Failed
-1. Check **Verify** section in README.md STEP
+1. Check **Verify** section in README.WSL STEP
 2. Check **Troubleshooting** section
 3. Run `sudo apt update` if packages missing
 
@@ -208,7 +208,7 @@ done
    ```
 
 2. **For each STEP:**
-   - Open [README.md](../../README.md)
+   - Open [README.WSL](../../README.WSL)
    - Find "## STEP X: [Title]"
    - Read: What will happen, Backups, Commands, Verify
    - Run commands
@@ -222,5 +222,5 @@ done
 ---
 
 **Last Updated:** 2026-07-25  
-**Architecture:** Single source of truth (README.md) with interactive agent wrapper  
+**Architecture:** Single source of truth (README.WSL) with interactive agent wrapper  
 **Steps:** 0-27 (28 total) | **Estimated Time:** 60-90 minutes

@@ -128,18 +128,14 @@ The agent will:
 
 ## Updating the Agent
 
-When README.WSL is updated, sync the agent:
+When README.WSL is updated, update agents/WSL_DEV_SETUP/agent.md manually in
+the same change set.
 
+Recommended workflow:
 ```bash
-./scripts/sync_agent_from_readme.sh
-```
-
-This extracts latest steps from README.WSL and updates agent.md automatically.
-
-Then commit:
-```bash
+git diff README.WSL agents/WSL_DEV_SETUP/agent.md
 git add README.WSL agents/WSL_DEV_SETUP/agent.md
-git commit -m "docs: Update README.WSL and sync agent"
+git commit -m "docs: Update README.WSL and agent"
 ```
 
 ## Troubleshooting
