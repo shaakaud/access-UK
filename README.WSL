@@ -257,8 +257,9 @@ dircolors.ansi-dark)"' >> ~/.zshrc.local
        sudo apt install -y xsel
 
 11. Install asciidoc if required:
-   - asciidoc: text-to-doc converter.
-   - Install:
+   - ⚠️ SKIP THIS STEP unless you specifically need to convert .asciidoc files
+   - asciidoc: text-to-doc converter (not required for standard development)
+   - Install only if needed:
      sudo apt update
      sudo apt install -y asciidoc
 
@@ -373,18 +374,13 @@ dircolors.ansi-dark)"' >> ~/.zshrc.local
      curl -LsSf https://astral.sh/uv/install.sh | sh
 
 20. WSLg GUI apps (optional):
+   - ⚠️ SKIP THIS STEP - GUI tools are not required for standard development
+   - Only install if you specifically need graphical applications in WSL
    - WSLg is Windows Subsystem for Linux GUI support on Windows 11.
-   - Ensure WSLg components are updated from PowerShell:
+   - If needed, ensure WSLg components are updated from PowerShell:
      wsl --update
      wsl --shutdown
-   - Install GUI apps in Ubuntu:
-     sudo apt update
-     sudo apt install -y gnome-text-editor x11-apps nautilus
-   - Test WSLg:
-     xeyes
-   - Examples:
-     - gnome-text-editor
-     - nautilus
+   - DO NOT install: gnome-text-editor, x11-apps, nautilus (not needed)
 
 21. Sharing files with Windows:
    - Use \\wsl$ in Windows Explorer.

@@ -566,12 +566,14 @@ echo "Hello from WSL" | clip.exe  # Copy to Windows clipboard
 
 ---
 
-## STEP 11: Install Asciidoc (Optional)
+## STEP 11: Install Asciidoc (⚠️ SKIP UNLESS NEEDED)
 
 **What will happen:**
 - Install asciidoc (text-to-document converter)
+- **Only install if you need to convert .asciidoc files to HTML/PDF**
+- Not required for standard WSL development
 
-**Commands:**
+**Commands (Skip this step unless needed):**
 ```bash
 sudo apt update
 sudo apt install -y asciidoc
@@ -810,20 +812,23 @@ nvim -c ":MasonInstallAll | quit"
 
 ---
 
-## STEP 20: WSLg GUI Apps (Optional)
+## STEP 20: WSLg GUI Apps (⚠️ SKIP UNLESS NEEDED)
 
 **What will happen:**
-- Verify WSL GUI (WSLg) is working
-- Install optional GUI applications
+- Install optional GUI applications for WSL GUI (WSLg)
+- **NOT REQUIRED for standard development workflow**
+- Only install if you specifically need graphical applications in WSL
 
-**Setup:**
+**SKIP THIS STEP** unless you need to run GUI applications from Linux in WSL.
+
+**If you need GUI apps, proceed with:**
 ```bash
-# Update WSL components from Windows PowerShell
+# Update WSL components from Windows PowerShell (run on Windows, not WSL)
 wsl --update
 wsl --shutdown
 ```
 
-**Install GUI Applications:**
+**Optional: Install GUI Applications (Skip unless needed):**
 ```bash
 sudo apt update
 sudo apt install -y gnome-text-editor x11-apps nautilus

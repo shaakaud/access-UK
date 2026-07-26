@@ -1,6 +1,6 @@
 ---
 name: wsl_dev_setup
-applyTo: ["**/README.md", "**/README.WSL", "**/wsl*"]
+applyTo: ["**/*"]
 ---
 
 # @wsl_dev_setup: Interactive WSL Development Environment Setup Agent
