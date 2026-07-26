@@ -45,6 +45,20 @@
    - Link your zsh files:
      ln -sfn ~/access-UK/zsh/zshrc ~/.zshrc
      ln -sfn ~/access-UK/zsh/zshrc.local ~/.zshrc.local
+   - Install autojump for directory navigation:
+     cd ~/software
+     git clone https://github.com/wting/autojump.git
+     cd autojump
+     ./install.py
+   - This installs autojump to ~/.autojump/etc/profile.d/autojump.sh
+   - Persistence:
+     - [zsh/zshrc](zsh/zshrc) sources [zsh/zshrc.local](zsh/zshrc.local)
+     - [zsh/zshrc.local](zsh/zshrc.local) sources the autojump hook if the
+       file exists
+     - If a fresh shell says the hook is missing, verify both symlinks are
+       in place:
+       - ~/.zshrc -> ~/access-UK/zsh/zshrc
+       - ~/.zshrc.local -> ~/access-UK/zsh/zshrc.local
    - Install oh-my-zsh framework (use unattended mode):
      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/\
 master/tools/install.sh)" "" --unattended || true
@@ -491,14 +505,6 @@ zsh README details:
 git-completion.zsh -OL
      cd ~/
      ln -sfn ~/software/git-completion.zsh git-completion.zsh
-   - Autojump (command directory navigation):
-     - Installation:
-       cd ~/software
-       git clone https://github.com/wting/autojump.git
-       cd autojump
-       ./install.py
-     - This installs autojump to ~/.autojump/etc/profile.d/autojump.sh
-     - zshrc already sources this file if installed.
    - Git binary verification for zsh-git-prompt:
      - If you experience git status issues in your prompt:
        cd ~/access-UK/zsh/zsh-git-prompt
