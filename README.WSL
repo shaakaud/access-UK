@@ -143,6 +143,9 @@ master/tools/install.sh)" "" --unattended || true
    - Install git (if not already installed):
      sudo apt update
      sudo apt install -y git
+   - ⚠️ DO NOT run: git lfs install
+     Git LFS is only needed if tracking large binaries (>100MB).
+     This repo does NOT use git-lfs. Do not run git lfs install.
    - Recommendation for your usage pattern:
      - Use Ubuntu git by default.
      - Use Git PPA only if you need a specific new feature or fix.
@@ -194,8 +197,13 @@ master/tools/install.sh)" "" --unattended || true
      git clone git@gitlab.com:shaakaud/Docs-UK.git
 
 8. Terminal Colors and Fonts:
-   - ⏭️ SKIP FOR ZSH-ONLY SETUP: Dircolors-solarized is already in ~/.zshrc.local
-   - No additional setup needed for terminal colors
+   - ⏭️ SKIP THIS STEP - DO NOT RUN
+   - Dircolors-solarized is already configured in ~/.zshrc.local
+   - Running manual dircolors setup would:
+     - Add duplicate lines to zshrc.local
+     - Pollute git diff with unnecessary changes
+   - Verify already configured:
+     grep 'dircolors.ansi-dark' ~/.zshrc.local
    - Optional: Nerd Font setup for Windows Terminal / VS Code terminal:
      - Download from: https://www.nerdfonts.com/font-downloads
      - Pick one font family (example: MesloLGS NF or CaskaydiaCove NF).
@@ -215,18 +223,25 @@ master/tools/install.sh)" "" --unattended || true
      - Restart Windows Terminal and run `exec zsh` in WSL.
 
 9. Install fzf:
-   - ⏭️ SKIP THIS STEP: Zsh includes fzf via Oh-My-Zsh plugin (enabled by default).
-   - Fzf installer is not needed.
-   - Why skip? Installer attempts to modify ~/.bashrc despite --no-update-rc, wasting time and polluting files.
-   - Legacy for bash users (not applicable here):
+   - ⏭️ SKIP THIS STEP - DO NOT RUN
+   - Zsh already includes fzf via Oh-My-Zsh plugin (enabled by default).
+   - Why skip? The fzf installer will pollute bash files despite --no-update-rc flag:
+     - Adds sourcing to ~/.bashrc even though you don't use bash
+     - Cannot be prevented (installer ignores --no-update-rc)
+     - Breaks tool independence and pollutes repo files
+   - Verify fzf is already working:
+     echo "test" | fzf --filter "test"  # Should return "test"
+     bindkey -l | grep fzf  # Should show fzf entries
+   - Legacy for bash users (do NOT run for zsh-only setup):
      mkdir -p ~/software
      git clone --depth 1 https://github.com/junegunn/fzf.git ~/software/fzf
      ln -s ~/software/fzf ~/.fzf
      cd ~/software/fzf
-     ./install --no-update-rc
-   - Note: Installer may attempt to modify ~/.bashrc despite --no-update-rc flag.
-     Verify ~/.bashrc has the fzf sourcing line if needed.
+     ./install --no-update-rc  ← installer ignores this flag!
    - Continue with step 15 for tmux/dotfile integration used by this repo.
+
+10. Clipboard tools in WSL (if required):
+   - For Windows Terminal, extra clipboard packages are usually not required.
 
 10. Clipboard tools in WSL (if required):
    - For Windows Terminal, extra clipboard packages are usually not required.

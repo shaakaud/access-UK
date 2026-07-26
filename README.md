@@ -383,6 +383,11 @@ sudo apt install -y git
 ln -sfn ~/access-UK/git/gitconfig ~/.gitconfig
 ln -sfn ~/access-UK/git/git-prompt.sh ~/.git-prompt.sh
 ln -sfn ~/access-UK/bin/git ~/bin/git
+
+# ⚠️ DO NOT run git lfs install
+# Git LFS is only needed if tracking large binaries (>100MB)
+# This repo does NOT use git-lfs, so DO NOT run this:
+# ❌ git lfs install  ← SKIP THIS
 ```
 
 **Optional: Git PPA (latest version)**
@@ -485,20 +490,28 @@ ls -la ~/Docs-UK
 
 ## STEP 8: Terminal Colors and Fonts (Optional)
 
-**⏭️ SKIP FOR ZSH-ONLY SETUP:**
-- Dircolors-solarized is already configured in ~/.zshrc.local (added during merge from bash/bashrc.local_for_zsh)
-- No additional setup needed for terminal colors
-- Nerd Font installation is optional (see below if desired for fancy icons)
+**⏭️ SKIP THIS STEP - DO NOT RUN**
 
-**Legacy Information (for reference):**
-If you need to manually add dircolors for any reason:
+Dircolors-solarized is already configured in ~/.zshrc.local (added during merge from bash/bashrc.local_for_zsh).
+
+**Why skip:**
+- Running manual dircolors setup would add duplicate lines to zshrc.local
+- Would pollute git diff with unnecessary changes
+- Setup is 100% complete in zshrc.local already
+
+**Verify already configured:**
 ```bash
-mkdir -p ~/software
-cd ~/software
-git clone https://github.com/seebi/dircolors-solarized
+grep 'dircolors.ansi-dark' ~/.zshrc.local
+# Should show: eval "$(dircolors -b ~/software/dircolors-solarized/dircolors.ansi-dark)"
+```
 
-# Check if already present in ~/.zshrc.local
-grep -q 'dircolors.ansi-dark' ~/.zshrc.local && echo "Already configured"
+**Legacy Information (for reference only, do NOT run these):**
+If you need to understand the original manual setup:
+```bash
+# ❌ DO NOT RUN THESE - Already configured above
+# mkdir -p ~/software
+# cd ~/software
+# git clone https://github.com/seebi/dircolors-solarized
 ```
 
 **Nerd Font Setup (Alternative to DejaVu):**
@@ -521,13 +534,35 @@ ls --color=auto ~/ | head
 
 ---
 
-## STEP 9: Install fzf — ⏭️ SKIP FOR ZSH-ONLY SETUP
+## STEP 9: Install fzf — ⏭️ SKIP THIS STEP - DO NOT RUN
 
-**SKIP this step.** Zsh includes fzf via Oh-My-Zsh plugin (enabled by default).
-Fzf installer is not needed.
+**Do NOT run the fzf installer.**
 
-**If you were using bash:**
-- Install fzf (fuzzy finder for files, history, commands)
+**Why skip:**
+- Zsh already includes fzf via Oh-My-Zsh plugin (enabled by default)
+- fzf installer will pollute bash files despite --no-update-rc flag
+- Running it adds fzf sourcing to ~/.bashrc even though you don't use bash
+- Installer auto-modifications cannot be prevented (breaks tool independence)
+
+**Verify fzf is already working:**
+```bash
+# Test fzf is available in zsh
+echo "test" | fzf --filter "test"  # Should return "test"
+
+# List fzf keybindings
+bindkey -l | grep fzf  # Should show fzf entries
+```
+
+**Legacy Information (for bash users only, do NOT run for zsh-only setup):**
+If you were using bash:
+```bash
+# ❌ DO NOT RUN - fzf installer is known to pollute files
+# mkdir -p ~/software
+# git clone --depth 1 https://github.com/junegunn/fzf.git ~/software/fzf
+# ln -s ~/software/fzf ~/.fzf
+# cd ~/software/fzf
+# ./install --no-update-rc  ← installer ignores this flag!
+```
 - Link fzf configuration
 
 **Legacy for bash users:**

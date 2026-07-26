@@ -140,10 +140,16 @@ If a step fails:
 - ✅ STEP 1: Base Tools (always)
 - ⏭️ **STEP 2: Bash** — **SKIP** (not needed for zsh-only)
 - ✅ STEP 3-4: Zsh/Oh-My-Zsh (always)
-- ✅ STEP 5-7: Git, Tmux, Docs-UK (as desired)
-- ✅ STEP 8: Dircolors — Agent checks ~/.zshrc.local first, skips if already present
+- ✅ STEP 5-7: Git (skip git-lfs auto-install), Tmux, Docs-UK (as desired)
+- ⏭️ **STEP 8: Dircolors** — **SKIP** (already in ~/.zshrc.local from merge)
 - ⏭️ **STEP 9: fzf installer** — **SKIP** (fzf already in Oh-My-Zsh plugin)
 - ✅ STEP 10+: Continue as desired
+
+⚠️ **CRITICAL - Do NOT run these steps manually:**
+- **STEP 2**: No bash symlinks — would pollute repo
+- **STEP 8**: Dircolors already configured in zshrc.local
+- **STEP 9**: fzf installer will pollute bash files despite --no-update-rc flag
+- **git lfs install** (in STEP 5): SKIP unless you track large binaries
 
 **After Setup (Make Zsh Your Default Login Shell):**
 ```bash
