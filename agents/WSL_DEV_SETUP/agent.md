@@ -59,7 +59,7 @@ applyTo: ["**/README.md", "**/README.WSL", "**/wsl*"]
 
 ---
 
-## 28 Complete Steps (STEP 0 to STEP 27)
+## WSL Setup Steps
 
 All steps documented in [README.WSL](../../README.WSL) with:
 - **What will happen** - Pre-flight briefing
@@ -223,4 +223,4 @@ done
 
 **Last Updated:** 2026-07-25  
 **Architecture:** Single source of truth (README.WSL) with interactive agent wrapper  
-**Steps:** 0-27 (28 total) | **Estimated Time:** 60-90 minutes
+**Steps:** 0, 0.5, 1-28 plus fractional helper steps | **Estimated Time:** 60-90 minutes

@@ -2,7 +2,7 @@
 
 💡 **Interactive Setup Available**: Use the [@wsl_dev_setup](agents/WSL_DEV_SETUP/agent.md) VS Code Copilot agent for guided, step-by-step assistance with automatic error recovery.
 
-Complete guide for setting up a professional WSL Ubuntu development environment with all tools, configurations, and best practices. Steps are numbered 0-28 for use with the @wsl_dev_setup VS Code Copilot agent.
+Complete guide for setting up a professional WSL Ubuntu development environment with all tools, configurations, and best practices. Steps are numbered 0, 0.5, 1-28 with a few fractional helper steps for use with the @wsl_dev_setup VS Code Copilot agent.
 
 ---
 

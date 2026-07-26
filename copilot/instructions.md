@@ -30,6 +30,8 @@ If a question can be answered by exploring the codebase, explore the codebase in
 
 - ❌ Do NOT auto-commit changes
 - ❌ Do NOT auto-push to remote
+- ❌ Do NOT run `git push` at any time
+- ❌ Do NOT suggest or perform any push workflow on the user's behalf
 - ✅ DO ask user before any git commit/push: "Ready to commit?" + show summary
 - ✅ DO wait for explicit approval: "commit" / "push" / "yes"
 - ✅ DO describe what will be committed before asking
