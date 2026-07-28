@@ -156,6 +156,22 @@ If a step fails:
 - **STEP 9**: fzf installer will pollute bash files despite --no-update-rc flag
 - **git lfs install** (in STEP 5): SKIP unless you track large binaries
 
+⚠️ **CRITICAL - Tmux plugins need a HEADLESS install (STEP 7):**
+- `prefix + I` is an interactive tmux keystroke the agent CANNOT press, so it
+  gets silently skipped and tmux-resurrect/tmux-continuum never install. As a
+  result session restore after `wsl --shutdown` fails.
+- After cloning TPM, install plugins non-interactively:
+  ```bash
+  tmux new-session -d -s tpm_bootstrap 2>/dev/null || true
+  ~/.tmux/plugins/tpm/bin/install_plugins
+  tmux kill-session -t tpm_bootstrap 2>/dev/null || true
+  ```
+- Then VERIFY (fail loudly if missing):
+  ```bash
+  ls ~/.tmux/plugins                     # must list tmux-resurrect, tmux-continuum
+  tmux show-options -g | grep continuum  # expect @continuum-restore on
+  ```
+
 **After Setup (Make Zsh Your Default Login Shell):**
 ```bash
 chsh -s $(which zsh)

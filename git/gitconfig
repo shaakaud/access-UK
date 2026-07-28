@@ -62,7 +62,6 @@
 	editor = vim
 [credential]
     helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
-    #helper = store
 	credentialStore = secretservice
 	azreposCredentialType = oauth
 [credential "azrepos:org/msazure"]

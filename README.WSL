@@ -183,21 +183,38 @@ master/tools/install.sh)" "" --unattended || true
      - `tmux-resurrect`: saves/restores tmux sessions, windows, panes.
      - `tmux-continuum`: auto-saves tmux state periodically.
   - No need to add these plugins manually.
-  - Install via TPM inside tmux: `prefix + I`.
-   - Load config:
-     tmux source-file ~/.tmux.conf
-   - Plugin install inside tmux:
-     prefix + I
-   - Expected TPM output after install:
-     `TMUX environment reloaded. Done, press ENTER to continue.`
-   - Verify plugins are present:
-     ls ~/.tmux/plugins
-   - Verify resurrect save files (new default path):
-     ls ~/.local/share/tmux/resurrect
+   - Install plugins NON-INTERACTIVELY (required for agent-driven setup):
+     - `prefix + I` is an interactive tmux keystroke an agent CANNOT press,
+       so it is silently skipped and plugins never get installed. Use the
+       headless installer instead:
+       tmux new-session -d -s tpm_bootstrap 2>/dev/null || true
+       ~/.tmux/plugins/tpm/bin/install_plugins
+       tmux kill-session -t tpm_bootstrap 2>/dev/null || true
+   - Interactive alternative (if you are at a keyboard inside tmux):
+     - Load config:  tmux source-file ~/.tmux.conf
+     - Install:      prefix + I
+     - Expected:     `TMUX environment reloaded. Done, press ENTER to continue.`
+   - ⚠️ VERIFY (do not skip — this is where restore silently fails):
+     - Plugins present (must list tmux-resurrect AND tmux-continuum):
+       ls ~/.tmux/plugins
+     - Restore settings live in the server:
+       tmux show-options -g | grep continuum
+       # expect: @continuum-restore on / @continuum-save-interval 60
+     - Resurrect save dir exists (empty until first save):
+       ls -la ~/.local/share/tmux/resurrect
    - If no save files yet, trigger one manually inside tmux:
      prefix + Ctrl-s
    - Restore manually inside tmux:
      prefix + Ctrl-r
+   - ⚠️ WSL + `wsl --shutdown`: continuum's auto-restore-on-startup is
+     unreliable under WSL — the on-disk snapshot survives the shutdown, but it
+     is often NOT auto-loaded when you next start tmux. Recover manually:
+       tmux                 # start a fresh server
+       prefix + Ctrl-r      # restore the last saved sessions
+     Tip: run `prefix + Ctrl-s` to force a save right before `wsl --shutdown`.
+   - NOTE: resurrect snapshots are stored per-machine under
+     ~/.local/share/tmux/resurrect and are NOT synced via this repo. A fresh
+     machine has nothing to restore until continuum has saved at least once.
 
 7.5 Set up GitHub Copilot Chat instructions globally:
    - GitHub Copilot Chat automatically loads instructions from `~/.copilot/instructions/`
