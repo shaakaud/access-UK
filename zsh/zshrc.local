@@ -45,6 +45,13 @@ alias mv='mv -i'
 alias ren='mv -i'
 alias rm='rm -i'
 
+# Preserve legacy workspace aliases for zsh users when available.
+# Source this after the default aliases above so old workspace shortcuts and
+# alias overrides keep working under zsh.
+if [[ -f ~/.aliases_bash ]]; then
+    source ~/.aliases_bash
+fi
+
 if [[ -z "${DISPLAY:-}" ]]; then
     XSERVER=$(who am i | /usr/bin/awk '{print $6}' | /bin/sed 's/[()]//g')
     XSERVER=${XSERVER%%:*}

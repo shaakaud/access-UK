@@ -45,20 +45,6 @@
    - Link your zsh files:
      ln -sfn ~/access-UK/zsh/zshrc ~/.zshrc
      ln -sfn ~/access-UK/zsh/zshrc.local ~/.zshrc.local
-   - Install autojump for directory navigation:
-     cd ~/software
-     git clone https://github.com/wting/autojump.git
-     cd autojump
-     ./install.py
-   - This installs autojump to ~/.autojump/etc/profile.d/autojump.sh
-   - Persistence:
-     - [zsh/zshrc](zsh/zshrc) sources [zsh/zshrc.local](zsh/zshrc.local)
-     - [zsh/zshrc.local](zsh/zshrc.local) sources the autojump hook if the
-       file exists
-     - If a fresh shell says the hook is missing, verify both symlinks are
-       in place:
-       - ~/.zshrc -> ~/access-UK/zsh/zshrc
-       - ~/.zshrc.local -> ~/access-UK/zsh/zshrc.local
    - Install oh-my-zsh framework (use unattended mode):
      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/\
 master/tools/install.sh)" "" --unattended || true
@@ -146,6 +132,11 @@ master/tools/install.sh)" "" --unattended || true
    - Link the common files:
      ln -sfn ~/access-UK/others/inputrc ~/.inputrc
      ln -sfn ~/access-UK/gdb/gdbinit ~/.gdbinit
+     ln -sfn ~/access-UK/bash/aliases_bash ~/.aliases_bash
+   - zsh compatibility:
+     - `~/.zshrc.local` explicitly sources `~/.aliases_bash` when present.
+     - This preserves legacy aliases such as `base` and older workspace
+       shortcuts even though STEP 2 bash shell setup is skipped.
 
 6. Configure git:
    - ⚠️ BACKUP: Create backup of existing dotfile:
@@ -183,38 +174,21 @@ master/tools/install.sh)" "" --unattended || true
      - `tmux-resurrect`: saves/restores tmux sessions, windows, panes.
      - `tmux-continuum`: auto-saves tmux state periodically.
   - No need to add these plugins manually.
-   - Install plugins NON-INTERACTIVELY (required for agent-driven setup):
-     - `prefix + I` is an interactive tmux keystroke an agent CANNOT press,
-       so it is silently skipped and plugins never get installed. Use the
-       headless installer instead:
-       tmux new-session -d -s tpm_bootstrap 2>/dev/null || true
-       ~/.tmux/plugins/tpm/bin/install_plugins
-       tmux kill-session -t tpm_bootstrap 2>/dev/null || true
-   - Interactive alternative (if you are at a keyboard inside tmux):
-     - Load config:  tmux source-file ~/.tmux.conf
-     - Install:      prefix + I
-     - Expected:     `TMUX environment reloaded. Done, press ENTER to continue.`
-   - ⚠️ VERIFY (do not skip — this is where restore silently fails):
-     - Plugins present (must list tmux-resurrect AND tmux-continuum):
-       ls ~/.tmux/plugins
-     - Restore settings live in the server:
-       tmux show-options -g | grep continuum
-       # expect: @continuum-restore on / @continuum-save-interval 60
-     - Resurrect save dir exists (empty until first save):
-       ls -la ~/.local/share/tmux/resurrect
+  - Install via TPM inside tmux: `prefix + I`.
+   - Load config:
+     tmux source-file ~/.tmux.conf
+   - Plugin install inside tmux:
+     prefix + I
+   - Expected TPM output after install:
+     `TMUX environment reloaded. Done, press ENTER to continue.`
+   - Verify plugins are present:
+     ls ~/.tmux/plugins
+   - Verify resurrect save files (new default path):
+     ls ~/.local/share/tmux/resurrect
    - If no save files yet, trigger one manually inside tmux:
      prefix + Ctrl-s
    - Restore manually inside tmux:
      prefix + Ctrl-r
-   - ⚠️ WSL + `wsl --shutdown`: continuum's auto-restore-on-startup is
-     unreliable under WSL — the on-disk snapshot survives the shutdown, but it
-     is often NOT auto-loaded when you next start tmux. Recover manually:
-       tmux                 # start a fresh server
-       prefix + Ctrl-r      # restore the last saved sessions
-     Tip: run `prefix + Ctrl-s` to force a save right before `wsl --shutdown`.
-   - NOTE: resurrect snapshots are stored per-machine under
-     ~/.local/share/tmux/resurrect and are NOT synced via this repo. A fresh
-     machine has nothing to restore until continuum has saved at least once.
 
 7.5 Set up GitHub Copilot Chat instructions globally:
    - GitHub Copilot Chat automatically loads instructions from `~/.copilot/instructions/`
@@ -439,8 +413,10 @@ master/tools/install.sh)" "" --unattended || true
 23. Workspace helper from old README:
    - access-UK/bin has `pwd.sh`.
    - Running the source commands below stores current `pwd` in `$WS`.
-   - Alias `base` from `aliases_bash` returns you to `$WS`.
-   - `aliases_bash` also uses `$WS` for folder navigation shortcuts.
+   - Alias `base` from `~/.aliases_bash` returns you to `$WS`.
+   - `~/.aliases_bash` also uses `$WS` for folder navigation shortcuts.
+   - Make sure STEP 5 linked `~/access-UK/bash/aliases_bash` to
+     `~/.aliases_bash` so zsh loads these legacy aliases.
    - Commands:
      source ~/.zshrc && source ~/bin/pwd.sh
 
@@ -522,6 +498,14 @@ zsh README details:
 git-completion.zsh -OL
      cd ~/
      ln -sfn ~/software/git-completion.zsh git-completion.zsh
+   - Autojump (command directory navigation):
+     - Installation:
+       cd ~/software
+       git clone https://github.com/wting/autojump.git
+       cd autojump
+       ./install.py
+     - This installs autojump to ~/.autojump/etc/profile.d/autojump.sh
+     - zshrc already sources this file if installed.
    - Git binary verification for zsh-git-prompt:
      - If you experience git status issues in your prompt:
        cd ~/access-UK/zsh/zsh-git-prompt

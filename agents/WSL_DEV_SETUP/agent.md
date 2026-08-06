@@ -108,10 +108,13 @@ All installations optimized for **zsh as primary shell**:
 - **Languages**: Python 3, Go, .NET SDK 8
 - **Cloud**: Azure CLI, azd
 - **Fonts**: DejaVu Sans Mono
-- **Helpers**: GitHub Copilot CLI, Claude Code
+- **Helpers**: GitHub Copilot CLI, Claude Code, legacy `~/.aliases_bash`
+   compatibility in zsh
 
 **Smart Installation:**
 - **Skips STEP 2**: Bash configuration (not needed for zsh)
+- **Keeps legacy aliases**: STEP 5 links `~/.aliases_bash` and zsh loads it
+   to preserve `base` and older workspace shortcuts
 - **Skips STEP 9**: fzf installer (redundant with Oh-My-Zsh plugin)
 - **Checks before appending**: Verifies changes don't already exist in ~/.zshrc.local
 - **Prevents repo pollution**: No installation tools modify repo files
@@ -145,7 +148,7 @@ If a step fails:
 - ✅ STEP 1: Base Tools (always)
 - ⏭️ **STEP 2: Bash** — **SKIP** (not needed for zsh-only)
 - ✅ STEP 3-4: Zsh/Oh-My-Zsh (always)
-- ✅ STEP 5-7: Git (skip git-lfs auto-install), Tmux, Docs-UK (as desired)
+- ✅ STEP 5-7: Dotfiles and legacy aliases, Git, Tmux/Docs-UK (as desired)
 - ⏭️ **STEP 8: Dircolors** — **SKIP** (already in ~/.zshrc.local from merge)
 - ⏭️ **STEP 9: fzf installer** — **SKIP** (fzf already in Oh-My-Zsh plugin)
 - ✅ STEP 10+: Continue as desired
@@ -155,22 +158,6 @@ If a step fails:
 - **STEP 8**: Dircolors already configured in zshrc.local
 - **STEP 9**: fzf installer will pollute bash files despite --no-update-rc flag
 - **git lfs install** (in STEP 5): SKIP unless you track large binaries
-
-⚠️ **CRITICAL - Tmux plugins need a HEADLESS install (STEP 7):**
-- `prefix + I` is an interactive tmux keystroke the agent CANNOT press, so it
-  gets silently skipped and tmux-resurrect/tmux-continuum never install. As a
-  result session restore after `wsl --shutdown` fails.
-- After cloning TPM, install plugins non-interactively:
-  ```bash
-  tmux new-session -d -s tpm_bootstrap 2>/dev/null || true
-  ~/.tmux/plugins/tpm/bin/install_plugins
-  tmux kill-session -t tpm_bootstrap 2>/dev/null || true
-  ```
-- Then VERIFY (fail loudly if missing):
-  ```bash
-  ls ~/.tmux/plugins                     # must list tmux-resurrect, tmux-continuum
-  tmux show-options -g | grep continuum  # expect @continuum-restore on
-  ```
 
 **After Setup (Make Zsh Your Default Login Shell):**
 ```bash
