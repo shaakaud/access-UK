@@ -16,6 +16,10 @@ approval and error recovery. It is committed at
 [.github/agents/wsl_dev_setup.agent.md](.github/agents/wsl_dev_setup.agent.md),
 so VS Code discovers it automatically — no symlink or manual setup.
 
+> **Agent location:** `.github/agents/wsl_dev_setup.agent.md`
+> (real file, committed to the repo — VS Code does not follow symlinks
+> for agent discovery).
+
 1. Clone the repo:
    ```bash
    git clone git@github.com:shaakaud/access-UK.git ~/access-UK
