@@ -1,23 +1,23 @@
 ---
 name: wsl_dev_setup
-applyTo: ["**/README.md", "**/README.WSL", "**/wsl*"]
+description: Interactive WSL development environment setup guide driven by README.WSL
 ---
 
-# @wsl_dev_setup: Interactive WSL Development Environment Setup Agent
+# wsl_dev_setup: Interactive WSL Development Environment Setup Agent
 
 > **Single Source of Truth:** All steps, commands, and configurations are in [README.WSL](../../README.WSL). This agent guides you through each step interactively with per-step approval and error recovery.
 
 ## Quick Start
 
-1. **One-time setup** (if not already done):
-   ```bash
-   mkdir -p ~/.vscode
-   ln -sfn ~/access-UK/agents ~/.vscode/agents
-   ```
+1. **No setup needed** — this agent is committed at
+   `.github/agents/wsl_dev_setup.agent.md`, so VS Code discovers it
+   automatically when you open the `access-UK` folder.
 
-2. **Start setup in any VS Code workspace:**
-   - In VS Code Copilot Chat, type: `@wsl_dev_setup`
-   - Agent will guide you through each STEP interactively
+2. **Start setup:**
+   - Open `~/access-UK` as a folder in VS Code (Remote - WSL).
+   - Open Copilot Chat, use the agent/mode picker, and select
+     `wsl_dev_setup` (reload the window if it does not appear yet).
+   - Agent will guide you through each STEP interactively.
 
 3. **🔴 Primary Shell: Zsh**
    - This setup assumes **zsh as your primary shell** (installed in STEP 3)
@@ -179,10 +179,11 @@ chsh -s $(which zsh)
 ## Troubleshooting
 
 ### Agent Not Found
-```bash
-mkdir -p ~/.vscode
-ln -sfn ~/access-UK/agents ~/.vscode/agents
-```
+- Ensure the folder open in VS Code is `~/access-UK` (the agent is
+  discovered from `.github/agents/` in that workspace).
+- Reload the window: Command Palette -> "Developer: Reload Window".
+- VS Code does not follow symlinks for agent discovery; the file
+  must be a real file under `.github/agents/`.
 
 ### Step Failed
 1. Check **Verify** section in README.WSL STEP
@@ -206,9 +207,7 @@ done
 ## How to Use
 
 1. **In VS Code Copilot Chat:**
-   ```
-   @wsl_dev_setup
-   ```
+   Open the agent/mode picker and select `wsl_dev_setup`.
 
 2. **For each STEP:**
    - Open [README.WSL](../../README.WSL)

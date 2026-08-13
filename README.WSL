@@ -8,15 +8,18 @@
      git clone git@github.com:shaakaud/access-UK.git
    - Keep repo under Linux filesystem (example: ~/access-UK).
 
-0.5 Make Agents Globally Available (Optional but Recommended):
-   - VS Code agents in ~/access-UK/agents will guide your WSL setup.
-   - To make these agents available in any VS Code workspace:
-     mkdir -p ~/.vscode
-     ln -s ~/access-UK/agents ~/.vscode/agents
-   - Verify the symlink:
-     ls -la ~/.vscode/agents/
-     # Should show: agents -> /home/youruser/access-UK/agents
-   - Now invoke @wsl_dev_setup from ANY VS Code workspace.
+0.5 Launch the wsl_dev_setup agent (recommended first action):
+   - The agent lives in the repo at
+     `.github/agents/wsl_dev_setup.agent.md` and is committed to git,
+     so VS Code discovers it automatically — no symlink needed.
+   - Open the cloned repo as a folder in VS Code (Remote - WSL):
+     cd ~/access-UK && code .
+   - If the agent does not appear yet, reload the window:
+     Command Palette -> "Developer: Reload Window".
+   - Open Copilot Chat, click the agent/mode picker at the bottom
+     of the chat input, and select `wsl_dev_setup`.
+   - Tell it to begin; it drives the rest of the STEPS below with
+     per-step approval and error recovery.
    - Logs saved to: ~/access-UK/.wsl_setup_logs/wsl_setup.<timestamp>.log
 
 1. Install base dev tools required by other steps:
@@ -526,18 +529,18 @@ Items intentionally skipped from old README (WSL not required):
 Maintenance:
    - Keeping README.WSL and Agent in Sync:
     README.WSL is the source of truth for WSL setup.
-    Update agents/WSL_DEV_SETUP/agent.md in the same change when setup
-    steps change.
+    Update .github/agents/wsl_dev_setup.agent.md in the same change
+    when setup steps change.
     No sync script is used or maintained.
 
     1. Edit README.WSL with your changes.
-    2. Update agents/WSL_DEV_SETUP/agent.md manually to match.
+    2. Update .github/agents/wsl_dev_setup.agent.md manually to match.
     3. Review both files together with git diff.
     4. Commit both files together.
 
    - Agent Usage:
-     In VS Code Copilot chat, invoke the agent with:
-        @wsl_dev_setup Please help me set up WSL
+     In VS Code Copilot chat, open the agent/mode picker and select
+        wsl_dev_setup
      
      Agent will guide you through each step interactively.
      Logs saved to: ~/access-UK/.wsl_setup_logs/wsl_setup.<timestamp>.log
