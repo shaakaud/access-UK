@@ -287,3 +287,15 @@ export PATH=$PATH:$GOPATH/bin
 #Incase you have github copilot cli installed
 # Add this to ~/.zshrc.local
 [[ -f ~/.gh-copilot-aliases.zsh ]] && source ~/.gh-copilot-aliases.zsh
+
+#MSFT
+# Point Go env at the current gsa repo (this shell only)
+setgo() {
+    local root
+    root="$(git rev-parse --show-toplevel 2>/dev/null)" || root="${PWD:A}"
+    export GOPATH="$root/src/golang"
+    export GOROOT="$(go env GOROOT)"
+    export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+    echo "GOPATH=$GOPATH"
+    echo "GOROOT=$GOROOT"
+}
